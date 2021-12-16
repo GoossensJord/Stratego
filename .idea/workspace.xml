@@ -5,17 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d51dcb44-39d4-4d99-8cb3-33f1ea98bd95" name="Changes" comment="pushing new piece classes">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/discord.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/stratego/src/Board/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/stratego/src/board/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stratego/src/Board/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/stratego/src/board/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stratego/src/pieces/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/stratego/src/pieces/Piece.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stratego/src/testmain.java" beforeDir="false" afterPath="$PROJECT_DIR$/stratego/src/testmain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Stratego/Board.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Stratego/pieces/Bomb.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Stratego/pieces/Flag.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Stratego/pieces/Marshal.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Stratego/pieces/Miner.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Stratego/pieces/Piece$Ranks.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Stratego/pieces/Piece.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Stratego/pieces/Scout.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Stratego/pieces/Spy.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Stratego/stratego.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Stratego/testmain.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,6 +93,7 @@
       <workItem from="1639669063410" duration="38000" />
       <workItem from="1639669505811" duration="1325000" />
       <workItem from="1639670888309" duration="40000" />
+      <workItem from="1639671725194" duration="60000" />
     </task>
     <task id="LOCAL-00001" summary="pushing new piece classes">
       <created>1639651304864</created>
@@ -114,7 +118,6 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="pushing new piece classes" />
