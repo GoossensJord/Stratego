@@ -1,14 +1,19 @@
 package board;
 
 public class Player {
-    String name;
+    public String name;
+    public Board board;
 
 
-
-    Player(String name){
+    public Player(String name,Board b){
         this.name = name;
+        this.board = b;
     }
     public void play(Board board){
+        this.board = board;
+    }
 
+    public Board getBoard() {
+        return board;
     }
 }

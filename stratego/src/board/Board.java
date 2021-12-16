@@ -84,7 +84,5 @@ public class Board {
         return this.SQUARE_ARRAY_WIDTH;
     }
 
-    public static int getSQUARE_ARRAY_HEIGHT() {
-        return this.SQUARE_ARRAY_HEIGHT;
-    }
+    public int getSQUARE_ARRAY_HEIGHT() {return this.SQUARE_ARRAY_WIDTH;    }
 }

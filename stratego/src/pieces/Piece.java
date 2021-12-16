@@ -1,8 +1,8 @@
 package pieces;
 
 import board.Board;
+import board.Player;
 
-import java.awt.event.HierarchyBoundsAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,14 +13,16 @@ public class Piece {
     boolean isMoveable;
     boolean canAttack;
     List<int[]> moveableSquares;
+    Player player;
 
-    public Piece(Rank r) {
+    public Piece(Rank r,Player player) {
         this.rank = r;
         this.position = new int[2];
         this.deadOrAlive = true;
         this.isMoveable = true;
         this.canAttack = true;
         moveableSquares = new ArrayList<int[]>();
+        this.player = player;
     }
 
     public Piece() {
@@ -44,12 +46,16 @@ public class Piece {
 
 
     }
-    boolean isOccupied = true;
+    boolean isOccupied = false;
     public boolean notOutOfBounds(int[] posarr){
         boolean available = false;
-        for (int i = 0; i < posarr.length; i++) {
-            if (posarr[i] > 0 || posarr[i] < Board.getSQUARE_ARRAY_HEIGHT() && posarr[i] < Board.getSQUARE_ARRAY_WIDTH()) available = true;
-            else available = false;
+        if(!isOccupied) {
+            for (int i = 0; i < posarr.length; i++) {
+                if (posarr[i] > 0 && posarr[i] < player.getBoard().getSQUARE_ARRAY_HEIGHT() && posarr[i] < player.getBoard().getSQUARE_ARRAY_WIDTH())
+                    available = true;
+                else available = false;
+                System.out.println("xd");
+            }
         }
         return available;
     }
