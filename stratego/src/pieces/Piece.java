@@ -1,8 +1,8 @@
 package pieces;
 
+import board.Board;
 
-import Board.Board;
-
+import java.awt.event.HierarchyBoundsAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,10 +45,12 @@ public class Piece {
 
     }
     boolean isOccupied = true;
-    private boolean notOutOfBounds(int[] posarr){
+    public boolean notOutOfBounds(int[] posarr){
+        boolean available = false;
         for (int i = 0; i < posarr.length; i++) {
-            if (posarr[i] < 0 || posarr[i] > board)
+            if (posarr[i] > 0 || posarr[i] < Board.getSQUARE_ARRAY_HEIGHT() && posarr[i] < Board.getSQUARE_ARRAY_WIDTH()) available = true;
+            else available = false;
         }
-        return true;
+        return available;
     }
 }

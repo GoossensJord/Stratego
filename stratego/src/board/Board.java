@@ -1,4 +1,4 @@
-package Board;
+package board;
 
 public class Board {
     public int boardHeight = 20; //minimum = 20 increments of 10 only
@@ -78,5 +78,13 @@ public class Board {
 
     public void setBoardWidth(int boardWidth) {
         this.boardWidth = boardWidth;
+    }
+
+    public int getSQUARE_ARRAY_WIDTH() {
+        return this.SQUARE_ARRAY_WIDTH;
+    }
+
+    public static int getSQUARE_ARRAY_HEIGHT() {
+        return this.SQUARE_ARRAY_HEIGHT;
     }
 }

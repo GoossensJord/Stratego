@@ -1,4 +1,4 @@
-package Board;
+package board;
 
 public class Player {
     String name;
