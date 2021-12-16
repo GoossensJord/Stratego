@@ -1,4 +1,4 @@
-import java.util.Scanner;
+import Board.Board;
 
 public class testmain {
     public static void main(String[] args) {

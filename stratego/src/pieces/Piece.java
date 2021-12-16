@@ -1,5 +1,8 @@
 package pieces;
 
+
+import Board.Board;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,11 +28,27 @@ public class Piece {
         this.deadOrAlive = true;
     }
 
-    public void move(){
+    public void move() {
         System.out.println("Where would you like to move");
-        for (int i = 0; i < 4; i++) {
-            moveableSquares.get(i) = new int[2];
-        }
 
+        int[] pos1 = {this.position[0], this.position[1] + 1};
+        int[] pos2 = {this.position[0], this.position[1] - 1};
+        int[] pos3 = {this.position[0] + 1, this.position[1]};
+        int[] pos4 = {this.position[0] - 1, this.position[1]};
+
+        moveableSquares.add(pos1);
+        moveableSquares.add(pos2);
+        moveableSquares.add(pos3);
+        moveableSquares.add(pos4);
+
+
+
+    }
+    boolean isOccupied = true;
+    private boolean notOutOfBounds(int[] posarr){
+        for (int i = 0; i < posarr.length; i++) {
+            if (posarr[i] < 0 || posarr[i] > board)
+        }
+        return true;
     }
 }

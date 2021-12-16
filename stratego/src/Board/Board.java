@@ -1,3 +1,5 @@
+package Board;
+
 public class Board {
     public int boardHeight = 20; //minimum = 20 increments of 10 only
     public int boardWidth = 20; //minimum = 20 increments of 10 only
