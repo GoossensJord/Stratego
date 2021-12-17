@@ -1,6 +1,7 @@
 package pieces;
 
 import board.Player;
+import board.Square;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,53 +42,42 @@ public class Piece {
         int[] pos3 = {this.position[0] + 1, this.position[1]};
         int[] pos4 = {this.position[0] - 1, this.position[1]};
 
-
         moveableSquares.add(pos1);
         moveableSquares.add(pos2);
         moveableSquares.add(pos3);
         moveableSquares.add(pos4);
 
         System.out.println("Choose one of the following squares.");
+
         for (int i = 0; i < moveableSquares.size(); i++) {
-            if (!(notOutOfBoundsOrOccupied(moveableSquares.get(i)))) moveableSquares.remove(moveableSquares.get(i));
+            if (outOfBoundsOrOccupied(moveableSquares.get(i))) moveableSquares.set(i,null);
             else{
                 for (int j = 0; j < moveableSquares.get(i).length; j++) {
                     System.out.print(moveableSquares.get(i)[j]);
                 }
                 System.out.println();
             }
+
         }
     }
-
-    boolean isOccupied = false;
-
-    public boolean notOutOfBoundsOrOccupied(int[] posarr) {
-        if (!isOccupied) {
-            if(posarr[0] < 0 || posarr[0] > player.getBoard().getPIECE_ARRAY_HEIGHT());
-            //posarr[1]
+    public boolean outOfBoundsOrOccupied(int[] posarr) {
+        if (true) {
+            for (int i = 0; i < posarr.length; i++) {
+                boolean inBoundsHeight = posarr[i] >= 0 && posarr[i] <= player.getBoard().getPIECE_ARRAY_HEIGHT();
+                boolean inBoundsWidth = posarr[i] >= 0 && posarr[i] <= player.getBoard().getPIECE_ARRAY_HEIGHT();
+                if(!inBoundsHeight||!inBoundsWidth) return true;
+            }
         }
-        return true;
+        return false;
+    }
+
+    public void attack(){
+
     }
 
     // temporary?
     public String toString(){
-        StringBuilder characterOfPiece = new StringBuilder();
-        switch (this.rank){
-            case FLAG: characterOfPiece.append("F"); break;
-            case LUITENANT: characterOfPiece.append("L"); break;
-            case SERGEANT: characterOfPiece.append("S"); break;
-            case MARSHAL: characterOfPiece.append("*"); break;
-            case GENERAL: characterOfPiece.append("G"); break;
-            case COLONEL: characterOfPiece.append("C"); break;
-            case CAPTAIN: characterOfPiece.append("c"); break;
-            case BOMB: characterOfPiece.append("B"); break;
-            case MAJOR: characterOfPiece.append("m"); break;
-            case MINER: characterOfPiece.append("M"); break;
-            case SCOUT: characterOfPiece.append("s"); break;
-            case SPY: characterOfPiece.append("+"); break;
-            case EMPTY: characterOfPiece.append(" "); break;
-        }
-        return characterOfPiece.toString();
-        //xd
+        String out = this.rank.getName().substring(0,2);
+        return out;
     }
 }
