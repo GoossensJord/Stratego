@@ -3,27 +3,20 @@ import board.Player;
 import pieces.Piece;
 import pieces.Rank;
 
+import java.util.ArrayList;
+
 public class TestMain {
     public static void main(String[] args) {
         Board board = new Board();
         Player pl = new Player("jord",board);
-        Player pl2 = new Player("michiel",board);
+
         Piece p = new Piece(Rank.MAJOR,pl);
 
 
         board.fillCharArray(pl,pl2);
         board.makeBoard();
 
-
-
-        int[] position = {1,1};
-        int[] pos1 = {position[0], position[1] + 1};
-        int[] pos2 = {position[0], position[1] - 1};
-        int[] pos3 = {position[0] + 1, position[1]};
-        int[] pos4 = {position[0] - 1, position[1]};
-
-        int[] outOfBounds = {-1,21};
-
-        System.out.println(p.notOutOfBounds(outOfBounds));
+        p.setPosition(new int[]{8, 0});
+        p.move();
     }
 }
