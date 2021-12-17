@@ -99,7 +99,7 @@ public class Board {
     public void assignPiece(Rank rank, Player player) {
         Scanner sc = new Scanner(System.in);
 
-        System.out.println(player.getName() + ", where do u want to place the " + rank.getName() +"? (enter number for width and height ex: 01) = ");
+        System.out.println(player.getName() + ", where do u want to place the " + rank.getName() +"? ");
         String flagIndex = sc.next();
 
         int heightIndexFlag = Character.digit(flagIndex.charAt(0), 10);
@@ -108,7 +108,11 @@ public class Board {
         if (player.getId() == 1 ) {
             piecesTeamA[heightIndexFlag][widthIndexFlag] = new Piece(rank, player);
         }
-        else piecesTeamB[heightIndexFlag][widthIndexFlag] = new Piece(rank, player);
+
+        else {
+            heightIndexFlag = heightIndexFlag - 6;
+            piecesTeamB[heightIndexFlag][widthIndexFlag] = new Piece(rank, player);
+        }
 
         printOutCurrentBoard();
     }
