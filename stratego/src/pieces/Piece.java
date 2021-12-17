@@ -66,8 +66,8 @@ public class Piece {
     public int[] notOutOfBoundsOrOccupied(int[] posarr) {
         if (!isOccupied) {
             for (int i = 0; i < posarr.length; i++) {
-                if (posarr[i] > 0 && posarr[i] < player.getBoard().getSQUARE_ARRAY_HEIGHT() &&
-                        posarr[i] < player.getBoard().getSQUARE_ARRAY_WIDTH()) {
+                if (posarr[i] > 0 && posarr[i] < player.getBoard().getPIECE_ARRAY_HEIGHT() &&
+                        posarr[i] < player.getBoard().getPIECE_ARRAY_WIDTH()) {
                     return posarr;
                 }
 //                System.out.println("xd");
@@ -83,15 +83,16 @@ public class Piece {
             case FLAG: characterOfPiece.append("F"); break;
             case LUITENANT: characterOfPiece.append("L"); break;
             case SERGEANT: characterOfPiece.append("S"); break;
-            case MARSHAL: characterOfPiece.append("M"); break;
+            case MARSHAL: characterOfPiece.append("*"); break;
             case GENERAL: characterOfPiece.append("G"); break;
             case COLONEL: characterOfPiece.append("C"); break;
             case CAPTAIN: characterOfPiece.append("c"); break;
             case BOMB: characterOfPiece.append("B"); break;
             case MAJOR: characterOfPiece.append("m"); break;
-            case MINER: characterOfPiece.append("*"); break;
+            case MINER: characterOfPiece.append("M"); break;
             case SCOUT: characterOfPiece.append("s"); break;
             case SPY: characterOfPiece.append("+"); break;
+            case EMPTY: characterOfPiece.append(" "); break;
         }
         return characterOfPiece.toString();
         //xd

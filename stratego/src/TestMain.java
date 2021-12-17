@@ -15,7 +15,7 @@ public class TestMain {
 
 
         board.fillCharArray(pl,pl2);
-        board.makeBoard();
+
 
         p.setPosition(new int[]{8, 0});
         p.move();
