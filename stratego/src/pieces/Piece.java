@@ -46,34 +46,27 @@ public class Piece {
         moveableSquares.add(pos2);
         moveableSquares.add(pos3);
         moveableSquares.add(pos4);
+
         System.out.println("Choose one of the following squares.");
         for (int i = 0; i < moveableSquares.size(); i++) {
-            if (notOutOfBoundsOrOccupied(moveableSquares.get(i)) == null) moveableSquares.remove(moveableSquares.get(i));
+            if (!(notOutOfBoundsOrOccupied(moveableSquares.get(i)))) moveableSquares.remove(moveableSquares.get(i));
             else{
                 for (int j = 0; j < moveableSquares.get(i).length; j++) {
                     System.out.print(moveableSquares.get(i)[j]);
                 }
                 System.out.println();
-
-                //System.out.println(moveableSquares.get(i));
             }
         }
-
     }
 
     boolean isOccupied = false;
 
-    public int[] notOutOfBoundsOrOccupied(int[] posarr) {
+    public boolean notOutOfBoundsOrOccupied(int[] posarr) {
         if (!isOccupied) {
-            for (int i = 0; i < posarr.length; i++) {
-                if (posarr[i] > 0 && posarr[i] < player.getBoard().getPIECE_ARRAY_HEIGHT() &&
-                        posarr[i] < player.getBoard().getPIECE_ARRAY_WIDTH()) {
-                    return posarr;
-                }
-//                System.out.println("xd");
-            }
+            if(posarr[0] < 0 || posarr[0] > player.getBoard().getPIECE_ARRAY_HEIGHT());
+            //posarr[1]
         }
-        return null;
+        return true;
     }
 
     // temporary?
