@@ -89,4 +89,5 @@ public class Board {
     }
 
     public int getSQUARE_ARRAY_HEIGHT() {return this.SQUARE_ARRAY_WIDTH;    }
+    //xd
 }

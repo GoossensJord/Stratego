@@ -78,5 +78,6 @@ public class Piece {
             case SPY: characterOfPiece.append("+"); break;
         }
         return characterOfPiece.toString();
+        //xd
     }
 }
