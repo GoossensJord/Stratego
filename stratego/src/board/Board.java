@@ -38,112 +38,48 @@ public class Board {
 
             }
         }
-        Scanner sc = new Scanner(System.in);
 
         for (int i = 1; i < 7; i++) {
-            System.out.println("Where do u want to place Bomb nr " + i + " HW = ");
-            String bombIndex = sc.next();
-            int heightIndexBomb = Character.digit(bombIndex.charAt(0),10);
-            int widthIndexBomb = Character.digit(bombIndex.charAt(1),10);
-            piecesTeamA[heightIndexBomb][widthIndexBomb] = new Piece(Rank.BOMB, playerA);
-            piecesTeamB[heightIndexBomb][widthIndexBomb] = new Piece(Rank.BOMB, playerB);
-            printOutCurrentBoard();
+            assignPiece(Rank.BOMB, playerA, playerB);
         }
         for (int i = 1; i < 9; i++) {
-            System.out.println("Where do u want to place Scout nr " + i + " HW = ");
-            String scoutIndex = sc.next();
-            int heightIndexScout = Character.digit(scoutIndex.charAt(0),10);
-            int widthIndexScout = Character.digit(scoutIndex.charAt(1),10);
-            piecesTeamA[heightIndexScout][widthIndexScout] = new Piece(Rank.SCOUT, playerA);
-            piecesTeamB[heightIndexScout][widthIndexScout] = new Piece(Rank.SCOUT, playerB);
-            printOutCurrentBoard();
+            assignPiece(Rank.SCOUT, playerA, playerB);
+
         }
         for (int i = 1; i < 6; i++) {
-            System.out.println("Where do u want to place Miner nr " + i + " HW = ");
-            String minerIndex = sc.next();
-            int heightIndexMiner = Character.digit(minerIndex.charAt(0),10);
-            int widthIndexMiner = Character.digit(minerIndex.charAt(1),10);
-            piecesTeamA[heightIndexMiner][widthIndexMiner] = new Piece(Rank.MINER, playerA);
-            piecesTeamB[heightIndexMiner][widthIndexMiner] = new Piece(Rank.MINER, playerB);
-            printOutCurrentBoard();
+            assignPiece(Rank.MINER, playerA, playerB);
         }
         for (int i = 1; i < 5; i++) {
-            System.out.println("Where do u want to place Major nr " + i + " HW = ");
-            String seargentIndex = sc.next();
-            int heightIndexSeargent = Character.digit(seargentIndex.charAt(0),10);
-            int widthIndexSeargent = Character.digit(seargentIndex.charAt(1),10);
-            piecesTeamA[heightIndexSeargent][widthIndexSeargent] = new Piece(Rank.SERGEANT, playerA);
-            piecesTeamB[heightIndexSeargent][widthIndexSeargent] = new Piece(Rank.SERGEANT, playerB);
-            printOutCurrentBoard();
+            assignPiece(Rank.SERGEANT, playerA, playerB);
+            assignPiece(Rank.LUITENANT, playerA, playerB);
+            assignPiece(Rank.CAPTAIN, playerA, playerB);
 
-            System.out.println("Where do u want to place Major nr " + i + " HW = ");
-            String luitenantIndex = sc.next();
-            int heightIndexLuitenant = Character.digit(luitenantIndex.charAt(0),10);
-            int widthIndexLuitenant = Character.digit(luitenantIndex.charAt(1),10);
-            piecesTeamA[heightIndexLuitenant][widthIndexLuitenant] = new Piece(Rank.LUITENANT, playerA);
-            piecesTeamB[heightIndexLuitenant][widthIndexLuitenant] = new Piece(Rank.LUITENANT, playerB);
-            printOutCurrentBoard();
-
-            System.out.println("Where do u want to place Captain nr " + i + " HW = ");
-            String captainIndex = sc.next();
-            int heightIndexCaptain = Character.digit(captainIndex.charAt(0),10);
-            int widthIndexCaptain = Character.digit(captainIndex.charAt(1),10);
-            piecesTeamA[heightIndexCaptain][widthIndexCaptain] = new Piece(Rank.CAPTAIN, playerA);
-            piecesTeamB[heightIndexCaptain][widthIndexCaptain] = new Piece(Rank.CAPTAIN, playerB);
-            printOutCurrentBoard();
         }
         for (int i = 1; i < 4; i++) {
-            System.out.println("Where do u want to place Major nr " + i + " HW = ");
-            String majorIndex = sc.next();
-            int heightIndexMajor = Character.digit(majorIndex.charAt(0),10);
-            int widthIndexMajor = Character.digit(majorIndex.charAt(1),10);
-            piecesTeamA[heightIndexMajor][widthIndexMajor] = new Piece(Rank.MAJOR, playerA);
-            piecesTeamB[heightIndexMajor][widthIndexMajor] = new Piece(Rank.MAJOR, playerB);
-            printOutCurrentBoard();
+            assignPiece(Rank.MAJOR, playerA, playerB);
+
         }
         for (int i = 0; i < 2; i++) {
-            System.out.println("Where do u want to place Colonel nr " + i + " HW = ");
-            String colonelIndex = sc.next();
-            int heightIndexColonel = Character.digit(colonelIndex.charAt(0),10);
-            int widthIndexColonel = Character.digit(colonelIndex.charAt(1),10);
-            piecesTeamA[heightIndexColonel][widthIndexColonel] = new Piece(Rank.COLONEL, playerA);
-            piecesTeamB[heightIndexColonel][widthIndexColonel] = new Piece(Rank.COLONEL, playerB);
-            printOutCurrentBoard();
+            assignPiece(Rank.COLONEL, playerA, playerB);
         }
-        System.out.println("Where do u want to place the Marshal? HW= ");
-        String marshalIndex = sc.next();
-        int heightIndexMarshal = Character.digit(marshalIndex.charAt(0),10);
-        int widthIndexMarshal = Character.digit(marshalIndex.charAt(1),10);
-        piecesTeamA[heightIndexMarshal][widthIndexMarshal] = new Piece(Rank.MARSHAL, playerA);
-        piecesTeamB[heightIndexMarshal][widthIndexMarshal] = new Piece(Rank.MARSHAL, playerB);
-        printOutCurrentBoard();
+        assignPiece(Rank.MARSHAL, playerA, playerB);
+        assignPiece(Rank.GENERAL, playerA, playerB);
+        assignPiece(Rank.SPY, playerA, playerB);
+        assignPiece(Rank.FLAG,playerA,playerB);
 
-        System.out.println("Where do u want to place the General? HW= ");
-        String generalIndex = sc.next();
-        int heightIndexGeneral = Character.digit(generalIndex.charAt(0),10);
-        int widthIndexGeneral = Character.digit(generalIndex.charAt(1),10);
-        piecesTeamA[heightIndexGeneral][widthIndexGeneral] = new Piece(Rank.GENERAL, playerA);
-        piecesTeamB[heightIndexGeneral][widthIndexGeneral] = new Piece(Rank.GENERAL, playerB);
-        printOutCurrentBoard();
 
-        System.out.println("Where do u want to place the Spy? HW= ");
-        String spyIndex = sc.next();
-        int heightIndexSpy = Character.digit(spyIndex.charAt(0),10);
-        int widthIndexSpy = Character.digit(spyIndex.charAt(1),10);
-        piecesTeamA[heightIndexSpy][widthIndexSpy] = new Piece(Rank.SPY, playerA);
-        piecesTeamB[heightIndexSpy][widthIndexSpy] = new Piece(Rank.SPY, playerB);
-        printOutCurrentBoard();
+    }
 
-        System.out.println("Where do u want to place the Flag? HW= ");
+    public void assignPiece(Rank rank, Player playerA, Player playerB) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Where do u want to place the " + rank.getName() +"? HW= ");
         String flagIndex = sc.next();
-        int heightIndexFlag = Character.digit(flagIndex.charAt(0),10);
-        int widthIndexFlag = Character.digit(flagIndex.charAt(1),10);
-        piecesTeamA[heightIndexFlag][widthIndexFlag] = new Piece(Rank.FLAG, playerA);
-        piecesTeamB[heightIndexFlag][widthIndexFlag] = new Piece(Rank.FLAG, playerB);
+        int heightIndexFlag = Character.digit(flagIndex.charAt(0), 10);
+        int widthIndexFlag = Character.digit(flagIndex.charAt(1), 10);
+        piecesTeamA[heightIndexFlag][widthIndexFlag] = new Piece(rank, playerA);
+        piecesTeamB[heightIndexFlag][widthIndexFlag] = new Piece(rank, playerB);
         printOutCurrentBoard();
-
-
-
     }
 
 //in comment, low priority
@@ -205,7 +141,7 @@ public class Board {
             for (int j = 0; j < SQUARE_ARRAY_WIDTH; j++) {
                 System.out.print(piecesTeamB[i][j] + " ");
             }
-            System.out.print(i+6);
+            System.out.print(i + 6);
             System.out.println();
         }
         System.out.println("\n0 1 2 3 4 5 6 7 8 9");
