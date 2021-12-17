@@ -9,6 +9,7 @@ public class TestMain {
     public static void main(String[] args) {
         Board board = new Board();
         Player pl = new Player("jord",board);
+        Player pl2 = new Player("michiel",board);
 
         Piece p = new Piece(Rank.MAJOR,pl);
 
