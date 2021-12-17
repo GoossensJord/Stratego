@@ -1,5 +1,7 @@
 package board;
 
+
+
 public class Player {
     public String name;
     public Board board;
@@ -16,4 +18,6 @@ public class Player {
     public Board getBoard() {
         return board;
     }
+
+
 }

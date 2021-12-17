@@ -1,6 +1,10 @@
 package board;
 
+import pieces.Piece;
+import pieces.Rank;
+
 public class Board {
+    Piece piece;
     public int boardHeight = 20; //minimum = 20 increments of 10 only
     public int boardWidth = 20; //minimum = 20 increments of 10 only
     private final int SQUARE_ARRAY_WIDTH = Math.abs((boardWidth + 1) / 2);
@@ -8,8 +12,8 @@ public class Board {
 
 
     //char array to be replaced with array of squares
-    char[][] temporaryReplacementForSquaresTeamA = new char[SQUARE_ARRAY_HEIGHT][SQUARE_ARRAY_WIDTH];
-    char[][] temporaryReplacementForSquaresTeamB = new char[SQUARE_ARRAY_HEIGHT][SQUARE_ARRAY_WIDTH];
+    Piece[][] piecesTeamA = new Piece[SQUARE_ARRAY_HEIGHT][SQUARE_ARRAY_WIDTH];
+    Piece[][] piecesTeamB = new Piece[SQUARE_ARRAY_HEIGHT][SQUARE_ARRAY_WIDTH];
 
     //if piece selected highlight moveable squares
     public Board() {
@@ -17,11 +21,11 @@ public class Board {
     }
 
     //temporary fill method for char array until replacement
-    public void fillCharArray() {
+    public void fillCharArray(Player playerA, Player playerB) {
         for (int i = 0; i < SQUARE_ARRAY_HEIGHT; i++) {
             for (int j = 0; j < SQUARE_ARRAY_WIDTH; j++) {
-                temporaryReplacementForSquaresTeamA[i][j] = 'A';
-                temporaryReplacementForSquaresTeamB[i][j] = 'B';
+                piecesTeamA[i][j] = new Piece(Rank.CAPTAIN,playerA) ;
+                piecesTeamB[i][j] = new Piece(Rank.FLAG,playerB);
             }
         }
     }
@@ -51,9 +55,9 @@ public class Board {
                 } else if (i > boardHeight * 0.4 && i <= boardHeight * 0.6)
                     System.out.print(" ");
                 else if (i < boardHeight * 0.6)
-                    System.out.print(temporaryReplacementForSquaresTeamA[i / 7][j / 2]);
+                    System.out.print(piecesTeamA[i / 7][j / 2].toString());
 
-                else System.out.print(temporaryReplacementForSquaresTeamB[i / 7][j / 2]);
+                else System.out.print(piecesTeamB[i / 7][j / 2].toString());
             }
 
             System.out.println();

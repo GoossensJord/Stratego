@@ -59,4 +59,24 @@ public class Piece {
         }
         return available;
     }
+
+    // temporary?
+    public String toString(){
+        StringBuilder characterOfPiece = new StringBuilder();
+        switch (rank){
+            case FLAG: characterOfPiece.append("F"); break;
+            case LUITENANT: characterOfPiece.append("L"); break;
+            case SERGEANT: characterOfPiece.append("S"); break;
+            case MARSHAL: characterOfPiece.append("M"); break;
+            case GENERAL: characterOfPiece.append("G"); break;
+            case COLONEL: characterOfPiece.append("C"); break;
+            case CAPTAIN: characterOfPiece.append("c"); break;
+            case BOMB: characterOfPiece.append("B"); break;
+            case MAJOR: characterOfPiece.append("m"); break;
+            case MINER: characterOfPiece.append("*"); break;
+            case SCOUT: characterOfPiece.append("s"); break;
+            case SPY: characterOfPiece.append("+"); break;
+        }
+        return characterOfPiece.toString();
+    }
 }
