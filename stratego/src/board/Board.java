@@ -98,24 +98,49 @@ public class Board {
 
     public void assignPiece(Rank rank, Player player) {
         Scanner sc = new Scanner(System.in);
+        boolean validNumberRange = true;
+        boolean validAmountOfNumbers;
+        String index = " ";
+        int heightIndexFlag = 0;
+        int widthIndexFlag = 0;
 
-        System.out.println(player.getName() + ", where do u want to place the " + rank.getName() +"? ");
-        String flagIndex = sc.next();
+        while(validNumberRange) { ////////////////////////////////////////////////////////////////////////////////////////
+            validAmountOfNumbers = true;////////////////////////////////////////////////////////////////////////////////////////
+            while(validAmountOfNumbers) {////////////////////////////////////////////////////////////////////////////////////////
+                System.out.println(player.getName() + ", where do u want to place the " + rank.getName() + "? ");////////////////////////////////////////////
+                 index = sc.next();//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// ------> making this into seperate method TODO
+                if (index.toString().length() != 2) {////////////////////////////////////////////////////////////////////////////////////////
+                    System.out.println("Enter two numbers no spaces");////////////////////////////////////////////////////////////////////////////////////////
+                }////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                else validAmountOfNumbers = false;////////////////////////////////////////////////////////////////////////////////////////
+            }////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        int heightIndexFlag = Character.digit(flagIndex.charAt(0), 10);
-        int widthIndexFlag = Character.digit(flagIndex.charAt(1), 10);
+            heightIndexFlag = Character.digit(index.charAt(0), 10);
+            widthIndexFlag = Character.digit(index.charAt(1), 10);
 
+            if (player.getId() != 1) {
+                heightIndexFlag = heightIndexFlag-6;
+            }
+            if (heightIndexFlag < 3 && widthIndexFlag < 9 && heightIndexFlag >= 0) {
+                validNumberRange = false;
+
+            }
+            else {
+                System.out.println("incorrect number range");
+
+            }
+        }
         if (player.getId() == 1 ) {
             piecesTeamA[heightIndexFlag][widthIndexFlag] = new Piece(rank, player);
         }
 
         else {
-            heightIndexFlag = heightIndexFlag - 6;
             piecesTeamB[heightIndexFlag][widthIndexFlag] = new Piece(rank, player);
         }
 
         printOutCurrentBoard();
     }
+
 
 
     public void printOutCurrentBoard() {
@@ -139,6 +164,7 @@ public class Board {
         }
         System.out.println("\n0 1 2 3 4 5 6 7 8 9");
     }
+
 
     public void setBoardHeight(int boardHeight) {
         this.boardHeight = boardHeight;
