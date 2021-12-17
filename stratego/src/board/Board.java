@@ -40,90 +40,83 @@ public class Board {
         }
 
         for (int i = 1; i < 7; i++) {
-            assignPiece(Rank.BOMB, playerA, playerB);
+
+            assignPiece(Rank.BOMB, playerA);
+            assignPiece(Rank.BOMB, playerB);
+
         }
         for (int i = 1; i < 9; i++) {
-            assignPiece(Rank.SCOUT, playerA, playerB);
+            assignPiece(Rank.SCOUT, playerA);
+            assignPiece(Rank.SCOUT, playerB);
 
         }
         for (int i = 1; i < 6; i++) {
-            assignPiece(Rank.MINER, playerA, playerB);
+
+            assignPiece(Rank.MINER, playerA);
+            assignPiece(Rank.MINER, playerB);
+
         }
         for (int i = 1; i < 5; i++) {
-            assignPiece(Rank.SERGEANT, playerA, playerB);
-            assignPiece(Rank.LUITENANT, playerA, playerB);
-            assignPiece(Rank.CAPTAIN, playerA, playerB);
+
+            assignPiece(Rank.SERGEANT, playerA);
+            assignPiece(Rank.SERGEANT, playerB);
+
+            assignPiece(Rank.LUITENANT, playerA);
+            assignPiece(Rank.LUITENANT, playerB);
+
+            assignPiece(Rank.CAPTAIN, playerA);
+            assignPiece(Rank.CAPTAIN, playerB);
 
         }
         for (int i = 1; i < 4; i++) {
-            assignPiece(Rank.MAJOR, playerA, playerB);
+
+            assignPiece(Rank.MAJOR, playerA);
+            assignPiece(Rank.MAJOR, playerB);
+
 
         }
         for (int i = 0; i < 2; i++) {
-            assignPiece(Rank.COLONEL, playerA, playerB);
+
+            assignPiece(Rank.COLONEL, playerA);
+            assignPiece(Rank.COLONEL, playerB);
         }
-        assignPiece(Rank.MARSHAL, playerA, playerB);
-        assignPiece(Rank.GENERAL, playerA, playerB);
-        assignPiece(Rank.SPY, playerA, playerB);
-        assignPiece(Rank.FLAG,playerA,playerB);
+
+        assignPiece(Rank.MARSHAL, playerA);
+        assignPiece(Rank.MARSHAL, playerB);
+
+        assignPiece(Rank.GENERAL, playerA);
+        assignPiece(Rank.GENERAL, playerB);
+
+        assignPiece(Rank.SPY, playerA);
+        assignPiece(Rank.SPY, playerB);
+
+        assignPiece(Rank.FLAG,playerA);
+        assignPiece(Rank.FLAG,playerB);
 
 
     }
 
-    public void assignPiece(Rank rank, Player playerA, Player playerB) {
+    public void assignPiece(Rank rank, Player player) {
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("Where do u want to place the " + rank.getName() +"? HW= ");
+        System.out.println(player.getName() + ", where do u want to place the " + rank.getName() +"? ");
         String flagIndex = sc.next();
+
         int heightIndexFlag = Character.digit(flagIndex.charAt(0), 10);
         int widthIndexFlag = Character.digit(flagIndex.charAt(1), 10);
-        piecesTeamA[heightIndexFlag][widthIndexFlag] = new Piece(rank, playerA);
-        piecesTeamB[heightIndexFlag][widthIndexFlag] = new Piece(rank, playerB);
+
+        if (player.getId() == 1 ) {
+            piecesTeamA[heightIndexFlag][widthIndexFlag] = new Piece(rank, player);
+        }
+
+        else {
+            heightIndexFlag = heightIndexFlag - 6;
+            piecesTeamB[heightIndexFlag][widthIndexFlag] = new Piece(rank, player);
+        }
+
         printOutCurrentBoard();
     }
 
-//in comment, low priority
-  /*  public void makeBoard() {
-
-        int counterHorizontalIndex = 0;
-        int counterVerticalIndex = 0;
-
-        System.out.println("    Welcome to Stratego!");
-        for (int i = 0; i < boardHeight + 1; i++) {
-            if (i % 2 != 0) {
-                if (counterVerticalIndex < 10) {
-                    System.out.print(counterVerticalIndex++ + "\t");
-                } else System.out.print(counterVerticalIndex++ + "\t");
-
-            } else System.out.print("\t");
-
-
-            for (int j = 0; j < boardWidth + 1; j++) {
-                if (i % 2 == 0) {
-                    System.out.print("-");
-                } else if (j % 2 == 0) {
-                    System.out.print("|");
-                } else if (i > boardHeight * 0.4 && i <= boardHeight * 0.6)
-                    System.out.print(" ");
-                else if (i < boardHeight * 0.6) {
-                    System.out.print(piecesTeamA[i][j].toString());
-                } else System.out.print(piecesTeamB[i][j].toString());
-
-            }
-            System.out.println();
-        }
-        System.out.print("    ");
-        for (
-                int i = 0; i < (boardWidth) / 2; i++) {
-            if (counterHorizontalIndex < 10) {
-                System.out.print(" " + counterHorizontalIndex++);
-            } else
-                System.out.print(counterHorizontalIndex++);
-        }
-
-
-
-    }*/
 
     public void printOutCurrentBoard() {
         System.out.println("Stratego\n");

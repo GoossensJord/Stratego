@@ -72,7 +72,7 @@ public class Piece {
     // temporary?
     public String toString(){
         StringBuilder characterOfPiece = new StringBuilder();
-        switch (rank){
+        switch (this.rank){
             case FLAG: characterOfPiece.append("F"); break;
             case LUITENANT: characterOfPiece.append("L"); break;
             case SERGEANT: characterOfPiece.append("S"); break;
