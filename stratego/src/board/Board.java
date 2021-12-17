@@ -99,7 +99,7 @@ public class Board {
     public void assignPiece(Rank rank, Player player) {
         Scanner sc = new Scanner(System.in);
 
-        System.out.println(player.getName() + ", where do u want to place the " + rank.getName() +"? HW= ");
+        System.out.println(player.getName() + ", where do u want to place the " + rank.getName() +"? (enter number for width and height ex: 01) = ");
         String flagIndex = sc.next();
 
         int heightIndexFlag = Character.digit(flagIndex.charAt(0), 10);
