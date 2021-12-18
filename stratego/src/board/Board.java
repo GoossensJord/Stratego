@@ -3,18 +3,16 @@ package board;
 import pieces.Piece;
 import pieces.Rank;
 
-import java.lang.module.FindException;
 import java.util.Scanner;
 
 public class Board {
 
-    public int boardHeight = 20; //minimum = 20 increments of 10 only
-    public int boardWidth = 20; //minimum = 20 increments of 10 only
+    public int boardHeight = 20;
+    public int boardWidth = 20;
     private final int SQUARE_ARRAY_WIDTH = Math.abs((boardWidth + 1) / 2);
     private final int SQUARE_ARRAY_HEIGHT = Math.abs((boardHeight + 1) / 6);
 
 
-    //char array to be replaced with array of squares
     Piece[][] piecesTeamA = new Piece[SQUARE_ARRAY_HEIGHT + 1][SQUARE_ARRAY_WIDTH + 1];
     Piece[][] piecesTeamB = new Piece[SQUARE_ARRAY_HEIGHT + 1][SQUARE_ARRAY_WIDTH + 1];
 
@@ -90,8 +88,8 @@ public class Board {
         assignPiece(Rank.SPY, playerA);
         assignPiece(Rank.SPY, playerB);
 
-        assignPiece(Rank.FLAG,playerA);
-        assignPiece(Rank.FLAG,playerB);
+        assignPiece(Rank.FLAG, playerA);
+        assignPiece(Rank.FLAG, playerB);
 
 
     }
@@ -101,46 +99,54 @@ public class Board {
         boolean validNumberRange = true;
         boolean validAmountOfNumbers;
         String index = " ";
-        int heightIndexFlag = 0;
-        int widthIndexFlag = 0;
+        int heightIndex = 0;
+        int widthIndex = 0;
 
-        while(validNumberRange) { ////////////////////////////////////////////////////////////////////////////////////////
-            validAmountOfNumbers = true;////////////////////////////////////////////////////////////////////////////////////////
-            while(validAmountOfNumbers) {////////////////////////////////////////////////////////////////////////////////////////
-                System.out.println(player.getName() + ", where do u want to place the " + rank.getName() + "? ");////////////////////////////////////////////
-                 index = sc.next();//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// ------> making this into seperate method TODO
-                if (index.toString().length() != 2) {////////////////////////////////////////////////////////////////////////////////////////
-                    System.out.println("Enter two numbers no spaces");////////////////////////////////////////////////////////////////////////////////////////
-                }////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                else validAmountOfNumbers = false;////////////////////////////////////////////////////////////////////////////////////////
-            }////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-            heightIndexFlag = Character.digit(index.charAt(0), 10);
-            widthIndexFlag = Character.digit(index.charAt(1), 10);
+        while (validNumberRange) {
+            validAmountOfNumbers = true;
+            while (validAmountOfNumbers) {
+                System.out.println(player.getName() + ", where do u want to place the " + rank.getName() + "? ");
+                index = sc.next();
+                validAmountOfNumbers = ammountOfInputCharacterCheck(index);
+            }
+            heightIndex = Character.digit(index.charAt(0), 10);
+            widthIndex = Character.digit(index.charAt(1), 10);
 
             if (player.getId() != 1) {
-                heightIndexFlag = heightIndexFlag-6;
+                heightIndex = heightIndex - 6;
             }
-            if (heightIndexFlag < 3 && widthIndexFlag < 9 && heightIndexFlag >= 0) {
-                validNumberRange = false;
 
-            }
-            else {
-                System.out.println("incorrect number range");
-
-            }
+           validNumberRange = rangeOfInputNumbersCheck(heightIndex,widthIndex);
         }
-        if (player.getId() == 1 ) {
-            piecesTeamA[heightIndexFlag][widthIndexFlag] = new Piece(rank, player);
-        }
-
-        else {
-            piecesTeamB[heightIndexFlag][widthIndexFlag] = new Piece(rank, player);
+        if (player.getId() == 1) {
+            piecesTeamA[heightIndex][widthIndex] = new Piece(rank, player);
+        } else {
+            piecesTeamB[heightIndex][widthIndex] = new Piece(rank, player);
         }
 
         printOutCurrentBoard();
     }
 
+
+    public boolean rangeOfInputNumbersCheck(int heightIndex, int widthIndex){
+
+        if (heightIndex <= 3 && widthIndex <= 9 && heightIndex >= 0) {
+            return false;
+
+        } else {
+            System.out.println("incorrect number range");
+            return true;
+
+        }
+    }
+
+    public boolean ammountOfInputCharacterCheck(String input) {
+        if (input.toString().length() != 2) {
+            System.out.println("Enter two numbers no spaces");
+            return true;
+        }
+        else return false;
+    }
 
 
     public void printOutCurrentBoard() {
@@ -162,7 +168,7 @@ public class Board {
             System.out.print(i + 6);
             System.out.println();
         }
-        System.out.println("\n0 1 2 3 4 5 6 7 8 9");
+        System.out.println("\n0  1  2  3  4  5  6  7  8  9");
     }
 
 
