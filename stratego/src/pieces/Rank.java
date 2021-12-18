@@ -13,6 +13,10 @@ public enum Rank {
 
     }
 
+    public int getAmnt() {
+        return amnt;
+    }
+
     public String getName() {
         return name;
     }

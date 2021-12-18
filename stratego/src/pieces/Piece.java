@@ -30,6 +30,8 @@ public class Piece {
         this.deadOrAlive = true;
     }
 
+
+
     public void setPosition(int[] position) {
         this.position = position;
     }
@@ -78,6 +80,9 @@ public class Piece {
 
     private int getRankPower(){
         return this.rank.power;
+    }
+    public Rank getRank() {
+        return rank;
     }
 
     public String toString(){
