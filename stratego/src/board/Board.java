@@ -182,4 +182,5 @@ public class Board {
         return this.SQUARE_ARRAY_WIDTH;
     }
     //xd
+
 }
