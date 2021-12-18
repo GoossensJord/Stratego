@@ -71,10 +71,14 @@ public class Piece {
         return false;
     }
 
-    public void attack(){
-
+    public Piece attack(Piece piece){
+        if(piece.getRankPower() < this.getRankPower()) return this;
+        else return piece;
     }
 
+    private int getRankPower(){
+        return this.rank.power;
+    }
     // temporary?
     public String toString(){
         String out = this.rank.getName().substring(0,2);

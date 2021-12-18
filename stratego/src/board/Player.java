@@ -6,9 +6,6 @@ public class Player {
     public String name;
     public Board board;
     public int id;
-    //placeholder for piece functions.
-    //noteven , leaving it here just in case
-    //Piece[] pieces;
 
     public Player(int id,String name,Board b /*,Piece[] pieces*/){
         this.name = name;
