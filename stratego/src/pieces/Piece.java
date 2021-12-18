@@ -87,9 +87,6 @@ public class Piece {
 
     public String toString(){
         String out = this.rank.getName().substring(0,2);
-        if (this.rank.getName().equalsIgnoreCase("Empty")) {
-            out = "  ";
-        }
         return out;
     }
 }
