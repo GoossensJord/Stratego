@@ -3,10 +3,7 @@ package board;
 import pieces.Piece;
 import pieces.Rank;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Board {
     //placeholder for input later.
@@ -15,14 +12,14 @@ public class Board {
     //square arr sizing
     private final int SQUARE_ARRAY_WIDTH = Math.abs((boardWidth + 1) / 2);
     private final int SQUARE_ARRAY_HEIGHT = Math.abs((boardHeight + 1) / 6);
-
+    Square square;
 
     Square[][] squaresBoard = new Square[SQUARE_ARRAY_HEIGHT + 1][SQUARE_ARRAY_WIDTH + 1];
 
 
     //if piece selected highlight moveable squares
     public Board() {
-
+        square = new Square(this);
     }
 
     //makes squares on all index to not get nullpointers, then adds empty pieces
@@ -34,6 +31,29 @@ public class Board {
                     squaresBoard[i][j] = new Square(this);
                     squaresBoard[i][j].setPiece(new Piece(Rank.EMPTY, player, 0, 0));
 
+                }
+            }
+        }
+    }
+
+    public void arrangePiecesTopPlayer(Piece piece) {
+        for (int i = 0; i < SQUARE_ARRAY_HEIGHT; i++) {
+            for (int j = 0; j < SQUARE_ARRAY_WIDTH; j++) {
+                if (spaceAvailable(i, j)) {
+                    squaresBoard[i][j].setPiece(piece);
+                    return;
+                }
+            }
+        }
+    }
+
+
+    public void arrangePiecesBottomPlayer(Piece piece) {
+        for (int i = SQUARE_ARRAY_HEIGHT - 1; i >= 0; i--) {
+            for (int j = SQUARE_ARRAY_WIDTH - 1; j >= 0; j--) {
+                if (spaceAvailable(i, j)) {
+                    squaresBoard[i][j].setPiece(piece);
+                    return;
                 }
             }
         }
@@ -96,7 +116,7 @@ public class Board {
 
         } else {
 
-            System.out.println("place taken");
+            //System.out.println("place taken");
             return false;
 
         }
@@ -113,7 +133,7 @@ public class Board {
                 System.out.println("incorrect number range");
                 return true;
             }
-        } else{
+        } else {
             if (heightIndex >= 6 && widthIndex <= 9 && heightIndex <= 9) {
                 return false;
 
@@ -126,55 +146,105 @@ public class Board {
     }
 
 
-        public boolean ammountOfInputCharacterCheck (String input){
+    public boolean ammountOfInputCharacterCheck(String input) {
 
-            if (input.length() != 2) {
+        if (input.length() != 2) {
 
-                System.out.println("Enter two numbers no spaces");
-                return true;
+            System.out.println("Enter two numbers no spaces");
+            return true;
 
-            } else return false;
-        }
+        } else return false;
+    }
 
 
-        public void printOutCurrentBoard () {
-            System.out.println("Stratego\n");
-            for (int i = 0; i < SQUARE_ARRAY_HEIGHT; i++) {
-                for (int j = 0; j < SQUARE_ARRAY_WIDTH; j++) {
-                    System.out.print(squaresBoard[i][j] + " ");
-                }
-                System.out.print(i);
-                System.out.println();
+    public void printOutCurrentBoard() {
+        System.out.println("Stratego\n");
+        for (int i = 0; i < SQUARE_ARRAY_HEIGHT; i++) {
+            for (int j = 0; j < SQUARE_ARRAY_WIDTH; j++) {
+                System.out.print(squaresBoard[i][j] + " ");
             }
-
-            System.out.println("\n0  1  2  3  4  5  6  7  8  9");
+            System.out.print(" " + i);
+            System.out.println();
         }
 
-        public void shufflePos () {
-            List<int[]> pos = new ArrayList<>();
-            for (int i = 0; i < 3; i++) {
-                for (int j = 0; j < 9; j++) {
-                    pos.add(new int[]{i, j});
-                }
+        System.out.println("\n0  1  2  3  4  5  6  7  8  9");
+    }
+
+
+    public void setBoardHeight(int boardHeight) {
+        this.boardHeight = boardHeight;
+    }
+
+    public void setBoardWidth(int boardWidth) {
+        this.boardWidth = boardWidth;
+    }
+
+    public int getPIECE_ARRAY_WIDTH() {
+        return this.SQUARE_ARRAY_WIDTH;
+    }
+
+    public int getPIECE_ARRAY_HEIGHT() {
+        return this.SQUARE_ARRAY_WIDTH;
+    }
+
+    public void move(int x, int y) {
+        if (square.outOfBoundsOrOccupied(x, y)) {
+
+        }
+    }
+
+    //xd
+    public void randomlyPlacePieces(Player player) {
+        List<Piece> piecesPlayer = Arrays.asList(
+                new Piece(Rank.BOMB, player, 0, 0),
+                new Piece(Rank.BOMB, player, 0, 0),
+                new Piece(Rank.BOMB, player, 0, 0),
+                new Piece(Rank.BOMB, player, 0, 0),
+                new Piece(Rank.BOMB, player, 0, 0),
+                new Piece(Rank.BOMB, player, 0, 0),
+                new Piece(Rank.MARSHAL, player, 0, 0),
+                new Piece(Rank.GENERAL, player, 0, 0),
+                new Piece(Rank.COLONEL, player, 0, 0),
+                new Piece(Rank.COLONEL, player, 0, 0),
+                new Piece(Rank.MAJOR, player, 0, 0),
+                new Piece(Rank.MAJOR, player, 0, 0),
+                new Piece(Rank.MAJOR, player, 0, 0),
+                new Piece(Rank.CAPTAIN, player, 0, 0),
+                new Piece(Rank.CAPTAIN, player, 0, 0),
+                new Piece(Rank.CAPTAIN, player, 0, 0),
+                new Piece(Rank.CAPTAIN, player, 0, 0),
+                new Piece(Rank.LUITENANT, player, 0, 0),
+                new Piece(Rank.LUITENANT, player, 0, 0),
+                new Piece(Rank.LUITENANT, player, 0, 0),
+                new Piece(Rank.LUITENANT, player, 0, 0),
+                new Piece(Rank.SERGEANT, player, 0, 0),
+                new Piece(Rank.SERGEANT, player, 0, 0),
+                new Piece(Rank.SERGEANT, player, 0, 0),
+                new Piece(Rank.SERGEANT, player, 0, 0),
+                new Piece(Rank.MINER, player, 0, 0),
+                new Piece(Rank.MINER, player, 0, 0),
+                new Piece(Rank.MINER, player, 0, 0),
+                new Piece(Rank.MINER, player, 0, 0),
+                new Piece(Rank.MINER, player, 0, 0),
+                new Piece(Rank.SCOUT, player, 0, 0),
+                new Piece(Rank.SCOUT, player, 0, 0),
+                new Piece(Rank.SCOUT, player, 0, 0),
+                new Piece(Rank.SCOUT, player, 0, 0),
+                new Piece(Rank.SCOUT, player, 0, 0),
+                new Piece(Rank.SCOUT, player, 0, 0),
+                new Piece(Rank.SCOUT, player, 0, 0),
+                new Piece(Rank.SCOUT, player, 0, 0),
+                new Piece(Rank.SPY, player, 0, 0),
+                new Piece(Rank.FLAG, player, 0, 0));
+
+        Collections.shuffle(piecesPlayer);
+        for (Piece piece : piecesPlayer) {
+            if (player.getId() == 1) {
+                arrangePiecesTopPlayer(piece);
+            } else {
+                arrangePiecesBottomPlayer(piece);
             }
-            Collections.shuffle(pos);
         }
-
-        public void setBoardHeight ( int boardHeight){
-            this.boardHeight = boardHeight;
-        }
-
-        public void setBoardWidth ( int boardWidth){
-            this.boardWidth = boardWidth;
-        }
-
-        public int getPIECE_ARRAY_WIDTH () {
-            return this.SQUARE_ARRAY_WIDTH;
-        }
-
-        public int getPIECE_ARRAY_HEIGHT () {
-            return this.SQUARE_ARRAY_WIDTH;
-        }
-        //xd
 
     }
+}
