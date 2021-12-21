@@ -12,8 +12,9 @@ public class Stratego {
     Player pl2 = new Player(2,"michiel",board);
 
     public void playStratego(){
-        board.fillWithEmptyPieces();
-        board.assignPiece(Rank.FLAG,pl);
+        board.fillWithEmptyPieces(pl,pl2);
+        board.fillBoard(pl);
+        board.fillBoard(pl2);
         board.printOutCurrentBoard();
 
        /* Piece p = new Piece(Rank.MAJOR,pl,0,0);
