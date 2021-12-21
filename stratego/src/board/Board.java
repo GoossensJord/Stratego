@@ -15,14 +15,15 @@ public class Board {
     public int boardWidth = 20;
     private final int SQUARE_ARRAY_WIDTH = Math.abs((boardWidth + 1) / 2);
     private final int SQUARE_ARRAY_HEIGHT = Math.abs((boardHeight + 1) / 6);
-
+    private Player p1;
+    private Player p2;
 
     Piece[][] piecesTeamA = new Piece[SQUARE_ARRAY_HEIGHT + 1][SQUARE_ARRAY_WIDTH + 1];
     Piece[][] piecesTeamB = new Piece[SQUARE_ARRAY_HEIGHT + 1][SQUARE_ARRAY_WIDTH + 1];
 
     //if piece selected highlight moveable squares
     public Board() {
-
+        this.p1 = new Player(1,"XD", this);
     }
 
     public void fillWithEmptyPieces() {
@@ -64,8 +65,6 @@ public class Board {
             }
         }
         System.out.println("full");
-
-
     }
 
 
@@ -175,7 +174,15 @@ public class Board {
         System.out.println("\n0  1  2  3  4  5  6  7  8  9");
     }
 
-
+    public void shufflePos(){
+        List<int[]> pos = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 9; j++) {
+                pos.add(new int[]{i,j});
+            }
+        }
+        Collections.shuffle(pos);
+    }
     public void setBoardHeight(int boardHeight) {
         this.boardHeight = boardHeight;
     }

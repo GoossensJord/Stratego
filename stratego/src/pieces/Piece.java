@@ -17,17 +17,18 @@ public class Piece {
     Player player;
     protected int boardHeight;
     protected int boardWidth;
-
+    protected int x;
+    protected int y;
     public Piece(Rank r, Player player) {
         this.rank = r;
         this.position = new int[2];
         this.deadOrAlive = true;
         this.isMoveable = true;
         this.canAttack = true;
-        moveableSquares = new ArrayList<>();
+        this.moveableSquares = new ArrayList<>();
         this.player = player;
-        boardHeight = player.getBoard().getPIECE_ARRAY_HEIGHT();
-        boardWidth = player.getBoard().getPIECE_ARRAY_WIDTH();
+        this.x = position[0];
+        this.y = position[1];
     }
 
     public Piece() {
@@ -88,9 +89,15 @@ public class Piece {
     public Rank getRank() {
         return rank;
     }
-    public int[] getPosition(){
-        return this.position;
+
+    public int getX() {
+        return x;
     }
+
+    public int getY() {
+        return y;
+    }
+
     public String toString(){
         String out = this.rank.getName().substring(0,2);
         return out;

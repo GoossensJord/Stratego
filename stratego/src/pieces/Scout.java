@@ -12,9 +12,16 @@ public class Scout extends Piece {
     }
 
     public List<int[]> getCrossPositions(){
-        for (int i = 0; i < this.player.getBoard().getBoardHeight(); i++) {
-            moveableSquares.add(new int[]{this.getPosition()[0],i});
-            moveableSquares.add(new int[]{i,this.getPosition()[0]});
+        int curx = getX();
+        int cury = getY();
+
+        for (int i = 0; i < 20; i++) {
+            int[] posarrX = new int[]{curx,i};
+            int[] posarrY = new int[]{i,cury};
+            if(!(super.outOfBoundsOrOccupied(posarrX)&& super.outOfBoundsOrOccupied(posarrY))) {
+                moveableSquares.add(new int[]{curx, i});
+                moveableSquares.add(new int[]{i, cury});
+            }
         }
         return moveableSquares;
     }

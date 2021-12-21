@@ -4,6 +4,7 @@ import board.Board;
 import board.Player;
 import pieces.Piece;
 import pieces.Rank;
+import pieces.Scout;
 
 public class Stratego {
     Board board = new Board();
@@ -15,7 +16,9 @@ public class Stratego {
         board.printOutCurrentBoard();
 
         Piece p = new Piece(Rank.MAJOR,pl);
-       // p.setPosition(new int[]{5, 0});
-        // p.move();
+        Piece s = new Scout(Rank.SCOUT,pl);
+        s.setPosition(new int[]{5, 0});
+        ((Scout) s).getCrossPositions();
+
     }
 }
