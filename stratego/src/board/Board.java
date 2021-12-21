@@ -3,6 +3,10 @@ package board;
 import pieces.Piece;
 import pieces.Rank;
 
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 public class Board {
@@ -21,83 +25,49 @@ public class Board {
 
     }
 
-    public void fillWithEmptyPieces(Player playerA, Player playerB) {
+    public void fillWithEmptyPieces() {
 
         for (int i = 0; i <= SQUARE_ARRAY_HEIGHT; i++) {
             for (int j = 0; j <= SQUARE_ARRAY_WIDTH; j++) {
                 if (piecesTeamA[i][j] == null) {
-                    piecesTeamA[i][j] = new Piece(Rank.EMPTY, playerA);
+                    piecesTeamA[i][j] = new Piece(Rank.EMPTY, null);
 
                 }
                 if (piecesTeamB[i][j] == null) {
-                    piecesTeamB[i][j] = new Piece(Rank.EMPTY, playerB);
+                    piecesTeamB[i][j] = new Piece(Rank.EMPTY, null);
                 }
 
             }
         }
     }
-
-    public void fillBoard(Player playerA, Player playerB) {
-
-        fillWithEmptyPieces(playerA, playerB);
-
-
-        for (int i = 1; i < Rank.BOMB.getAmnt(); i++) {
-
-            assignPiece(Rank.BOMB, playerA);
-            assignPiece(Rank.BOMB, playerB);
-
+    public void fillBoardRandomly(){ // delen door 10 = rij -> modulo = kolomn
+        List<Integer> numbersToRandomize = new ArrayList<>();
+        for (int i = 0; i < 39; i++) {
+            numbersToRandomize.add(i);
         }
-        for (int i = 1; i < Rank.GENERAL.getAmnt(); i++) {
-            assignPiece(Rank.SCOUT, playerA);
-            assignPiece(Rank.SCOUT, playerB);
+        Collections.shuffle(numbersToRandomize);
+        for (Rank r: Rank.values()) {
+            for (int i = 0; i < r.getAmnt(); i++) {
+                int row = numbersToRandomize.get(i)/10;
+                int column = numbersToRandomize.get(i) % 10;
+                piecesTeamB[row][column] = new Piece(r, null);
+                piecesTeamA[row][column] = new Piece(r, null);
 
+            }
         }
-        for (int i = 1; i < Rank.MINER.getAmnt(); i++) {
+    }
 
-            assignPiece(Rank.MINER, playerA);
-            assignPiece(Rank.MINER, playerB);
-
+    public void fillBoard(Player player){
+        for (Rank r: Rank.values()){
+            for (int i = 0; i < r.getAmnt(); i++) {
+                assignPiece(r, player);
+            }
         }
-        for (int i = 1; i < Rank.LUITENANT.getAmnt(); i++) {
-
-            assignPiece(Rank.SERGEANT, playerA);
-            assignPiece(Rank.SERGEANT, playerB);
-
-            assignPiece(Rank.LUITENANT, playerA);
-            assignPiece(Rank.LUITENANT, playerB);
-
-            assignPiece(Rank.CAPTAIN, playerA);
-            assignPiece(Rank.CAPTAIN, playerB);
-
-        }
-        for (int i = 1; i < Rank.MAJOR.getAmnt(); i++) {
-
-            assignPiece(Rank.MAJOR, playerA);
-            assignPiece(Rank.MAJOR, playerB);
-
-
-        }
-        for (int i = 1; i < Rank.COLONEL.getAmnt(); i++) {
-
-            assignPiece(Rank.COLONEL, playerA);
-            assignPiece(Rank.COLONEL, playerB);
-        }
-
-        assignPiece(Rank.MARSHAL, playerA);
-        assignPiece(Rank.MARSHAL, playerB);
-
-        assignPiece(Rank.GENERAL, playerA);
-        assignPiece(Rank.GENERAL, playerB);
-
-        assignPiece(Rank.SPY, playerA);
-        assignPiece(Rank.SPY, playerB);
-
-        assignPiece(Rank.FLAG, playerA);
-        assignPiece(Rank.FLAG, playerB);
+        System.out.println("full");
 
 
     }
+
 
     public void assignPiece(Rank rank, Player player) {
         Scanner sc = new Scanner(System.in);
@@ -121,7 +91,7 @@ public class Board {
 
                 if (!rangeOfInputNumbersCheck(heightIndex, widthIndex)) {
 
-                    if (spaceAvailable(rank, player, piecesTeamA, piecesTeamB, heightIndex, widthIndex)) {
+                    if (spaceAvailable(rank, player,heightIndex, widthIndex)) {
                         placeTaken = false;
                         validNumberRange = false;
                         printOutCurrentBoard();
@@ -135,7 +105,7 @@ public class Board {
     }
 
 
-    public boolean spaceAvailable(Rank rank, Player player, Piece[][] piecesTeamA, Piece[][] piecesTeamB, int heightIndex, int widthIndex) {
+    public boolean spaceAvailable(Rank rank, Player player, int heightIndex, int widthIndex) {
 
         if (piecesTeamA[heightIndex][widthIndex].getRank().equals(Rank.EMPTY) && player.getId() == 1) {
 

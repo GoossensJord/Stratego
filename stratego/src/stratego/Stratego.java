@@ -11,7 +11,9 @@ public class Stratego {
     Player pl2 = new Player(2,"michiel",board);
 
     public void playStratego(){
-        board.fillBoard(pl,pl2);
+        board.fillBoardRandomly();
+        board.printOutCurrentBoard();
+
         Piece p = new Piece(Rank.MAJOR,pl);
        // p.setPosition(new int[]{5, 0});
         // p.move();

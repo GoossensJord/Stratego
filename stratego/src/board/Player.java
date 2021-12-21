@@ -3,9 +3,9 @@ package board;
 import pieces.Piece;
 
 public class Player {
-    public String name;
-    public Board board;
-    public int id;
+    private String name;
+    private Board board;
+    private int id;
 
     public Player(int id,String name,Board b /*,Piece[] pieces*/){
         this.name = name;
