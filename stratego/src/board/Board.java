@@ -3,7 +3,6 @@ package board;
 import pieces.Piece;
 import pieces.Rank;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -18,8 +17,8 @@ public class Board {
     private Player p1;
     private Player p2;
 
-    Piece[][] piecesTeamA = new Piece[SQUARE_ARRAY_HEIGHT + 1][SQUARE_ARRAY_WIDTH + 1];
-    Piece[][] piecesTeamB = new Piece[SQUARE_ARRAY_HEIGHT + 1][SQUARE_ARRAY_WIDTH + 1];
+    Square[][] squaresTeamA = new Square[SQUARE_ARRAY_HEIGHT + 1][SQUARE_ARRAY_WIDTH + 1];
+    Square[][] squaresTeamB = new Square[SQUARE_ARRAY_HEIGHT + 1][SQUARE_ARRAY_WIDTH + 1];
 
     //if piece selected highlight moveable squares
     public Board() {
@@ -30,12 +29,12 @@ public class Board {
 
         for (int i = 0; i <= SQUARE_ARRAY_HEIGHT; i++) {
             for (int j = 0; j <= SQUARE_ARRAY_WIDTH; j++) {
-                if (piecesTeamA[i][j] == null) {
-                    piecesTeamA[i][j] = new Piece(Rank.EMPTY, null);
+                if (squaresTeamA[i][j] == null) {
+                    squaresTeamA[i][j].setPiece(new Piece(Rank.EMPTY,p1));
 
                 }
-                if (piecesTeamB[i][j] == null) {
-                    piecesTeamB[i][j] = new Piece(Rank.EMPTY, null);
+                if (squaresTeamB[i][j] == null) {
+                    squaresTeamB[i][j].setPiece(new Piece(Rank.EMPTY, p2));
                 }
 
             }
@@ -51,8 +50,8 @@ public class Board {
             for (int i = 0; i < r.getAmnt(); i++) {
                 int row = numbersToRandomize.get(i)/10;
                 int column = numbersToRandomize.get(i) % 10;
-                piecesTeamB[row][column] = new Piece(r, null);
-                piecesTeamA[row][column] = new Piece(r, null);
+                squaresTeamB[row][column].setPiece(new Piece(r, null));
+                squaresTeamA[row][column].setPiece(new Piece(r,null));
 
             }
         }
@@ -106,14 +105,14 @@ public class Board {
 
     public boolean spaceAvailable(Rank rank, Player player, int heightIndex, int widthIndex) {
 
-        if (piecesTeamA[heightIndex][widthIndex].getRank().equals(Rank.EMPTY) && player.getId() == 1) {
+        if (squaresTeamA[heightIndex][widthIndex].getRank().equals(Rank.EMPTY) && player.getId() == 1) {
 
-            piecesTeamA[heightIndex][widthIndex] = new Piece(rank, player);
+            squaresTeamA[heightIndex][widthIndex].setPiece(new Piece(rank,player));
             return true;
 
-        } else if (piecesTeamB[heightIndex][widthIndex].getRank().equals(Rank.EMPTY) && player.getId() != 1) {
+        } else if (squaresTeamB[heightIndex][widthIndex].getRank().equals(Rank.EMPTY) && player.getId() != 1) {
 
-            piecesTeamB[heightIndex][widthIndex] = new Piece(rank, player);
+            squaresTeamB[heightIndex][widthIndex].setPiece(new Piece(rank, player));
             return true;
 
         } else {
@@ -156,7 +155,7 @@ public class Board {
         for (int i = 0; i <= SQUARE_ARRAY_HEIGHT; i++) {
 
             for (int j = 0; j < SQUARE_ARRAY_WIDTH; j++) {
-                System.out.print(piecesTeamA[i][j] + " ");
+                System.out.print(squaresTeamA[i][j] + " ");
             }
             System.out.print(i);
             System.out.println();
@@ -166,7 +165,7 @@ public class Board {
 
         for (int i = 0; i <= SQUARE_ARRAY_HEIGHT; i++) {
             for (int j = 0; j < SQUARE_ARRAY_WIDTH; j++) {
-                System.out.print(piecesTeamB[i][j] + " ");
+                System.out.print(squaresTeamB[i][j] + " ");
             }
             System.out.print(i);
             System.out.println();
