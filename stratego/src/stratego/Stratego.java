@@ -12,7 +12,7 @@ public class Stratego {
     Player pl2 = new Player(2,"michiel",board);
 
     public void playStratego(){
-        board.fillWithEmptyPieces(pl,pl2);
+        board.fillWithEmptyPieces(pl);
         board.fillBoard(pl);
         board.fillBoard(pl2);
         board.printOutCurrentBoard();
