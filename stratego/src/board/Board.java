@@ -7,8 +7,8 @@ import java.util.Scanner;
 
 public class Board {
 
-    public int boardHeight = 20;
-    public int boardWidth = 20;
+    private int boardHeight = 20;
+    private int boardWidth = 20;
     private final int SQUARE_ARRAY_WIDTH = Math.abs((boardWidth + 1) / 2);
     private final int SQUARE_ARRAY_HEIGHT = Math.abs((boardHeight + 1) / 6);
 
@@ -26,13 +26,11 @@ public class Board {
         for (int i = 0; i <= SQUARE_ARRAY_HEIGHT; i++) {
             for (int j = 0; j <= SQUARE_ARRAY_WIDTH; j++) {
                 if (piecesTeamA[i][j] == null) {
-                    piecesTeamA[i][j] = new Piece(Rank.EMPTY, playerA);
-
+                    piecesTeamA[i][j] = new Piece(Rank.SCOUT, playerA);
                 }
                 if (piecesTeamB[i][j] == null) {
-                    piecesTeamB[i][j] = new Piece(Rank.EMPTY, playerB);
+                    piecesTeamB[i][j] = new Piece(Rank.SCOUT, playerB);
                 }
-
             }
         }
     }
@@ -40,27 +38,19 @@ public class Board {
     public void fillBoard(Player playerA, Player playerB) {
 
         fillWithEmptyPieces(playerA, playerB);
-
-
         for (int i = 1; i < Rank.BOMB.getAmnt(); i++) {
-
             assignPiece(Rank.BOMB, playerA);
             assignPiece(Rank.BOMB, playerB);
-
         }
         for (int i = 1; i < Rank.GENERAL.getAmnt(); i++) {
             assignPiece(Rank.SCOUT, playerA);
             assignPiece(Rank.SCOUT, playerB);
-
         }
         for (int i = 1; i < Rank.MINER.getAmnt(); i++) {
-
             assignPiece(Rank.MINER, playerA);
             assignPiece(Rank.MINER, playerB);
-
         }
         for (int i = 1; i < Rank.LUITENANT.getAmnt(); i++) {
-
             assignPiece(Rank.SERGEANT, playerA);
             assignPiece(Rank.SERGEANT, playerB);
 
@@ -69,14 +59,10 @@ public class Board {
 
             assignPiece(Rank.CAPTAIN, playerA);
             assignPiece(Rank.CAPTAIN, playerB);
-
         }
         for (int i = 1; i < Rank.MAJOR.getAmnt(); i++) {
-
             assignPiece(Rank.MAJOR, playerA);
             assignPiece(Rank.MAJOR, playerB);
-
-
         }
         for (int i = 1; i < Rank.COLONEL.getAmnt(); i++) {
 
@@ -95,8 +81,6 @@ public class Board {
 
         assignPiece(Rank.FLAG, playerA);
         assignPiece(Rank.FLAG, playerB);
-
-
     }
 
     public void assignPiece(Rank rank, Player player) {
@@ -134,7 +118,6 @@ public class Board {
 
     }
 
-
     public boolean spaceAvailable(Rank rank, Player player, Piece[][] piecesTeamA, Piece[][] piecesTeamB, int heightIndex, int widthIndex) {
 
         if (piecesTeamA[heightIndex][widthIndex].getRank().equals(Rank.EMPTY) && player.getId() == 1) {
@@ -156,7 +139,6 @@ public class Board {
 
     }
 
-
     public boolean rangeOfInputNumbersCheck(int heightIndex, int widthIndex) {
 
         if (heightIndex <= 3 && widthIndex <= 9 && heightIndex >= 0) {
@@ -169,7 +151,6 @@ public class Board {
         }
     }
 
-
     public boolean ammountOfInputCharacterCheck(String input) {
 
         if (input.length() != 2) {
@@ -179,7 +160,6 @@ public class Board {
 
         } else return false;
     }
-
 
     public void printOutCurrentBoard() {
         System.out.println("Stratego\n");
@@ -205,9 +185,16 @@ public class Board {
         System.out.println("\n0  1  2  3  4  5  6  7  8  9");
     }
 
-
     public void setBoardHeight(int boardHeight) {
         this.boardHeight = boardHeight;
+    }
+
+    public int getBoardHeight() {
+        return boardHeight;
+    }
+
+    public int getBoardWidth() {
+        return boardWidth;
     }
 
     public void setBoardWidth(int boardWidth) {

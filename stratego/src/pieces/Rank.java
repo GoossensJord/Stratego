@@ -10,7 +10,6 @@ public enum Rank {
         this.power = power;
         this.name = name;
         this.amnt = amnt;
-
     }
 
     public int getAmnt() {
