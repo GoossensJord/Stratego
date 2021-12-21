@@ -7,7 +7,7 @@ import java.util.List;
 
 //moves any distance horizontal & vertical (no leaping over)
 public class Scout extends Piece {
-    public Scout(Rank scout, Player pl) {
+   /* public Scout(Rank scout, Player pl) {
         super(scout,pl);
     }
 
@@ -24,5 +24,5 @@ public class Scout extends Piece {
             }
         }
         return moveableSquares;
-    }
+    }*/
 }

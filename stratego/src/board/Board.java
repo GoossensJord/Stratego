@@ -33,11 +33,14 @@ public class Board {
         for (int i = 0; i <= SQUARE_ARRAY_HEIGHT; i++) {
             for (int j = 0; j <= SQUARE_ARRAY_WIDTH; j++) {
                 if (squaresTeamA[i][j] == null) {
-                    squaresTeamA[i][j].setPiece(new Piece(Rank.EMPTY,p1));
+                    squaresTeamA[i][j] = new Square(this);
+                    squaresTeamA[i][j].setPiece(new Piece(Rank.EMPTY,p1,0,0));
 
                 }
                 if (squaresTeamB[i][j] == null) {
-                    squaresTeamB[i][j].setPiece(new Piece(Rank.EMPTY, p2));
+                    squaresTeamB[i][j] = new Square(this);
+
+                    squaresTeamB[i][j].setPiece(new Piece(Rank.EMPTY, p2,0,0));
                 }
             }
         }
@@ -52,8 +55,8 @@ public class Board {
             for (int i = 0; i < r.getAmnt(); i++) {
                 int row = numbersToRandomize.get(i)/10;
                 int column = numbersToRandomize.get(i) % 10;
-                squaresTeamB[row][column].setPiece(new Piece(r, null));
-                squaresTeamA[row][column].setPiece(new Piece(r,null));
+                squaresTeamB[row][column].setPiece(new Piece(r, null,0,0));
+                squaresTeamA[row][column].setPiece(new Piece(r,null,0,0));
 
             }
         }
@@ -109,12 +112,12 @@ public class Board {
 
         if (squaresTeamA[heightIndex][widthIndex].getRank().equals(Rank.EMPTY) && player.getId() == 1) {
 
-            squaresTeamA[heightIndex][widthIndex].setPiece(new Piece(rank,player));
+            squaresTeamA[heightIndex][widthIndex].setPiece(new Piece(rank,player,heightIndex,widthIndex));
             return true;
 
         } else if (squaresTeamB[heightIndex][widthIndex].getRank().equals(Rank.EMPTY) && player.getId() != 1) {
 
-            squaresTeamB[heightIndex][widthIndex].setPiece(new Piece(rank, player));
+            squaresTeamB[heightIndex][widthIndex].setPiece(new Piece(rank, player,heightIndex,widthIndex));
             return true;
 
         } else {

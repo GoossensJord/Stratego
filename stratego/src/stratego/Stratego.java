@@ -12,14 +12,15 @@ public class Stratego {
     Player pl2 = new Player(2,"michiel",board);
 
     public void playStratego(){
-        board.fillBoardRandomly();
+        board.fillWithEmptyPieces();
+        board.assignPiece(Rank.FLAG,pl);
         board.printOutCurrentBoard();
 
-        Piece p = new Piece(Rank.MAJOR,pl);
+       /* Piece p = new Piece(Rank.MAJOR,pl,0,0);
         Piece s = new Scout(Rank.SCOUT,pl);
 
         s.setPosition(new int[]{5, 0});
-        ((Scout) s).getCrossPositions();
+        ((Scout) s).getCrossPositions();*/
 
     }
 }

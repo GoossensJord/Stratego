@@ -39,4 +39,8 @@ public class Square {
     public Rank getRank(){
         return this.p.getRank();
     }
+
+    public String toString(){
+        return this.p.toString();
+    }
 }
