@@ -17,6 +17,7 @@ public class Stratego {
 
         Piece p = new Piece(Rank.MAJOR,pl);
         Piece s = new Scout(Rank.SCOUT,pl);
+
         s.setPosition(new int[]{5, 0});
         ((Scout) s).getCrossPositions();
 
