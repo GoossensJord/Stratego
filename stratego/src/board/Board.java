@@ -9,16 +9,19 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Board {
-
-    public int boardHeight = 20;
-    public int boardWidth = 20;
+    //placeholder for input later.
+    private int boardHeight = 20;
+    private int boardWidth = 20;
+    //square arr sizing
     private final int SQUARE_ARRAY_WIDTH = Math.abs((boardWidth + 1) / 2);
     private final int SQUARE_ARRAY_HEIGHT = Math.abs((boardHeight + 1) / 6);
+
     private Player p1;
     private Player p2;
 
     Square[][] squaresTeamA = new Square[SQUARE_ARRAY_HEIGHT + 1][SQUARE_ARRAY_WIDTH + 1];
     Square[][] squaresTeamB = new Square[SQUARE_ARRAY_HEIGHT + 1][SQUARE_ARRAY_WIDTH + 1];
+
 
     //if piece selected highlight moveable squares
     public Board() {
@@ -36,7 +39,6 @@ public class Board {
                 if (squaresTeamB[i][j] == null) {
                     squaresTeamB[i][j].setPiece(new Piece(Rank.EMPTY, p2));
                 }
-
             }
         }
     }
