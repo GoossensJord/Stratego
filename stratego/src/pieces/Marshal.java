@@ -7,8 +7,8 @@ public class Marshal extends Piece {
         this.captured = false;
     }
 
-    /*@Override
+    @Override
     public Piece attack(Piece piece) {
         return super.attack(piece);
-    }*/
+    }
 }

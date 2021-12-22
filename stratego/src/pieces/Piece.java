@@ -10,9 +10,9 @@ import java.util.List;
 public class Piece {
 
     Rank rank;
-    boolean deadOrAlive;
-    boolean isMoveable;
-    boolean canAttack;
+    protected boolean deadOrAlive;
+    protected boolean isMoveable;
+    protected boolean canAttack;
     protected List<int[]> moveableSquares;
     protected int x;
     protected int y;
@@ -30,10 +30,9 @@ public class Piece {
     public Piece() {
     }
 
-    public List<int[]> getMoves(){
-        System.out.println("\nWhere would you like to move?");
-
-        int[] pos1 = {this.x, this.y+1};
+    //all moves, also impossible moves
+    public List<int[]> getMoves() {
+        int[] pos1 = {this.x, this.y + 1};
         int[] pos2 = {this.x, this.y - 1};
         int[] pos3 = {this.x + 1, this.y};
         int[] pos4 = {this.x - 1, this.y};
@@ -45,33 +44,32 @@ public class Piece {
 
         return this.moveableSquares;
     }
-// Removes non moveable squares from array, implementation moved/has to move to board.
-//    public List<int[]> getMoveableSquares() {
-//
-//        for (int i = 0; i < moveableSquares.size(); i++) {
-//            if (outOfBoundsOrOccupied(moveableSquares.get(i))) moveableSquares.set(i,null);
-//            else{
-//                for (int j = 0; j < moveableSquares.get(i).length; j++) {
-//                    System.out.print(moveableSquares.get(i)[j]);
-//                }
-//                System.out.println();
-//            }
-//            return moveableSquares;
-//        }
-//    }
 
-//    public Piece attack(Piece piece){
-//        if(piece.getRankPower() < this.getRankPower()) return this;
-//        else return piece;
-//    }
+    public Piece attack(Piece piece) {
+        if (piece.getRankPower() < this.getRankPower()){
+            piece.setDeadOrAlive(false);
+            return this;
+        }
+        else {
+            this.setDeadOrAlive(false);
+            return piece;
+        }
+    }
 
+    public int getRankPower() {
+        return this.rank.power;
+    }
 
     public Rank getRank() {
         return rank;
     }
 
-    public String toString(){
-        String out = this.rank.getName().substring(0,2);
+    public void setDeadOrAlive(boolean deadOrAlive) {
+        this.deadOrAlive = deadOrAlive;
+    }
+
+    public String toString() {
+        String out = this.rank.getName().substring(0, 2);
         return out;
     }
 }
