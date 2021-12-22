@@ -60,6 +60,7 @@ public class Board {
     }
 
 
+
     public void fillBoard(Player player) {
         for (Rank r : Rank.values()) {
             for (int i = 0; i < r.getAmnt(); i++) {
@@ -122,6 +123,20 @@ public class Board {
         }
 
     }
+    public void availableSquares(int x, int y){
+        if (squaresBoard[x+1][y].getRank().equals(Rank.EMPTY)) {
+            System.out.println("Square DOWN available");
+        }
+        if (squaresBoard[x][y+1].getRank().equals(Rank.EMPTY)) {
+            System.out.println("Square RIGTH available");
+        }
+        if (squaresBoard[x][y-1].getRank().equals(Rank.EMPTY)) {
+            System.out.println("Square LEFT available");
+        }
+        if (squaresBoard[x-1][y].getRank().equals(Rank.EMPTY)) {
+            System.out.println("Square UP available");
+        }
+    }
 
 
     public boolean rangeOfInputNumbersCheck(Player player, int heightIndex, int widthIndex) {
@@ -170,6 +185,9 @@ public class Board {
         System.out.println("\n0  1  2  3  4  5  6  7  8  9");
     }
 
+    // Removes non moveable squares from array, implementation moved/has to move to board.
+
+
 
     public void setBoardHeight(int boardHeight) {
         this.boardHeight = boardHeight;
@@ -187,11 +205,7 @@ public class Board {
         return this.SQUARE_ARRAY_WIDTH;
     }
 
-    public void move(int x, int y) {
-        if (square.outOfBoundsOrOccupied(x, y)) {
 
-        }
-    }
 
     //xd
     public void randomlyPlacePieces(Player player) {

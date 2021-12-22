@@ -17,6 +17,7 @@ public class Stratego {
        board.randomlyPlacePieces(pl);
        board.randomlyPlacePieces(pl2);
         board.printOutCurrentBoard();
+        board.availableSquares(4,5);
 
        /* Piece p = new Piece(Rank.MAJOR,pl,0,0);
         Piece s = new Scout(Rank.SCOUT,pl);
