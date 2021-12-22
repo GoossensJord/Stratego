@@ -29,7 +29,7 @@ public class Board {
             for (int j = 0; j <= SQUARE_ARRAY_WIDTH; j++) {
                 if (squaresBoard[i][j] == null) {
                     squaresBoard[i][j] = new Square(this);
-                    squaresBoard[i][j].setPiece(new Piece(Rank.EMPTY, player, 0, 0));
+
 
                 }
             }
@@ -111,7 +111,7 @@ public class Board {
     public boolean spaceAvailable(int heightIndex, int widthIndex) {
 
 
-        if (squaresBoard[heightIndex][widthIndex].getRank().equals(Rank.EMPTY)) {
+        if (squaresBoard[heightIndex][widthIndex].getIsOccupied()) {
 
             return true;
 
@@ -124,16 +124,16 @@ public class Board {
 
     }
     public void availableSquares(int x, int y){
-        if (squaresBoard[x+1][y].getRank().equals(Rank.EMPTY)) {
+        if (!squaresBoard[x+1][y].getIsOccupied()) {
             System.out.println("Square DOWN available");
         }
-        if (squaresBoard[x][y+1].getRank().equals(Rank.EMPTY)) {
+        if (!squaresBoard[x][y+1].getIsOccupied()) {
             System.out.println("Square RIGTH available");
         }
-        if (squaresBoard[x][y-1].getRank().equals(Rank.EMPTY)) {
+        if (!squaresBoard[x][y-1].getIsOccupied()) {
             System.out.println("Square LEFT available");
         }
-        if (squaresBoard[x-1][y].getRank().equals(Rank.EMPTY)) {
+        if (!squaresBoard[x-1][y].getIsOccupied()) {
             System.out.println("Square UP available");
         }
     }
