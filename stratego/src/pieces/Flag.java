@@ -7,6 +7,4 @@ public class Flag extends Piece {
         super.isMoveable = false;
         super.canAttack = false;
     }
-
-
 }

@@ -1,6 +1,5 @@
 package pieces;
 
-import board.Board;
 import board.Player;
 
 import java.util.List;
