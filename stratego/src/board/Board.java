@@ -82,7 +82,7 @@ public class Board {
             validAmountOfNumbers = ammountOfInputCharacterCheck(index);
         }
         return index;
-    }
+    } //xd
 
     //checks if space is available to place piece while setting up piece layout
     public boolean spaceAvailable(int heightIndex, int widthIndex) {
