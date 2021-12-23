@@ -1,6 +1,6 @@
 package board;
 
-import pieces.Piece;
+
 
 public class Player {
     private String name;
@@ -18,15 +18,15 @@ public class Player {
     }
 
     public Board getBoard() {
-        return board;
+        return this.board;
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public int getId() {
-        return id;
+        return this.id;
     }
 }
 

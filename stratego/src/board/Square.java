@@ -51,6 +51,6 @@ public class Square {
     @Override
     public String toString() {
         if(p != null) return this.p.toString();
-        else return "Empty square";
+        else return "  ";
     }
 }

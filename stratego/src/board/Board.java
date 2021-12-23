@@ -22,7 +22,7 @@ public class Board {
     }
 
     //makes squares on all index to not get nullpointers, then adds empty pieces
-    public void fillWithEmptyPieces(Player player) {
+    public void fillWithSquares(Player player) {
 
         for (int i = 0; i <= SQUARE_ARRAY_HEIGHT; i++) {
             for (int j = 0; j <= SQUARE_ARRAY_WIDTH; j++) {
@@ -33,28 +33,6 @@ public class Board {
         }
     }
 
-    public void arrangePiecesTopPlayer(Piece piece) {
-        for (int i = 0; i < SQUARE_ARRAY_HEIGHT; i++) {
-            for (int j = 0; j < SQUARE_ARRAY_WIDTH; j++) {
-                if (spaceAvailable(i, j)) {
-                    squaresBoard[i][j].setPiece(piece);
-                    return;
-                }
-            }
-        }
-    }
-
-
-    public void arrangePiecesBottomPlayer(Piece piece) {
-        for (int i = SQUARE_ARRAY_HEIGHT - 1; i >= 0; i--) {
-            for (int j = SQUARE_ARRAY_WIDTH - 1; j >= 0; j--) {
-                if (spaceAvailable(i, j)) {
-                    squaresBoard[i][j].setPiece(piece);
-                    return;
-                }
-            }
-        }
-    }
 
 
 
@@ -67,7 +45,7 @@ public class Board {
         System.out.println("full");
     }
 
-
+//for assigning pieces at the start of the game, to be cleaned up
     public void assignPiece(Rank rank, Player player) {
         Scanner sc = new Scanner(System.in);
         boolean validNumberRange = true;
@@ -101,22 +79,23 @@ public class Board {
         }
     }
 
-
+//checks if space is available to place piece while setting up piece layout
     public boolean spaceAvailable(int heightIndex, int widthIndex) {
 
 
-        if (squaresBoard[heightIndex][widthIndex].getIsOccupied()) {
+        if (!squaresBoard[heightIndex][widthIndex].getIsOccupied()) {
 
             return true;
 
         } else {
 
-            //System.out.println("place taken");
+            System.out.println("place taken");
             return false;
 
         }
 
     }
+    //available squares to move piece to
     public void availableSquares(int x, int y){
         if (!squaresBoard[x+1][y].getIsOccupied()) {
             System.out.println("Square DOWN available");
@@ -179,7 +158,6 @@ public class Board {
         System.out.println("\n0  1  2  3  4  5  6  7  8  9");
     }
 
-    // Removes non moveable squares from array, implementation moved/has to move to board.
 
 
 
@@ -202,6 +180,7 @@ public class Board {
 
 
     //xd
+    // randomly assigns the correct amount of pieces for each player, TESTING PURPOSES.
     public void randomlyPlacePieces(Player player) {
         List<Piece> piecesPlayer = Arrays.asList(
                 new Piece(Rank.BOMB, player, 0, 0),
@@ -254,5 +233,28 @@ public class Board {
             }
         }
 
+    }
+
+    public void arrangePiecesTopPlayer(Piece piece) {
+        for (int i = 0; i < SQUARE_ARRAY_HEIGHT; i++) {
+            for (int j = 0; j < SQUARE_ARRAY_WIDTH; j++) {
+                if (spaceAvailable(i, j)) {
+                    squaresBoard[i][j].setPiece(piece);
+                    return;
+                }
+            }
+        }
+    }
+
+
+    public void arrangePiecesBottomPlayer(Piece piece) {
+        for (int i = SQUARE_ARRAY_HEIGHT - 1; i >= 0; i--) {
+            for (int j = SQUARE_ARRAY_WIDTH - 1; j >= 0; j--) {
+                if (spaceAvailable(i, j)) {
+                    squaresBoard[i][j].setPiece(piece);
+                    return;
+                }
+            }
+        }
     }
 }

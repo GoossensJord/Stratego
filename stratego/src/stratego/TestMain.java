@@ -1,4 +1,6 @@
-import stratego.Stratego;
+package stratego;
+
+
 
 
 
