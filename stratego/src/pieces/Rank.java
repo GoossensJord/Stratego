@@ -13,10 +13,10 @@ public enum Rank {
     }
 
     public int getAmnt() {
-        return amnt;
+        return this.amnt;
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 }
