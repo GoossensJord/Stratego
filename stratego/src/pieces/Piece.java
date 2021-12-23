@@ -28,21 +28,6 @@ public class Piece {
     public Piece() {
     }
 
-    //all moves, also impossible moves
-//    public List<int[]> getMoves() {
-//        int[] pos1 = {this.x, this.y + 1};
-//        int[] pos2 = {this.x, this.y - 1};
-//        int[] pos3 = {this.x + 1, this.y};
-//        int[] pos4 = {this.x - 1, this.y};
-//
-//        moveableSquares.add(pos1);
-//        moveableSquares.add(pos2);
-//        moveableSquares.add(pos3);
-//        moveableSquares.add(pos4);
-//
-//        return this.moveableSquares;
-//    }
-
     public Piece attack(Piece piece) {
         if (piece.getRankPower() < this.getRankPower()){
             piece.setDeadOrAlive(false);
@@ -72,5 +57,21 @@ public class Piece {
 
     public String toString() {
         return this.rank.getName().substring(0, 2);
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 }

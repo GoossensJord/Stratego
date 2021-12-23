@@ -13,9 +13,12 @@ public class Stratego {
     Piece s = new Scout(Rank.SCOUT, pl, 5, 5);
 
     public void playStratego() {
-        board.fillWithSquares(pl);
+//        board.fillBoard(pl);
+//        board.fillBoard(pl2);
+
+
+        board.randomlyPlacePieces(pl);
         board.printOutCurrentBoard();
-        board.fillBoard(pl);
-        board.fillBoard(pl2);
+        board.makeMove(s);
     }
 }

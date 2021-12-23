@@ -12,17 +12,18 @@ public class Board {
     //square arr sizing
     private final int SQUARE_ARRAY_WIDTH = Math.abs((boardWidth + 1) / 2);
     private final int SQUARE_ARRAY_HEIGHT = Math.abs((boardHeight + 1) / 6);
+    private Scanner sc = new Scanner(System.in);
 
     Square[][] squaresBoard = new Square[SQUARE_ARRAY_HEIGHT + 1][SQUARE_ARRAY_WIDTH + 1];
 
 
     //if piece selected highlight moveable squares
     public Board() {
-
+        fillWithSquares();
     }
 
     //makes squares on all index to not get nullpointers, then adds empty pieces
-    public void fillWithSquares(Player player) {
+    public void fillWithSquares() {
 
         for (int i = 0; i <= SQUARE_ARRAY_HEIGHT; i++) {
             for (int j = 0; j <= SQUARE_ARRAY_WIDTH; j++) {
@@ -34,8 +35,6 @@ public class Board {
     }
 
 
-
-
     public void fillBoard(Player player) {
         for (Rank r : Rank.values()) {
             for (int i = 0; i < r.getAmnt(); i++) {
@@ -45,7 +44,7 @@ public class Board {
         System.out.println("full");
     }
 
-//for assigning pieces at the start of the game, to be cleaned up
+    //for assigning pieces at the start of the game, to be cleaned up
     public void assignPiece(Rank rank, Player player) {
         Scanner sc = new Scanner(System.in);
         boolean validNumberRange = true;
@@ -79,7 +78,7 @@ public class Board {
         }
     }
 
-//checks if space is available to place piece while setting up piece layout
+    //checks if space is available to place piece while setting up piece layout
     public boolean spaceAvailable(int heightIndex, int widthIndex) {
 
 
@@ -95,20 +94,27 @@ public class Board {
         }
 
     }
+
     //available squares to move piece to
-    public void availableSquares(int x, int y){
-        if (!squaresBoard[x+1][y].getIsOccupied()) {
+    public List<int[]> availableSquares(int x, int y) {
+        List<int[]> moveableSquares = new ArrayList<>();
+        if (!squaresBoard[x + 1][y].getIsOccupied()) {
+            moveableSquares.add(new int[]{x + 1, y});
             System.out.println("Square DOWN available");
         }
-        if (!squaresBoard[x][y+1].getIsOccupied()) {
+        if (!squaresBoard[x][y + 1].getIsOccupied()) {
+            moveableSquares.add(new int[]{x, y + 1});
             System.out.println("Square RIGTH available");
         }
-        if (!squaresBoard[x][y-1].getIsOccupied()) {
+        if (!squaresBoard[x][y - 1].getIsOccupied()) {
+            moveableSquares.add(new int[]{x - 1, y});
             System.out.println("Square LEFT available");
         }
-        if (!squaresBoard[x-1][y].getIsOccupied()) {
+        if (!squaresBoard[x - 1][y].getIsOccupied()) {
+            moveableSquares.add(new int[]{x, y - 1});
             System.out.println("Square UP available");
         }
+        return moveableSquares;
     }
 
 
@@ -159,8 +165,6 @@ public class Board {
     }
 
 
-
-
     public void setBoardHeight(int boardHeight) {
         this.boardHeight = boardHeight;
     }
@@ -176,7 +180,6 @@ public class Board {
     public int getPIECE_ARRAY_HEIGHT() {
         return this.SQUARE_ARRAY_WIDTH;
     }
-
 
 
     //xd
@@ -256,5 +259,38 @@ public class Board {
                 }
             }
         }
+    }
+
+    public void makeMove(Piece p) {
+
+        int[] move = chooseMove(p);
+        if(spaceAvailable(move[0],move[1])) {
+            p.setX(move[0]);
+            p.setY(move[1]);
+        }
+    }
+
+    public int[] chooseMove(Piece p){
+        Scanner sc = new Scanner(System.in);
+        int counter = 1;
+        List<int[]> listArr = availableSquares(p.getX(), p.getY());
+
+        for (int[] arr : listArr) {
+            System.out.print(counter++ + " : ");
+            Arrays.stream(arr).forEach(i -> System.out.print(i));
+            System.out.println();
+        }
+        System.out.println("make your pick (1,2,3,4)");
+
+        int n = sc.nextInt();
+
+        for (int i = 0; i < listArr.size(); i++) {
+            if(n-1 == i && n < listArr.size()+1){
+                Arrays.stream(listArr.get(i)).forEach(num -> System.out.print(num));
+                return listArr.get(i-1);
+            }
+        }
+        System.out.println("Try again.");
+        return chooseMove(p);
     }
 }
