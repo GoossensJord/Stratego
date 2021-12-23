@@ -7,12 +7,11 @@ import java.util.*;
 
 public class Board {
     //placeholder for input later.
-    private int boardHeight = 60;
-    private int boardWidth = 20;
+    protected int boardHeight = 60;
+    protected int boardWidth = 20;
     //square arr sizing
-    private final int SQUARE_ARRAY_WIDTH = Math.abs((boardWidth + 1) / 2);
-    private final int SQUARE_ARRAY_HEIGHT = Math.abs((boardHeight + 1) / 6);
-    private Scanner sc = new Scanner(System.in);
+    protected final int SQUARE_ARRAY_WIDTH = Math.abs((boardWidth + 1) / 2);
+    protected final int SQUARE_ARRAY_HEIGHT = Math.abs((boardHeight + 1) / 6);
 
     Square[][] squaresBoard = new Square[SQUARE_ARRAY_HEIGHT + 1][SQUARE_ARRAY_WIDTH + 1];
 
@@ -33,124 +32,6 @@ public class Board {
             }
         }
     }
-
-
-    public void fillBoard(Player player) {
-        for (Rank r : Rank.values()) {
-            for (int i = 0; i < r.getAmnt(); i++) {
-                assignPiece(r, player);
-            }
-        }
-        System.out.println("full");
-    }
-
-    //for assigning pieces at the start of the game, to be cleaned up
-    public void assignPiece(Rank rank, Player player) {
-        Scanner sc = new Scanner(System.in);
-        boolean validNumberRange = true;
-        boolean validAmountOfNumbers;
-        boolean placeTaken = true;
-        String index = " ";
-        int heightIndex;
-        int widthIndex;
-
-        while (validNumberRange) {
-            while (placeTaken) {
-                validAmountOfNumbers = true;
-                while (validAmountOfNumbers) {
-                    System.out.println(player.getName() + ", where do u want to place the " + rank.getName() + "? ");
-                    index = sc.next();
-                    validAmountOfNumbers = ammountOfInputCharacterCheck(index);
-                }
-                heightIndex = Character.digit(index.charAt(0), 10);
-                widthIndex = Character.digit(index.charAt(1), 10);
-
-                if (!rangeOfInputNumbersCheck(player, heightIndex, widthIndex)) {
-                    if (spaceAvailable(heightIndex, widthIndex)) {
-                        squaresBoard[heightIndex][widthIndex].setPiece(new Piece(rank, player, heightIndex, widthIndex));
-                        placeTaken = false;
-                        validNumberRange = false;
-                        printOutCurrentBoard();
-                    }
-
-                }
-            }
-        }
-    }
-
-    //checks if space is available to place piece while setting up piece layout
-    public boolean spaceAvailable(int heightIndex, int widthIndex) {
-
-
-        if (!squaresBoard[heightIndex][widthIndex].getIsOccupied()) {
-
-            return true;
-
-        } else {
-
-            System.out.println("place taken");
-            return false;
-
-        }
-
-    }
-
-    //available squares to move piece to
-    public List<int[]> availableSquares(int x, int y) {
-        List<int[]> moveableSquares = new ArrayList<>();
-        if (!squaresBoard[x + 1][y].getIsOccupied()) {
-            moveableSquares.add(new int[]{x + 1, y});
-            System.out.println("Square DOWN available");
-        }
-        if (!squaresBoard[x][y + 1].getIsOccupied()) {
-            moveableSquares.add(new int[]{x, y + 1});
-            System.out.println("Square RIGTH available");
-        }
-        if (!squaresBoard[x][y - 1].getIsOccupied()) {
-            moveableSquares.add(new int[]{x - 1, y});
-            System.out.println("Square LEFT available");
-        }
-        if (!squaresBoard[x - 1][y].getIsOccupied()) {
-            moveableSquares.add(new int[]{x, y - 1});
-            System.out.println("Square UP available");
-        }
-        return moveableSquares;
-    }
-
-
-    public boolean rangeOfInputNumbersCheck(Player player, int heightIndex, int widthIndex) {
-
-        if (player.getId() == 1) {
-            if (heightIndex <= 3 && widthIndex <= 9 && heightIndex >= 0) {
-                return false;
-            } else {
-                System.out.println("incorrect number range");
-                return true;
-            }
-        } else {
-            if (heightIndex >= 6 && widthIndex <= 9 && heightIndex <= 9) {
-                return false;
-
-            } else {
-                System.out.println("incorrect number range");
-                return true;
-            }
-
-        }
-    }
-
-
-    public boolean ammountOfInputCharacterCheck(String input) {
-
-        if (input.length() != 2) {
-
-            System.out.println("Enter two numbers no spaces");
-            return true;
-
-        } else return false;
-    }
-
-
     public void printOutCurrentBoard() {
         System.out.println("Stratego\n");
         for (int i = 0; i < SQUARE_ARRAY_HEIGHT; i++) {
@@ -163,28 +44,45 @@ public class Board {
 
         System.out.println("\n0  1  2  3  4  5  6  7  8  9");
     }
+    public void assignPiece(Rank rank, Player player) {
+        BoardInputChecker boardInputChecker = new BoardInputChecker();
+        boolean validNumberRange = true;
+        boolean placeTaken = true;
+        String index = " ";
+        int heightIndex;
+        int widthIndex;
 
+        while (validNumberRange) {
+            while (placeTaken) {
+                index = boardInputChecker.inputString(player,rank);
+                heightIndex = Character.digit(index.charAt(0), 10);
+                widthIndex = Character.digit(index.charAt(1), 10);
 
-    public void setBoardHeight(int boardHeight) {
-        this.boardHeight = boardHeight;
+                if (!boardInputChecker.rangeOfInputNumbersCheck(player, heightIndex, widthIndex)) {
+                    if (spaceAvailable(heightIndex, widthIndex)) {
+                        squaresBoard[heightIndex][widthIndex].setPiece(new Piece(rank, player, heightIndex, widthIndex));
+                        placeTaken = false;
+                        validNumberRange = false;
+                        printOutCurrentBoard();
+
+                    }
+
+                }
+            }
+        }
     }
 
-    public void setBoardWidth(int boardWidth) {
-        this.boardWidth = boardWidth;
-    }
-
-    public int getPIECE_ARRAY_WIDTH() {
-        return this.SQUARE_ARRAY_WIDTH;
-    }
-
-    public int getPIECE_ARRAY_HEIGHT() {
-        return this.SQUARE_ARRAY_WIDTH;
+    public void fillBoard(Player player) {
+        for (Rank r : Rank.values()) {
+            for (int i = 0; i < r.getAmnt(); i++) {
+                assignPiece(r, player);
+            }
+        }
+        System.out.println("full");
     }
 
 
-    //xd
-    // randomly assigns the correct amount of pieces for each player, TESTING PURPOSES.
-    public void randomlyPlacePieces(Player player) {
+    public void randomlyPlacePiecesData(Player player) {
         List<Piece> piecesPlayer = Arrays.asList(
                 new Piece(Rank.BOMB, player, 0, 0),
                 new Piece(Rank.BOMB, player, 0, 0),
@@ -235,30 +133,79 @@ public class Board {
                 arrangePiecesBottomPlayer(piece);
             }
         }
-
     }
 
-    public void arrangePiecesTopPlayer(Piece piece) {
+    public Square[][] arrangePiecesTopPlayer(Piece piece) {
         for (int i = 0; i < SQUARE_ARRAY_HEIGHT; i++) {
             for (int j = 0; j < SQUARE_ARRAY_WIDTH; j++) {
                 if (spaceAvailable(i, j)) {
                     squaresBoard[i][j].setPiece(piece);
-                    return;
+
                 }
             }
         }
+        return squaresBoard;
     }
 
 
-    public void arrangePiecesBottomPlayer(Piece piece) {
+    public Square[][] arrangePiecesBottomPlayer(Piece piece) {
         for (int i = SQUARE_ARRAY_HEIGHT - 1; i >= 0; i--) {
             for (int j = SQUARE_ARRAY_WIDTH - 1; j >= 0; j--) {
                 if (spaceAvailable(i, j)) {
                     squaresBoard[i][j].setPiece(piece);
-                    return;
+
                 }
             }
         }
+        return squaresBoard;
+    }
+
+
+
+
+
+    //for assigning pieces at the start of the game, to be cleaned up
+
+
+  //xd
+
+    //checks if space is available to place piece while setting up piece layout
+    public boolean spaceAvailable(int heightIndex, int widthIndex) {
+
+
+        if (!squaresBoard[heightIndex][widthIndex].getIsOccupied()) {
+
+            return true;
+
+        } else {
+
+            System.out.println("place taken");
+            return false;
+
+        }
+
+    }
+
+    //available squares to move piece to
+    public List<int[]> availableSquares(int x, int y) {
+        List<int[]> moveableSquares = new ArrayList<>();
+        if (!squaresBoard[x + 1][y].getIsOccupied()) {
+            moveableSquares.add(new int[]{x + 1, y});
+            System.out.println("Square DOWN available");
+        }
+        if (!squaresBoard[x][y + 1].getIsOccupied()) {
+            moveableSquares.add(new int[]{x, y + 1});
+            System.out.println("Square RIGTH available");
+        }
+        if (!squaresBoard[x][y - 1].getIsOccupied()) {
+            moveableSquares.add(new int[]{x - 1, y});
+            System.out.println("Square LEFT available");
+        }
+        if (!squaresBoard[x - 1][y].getIsOccupied()) {
+            moveableSquares.add(new int[]{x, y - 1});
+            System.out.println("Square UP available");
+        }
+        return moveableSquares;
     }
 
     public void makeMove(Piece p) {
@@ -293,4 +240,22 @@ public class Board {
         System.out.println("Try again.");
         return chooseMove(p);
     }
+
+    public void setBoardHeight(int boardHeight) {
+        this.boardHeight = boardHeight;
+    }
+
+    public void setBoardWidth(int boardWidth) {
+        this.boardWidth = boardWidth;
+    }
+
+    public int getPIECE_ARRAY_WIDTH() {
+        return this.SQUARE_ARRAY_WIDTH;
+    }
+
+    public int getPIECE_ARRAY_HEIGHT() {
+        return this.SQUARE_ARRAY_WIDTH;
+    }
+
+
 }

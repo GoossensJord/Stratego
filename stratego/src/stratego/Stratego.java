@@ -17,8 +17,13 @@ public class Stratego {
 //        board.fillBoard(pl2);
 
 
-        board.randomlyPlacePieces(pl);
+        board.fillBoard(pl);
+        board.availableSquares(3,5);
+        board.fillBoard(pl2);
         board.printOutCurrentBoard();
-        board.makeMove(s);
+
+
+
+
     }
 }
