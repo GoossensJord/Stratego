@@ -12,10 +12,8 @@ public class Stratego {
     Player pl2 = new Player(2,"michiel",board);
 
     public void playStratego(){
-        board.fillBoardRandomly();
+        board.fillWithEmptyPieces(pl);
+        board.randomlyPlacePieces(pl);
         board.printOutCurrentBoard();
-        Piece s = new Scout(Rank.SCOUT, pl,5,5);
-        ((Scout) s).getCrossPositions(20);
-
     }
 }

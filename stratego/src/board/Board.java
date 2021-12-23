@@ -12,14 +12,13 @@ public class Board {
     //square arr sizing
     private final int SQUARE_ARRAY_WIDTH = Math.abs((boardWidth + 1) / 2);
     private final int SQUARE_ARRAY_HEIGHT = Math.abs((boardHeight + 1) / 6);
-    Square square;
 
     Square[][] squaresBoard = new Square[SQUARE_ARRAY_HEIGHT + 1][SQUARE_ARRAY_WIDTH + 1];
 
 
     //if piece selected highlight moveable squares
     public Board() {
-        square = new Square(this);
+
     }
 
     //makes squares on all index to not get nullpointers, then adds empty pieces
@@ -29,8 +28,6 @@ public class Board {
             for (int j = 0; j <= SQUARE_ARRAY_WIDTH; j++) {
                 if (squaresBoard[i][j] == null) {
                     squaresBoard[i][j] = new Square(this);
-
-
                 }
             }
         }
@@ -92,7 +89,6 @@ public class Board {
                 widthIndex = Character.digit(index.charAt(1), 10);
 
                 if (!rangeOfInputNumbersCheck(player, heightIndex, widthIndex)) {
-
                     if (spaceAvailable(heightIndex, widthIndex)) {
                         squaresBoard[heightIndex][widthIndex].setPiece(new Piece(rank, player, heightIndex, widthIndex));
                         placeTaken = false;
