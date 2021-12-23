@@ -13,7 +13,7 @@ public class Stratego {
     Piece s = new Scout(Rank.SCOUT, pl,5,5);
     public void playStratego(){
 
-board.fillWithSquares(pl);
+board.fillWithSquares();
         board.printOutCurrentBoard();
         board.fillBoard(pl);
         board.fillBoard(pl2);

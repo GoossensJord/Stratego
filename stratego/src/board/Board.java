@@ -23,7 +23,7 @@ public class Board {
     }
 
     //makes squares on all index to not get nullpointers, then adds empty pieces
-    public void fillWithSquares(Player player) {
+    public void fillWithSquares() {
 
         for (int i = 0; i <= SQUARE_ARRAY_HEIGHT; i++) {
             for (int j = 0; j <= SQUARE_ARRAY_WIDTH; j++) {
@@ -50,9 +50,8 @@ public class Board {
 
 //for assigning pieces at the start of the game, to be cleaned up
     public void assignPiece(Rank rank, Player player) {
-        Scanner sc = new Scanner(System.in);
+
         boolean validNumberRange = true;
-        boolean validAmountOfNumbers;
         boolean placeTaken = true;
         String index = " ";
         int heightIndex;
@@ -60,12 +59,7 @@ public class Board {
 
         while (validNumberRange) {
             while (placeTaken) {
-                validAmountOfNumbers = true;
-                while (validAmountOfNumbers) {
-                    System.out.println(player.getName() + ", where do u want to place the " + rank.getName() + "? ");
-                    index = sc.next();
-                    validAmountOfNumbers = ammountOfInputCharacterCheck(index);
-                }
+                index = inputString(player,rank);
                 heightIndex = Character.digit(index.charAt(0), 10);
                 widthIndex = Character.digit(index.charAt(1), 10);
 
@@ -81,6 +75,18 @@ public class Board {
                 }
             }
         }
+    }
+    public String inputString(Player player, Rank rank){
+        Scanner sc = new Scanner(System.in);
+        String index = " ";
+        boolean validAmountOfNumbers = true;
+
+        while (validAmountOfNumbers) {
+            System.out.println(player.getName() + ", where do u want to place the " + rank.getName() + "? ");
+            index = sc.next();
+            validAmountOfNumbers = ammountOfInputCharacterCheck(index);
+        }
+        return index;
     }
 
 //checks if space is available to place piece while setting up piece layout
