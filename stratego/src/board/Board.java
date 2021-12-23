@@ -12,7 +12,7 @@ public class Board {
     //square arr sizing
     protected final int SQUARE_ARRAY_WIDTH = Math.abs((boardWidth + 1) / 2);
     protected final int SQUARE_ARRAY_HEIGHT = Math.abs((boardHeight + 1) / 6);
-
+    private Scanner sc = new Scanner(System.in);
     Square[][] squaresBoard = new Square[SQUARE_ARRAY_HEIGHT + 1][SQUARE_ARRAY_WIDTH + 1];
 
 
@@ -32,6 +32,7 @@ public class Board {
             }
         }
     }
+
     public void printOutCurrentBoard() {
         System.out.println("Stratego\n");
         for (int i = 0; i < SQUARE_ARRAY_HEIGHT; i++) {
@@ -44,6 +45,7 @@ public class Board {
 
         System.out.println("\n0  1  2  3  4  5  6  7  8  9");
     }
+
     public void assignPiece(Rank rank, Player player) {
         BoardInputChecker boardInputChecker = new BoardInputChecker();
         boolean validNumberRange = true;
@@ -54,7 +56,7 @@ public class Board {
 
         while (validNumberRange) {
             while (placeTaken) {
-                index = boardInputChecker.inputString(player,rank);
+                index = boardInputChecker.inputString(player, rank);
                 heightIndex = Character.digit(index.charAt(0), 10);
                 widthIndex = Character.digit(index.charAt(1), 10);
 
@@ -80,7 +82,6 @@ public class Board {
         }
         System.out.println("full");
     }
-
 
     public void randomlyPlacePiecesData(Player player) {
         List<Piece> piecesPlayer = Arrays.asList(
@@ -126,62 +127,55 @@ public class Board {
                 new Piece(Rank.FLAG, player, 0, 0));
 
         Collections.shuffle(piecesPlayer);
-        for (Piece piece : piecesPlayer) {
-            if (player.getId() == 1) {
-                arrangePiecesTopPlayer(piece);
-            } else {
-                arrangePiecesBottomPlayer(piece);
+        int counter = 0;
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 10; j++) {
+                if (player.getId() == 1) {
+                    arrangePiecesTopPlayer(piecesPlayer.get(counter));
+                    piecesPlayer.get(counter).setX(i);
+                    piecesPlayer.get(counter++).setY(j);
+                }
             }
         }
+//        for (Piece piece : piecesPlayer) {
+//            if (player.getId() == 1) {
+//                arrangePiecesTopPlayer(piece);
+//                piece.setX();
+//            } else {
+//                arrangePiecesBottomPlayer(piece);
+//            }
+//        }
     }
 
-    public Square[][] arrangePiecesTopPlayer(Piece piece) {
+    public void arrangePiecesTopPlayer(Piece piece) {
         for (int i = 0; i < SQUARE_ARRAY_HEIGHT; i++) {
             for (int j = 0; j < SQUARE_ARRAY_WIDTH; j++) {
                 if (spaceAvailable(i, j)) {
                     squaresBoard[i][j].setPiece(piece);
-
+                    return;
                 }
             }
         }
-        return squaresBoard;
     }
 
-
-    public Square[][] arrangePiecesBottomPlayer(Piece piece) {
+    public void arrangePiecesBottomPlayer(Piece piece) {
         for (int i = SQUARE_ARRAY_HEIGHT - 1; i >= 0; i--) {
             for (int j = SQUARE_ARRAY_WIDTH - 1; j >= 0; j--) {
                 if (spaceAvailable(i, j)) {
                     squaresBoard[i][j].setPiece(piece);
-
+                    return;
                 }
             }
         }
-        return squaresBoard;
     }
-
-
-
-
-
-    //for assigning pieces at the start of the game, to be cleaned up
-
-
-  //xd
 
     //checks if space is available to place piece while setting up piece layout
     public boolean spaceAvailable(int heightIndex, int widthIndex) {
-
-
         if (!squaresBoard[heightIndex][widthIndex].getIsOccupied()) {
-
             return true;
-
         } else {
-
             System.out.println("place taken");
             return false;
-
         }
 
     }
@@ -208,17 +202,28 @@ public class Board {
         return moveableSquares;
     }
 
-    public void makeMove(Piece p) {
+    public Piece choosePiece() {
+        System.out.println("Enter a position of the piece you would like to move.");
+        String pos = sc.nextLine();
+        int x  = Character.digit(pos.charAt(0), 10);
+        int y = Character.digit(pos.charAt(1), 10);
+        if (squaresBoard[x][y].getPiece() != null) return squaresBoard[x][y].getPiece();
 
+        else return choosePiece();
+    }
+
+    public void makeMove(Piece p) {
         int[] move = chooseMove(p);
-        if(spaceAvailable(move[0],move[1])) {
+        int[] tempPos = new int[]{p.getX(),p.getY()};
+        if (spaceAvailable(move[0], move[1])) {
             p.setX(move[0]);
             p.setY(move[1]);
+            squaresBoard[p.getX()][p.getY()].setPiece(p);
+            squaresBoard[tempPos[0]][tempPos[1]].removePiece();
         }
     }
 
-    public int[] chooseMove(Piece p){
-        Scanner sc = new Scanner(System.in);
+    private int[] chooseMove(Piece p) {
         int counter = 1;
         List<int[]> listArr = availableSquares(p.getX(), p.getY());
 
@@ -232,9 +237,9 @@ public class Board {
         int n = sc.nextInt();
 
         for (int i = 0; i < listArr.size(); i++) {
-            if(n-1 == i && n < listArr.size()+1){
+            if (n - 1 == i && n < listArr.size() + 1) {
                 Arrays.stream(listArr.get(i)).forEach(num -> System.out.print(num));
-                return listArr.get(i-1);
+                return listArr.get(i);
             }
         }
         System.out.println("Try again.");
@@ -248,14 +253,4 @@ public class Board {
     public void setBoardWidth(int boardWidth) {
         this.boardWidth = boardWidth;
     }
-
-    public int getPIECE_ARRAY_WIDTH() {
-        return this.SQUARE_ARRAY_WIDTH;
-    }
-
-    public int getPIECE_ARRAY_HEIGHT() {
-        return this.SQUARE_ARRAY_WIDTH;
-    }
-
-
 }

@@ -17,12 +17,14 @@ public class Stratego {
 //        board.fillBoard(pl2);
 
 
-        board.fillBoard(pl);
-        board.availableSquares(3,5);
-        board.fillBoard(pl2);
+//        board.fillBoard(pl);
+//        board.availableSquares(3,5);
+//        board.fillBoard(pl2);
+        board.randomlyPlacePiecesData(pl);
         board.printOutCurrentBoard();
-
-
+        Piece tomove = board.choosePiece();
+        board.makeMove(tomove);
+        board.printOutCurrentBoard();
 
 
     }

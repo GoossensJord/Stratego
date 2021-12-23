@@ -4,7 +4,7 @@ import pieces.Rank;
 
 import java.util.Scanner;
 
-public class BoardInputChecker extends Board {
+public class BoardInputChecker{
 
 
     public String inputString(Player player, Rank rank) {
@@ -27,26 +27,18 @@ public class BoardInputChecker extends Board {
     public boolean rangeOfInputNumbersCheck(Player player, int heightIndex, int widthIndex) {
 
         if (player.getId() == 1) {
-
             if (heightIndex <= 3 && widthIndex <= 9 && heightIndex >= 0) {
                 return false;
-
             } else {
-
                 System.out.println("incorrect number range");
                 return true;
-
             }
         } else {
-
             if (heightIndex >= 6 && widthIndex <= 9 && heightIndex <= 9) {
                 return false;
-
             } else {
-
                 System.out.println("incorrect number range");
                 return true;
-
             }
         }
     }
