@@ -40,8 +40,8 @@ public class Square {
 //        return false;
 //    }
 
-    public Rank getPieceRank(){
-        return this.p.getRank();
+    public Piece getPiece(){
+        return this.p;
     }
 
     public void setOccupied(boolean occupied) {
