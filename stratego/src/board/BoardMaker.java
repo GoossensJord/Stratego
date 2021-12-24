@@ -3,6 +3,9 @@ package board;
 import pieces.Piece;
 import pieces.Rank;
 
+import java.time.Instant;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -30,16 +33,21 @@ public class BoardMaker{
     }
 
     public void printOutCurrentBoard() {
-        System.out.println("Stratego\n");
+        LocalTime localTime = LocalTime.now();
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+        System.out.println("\n STRATEGO\n");
         for (int i = 0; i < SQUARE_ARRAY_HEIGHT; i++) {
             for (int j = 0; j < SQUARE_ARRAY_WIDTH; j++) {
+                System.out.print(" ");
                 System.out.print(squaresBoard[i][j] + " ");
             }
             System.out.print(" " + i);
             System.out.println();
         }
 
-        System.out.println("\n0  1  2  3  4  5  6  7  8  9");
+        System.out.println("\n 0   1   2   3   4   5   6   7   8   9");
+        System.out.println();
+        System.out.println("Current Time:\t" + localTime.format(dateTimeFormatter) + "\n");
     }
     //Randomly places all 40 pieces on the board, mainly for testing purposes, future gamemode maybe?
     public void randomlyPlacePieces(Player player) {
