@@ -13,8 +13,10 @@ import java.util.List;
 public class BoardMaker{
     private int boardHeight = 60;
     private int boardWidth = 20;
+
     private final int SQUARE_ARRAY_WIDTH = Math.abs((boardWidth + 1) / 2);
     private final int SQUARE_ARRAY_HEIGHT = Math.abs((boardHeight + 1) / 6);
+
     protected Square[][] squaresBoard = new Square[SQUARE_ARRAY_HEIGHT + 1][SQUARE_ARRAY_WIDTH + 1];
 
     LocalTime localTime = LocalTime.now();
@@ -141,7 +143,7 @@ public class BoardMaker{
         if (!squaresBoard[heightIndex][widthIndex].getIsOccupied()) {
             return true;
         } else {
-            System.out.println("place taken");
+            System.out.print("place taken");
             return false;
         }
 
