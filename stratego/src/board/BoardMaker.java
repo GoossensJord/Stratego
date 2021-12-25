@@ -120,7 +120,7 @@ public class BoardMaker{
         public void arrangePiecesTopPlayer(Piece piece) {
             for (int i = 0; i < SQUARE_ARRAY_HEIGHT; i++) {
                 for (int j = 0; j < SQUARE_ARRAY_WIDTH; j++) {
-                    if (spaceAvailable(i, j)) {
+                    if (spaceAvailableNoPrint(i, j)) {
                         squaresBoard[i][j].setPiece(piece);
                         return;
                     }
@@ -131,7 +131,7 @@ public class BoardMaker{
         public void arrangePiecesBottomPlayer(Piece piece) {
             for (int i = SQUARE_ARRAY_HEIGHT - 1; i >= 0; i--) {
                 for (int j = SQUARE_ARRAY_WIDTH - 1; j >= 0; j--) {
-                    if (spaceAvailable(i, j)) {
+                    if (spaceAvailableNoPrint(i, j)) {
                         squaresBoard[i][j].setPiece(piece);
                         return;
                     }
@@ -143,10 +143,16 @@ public class BoardMaker{
         if (!squaresBoard[heightIndex][widthIndex].getIsOccupied()) {
             return true;
         } else {
-            System.out.print("place taken");
+            System.out.println("place taken");
             return false;
         }
 
+    }
+    public boolean spaceAvailableNoPrint(int heightindex, int widthindex){
+        if (!squaresBoard[heightindex][widthindex].getIsOccupied()) {
+            return true;
+        }
+        else return false;
     }
 
     public void assignPiece(Rank rank, Player player) {
