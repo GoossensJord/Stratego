@@ -3,7 +3,7 @@ package board;
 import pieces.Piece;
 import pieces.Rank;
 
-import java.time.Instant;
+
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
@@ -17,9 +17,13 @@ public class BoardMaker{
     private final int SQUARE_ARRAY_HEIGHT = Math.abs((boardHeight + 1) / 6);
     protected Square[][] squaresBoard = new Square[SQUARE_ARRAY_HEIGHT + 1][SQUARE_ARRAY_WIDTH + 1];
 
+    LocalTime localTime = LocalTime.now();
+    DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+
     public BoardMaker(){
 
     }
+
     //FIlls the board with empty squares.
     public void fillWithSquares(Board board) {
 
@@ -33,8 +37,7 @@ public class BoardMaker{
     }
 
     public void printOutCurrentBoard() {
-        LocalTime localTime = LocalTime.now();
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+
         System.out.println("\n STRATEGO\n");
         for (int i = 0; i < SQUARE_ARRAY_HEIGHT; i++) {
             for (int j = 0; j < SQUARE_ARRAY_WIDTH; j++) {
