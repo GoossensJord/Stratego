@@ -34,17 +34,14 @@ public class Piece {
     }
 
     public Piece attack(Piece piece) {
-        if (piece.getRankPower() < this.getRankPower()){
+        if (piece.getRankPower() < this.getRankPower()) {
             piece.setDeadOrAlive(false);
             return this;
-        }
-        else {
+        } else {
             this.setDeadOrAlive(false);
             return piece;
         }
     }
-
-
 
 
     public int getRankPower() {
@@ -59,7 +56,7 @@ public class Piece {
         this.deadOrAlive = deadOrAlive;
     }
 
-    public boolean getDeadOrAlive(){
+    public boolean getDeadOrAlive() {
         return this.deadOrAlive;
     }
 

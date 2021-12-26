@@ -18,8 +18,6 @@ public class Stratego {
     Scanner sc = new Scanner(System.in);
 
 
-
-
     public void playStratego() {
         boardMaker.fillWithSquares(board);
         System.out.println("Welcome to Stratego! \n 1: Play Classic Stratego \n 2: Play Randomfill Stratego \n 3: Exit game \n");
@@ -28,13 +26,14 @@ public class Stratego {
         if (menuChoice == 1) {
             board.fillBoard(pl);
             board.fillBoard(pl2);
+        } else if (menuChoice == 2) {
+            boardMaker.randomlyPlacePieces(pl, pl2);
+        } else if (menuChoice == 3) {
+            System.exit(420);
+        } else {
+            System.out.println("Error, incorrect input \n");
+            playStratego();
         }
-        else if(menuChoice == 2) {
-            boardMaker.randomlyPlacePieces(pl,pl2);
-        }
-        else if(menuChoice == 3){ System.exit(420);}
-
-        else {System.out.println("Error, incorrect input \n"); playStratego();}
 
         while (true) {
             boardMaker.printOutCurrentBoard();

@@ -1,7 +1,7 @@
 package board;
 
 import pieces.Piece;
-import pieces.Rank;
+
 
 public class Square {
 

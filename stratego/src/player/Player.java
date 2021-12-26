@@ -8,7 +8,7 @@ public class Player {
     private Board board;
     private int id;
 
-    public Player(int id,String name,Board b){
+    public Player(int id, String name, Board b) {
         this.name = name;
         this.board = b;
         this.id = id;

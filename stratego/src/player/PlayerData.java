@@ -10,6 +10,7 @@ import java.util.List;
 public class PlayerData {
 
     public List<Piece> createRandomPieceList(Player player) {
+
         List<Piece> piecesList = Arrays.asList(
                 new Bomb(Rank.BOMB, player, 0, 0),
                 new Bomb(Rank.BOMB, player, 0, 0),
@@ -52,6 +53,7 @@ public class PlayerData {
                 new Spy(Rank.SPY, player, 0, 0),
                 new Flag(Rank.FLAG, player, 0, 0)
         );
+
         Collections.shuffle(piecesList);
 
         return piecesList;
