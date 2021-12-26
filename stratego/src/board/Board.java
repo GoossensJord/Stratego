@@ -2,6 +2,7 @@ package board;
 
 import pieces.Piece;
 import pieces.Rank;
+import pieces.Scout;
 
 import java.util.*;
 
@@ -27,15 +28,15 @@ public class Board {
     //available squares to move piece to
     public List<int[]> availableSquares(int x, int y) {
         List<int[]> moveableSquares = new ArrayList<>();
-        if (notOutOfBounds(x + 1, y)&&!boardMaker.getSquaresBoard()[x + 1][y].getIsOccupied()) {
+        if (notOutOfBounds(x + 1, y) && !boardMaker.getSquaresBoard()[x + 1][y].getIsOccupied()) {
             moveableSquares.add(new int[]{x + 1, y});
             System.out.println("Square DOWN available");
         }
-        if (notOutOfBounds(x, y + 1) &&!boardMaker.getSquaresBoard()[x][y + 1].getIsOccupied()) {
+        if (notOutOfBounds(x, y + 1) && !boardMaker.getSquaresBoard()[x][y + 1].getIsOccupied()) {
             moveableSquares.add(new int[]{x, y + 1});
             System.out.println("Square RIGTH available");
         }
-        if (notOutOfBounds(x, y - 1) &&!boardMaker.getSquaresBoard()[x][y - 1].getIsOccupied()) {
+        if (notOutOfBounds(x, y - 1) && !boardMaker.getSquaresBoard()[x][y - 1].getIsOccupied()) {
             moveableSquares.add(new int[]{x - 1, y});
             System.out.println("Square LEFT available");
         }
@@ -50,6 +51,7 @@ public class Board {
     public Piece choosePiece() {
         System.out.println("Enter a position of the piece you would like to move.");
         String pos = sc.next();
+        if( pos.length() != 2 ) return choosePiece();
         int x = Character.digit(pos.charAt(0), 10);
         int y = Character.digit(pos.charAt(1), 10);
         if (boardMaker.getSquaresBoard()[x][y].getPiece() != null) return boardMaker.getSquaresBoard()[x][y].getPiece();
@@ -73,6 +75,8 @@ public class Board {
     private int[] chooseMove(Piece p) {
 
         int counter = 1;
+        //Scout implementation, doe maar als ge wilt, ma da hoeft nie eht meer denk ik.
+        //if( p instanceof Scout) List<int[]> listArr = ((Scout) p).getCrossPositions(11)
         List<int[]> listArr = availableSquares(p.getX(), p.getY());
 
 
@@ -82,9 +86,9 @@ public class Board {
             System.out.println();
         }
         //Prevent stuck scenario. No step-sibling action here.
-        if(listArr.size() == 0) {
+        if (listArr.size() == 0) {
             System.out.println("Choose a new piece, no moves possible.");
-            return new int[]{-1,-1};
+            return new int[]{-1, -1};
         }
 
         System.out.println("make your pick (1,2,3,4)");
@@ -103,7 +107,7 @@ public class Board {
     }
 
     private boolean notOutOfBounds(int x, int y) {
-        if (x > 0 && y > 0) {
+        if (x >= 0 && y >= 0) {
             if (x < boardMaker.getSQUARE_ARRAY_WIDTH() && y < boardMaker.getSQUARE_ARRAY_HEIGHT()) {
                 return true;
             } else {
