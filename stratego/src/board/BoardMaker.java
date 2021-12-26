@@ -186,4 +186,12 @@ public class BoardMaker{
     public Square[][] getSquaresBoard() {
         return squaresBoard;
     }
+
+    public int getSQUARE_ARRAY_WIDTH() {
+        return SQUARE_ARRAY_WIDTH;
+    }
+
+    public int getSQUARE_ARRAY_HEIGHT() {
+        return SQUARE_ARRAY_HEIGHT;
+    }
 }

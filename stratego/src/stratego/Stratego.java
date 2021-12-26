@@ -22,7 +22,7 @@ public class Stratego {
 
     public void playStratego() {
         boardMaker.fillWithSquares(board);
-        System.out.println("Welcome to Stratego! \n\n 1: Play Classic Stratego \n\n 2: Play Randomfill Stratego \n\n 3: Exit game \n");
+        System.out.println("Welcome to Stratego! \n 1: Play Classic Stratego \n 2: Play Randomfill Stratego \n 3: Exit game \n");
         int menuChoice = sc.nextInt();
 
         if (menuChoice == 1) {
