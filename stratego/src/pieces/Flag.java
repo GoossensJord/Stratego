@@ -6,7 +6,7 @@ import player.Player;
 public class Flag extends Piece {
     public Flag(Rank r, Player player, int x, int y) {
         super.rank = r;
-        super.isMoveable = false;
+        super.isMovable = false;
         super.canAttack = false;
     }
 }

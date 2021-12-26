@@ -1,5 +1,6 @@
 package pieces;
 
+
 import player.Player;
 
 import java.util.ArrayList;
@@ -10,19 +11,20 @@ public class Piece {
     protected Rank rank;
     protected Player player;
     private boolean deadOrAlive;
-    protected boolean isMoveable;
+    protected boolean isMovable;
     protected boolean canAttack;
-    protected List<int[]> moveableSquares;
+    protected List<int[]> movableSquares;
     protected int x;
     protected int y;
+
 
     public Piece(Rank r, Player player, int x, int y) {
         this.rank = r;
         this.player = player;
         this.deadOrAlive = true;
-        this.isMoveable = true;
+        this.isMovable = true;
         this.canAttack = true;
-        this.moveableSquares = new ArrayList<>();
+        this.movableSquares = new ArrayList<>();
         this.x = x;
         this.y = y;
     }
@@ -41,6 +43,9 @@ public class Piece {
             return piece;
         }
     }
+
+
+
 
     public int getRankPower() {
         return this.rank.power;
@@ -77,4 +82,9 @@ public class Piece {
     public void setY(int y) {
         this.y = y;
     }
+
+    public Player getPlayer() {
+        return player;
+    }
+
 }

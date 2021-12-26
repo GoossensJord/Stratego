@@ -16,9 +16,9 @@ public class Scout extends Piece {
             int[] posarrX = new int[]{this.x,i};
             int[] posarrY = new int[]{i,this.y};
 
-            moveableSquares.add(posarrX);
-            moveableSquares.add(posarrY);
+            movableSquares.add(posarrX);
+            movableSquares.add(posarrY);
         }
-        return moveableSquares;
+        return movableSquares;
     }
 }
