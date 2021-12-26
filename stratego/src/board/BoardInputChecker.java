@@ -1,6 +1,7 @@
 package board;
 
 import pieces.Rank;
+import player.Player;
 
 import java.util.Scanner;
 

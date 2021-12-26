@@ -2,7 +2,7 @@ package board;
 
 import pieces.Piece;
 import pieces.Rank;
-import pieces.Scout;
+import player.Player;
 
 import java.util.*;
 

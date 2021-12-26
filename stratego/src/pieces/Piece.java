@@ -1,6 +1,6 @@
 package pieces;
 
-import board.Player;
+import player.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +8,7 @@ import java.util.List;
 public class Piece {
 
     protected Rank rank;
+    protected Player player;
     private boolean deadOrAlive;
     protected boolean isMoveable;
     protected boolean canAttack;
@@ -17,6 +18,7 @@ public class Piece {
 
     public Piece(Rank r, Player player, int x, int y) {
         this.rank = r;
+        this.player = player;
         this.deadOrAlive = true;
         this.isMoveable = true;
         this.canAttack = true;
@@ -24,6 +26,7 @@ public class Piece {
         this.x = x;
         this.y = y;
     }
+
 
     public Piece() {
     }

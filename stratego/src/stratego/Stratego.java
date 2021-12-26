@@ -2,7 +2,7 @@ package stratego;
 
 import board.Board;
 import board.BoardMaker;
-import board.Player;
+import player.Player;
 import pieces.Piece;
 
 import java.util.Scanner;
@@ -30,8 +30,7 @@ public class Stratego {
             board.fillBoard(pl2);
         }
         else if(menuChoice == 2) {
-            boardMaker.randomlyPlacePieces(pl);
-            boardMaker.randomlyPlacePieces(pl2);
+            boardMaker.randomlyPlacePieces(pl,pl2);
         }
         else if(menuChoice == 3){ System.exit(420);}
 

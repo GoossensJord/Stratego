@@ -1,6 +1,6 @@
 package pieces;
 
-import board.Player;
+import player.Player;
 
 import java.util.List;
 

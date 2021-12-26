@@ -2,12 +2,12 @@ package board;
 
 import pieces.Piece;
 import pieces.Rank;
+import player.Player;
+import player.PlayerData;
 
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class BoardMaker{
@@ -19,8 +19,8 @@ public class BoardMaker{
 
     protected Square[][] squaresBoard = new Square[SQUARE_ARRAY_HEIGHT + 1][SQUARE_ARRAY_WIDTH + 1];
 
-    LocalTime localTime = LocalTime.now();
-    DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+
+    PlayerData playerData = new PlayerData();
 
     public BoardMaker(){
 
@@ -39,7 +39,8 @@ public class BoardMaker{
     }
 
     public void printOutCurrentBoard() {
-
+        LocalTime localTime = LocalTime.now();
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
         System.out.println("\n STRATEGO\n");
         for (int i = 0; i < SQUARE_ARRAY_HEIGHT; i++) {
             for (int j = 0; j < SQUARE_ARRAY_WIDTH; j++) {
@@ -55,63 +56,29 @@ public class BoardMaker{
         System.out.println("Current Time:\t" + localTime.format(dateTimeFormatter) + "\n");
     }
     //Randomly places all 40 pieces on the board, mainly for testing purposes, future gamemode maybe?
-    public void randomlyPlacePieces(Player player) {
-        List<Piece> piecesPlayer = Arrays.asList(
-                new Piece(Rank.BOMB, player, 0, 0),
-                new Piece(Rank.BOMB, player, 0, 0),
-                new Piece(Rank.BOMB, player, 0, 0),
-                new Piece(Rank.BOMB, player, 0, 0),
-                new Piece(Rank.BOMB, player, 0, 0),
-                new Piece(Rank.BOMB, player, 0, 0),
-                new Piece(Rank.MARSHAL, player, 0, 0),
-                new Piece(Rank.GENERAL, player, 0, 0),
-                new Piece(Rank.COLONEL, player, 0, 0),
-                new Piece(Rank.COLONEL, player, 0, 0),
-                new Piece(Rank.MAJOR, player, 0, 0),
-                new Piece(Rank.MAJOR, player, 0, 0),
-                new Piece(Rank.MAJOR, player, 0, 0),
-                new Piece(Rank.CAPTAIN, player, 0, 0),
-                new Piece(Rank.CAPTAIN, player, 0, 0),
-                new Piece(Rank.CAPTAIN, player, 0, 0),
-                new Piece(Rank.CAPTAIN, player, 0, 0),
-                new Piece(Rank.LUITENANT, player, 0, 0),
-                new Piece(Rank.LUITENANT, player, 0, 0),
-                new Piece(Rank.LUITENANT, player, 0, 0),
-                new Piece(Rank.LUITENANT, player, 0, 0),
-                new Piece(Rank.SERGEANT, player, 0, 0),
-                new Piece(Rank.SERGEANT, player, 0, 0),
-                new Piece(Rank.SERGEANT, player, 0, 0),
-                new Piece(Rank.SERGEANT, player, 0, 0),
-                new Piece(Rank.MINER, player, 0, 0),
-                new Piece(Rank.MINER, player, 0, 0),
-                new Piece(Rank.MINER, player, 0, 0),
-                new Piece(Rank.MINER, player, 0, 0),
-                new Piece(Rank.MINER, player, 0, 0),
-                new Piece(Rank.SCOUT, player, 0, 0),
-                new Piece(Rank.SCOUT, player, 0, 0),
-                new Piece(Rank.SCOUT, player, 0, 0),
-                new Piece(Rank.SCOUT, player, 0, 0),
-                new Piece(Rank.SCOUT, player, 0, 0),
-                new Piece(Rank.SCOUT, player, 0, 0),
-                new Piece(Rank.SCOUT, player, 0, 0),
-                new Piece(Rank.SCOUT, player, 0, 0),
-                new Piece(Rank.SPY, player, 0, 0),
-                new Piece(Rank.FLAG, player, 0, 0));
+    public void randomlyPlacePieces(Player playerOne, Player playerTwo) {
 
-        Collections.shuffle(piecesPlayer);
+        List <Piece> piecesPlayerOne = playerData.createRandomPieceList(playerOne);
+        List <Piece> piecesPlayerTwo = playerData.createRandomPieceList(playerTwo);
+
         int counter = 0;
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 10; j++) {
-                if (player.getId() == 1) {
-                    arrangePiecesTopPlayer(piecesPlayer.get(counter));
-                    piecesPlayer.get(counter).setX(i);
-                    piecesPlayer.get(counter++).setY(j);
-                }
-                else{
-                    arrangePiecesBottomPlayer(piecesPlayer.get(counter));
-                    piecesPlayer.get(counter).setX(i);
-                    piecesPlayer.get(counter++).setY(j);
-                }
+
+                    arrangePiecesTopPlayer(piecesPlayerOne.get(counter));
+                    piecesPlayerOne.get(counter).setX(i);
+                    piecesPlayerOne.get(counter++).setY(j);
+
+            }
+        }
+        int counterTwo = 0;
+        for (int i = 9; i >= 6; i--) {
+            for (int j = 9; j >= 0; j--) {
+
+                arrangePiecesBottomPlayer(piecesPlayerTwo.get(counterTwo));
+                piecesPlayerTwo.get(counterTwo).setX(i);
+                piecesPlayerTwo.get(counterTwo++).setY(j);
+
             }
         }
 

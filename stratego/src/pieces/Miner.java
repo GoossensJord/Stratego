@@ -1,6 +1,6 @@
 package pieces;
 
-import board.Player;
+import player.Player;
 
 //can defuse bombs
 public class Miner extends Piece{

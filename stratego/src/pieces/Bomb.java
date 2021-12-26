@@ -1,6 +1,6 @@
 package pieces;
 
-import board.Player;
+import player.Player;
 
 //immovable, is captured by miner
 public class Bomb extends Piece{

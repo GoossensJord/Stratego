@@ -1,20 +1,18 @@
-package board;
+package player;
 
 
+import board.Board;
 
 public class Player {
     private String name;
     private Board board;
     private int id;
 
-    public Player(int id,String name,Board b /*,Piece[] pieces*/){
+    public Player(int id,String name,Board b){
         this.name = name;
         this.board = b;
         this.id = id;
         //this.pieces = pieces;
-    }
-    public void play(Board board){
-        this.board = board;
     }
 
     public Board getBoard() {
