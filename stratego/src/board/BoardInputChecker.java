@@ -5,7 +5,7 @@ import player.Player;
 
 import java.util.Scanner;
 
-public class BoardInputChecker{
+public class BoardInputChecker {
 
 
     public String inputString(Player player, Rank rank) {
