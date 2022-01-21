@@ -107,16 +107,6 @@ public class BoardMaker {
         }
     }
 
-    public boolean spaceAvailable(int heightIndex, int widthIndex) {
-        if (!squaresBoard[heightIndex][widthIndex].getIsOccupied()) {
-            return true;
-        } else {
-            System.out.println("place taken");
-            return false;
-        }
-
-    }
-
     public boolean spaceAvailableNoPrint(int heightindex, int widthindex) {
         if (!squaresBoard[heightindex][widthindex].getIsOccupied()) {
             return true;
@@ -138,7 +128,7 @@ public class BoardMaker {
                 widthIndex = Character.digit(index.charAt(1), 10);
 
                 if (!boardInputChecker.rangeOfInputNumbersCheck(player, heightIndex, widthIndex)) {
-                    if (spaceAvailable(heightIndex, widthIndex)) {
+                    if (spaceAvailableNoPrint(heightIndex, widthIndex)) {
                         squaresBoard[heightIndex][widthIndex].setPiece(new Piece(rank, player, heightIndex, widthIndex));
                         placeTaken = false;
                         validNumberRange = false;

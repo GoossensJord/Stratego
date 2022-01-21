@@ -2,6 +2,8 @@ package stratego;
 
 import board.Board;
 import board.BoardMaker;
+import pieces.Rank;
+import pieces.Scout;
 import player.Player;
 import pieces.Piece;
 

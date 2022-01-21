@@ -10,15 +10,15 @@ public class Scout extends Piece {
         super(Rank.SCOUT, player, x, y);
     }
 
-    public List<int[]> getCrossPositions(int boardSize) {
+    public List<int[]> getCrossPositions() {
 
-        for (int i = 0; i < boardSize; i++) {
+        for (int i = 0; i < 10; i++) {
             int[] posarrX = new int[]{this.x, i};
             int[] posarrY = new int[]{i, this.y};
-
-            movableSquares.add(posarrX);
-            movableSquares.add(posarrY);
+            if(this.player.getBoard().spaceAvailable(posarrX[0],posarrX[1])){movableSquares.add(posarrX);}
+            if(this.player.getBoard().spaceAvailable(posarrY[0],posarrY[1])){movableSquares.add(posarrY);}
         }
         return movableSquares;
     }
+
 }

@@ -2,6 +2,7 @@ package board;
 
 import pieces.Piece;
 import pieces.Rank;
+import pieces.Scout;
 import player.Player;
 
 import java.util.*;
@@ -27,7 +28,7 @@ public class Board {
 
     //available squares to move piece to
     public List<int[]> availableSquares(int x, int y) {
-        int counter = 0;
+       int counter = 0;
         List<int[]> moveableSquares = new ArrayList<>();
         if (notOutOfBounds(x + 1, y) && !boardMaker.getSquaresBoard()[x + 1][y].getIsOccupied()) {
             moveableSquares.add(new int[]{x + 1, y});
@@ -35,7 +36,7 @@ public class Board {
         }
         if (notOutOfBounds(x, y + 1) && !boardMaker.getSquaresBoard()[x][y + 1].getIsOccupied()) {
             moveableSquares.add(new int[]{x, y + 1});
-            System.out.println(++counter + " Square RIGTH available");
+            System.out.println(++counter + " Square RIGHT available");
         }
         if (notOutOfBounds(x, y - 1) && !boardMaker.getSquaresBoard()[x][y - 1].getIsOccupied()) {
             moveableSquares.add(new int[]{x, y - 1});
@@ -46,6 +47,14 @@ public class Board {
             System.out.println(++counter + " Square UP available");
         }
         return moveableSquares;
+    }
+
+    public String printMovesScout(List<int[]> listarr){
+        String[] directions = new String[]{"Down","Right","Left","Up"};
+        StringBuilder out = new StringBuilder();
+        for (int i = 0; i < directions.length; i++) {
+            out.append(directions[i] + listarr[i].)
+        }
     }
 
     //Selecting a piece for moving attacking etc
@@ -73,22 +82,28 @@ public class Board {
     }
 
     //Choosing where to move
-    private int[] chooseMove(Piece p) {
+    public int[] chooseMove(Piece p) {
 
 
         //Scout implementation, doe maar als ge wilt, ma da hoeft nie eht meer denk ik.
         //if( p instanceof Scout) List<int[]> listArr = ((Scout) p).getCrossPositions(11)
 
-        List<int[]> listArr = availableSquares(p.getX(), p.getY());
+        List<int[]> listArr;
 
-
+        if(p instanceof Scout){
+            listArr = ((Scout) p).getCrossPositions();
+            printMovesScout(listArr);
+        }
+        else {
+            listArr = availableSquares(p.getX(), p.getY());
+        }
         //Prevent stuck scenario. No step-sibling action here.
         if (listArr.size() == 0) {
             System.out.println("Choose a new piece, no moves possible.");
+            return new int[]{-1,-1};
         }
 
         //we need to add a check on player before making the move, so u cant move other players pieces
-
         System.out.println("make your pick (1,2,3,4)");
         int n = sc.nextInt();
 
@@ -112,9 +127,17 @@ public class Board {
             } else {
                 return false;
             }
-
         } else {
             return false;
         }
+    }
+    public boolean spaceAvailable(int heightIndex, int widthIndex) {
+        if (!boardMaker.squaresBoard[heightIndex][widthIndex].getIsOccupied()) {
+            return true;
+        } else {
+            System.out.println("place taken");
+            return false;
+        }
+
     }
 }

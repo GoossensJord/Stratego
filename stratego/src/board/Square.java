@@ -23,7 +23,6 @@ public class Square {
         this.p = null;
         isOccupied = false;
     }
-
     public boolean getIsOccupied() {
         return this.isOccupied;
     }
