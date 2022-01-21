@@ -81,56 +81,40 @@ public class Board {
             boardMaker.getSquaresBoard()[tempPos[0]][tempPos[1]].removePiece();
         }
     }
-
+    //checks for attackable pieces nearby returns them in a list
     public List<int[]> attackPossible(int x, int y, Player player) {
         int counter = 4;
         List<int[]> attackableSquares = new ArrayList<>();
         if (notOutOfBounds(x + 1, y)) {
-            if (boardMaker.getSquaresBoard()[x + 1][y].getIsOccupied()&& !boardMaker.getSquaresBoard()[x + 1][y].getPiece().getPlayer().equals(player)) {
+            if (boardMaker.getSquaresBoard()[x + 1][y].getIsOccupied() && !boardMaker.getSquaresBoard()[x + 1][y].getPiece().getPlayer().equals(player)) {
                 attackableSquares.add(new int[]{x + 1, y});
                 System.out.println(++counter + " Square DOWN attackable");
             }
         }
-        if(notOutOfBounds(x, y + 1)) {
+        if (notOutOfBounds(x, y + 1)) {
             if (boardMaker.getSquaresBoard()[x][y + 1].getIsOccupied() && !boardMaker.getSquaresBoard()[x][y + 1].getPiece().getPlayer().equals(player)) {
                 attackableSquares.add(new int[]{x, y + 1});
                 System.out.println(++counter + " Square RIGHT attackable");
             }
         }
-        if (notOutOfBounds(x, y - 1) ) {
+        if (notOutOfBounds(x, y - 1)) {
             if (boardMaker.getSquaresBoard()[x][y - 1].getIsOccupied() && !boardMaker.getSquaresBoard()[x][y - 1].getPiece().getPlayer().equals(player)) {
                 attackableSquares.add(new int[]{x, y - 1});
                 System.out.println(++counter + " Square LEFT attackable");
             }
         }
-        if(notOutOfBounds(x - 1, y) ){
-        if (boardMaker.getSquaresBoard()[x - 1][y].getIsOccupied()&& !boardMaker.getSquaresBoard()[x - 1][y].getPiece().getPlayer().equals(player)) {
-            attackableSquares.add(new int[]{x - 1, y});
-            System.out.println(++counter + " Square UP attackable");
-        }}
+        if (notOutOfBounds(x - 1, y)) {
+            if (boardMaker.getSquaresBoard()[x - 1][y].getIsOccupied() && !boardMaker.getSquaresBoard()[x - 1][y].getPiece().getPlayer().equals(player)) {
+                attackableSquares.add(new int[]{x - 1, y});
+                System.out.println(++counter + " Square UP attackable");
+            }
+        }
         return attackableSquares;
     }
 
     //Choosing where to move
     public int[] chooseMove(Piece p, Player player) {
         Scanner sc = new Scanner(System.in);
-
-
-        List<int[]> listArr;
-        listArr = availableSquares(p.getX(), p.getY());
-        List<int[]> listAttackableSquares;
-        listAttackableSquares = attackPossible(p.getX(), p.getY(), player);
-
-        if (listAttackableSquares.size() != 0) {
-            System.out.println("Would you like to attack or move?  1: Move  2: Attack");
-            int answer = sc.nextInt();
-            if (answer == 2) {
-
-
-                System.out.println("Gonna put attack method here");
-            }
-        }
-
         if (p instanceof Scout) {
             List<List<int[]>> scoutarr = ((Scout) p).getCrossPositions();
             for (int i = 0; i < scoutarr.size(); i++) {
@@ -143,7 +127,20 @@ public class Board {
                 System.out.println("Choose a new piece, no moves possible.");
                 return new int[]{-1, -1};
             }
-            System.out.println("make your pick (1,2,3,4)");
+            List<int[]> listAttackableSquares;
+            listAttackableSquares = attackPossible(p.getX(), p.getY(), player);
+
+            //checks for attackable squares, if above 0 gives option to attack
+            if (listAttackableSquares.size() != 0) {
+                System.out.println("Would you like to attack or move?  1: Move  2: Attack");
+                int answer = sc.nextInt();
+                if (answer == 2) {
+
+
+                    System.out.println("Gonna put attack method here");
+                }
+            }
+            System.out.println("make your move pick (1,2,3,4)");
             int n = sc.nextInt();
 
             //printing made move
