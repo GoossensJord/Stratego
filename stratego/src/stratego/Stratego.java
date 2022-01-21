@@ -5,6 +5,7 @@ import board.BoardMaker;
 import player.Player;
 import pieces.Piece;
 
+
 import java.util.Scanner;
 
 
@@ -38,9 +39,15 @@ public class Stratego {
 
 
         while (true) {
+            System.out.println("\nSTRATEGO \n");
+            System.out.println(pl.getName().toUpperCase());
             boardMaker.printOutCurrentBoard();
+            System.out.println(pl2.getName().toUpperCase());
             madeMove(pl);
+            System.out.println("\nSTRATEGO \n");
+            System.out.println(pl.getName().toUpperCase());
             boardMaker.printOutCurrentBoard();
+            System.out.println(pl2.getName().toUpperCase());
             madeMove(pl2);
         }
     }

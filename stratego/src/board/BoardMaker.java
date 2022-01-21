@@ -41,7 +41,7 @@ public class BoardMaker {
     public void printOutCurrentBoard() {
         LocalTime localTime = LocalTime.now();
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-        System.out.println("\n STRATEGO\n");
+        System.out.println();
         for (int i = 0; i < SQUARE_ARRAY_HEIGHT; i++) {
             for (int j = 0; j < SQUARE_ARRAY_WIDTH; j++) {
                 System.out.print(" ");
