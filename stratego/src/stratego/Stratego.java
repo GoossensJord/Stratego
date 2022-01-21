@@ -39,39 +39,25 @@ public class Stratego {
 
         while (true) {
             boardMaker.printOutCurrentBoard();
-            madeMovePlayerOne();
+            madeMove(pl);
             boardMaker.printOutCurrentBoard();
-            madeMovePlayerTwo();
-
+            madeMove(pl2);
         }
     }
 
-    public void madeMovePlayerOne() {
-        boolean madeMove = true;
-        while (madeMove) {
 
 
-            Piece tomove = board.choosePiece(pl);
-            if (tomove.getPlayer().equals(pl)) {
-                madeMove = false;
-                board.makeMove(tomove);
-            } else {
-                System.out.println("This piece is not yours " + pl.getName());
-            }
-        }
-    }
-
-    public void madeMovePlayerTwo() {
+    private void madeMove(Player player) {
         boolean madeMoveTwo = true;
         while (madeMoveTwo) {
 
+            Piece tomovePlayerTwo = board.choosePiece(player);
 
-            Piece tomovePlayerTwo = board.choosePiece(pl2);
-
-            if (tomovePlayerTwo.getPlayer().equals(pl2)) {
+            if (tomovePlayerTwo.getPlayer().equals(player)) {
                 madeMoveTwo = false;
                 board.makeMove(tomovePlayerTwo);
-            } else System.out.println("This piece is not yours " + pl2.getName());
+            } else System.out.println("This piece is not yours " + player.getName());
+
         }
     }
 }
