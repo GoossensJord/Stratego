@@ -49,13 +49,16 @@ public class Board {
         return moveableSquares;
     }
 
-   /* public String printMovesScout(List<int[]> listarr){
-        String[] directions = new String[]{"Down","Right","Left","Up"};
-        StringBuilder out = new StringBuilder();
-        for (int i = 0; i < directions.length; i++) {
-            out.append(directions[i] + listarr[i].)
-        }
-    }*/
+//   public String printMovesScout(List<int[]> listarr){
+//        String[] directions = new String[]{"Down","Right","Left","Up"};
+//        int counter = 0;
+//        int pos =0;
+//        StringBuilder out = new StringBuilder();
+//        for (int i = 0; i < directions.length; i++) {
+//            out.append(++counter +" " + directions[i] + ": " +listarr.get(i).length+"\n");
+//        }
+//       return out.toString();
+//    }
 
     //Selecting a piece for moving attacking etc
     public Piece choosePiece(Player player) {
@@ -80,6 +83,7 @@ public class Board {
             boardMaker.getSquaresBoard()[p.getX()][p.getY()].setPiece(p);
             boardMaker.getSquaresBoard()[tempPos[0]][tempPos[1]].removePiece();
         }
+
     }
 
     public boolean attackPossible(int x, int y, Player player) {
@@ -113,23 +117,20 @@ public class Board {
         //Scout implementation, doe maar als ge wilt, ma da hoeft nie eht meer denk ik.
         //if( p instanceof Scout) List<int[]> listArr = ((Scout) p).getCrossPositions(11)
 
-        List<int[]> listArr;
+        List<int[]> listArr = null;
 
-       /* if(p instanceof Scout){
-            listArr = ((Scout) p).getCrossPositions();
-            printMovesScout(listArr);
-        }*/
-        // else {
+       if(p instanceof Scout){
+            List<List<int[]>> scoutarr = ((Scout) p).getCrossPositions();
+        }
+         else {
         listArr = availableSquares(p.getX(), p.getY());
-        // }
+         }
         //Prevent stuck scenario. No step-sibling action here.
         if (listArr.size() == 0) {
             System.out.println("Choose a new piece, no moves possible.");
             return new int[]{-1, -1};
         }
-
-
-        //we need to add a check on player before making the move, so u cant move other players pieces
+        
         System.out.println("make your pick (1,2,3,4)");
         int n = sc.nextInt();
 
