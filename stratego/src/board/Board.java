@@ -112,37 +112,33 @@ public class Board {
             if (answer == 2) {
                 System.out.println("Gonna put attack method here");
             }
-
         }
-        //Scout implementation, doe maar als ge wilt, ma da hoeft nie eht meer denk ik.
-        //if( p instanceof Scout) List<int[]> listArr = ((Scout) p).getCrossPositions(11)
 
-        List<int[]> listArr = null;
-
-       if(p instanceof Scout){
+        if (p instanceof Scout) {
             List<List<int[]>> scoutarr = ((Scout) p).getCrossPositions();
-        }
-         else {
-        listArr = availableSquares(p.getX(), p.getY());
-         }
-        //Prevent stuck scenario. No step-sibling action here.
-        if (listArr.size() == 0) {
-            System.out.println("Choose a new piece, no moves possible.");
-            return new int[]{-1, -1};
-        }
-        
-        System.out.println("make your pick (1,2,3,4)");
-        int n = sc.nextInt();
+            for (int i = 0; i < scoutarr.size(); i++) {
+                System.out.println(scoutarr.get(i));
+            }
+        } else {
+            List<int[]> listArr = availableSquares(p.getX(), p.getY());
+            //Prevent stuck scenario. No step-sibling action here.
+            if (listArr.size() == 0) {
+                System.out.println("Choose a new piece, no moves possible.");
+                return new int[]{-1, -1};
+            }
+            System.out.println("make your pick (1,2,3,4)");
+            int n = sc.nextInt();
 
-        //printing made move
-        for (int i = 0; i < listArr.size(); i++) {
-            if (n - 1 == i && n < listArr.size() + 1) {
-                Arrays.stream(listArr.get(i)).forEach(num -> System.out.print(num));
-                return listArr.get(i);
+            //printing made move
+            for (int i = 0; i < listArr.size(); i++) {
+                if (n - 1 == i && n < listArr.size() + 1) {
+                    Arrays.stream(listArr.get(i)).forEach(num -> System.out.print(num));
+                    return listArr.get(i);
+                }
             }
         }
         //if not succesfull, recursive call for retry (failsafe)
-        return chooseMove(p, player);
+        return null;
     }
 
     private boolean notOutOfBounds(int x, int y) {
