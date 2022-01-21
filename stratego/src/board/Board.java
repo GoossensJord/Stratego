@@ -86,6 +86,7 @@ public class Board {
             System.out.println("Choose a new piece, no moves possible.");
             return new int[]{-1, -1};
         }
+        //we need to add a check on player before making the move, so u cant move other players pieces
 
         System.out.println("make your pick (1,2,3,4)");
         int n = sc.nextInt();
