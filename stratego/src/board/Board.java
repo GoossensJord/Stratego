@@ -32,11 +32,11 @@ public class Board {
         List<int[]> moveableSquares = new ArrayList<>();
         if (notOutOfBounds(x + 1, y) && !boardMaker.getSquaresBoard()[x + 1][y].getIsOccupied()) {
             moveableSquares.add(new int[]{x + 1, y});
-            System.out.println(++counter + " Square DOWN available");
+            System.out.println(++counter + " Move DOWN available");
         }
         if (notOutOfBounds(x, y + 1) && !boardMaker.getSquaresBoard()[x][y + 1].getIsOccupied()) {
             moveableSquares.add(new int[]{x, y + 1});
-            System.out.println(++counter + " Square RIGHT available");
+            System.out.println(++counter + " Move RIGHT available");
         }
         if (notOutOfBounds(x, y - 1) && !boardMaker.getSquaresBoard()[x][y - 1].getIsOccupied()) {
             moveableSquares.add(new int[]{x, y - 1});
@@ -82,45 +82,58 @@ public class Board {
         }
     }
 
-    public boolean attackPossible(int x, int y, Player player) {
+    public List<int[]> attackPossible(int x, int y, Player player) {
+        int counter = 0;
+        List<int[]> attackableSquares = new ArrayList<>();
         if (notOutOfBounds(x + 1, y) && boardMaker.getSquaresBoard()[x + 1][y].getIsOccupied() && !boardMaker.getSquaresBoard()[x + 1][y].getPiece().getPlayer().equals(player)) {
-            return true;
+            attackableSquares.add(new int[]{x + 1, y});
+            System.out.println(++counter + " Attack DOWN available");
         }
         if (notOutOfBounds(x, y + 1) && boardMaker.getSquaresBoard()[x][y + 1].getIsOccupied() && !boardMaker.getSquaresBoard()[x][y + 1].getPiece().getPlayer().equals(player)) {
-            return true;
+            attackableSquares.add(new int[]{x, y + 1});
+            System.out.println(++counter + " Attack RIGHT available");
         }
         if (notOutOfBounds(x, y - 1) && boardMaker.getSquaresBoard()[x][y - 1].getIsOccupied() && !boardMaker.getSquaresBoard()[x][y - 1].getPiece().getPlayer().equals(player)) {
-            return true;
+            attackableSquares.add(new int[]{x, y - 1});
+            System.out.println(++counter + " Attack LEFT available");
         }
         if (notOutOfBounds(x - 1, y) && boardMaker.getSquaresBoard()[x - 1][y].getIsOccupied() && !boardMaker.getSquaresBoard()[x - 1][y].getPiece().getPlayer().equals(player)) {
-            return true;
+            attackableSquares.add(new int[]{x - 1, y});
+            System.out.println(++counter + " Attack UP available");
         }
-        return false;
+        return attackableSquares;
     }
 
     //Choosing where to move
     public int[] chooseMove(Piece p, Player player) {
         Scanner sc = new Scanner(System.in);
 
-        if (attackPossible(p.getX(), p.getY(), player)) {
+        List<int[]> listAttackableSquares;
+        listAttackableSquares = attackPossible(p.getX(), p.getY(), player);
+        List<int[]> listArr;
+        listArr = availableSquares(p.getX(), p.getY());
+        if (listAttackableSquares.size() != 0) {
             System.out.println("Would you like to attack or move?  1: Move  2: Attack");
             int answer = sc.nextInt();
             if (answer == 2) {
                 System.out.println("Gonna put attack method here");
-            }
 
+
+            }
         }
+
+
         //Scout implementation, doe maar als ge wilt, ma da hoeft nie eht meer denk ik.
         //if( p instanceof Scout) List<int[]> listArr = ((Scout) p).getCrossPositions(11)
 
-        List<int[]> listArr;
+
 
        /* if(p instanceof Scout){
             listArr = ((Scout) p).getCrossPositions();
             printMovesScout(listArr);
         }*/
         // else {
-        listArr = availableSquares(p.getX(), p.getY());
+
         // }
         //Prevent stuck scenario. No step-sibling action here.
         if (listArr.size() == 0) {
