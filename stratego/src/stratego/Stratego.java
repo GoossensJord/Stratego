@@ -12,8 +12,8 @@ public class Stratego {
 
     private BoardMaker boardMaker = new BoardMaker();
     private Board board = new Board(boardMaker);
-    private Player pl = new Player(1, "jord", board);
-    private Player pl2 = new Player(2, "michiel", board);
+    private Player pl = new Player(1, "Jord", board);
+    private Player pl2 = new Player(2, "Michiel", board);
 
     Scanner sc = new Scanner(System.in);
 
@@ -37,9 +37,17 @@ public class Stratego {
 
         while (true) {
             boardMaker.printOutCurrentBoard();
-            Piece tomove = board.choosePiece();
-            board.makeMove(tomove);
-
+            Piece tomove = board.choosePiece(pl);
+            if (tomove.getPlayer().equals(pl)) {
+                board.makeMove(tomove);
+            }
+            else System.out.println("NOT YO PIECE " + pl.getName());
+            boardMaker.printOutCurrentBoard();
+            Piece tomovePlayerTwo = board.choosePiece(pl2);
+            if (tomove.getPlayer().equals(pl2)) {
+                board.makeMove(tomovePlayerTwo);
+            }
+            else System.out.println("NOT YO PIECE " + pl2.getName());
         }
     }
 }

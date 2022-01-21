@@ -49,15 +49,15 @@ public class Board {
     }
 
     //Selecting a piece for moving attacking etc
-    public Piece choosePiece() {
-        System.out.println("Enter a position of the piece you would like to move.");
+    public Piece choosePiece(Player player) {
+        System.out.println("\n" + player.getName() + ": Enter a position of the piece you would like to move.");
         String pos = sc.next();
-        if (pos.length() != 2) return choosePiece();
+        if (pos.length() != 2) return choosePiece(player);
         int x = Character.digit(pos.charAt(0), 10);
         int y = Character.digit(pos.charAt(1), 10);
         if (boardMaker.getSquaresBoard()[x][y].getPiece() != null) return boardMaker.getSquaresBoard()[x][y].getPiece();
 
-        else return choosePiece();
+        else return choosePiece(player);
     }
 
     //Executing the move
@@ -75,6 +75,7 @@ public class Board {
     //Choosing where to move
     private int[] chooseMove(Piece p) {
 
+
         //Scout implementation, doe maar als ge wilt, ma da hoeft nie eht meer denk ik.
         //if( p instanceof Scout) List<int[]> listArr = ((Scout) p).getCrossPositions(11)
 
@@ -84,8 +85,8 @@ public class Board {
         //Prevent stuck scenario. No step-sibling action here.
         if (listArr.size() == 0) {
             System.out.println("Choose a new piece, no moves possible.");
-            return new int[]{-1, -1};
         }
+
         //we need to add a check on player before making the move, so u cant move other players pieces
 
         System.out.println("make your pick (1,2,3,4)");
