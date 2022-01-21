@@ -19,7 +19,7 @@ public class Stratego {
     Scanner sc = new Scanner(System.in);
 
 
-    public void playStratego() throws InterruptedException {
+    public void playStratego() {
         boardMaker.fillWithSquares(board);
         System.out.println("Welcome to Stratego! \n 1: Play Classic Stratego \n 2: Play Randomfill Stratego \n 3: Exit game \n");
         int menuChoice = sc.nextInt();
@@ -38,16 +38,18 @@ public class Stratego {
 
 
         while (true) {
+            boardMaker.printOutCurrentBoard();
             madeMovePlayerOne();
+            boardMaker.printOutCurrentBoard();
             madeMovePlayerTwo();
 
         }
     }
 
-    public void madeMovePlayerOne() throws InterruptedException {
+    public void madeMovePlayerOne() {
         boolean madeMove = true;
         while (madeMove) {
-            boardMaker.printOutCurrentBoard();
+
 
             Piece tomove = board.choosePiece(pl);
             if (tomove.getPlayer().equals(pl)) {
@@ -55,25 +57,21 @@ public class Stratego {
                 board.makeMove(tomove);
             } else {
                 System.out.println("This piece is not yours " + pl.getName());
-                Thread.sleep(1500);
             }
         }
     }
 
-    public void madeMovePlayerTwo() throws InterruptedException {
+    public void madeMovePlayerTwo() {
         boolean madeMoveTwo = true;
         while (madeMoveTwo) {
-            boardMaker.printOutCurrentBoard();
+
 
             Piece tomovePlayerTwo = board.choosePiece(pl2);
 
             if (tomovePlayerTwo.getPlayer().equals(pl2)) {
                 madeMoveTwo = false;
                 board.makeMove(tomovePlayerTwo);
-            } else {
-                System.out.println("This piece is not yours " + pl2.getName());
-                Thread.sleep(1500);
-            }
+            } else System.out.println("This piece is not yours " + pl2.getName());
         }
     }
 }
