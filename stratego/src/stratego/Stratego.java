@@ -65,7 +65,16 @@ public class Stratego {
             if (tomovePlayerTwo.getPlayer().equals(player)) {
                 madeMoveTwo = false;
 
-                board.makeMove(tomovePlayerTwo,player);
+                if(board.attackPossible(tomovePlayerTwo.getX(), tomovePlayerTwo.getY(), player).size() != 0){
+                    System.out.println("Would you like to attack or move?  1: Move  2: Attack");
+                    int answer = sc.nextInt();
+                    if (answer == 2) {
+                        board.makeAttack(tomovePlayerTwo, player);
+                    }
+                    else board.makeMove(tomovePlayerTwo,player);
+
+                }
+                else board.makeMove(tomovePlayerTwo,player);
             } else System.out.println("This piece is not yours " + player.getName());
 
         }

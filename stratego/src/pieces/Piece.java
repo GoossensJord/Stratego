@@ -36,9 +36,11 @@ public class Piece {
     public Piece attack(Piece piece) {
         if (piece.getRankPower() < this.getRankPower()) {
             piece.setDeadOrAlive(false);
+            System.out.println("\n"+this.getPlayer().getName() + " won the fight!\n");
             return this;
         } else {
             this.setDeadOrAlive(false);
+            System.out.println("\n"+piece.getPlayer().getName() + " won the fight!\n");
             return piece;
         }
     }
