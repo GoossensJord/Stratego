@@ -37,9 +37,13 @@ public class Piece {
         if(piece.getRank().equals(Rank.FLAG)){
             System.out.println("\n\n\n\n");
             System.out.println("---------------------------------------------------------");
-            System.out.println(this.getPlayer().getName() + " CAPTURED THE FLAG AND WON THE GAME!");
+            System.out.println(this.getPlayer().getName().toUpperCase() + " CAPTURED THE FLAG AND WON THE GAME!");
             System.out.println("---------------------------------------------------------");
             System.exit(0);
+        }
+        if(piece.getRankPower() == this.getRankPower()){
+            System.out.println("\n"+this.getPlayer().getName() + " won the fight!\n");
+            return this;
         }
         if (piece.getRankPower() < this.getRankPower()) {
             piece.setDeadOrAlive(false);

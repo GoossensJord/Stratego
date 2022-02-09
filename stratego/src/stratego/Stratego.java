@@ -2,8 +2,6 @@ package stratego;
 
 import board.Board;
 import board.BoardMaker;
-import pieces.Rank;
-import pieces.Scout;
 import player.Player;
 import pieces.Piece;
 
@@ -13,10 +11,11 @@ import java.util.Scanner;
 
 public class Stratego {
 
-    private BoardMaker boardMaker = new BoardMaker();
-    private Board board = new Board(boardMaker);
-    private Player pl = new Player(1, "Jord", board);
-    private Player pl2 = new Player(2, "Michiel", board);
+    private final BoardMaker boardMaker = new BoardMaker();
+    private final Board board = new Board(boardMaker);
+    private final Player pl = new Player(1, "Jord", board);
+    private final Player pl2 = new Player(2, "Michiel", board);
+    boolean flagTaken = true;
 
 
     Scanner sc = new Scanner(System.in);
@@ -40,7 +39,7 @@ public class Stratego {
         }
 
 
-        while (true) {
+        while (flagTaken) {
             System.out.println("\nSTRATEGO \n");
             System.out.println(pl.getName().toUpperCase());
             boardMaker.printOutCurrentBoard();
