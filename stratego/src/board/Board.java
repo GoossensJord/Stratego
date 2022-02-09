@@ -3,6 +3,7 @@ package board;
 import pieces.*;
 import player.Player;
 
+import javax.crypto.spec.PSource;
 import java.util.*;
 
 public class Board {
@@ -98,7 +99,7 @@ public class Board {
             System.out.println("\nNo piece on this square");
             return choosePiece(player);
         }
-        if (boardMaker.getSquaresBoard()[x][y].getPiece() instanceof Bomb || boardMaker.getSquaresBoard()[x][y].getPiece() instanceof Flag) {
+        if (!boardMaker.getSquaresBoard()[x][y].getPiece().isMovable()) {
             System.out.println("\nCant move bombs or flags!");
             return choosePiece(player);
         }
@@ -110,22 +111,31 @@ public class Board {
     //Choosing where to move
     public int[] chooseMove(Piece p, Player player) {
         Scanner sc = new Scanner(System.in);
-
-        if (p instanceof Scout) {
+        //1 = down
+     /*   if (p instanceof Scout) {
             List<List<int[]>> scoutarr = ((Scout) p).getCrossPositions();
+            System.out.println("choose a direction 1 Down \n2 Up \n3  - 4 ");
+            int direction = sc.nextInt();
+
+            //printing all moves
             for (int i = 0; i < scoutarr.size(); i++) {
-                System.out.println(scoutarr.get(i));
+                for (int j = 0; j < scoutarr.get(i).size(); j++) {
+                    System.out.print(scoutarr.get(i).get(j)[0]);
+                    System.out.print(scoutarr.get(i).get(j)[1]);
+                }
+                System.out.println();
             }
-        } else {
+            System.out.printf("choose amount of spaces you want to move 0- %d",scoutarr.get(direction).size());
+            int amntofSpaces = sc.nextInt();
+
+            return scoutarr.get(direction).get(amntofSpaces);
+        } else {*/
             List<int[]> listArr = availableSquares(p.getX(), p.getY());
             //Prevent stuck scenario. No step-sibling action here.
             if (listArr.size() == 0) {
                 System.out.println("Choose a new piece, no moves possible.");
                 return new int[]{-1, -1};
             }
-
-
-            //checks for attackable squares, if above 0 gives option to attack
 
             System.out.println("make your move pick (1,2,3,4)");
             int n = sc.nextInt();
@@ -137,18 +147,18 @@ public class Board {
                     return listArr.get(i);
                 }
             }
-        }
+        //}
         //if not succesfull, recursive call for retry (failsafe)
+
+
         return null;
     }
 
     public int[] chooseAttack(Piece p, Player player) {
         Scanner sc = new Scanner(System.in);
 
-        List<int[]> listAttackableSquares;
-        listAttackableSquares = attackPossible(p.getX(), p.getY(), player);
+        List<int[]> listAttackableSquares = attackPossible(p.getX(), p.getY(), player);
         if (listAttackableSquares.size() != 0) {
-
 
             System.out.println("make your attack pick (1,2,3,4)");
             int attackPick = sc.nextInt();
@@ -193,7 +203,6 @@ public class Board {
     private boolean notOutOfBounds(int x, int y) {
 
         if (x >= 0 && y >= 0) {
-
             return x < boardMaker.getSQUARE_ARRAY_WIDTH() && y < boardMaker.getSQUARE_ARRAY_HEIGHT();
         } else {
             return false;

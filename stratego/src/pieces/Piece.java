@@ -86,4 +86,11 @@ public class Piece {
         return player;
     }
 
+    public boolean isMovable() {
+        return isMovable;
+    }
+
+    public boolean isCanAttack() {
+        return canAttack;
+    }
 }

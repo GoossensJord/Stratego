@@ -9,4 +9,5 @@ public class Bomb extends Piece{
         this.isMovable = false;
         this.canAttack = false;
     }
+
 }
