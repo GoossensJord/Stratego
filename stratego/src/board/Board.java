@@ -111,25 +111,23 @@ public class Board {
     //Choosing where to move
     public int[] chooseMove(Piece p, Player player) {
         Scanner sc = new Scanner(System.in);
-        //1 = down
-     /*   if (p instanceof Scout) {
-            List<List<int[]>> scoutarr = ((Scout) p).getCrossPositions();
-            System.out.println("choose a direction 1 Down \n2 Up \n3  - 4 ");
-            int direction = sc.nextInt();
+        if(p instanceof Scout){
+            List<int[]> moves = ((Scout) p).allMoves();
+            for (int i = 0; i < moves.size(); i++) {
+                System.out.print(i +" ");
+                for (int j = 0; j < moves.get(i).length; j++) {
 
-            //printing all moves
-            for (int i = 0; i < scoutarr.size(); i++) {
-                for (int j = 0; j < scoutarr.get(i).size(); j++) {
-                    System.out.print(scoutarr.get(i).get(j)[0]);
-                    System.out.print(scoutarr.get(i).get(j)[1]);
-                }
-                System.out.println();
+                    System.out.print(moves.get(i)[j]);
+
+                };
+                System.out.print(" ");
             }
-            System.out.printf("choose amount of spaces you want to move 0- %d",scoutarr.get(direction).size());
-            int amntofSpaces = sc.nextInt();
+            System.out.println("pick your move");
+            int chosenIndex = sc.nextInt();
+            return moves.get(chosenIndex);
 
-            return scoutarr.get(direction).get(amntofSpaces);
-        } else {*/
+        }
+        else{
             List<int[]> listArr = availableSquares(p.getX(), p.getY());
             //Prevent stuck scenario. No step-sibling action here.
             if (listArr.size() == 0) {
@@ -147,10 +145,8 @@ public class Board {
                     return listArr.get(i);
                 }
             }
-        //}
-        //if not succesfull, recursive call for retry (failsafe)
-
-
+            //if not succesfull, recursive call for retry (failsafe)
+        }
         return null;
     }
 
