@@ -15,6 +15,7 @@ public class Main extends Application {
         ApplicatieNaamPresenter presenter = new ApplicatieNaamPresenter(model, view);
         primaryStage.setScene(new Scene(view));
         presenter.addWindowEventHandlers();
+        primaryStage.setMaximized(true);
         primaryStage.show();
     }
 

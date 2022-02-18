@@ -1,5 +1,6 @@
 package be.kdg.applicatienaam.view;
 
+import javafx.geometry.HPos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -11,7 +12,7 @@ import javafx.scene.layout.RowConstraints;
 public class ApplicatieNaamView extends GridPane {
     Button btnStartTurn;
     Button btnEndTurn;
-    TextField tfNotifs;
+    Label tfNotifs;
     GridPane board;
     Button btnStartGame;
 
@@ -21,31 +22,35 @@ public class ApplicatieNaamView extends GridPane {
     }
 
     private void initialiseNodes() {
-        btnStartTurn = new Button("Start Button");
-        btnEndTurn = new Button("End Button");
-        tfNotifs = new TextField();
+        btnStartTurn = new Button("Start Turn");
+        btnEndTurn = new Button("End Turn");
+        tfNotifs = new Label();
         board = new GridPane();
-        btnStartGame = new Button("Start Game");
+        btnStartGame = new Button("Fill Board");
     }
 
     private void layoutNodes() {
 
-        for (int i = 0; i < 4; i++) {
-            this.getColumnConstraints().add(new ColumnConstraints(200));
-            this.getRowConstraints().add(new RowConstraints(200));
+        for (int i = 0; i < 40; i++) {
+            this.getRowConstraints().add(new RowConstraints(20));
+
+        }
+        for (int i = 0; i < 71; i++) {
+            this.getColumnConstraints().add(new ColumnConstraints(20));
         }
         this.setGridLinesVisible(false);
         board.setGridLinesVisible(true);
 
         for (int i = 0; i < 10; i++) {
-            board.getColumnConstraints().add(new ColumnConstraints(60));
-            board.getRowConstraints().add(new RowConstraints(60));
+            board.getColumnConstraints().add(new ColumnConstraints(75));
+            board.getRowConstraints().add(new RowConstraints(75));
         }
-        GridPane.setConstraints(board, 0, 1, 4, 4);
-        GridPane.setConstraints(btnStartTurn, 0, 0);
-        GridPane.setConstraints(btnEndTurn, 3, 3);
-        GridPane.setConstraints(btnStartTurn,0,0);
-        this.getChildren().addAll(board, btnStartTurn, btnEndTurn, tfNotifs,btnStartGame);
+        GridPane.setConstraints(board, 1, 17, 4, 4);
+        GridPane.setConstraints(btnStartGame, 40, 35,5,3);
+        GridPane.setConstraints(btnStartTurn, 45, 35,5,3);
+        GridPane.setConstraints(btnEndTurn, 50, 35,5,3);
+        GridPane.setConstraints(tfNotifs, 55, 35,5,3);
+        this.getChildren().addAll(board, btnStartTurn, btnEndTurn, tfNotifs, btnStartGame);
     }
 // implementatie van de nodige
 // package-private Getters
@@ -54,8 +59,9 @@ public class ApplicatieNaamView extends GridPane {
         return btnStartGame;
     }
 
-    public void setPosition(String n , int x, int y){
+    public void setPosition(String n, int x, int y) {
         Label z = new Label(n);
-        board.add(z,x,y);
+        board.add(z, x, y);
+        GridPane.setHalignment(z, HPos.CENTER);
     }
 }
