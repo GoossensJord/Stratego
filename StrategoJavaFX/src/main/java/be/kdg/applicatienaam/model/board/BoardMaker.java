@@ -32,24 +32,19 @@ public class BoardMaker {
         int counter = 0;
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 10; j++) {
-
                 arrangePiecesTopPlayer(piecesPlayerOne.get(counter));
                 piecesPlayerOne.get(counter).setX(i);
                 piecesPlayerOne.get(counter++).setY(j);
-
             }
         }
         int counterTwo = 0;
         for (int i = 9; i >= 6; i--) {
             for (int j = 9; j >= 0; j--) {
-
                 arrangePiecesBottomPlayer(piecesPlayerTwo.get(counterTwo));
                 piecesPlayerTwo.get(counterTwo).setX(i);
                 piecesPlayerTwo.get(counterTwo++).setY(j);
-
             }
         }
-
     }
 
     public void arrangePiecesTopPlayer(Piece piece) {
@@ -79,8 +74,6 @@ public class BoardMaker {
             return true;
         } else return false;
     }
-
-
 
     public int getSQUARE_ARRAY_WIDTH() {
         return SQUARE_ARRAY_WIDTH;

@@ -27,7 +27,6 @@ public class Piece {
         this.movableSquares = new ArrayList<ArrayList<int[]>>();
         this.x = x;
         this.y = y;
-        this.image = image;
     }
 
 
@@ -107,7 +106,7 @@ public class Piece {
     }
 
     public Image getImage() {
-        return image;
+        return this.getRank().getImage();
     }
     public List<int[]> availableSquares(int x, int y) {
         int counter = 0;

@@ -3,7 +3,7 @@ package pieces;
 import player.Player;
 
 //defeats the Marshal if he attacks first
-public class Spy extends Piece {
+public class 2Spy extends Piece {
 
     public Spy(Rank r, Player player, int x, int y) {
         super(r, player, x, y);

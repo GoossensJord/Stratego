@@ -16,8 +16,6 @@ public class GamePresenter {
         this.model = model;
         this.view = view;
         this.addEventHandlers();
-
-        this.updateView();
     }
 
     private void addEventHandlers() {
@@ -35,8 +33,8 @@ public class GamePresenter {
             int x = 9 - (int) (e.getX() / 78);
 
             List<int[]> moveArr = model.getMoves(model.choosePiece(x, y));
-            view.lightUp(coordConverter(moveArr));
-            System.out.println(moveArr);
+            moveArr = coordConverter(moveArr);
+            System.out.println(x + " " + y);
             System.out.println(e.getX() / 78 + " " + e.getY() / 78);
         });
     }
@@ -48,16 +46,15 @@ public class GamePresenter {
     private void fillBoardWithImages() {
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
-
-                    view.setPicture(model.getBoard()[i][j].getPiece().getImage(), i, j);
-
+                if (model.getBoard()[i][j].getPiece() == null ) view.setPosition("empty square", i, j);
+                else view.setPicture(model.getBoard()[i][j].getPiece().getImage(), i, j);
             }
         }
     }
 
     private List<int[]> coordConverter(List<int[]> moveArr) {
         for (int i = 0; i < moveArr.size(); i++) {
-            moveArr.get(i)[0] = Math.abs(9 - moveArr.get(i)[0]);
+            moveArr.get(i)[0] = 9-moveArr.get(i)[0];
         }
         return moveArr;
     }

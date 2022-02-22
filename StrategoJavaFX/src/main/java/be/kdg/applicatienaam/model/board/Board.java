@@ -5,7 +5,6 @@ import javafx.scene.Node;
 import javafx.scene.text.Text;
 
 public class Board {
-    public Square[][] bord;
     private BoardMaker boardMaker;
 
     public Board(BoardMaker boardMaker) {
@@ -20,7 +19,6 @@ public class Board {
             System.out.println("place taken");
             return false;
         }
-
     }
 
     public Square[][] getBord() {
@@ -35,6 +33,7 @@ public class Board {
             return false;
         }
     }
+
     public void fillWithSquares() {
 
         for (int i = 0; i <= boardMaker.getSQUARE_ARRAY_HEIGHT(); i++) {

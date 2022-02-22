@@ -9,6 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
 import java.util.List;
@@ -63,10 +64,15 @@ public class GameView extends GridPane {
         GridPane.setConstraints(btnStartTurn, 45, 35,5,3);
         GridPane.setConstraints(btnEndTurn, 50, 35,5,3);
         GridPane.setConstraints(tfNotifs, 55, 35,5,3);
+
         this.getChildren().addAll(board, btnStartTurn, btnEndTurn, tfNotifs, btnStartGame);
         board.setRotate(-90);
     }
 // implementatie van de nodige
+
+    public Label getTfNotifs() {
+        return tfNotifs;
+    }
 // package-private Getters
 
     public Button getBtnStartGame() {
@@ -75,22 +81,24 @@ public class GameView extends GridPane {
 
     public void setPosition(String n, int x, int y) {
         Label z = new Label(n);
-        z.setTextFill(Color.color(1, 0, 0));
+        z.setTextFill(Color.BLACK);
         board.add(z, x, y);
         GridPane.setHalignment(z, HPos.CENTER);
     }
 
     public void setPicture(Image image,int x, int y){
         ImageView imageview = new ImageView(image);
+        board.setHalignment(imageview,HPos.CENTER);
+        imageview.setFitWidth(78);
+        imageview.setFitHeight(54);
+        imageview.setRotate(90);
         board.add(imageview,x,y);
-        GridPane.setHalignment(imageview,HPos.CENTER);
-
     }
     public void lightUp(List<int[]> moveArr){
-        for (int i = 0; i < moveArr.size(); i++) {
+         for (int i = 0; i < moveArr.size(); i++) {
             int[] pos = moveArr.get(i);
             Rectangle rect = new Rectangle(78,78);
-            rect.setFill(Color.BLACK);
+            rect.setFill(Color.GREEN);
             board.add(rect,pos[0],pos[1]);
         }
     }
