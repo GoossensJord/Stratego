@@ -1,15 +1,14 @@
-package be.kdg.applicatienaam.view;
+package be.kdg.applicatienaam.gameview;
 
 import be.kdg.applicatienaam.model.ApplicatieNaamModel;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.image.Image;
 
-public class ApplicatieNaamPresenter {
+public class GamePersenter {
     private ApplicatieNaamModel model;
-    private ApplicatieNaamView view;
+    private GameView view;
 
-    public ApplicatieNaamPresenter(ApplicatieNaamModel model, ApplicatieNaamView view) {
+    public GamePersenter(ApplicatieNaamModel model, GameView view) {
         this.model = model;
         this.view = view;
         this.addEventHandlers();

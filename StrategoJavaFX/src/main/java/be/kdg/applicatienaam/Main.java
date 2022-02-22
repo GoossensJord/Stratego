@@ -1,8 +1,8 @@
 package be.kdg.applicatienaam;
 
 import be.kdg.applicatienaam.model.ApplicatieNaamModel;
-import be.kdg.applicatienaam.view.ApplicatieNaamPresenter;
-import be.kdg.applicatienaam.view.ApplicatieNaamView;
+import be.kdg.applicatienaam.gameview.GamePersenter;
+import be.kdg.applicatienaam.gameview.GameView;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -11,8 +11,8 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         ApplicatieNaamModel model = new ApplicatieNaamModel();
-        ApplicatieNaamView view = new ApplicatieNaamView();
-        ApplicatieNaamPresenter presenter = new ApplicatieNaamPresenter(model, view);
+        GameView view = new GameView();
+        GamePersenter presenter = new GamePersenter(model, view);
         primaryStage.setScene(new Scene(view));
         presenter.addWindowEventHandlers();
         primaryStage.setMaximized(true);
