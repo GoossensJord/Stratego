@@ -1,6 +1,7 @@
 package be.kdg.applicatienaam.model.pieces;
 
 import be.kdg.applicatienaam.model.player.Player;
+import javafx.scene.image.Image;
 
 //immovable, capture = win
 public class Flag extends Piece {
@@ -8,6 +9,8 @@ public class Flag extends Piece {
         super(r, player, x, y);
         super.isMovable = false;
         super.canAttack = false;
+        this.image = new Image("Flag.png");
+
 
     }
 }

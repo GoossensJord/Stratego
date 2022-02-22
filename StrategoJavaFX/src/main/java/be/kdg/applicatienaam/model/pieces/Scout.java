@@ -1,6 +1,7 @@
 package be.kdg.applicatienaam.model.pieces;
 
 import be.kdg.applicatienaam.model.player.Player;
+import javafx.scene.image.Image;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +12,7 @@ public class Scout extends Piece {
 
     public Scout(Rank scout, Player player, int x, int y) {
         super(Rank.SCOUT, player, x, y);
+        this.image = new Image("Scout.png");
 
         movableSquares = new ArrayList<ArrayList<int[]>>();
         for (int i = 0; i < 4; i++) movableSquares.add(new ArrayList<int[]>());

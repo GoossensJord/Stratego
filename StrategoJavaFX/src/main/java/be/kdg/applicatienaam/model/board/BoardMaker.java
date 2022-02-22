@@ -13,12 +13,15 @@ public class BoardMaker {
     private final int SQUARE_ARRAY_WIDTH = Math.abs((boardWidth + 1) / 2);
     private final int SQUARE_ARRAY_HEIGHT = Math.abs((boardHeight + 1) / 6);
 
-    protected Square[][] squaresBoard = new Square[SQUARE_ARRAY_HEIGHT + 1][SQUARE_ARRAY_WIDTH + 1];
+    protected Square[][] squaresBoard;
 
 
     PlayerData playerData = new PlayerData();
 
+
     public BoardMaker() {
+        squaresBoard = new Square[SQUARE_ARRAY_HEIGHT + 1][SQUARE_ARRAY_WIDTH + 1];
+
     }
 
     public void randomlyPlacePieces(Player playerOne, Player playerTwo) {
@@ -77,17 +80,7 @@ public class BoardMaker {
         } else return false;
     }
 
-    public Square[][] fillWithSquares(Board board) {
 
-        for (int i = 0; i <= SQUARE_ARRAY_HEIGHT; i++) {
-            for (int j = 0; j <= SQUARE_ARRAY_WIDTH; j++) {
-                if (squaresBoard[i][j] == null) {
-                    squaresBoard[i][j] = new Square(board);
-                }
-            }
-        }
-        return squaresBoard;
-    }
 
     public int getSQUARE_ARRAY_WIDTH() {
         return SQUARE_ARRAY_WIDTH;
@@ -95,5 +88,9 @@ public class BoardMaker {
 
     public int getSQUARE_ARRAY_HEIGHT() {
         return SQUARE_ARRAY_HEIGHT;
+    }
+
+    public Square[][] getSquaresBoard() {
+        return squaresBoard;
     }
 }

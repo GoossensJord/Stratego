@@ -28,18 +28,19 @@ public class GamePresenter {
                 updateView();
             }
         });
-        view.getBoard().addEventHandler(MouseEvent.MOUSE_CLICKED, e->{
+        view.getBoard().addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
             //X val = 9-getX
             //y vval = X
-            int y = (int)(e.getY()/78);
-            int x = 9-(int)(e.getX()/78);
+            int y = (int) (e.getY() / 78);
+            int x = 9 - (int) (e.getX() / 78);
 
-            List<int[]> moveArr = model.getMoves(model.choosePiece(x,y));
-            moveArr = coordConverter(moveArr);
-            System.out.println(x + " " + y);
-            System.out.println(e.getX()/78 + " " +e.getY()/78);
+            List<int[]> moveArr = model.getMoves(model.choosePiece(x, y));
+            view.lightUp(coordConverter(moveArr));
+            System.out.println(moveArr);
+            System.out.println(e.getX() / 78 + " " + e.getY() / 78);
         });
     }
+
     private void updateView() {
         fillBoardWithImages();
     }
@@ -47,18 +48,20 @@ public class GamePresenter {
     private void fillBoardWithImages() {
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
-                view.setPosition(model.getBoard()[i][j].toString(), i, j);
-                if(model.getBoard()[i][j].getPiece() instanceof Bomb) {
+
                     view.setPicture(model.getBoard()[i][j].getPiece().getImage(), i, j);
-                }
+
             }
         }
     }
-    private List<int[]> coordConverter(List<int[]> moveArr){
+
+    private List<int[]> coordConverter(List<int[]> moveArr) {
         for (int i = 0; i < moveArr.size(); i++) {
-            moveArr.get(i)
+            moveArr.get(i)[0] = Math.abs(9 - moveArr.get(i)[0]);
         }
+        return moveArr;
     }
+
     public void addWindowEventHandlers() {
 // Window event handlers (anon. inner klassen)
 // Koppeling via view.getScene().getWindow()

@@ -9,9 +9,8 @@ public class Board {
     private BoardMaker boardMaker;
 
     public Board(BoardMaker boardMaker) {
-        bord = new Square[10][10];
         this.boardMaker = boardMaker;
-        bord = boardMaker.fillWithSquares(this);
+        fillWithSquares();
     }
 
     public boolean spaceAvailable(int heightIndex, int widthIndex) {
@@ -25,7 +24,7 @@ public class Board {
     }
 
     public Square[][] getBord() {
-        return bord;
+        return boardMaker.squaresBoard;
     }
 
     public boolean notOutOfBounds(int x, int y) {
@@ -36,4 +35,17 @@ public class Board {
             return false;
         }
     }
+    public void fillWithSquares() {
+
+        for (int i = 0; i <= boardMaker.getSQUARE_ARRAY_HEIGHT(); i++) {
+            for (int j = 0; j <= boardMaker.getSQUARE_ARRAY_WIDTH(); j++) {
+                if (boardMaker.getSquaresBoard()[i][j] == null) {
+                    boardMaker.getSquaresBoard()[i][j] = new Square(this);
+                }
+            }
+        }
+
+    }
+
+
 }

@@ -38,6 +38,6 @@ public class ApplicatieNaamModel {
         return board.getBord()[x][y].getPiece();
     }
     public Square[][] getBoard() {
-        return board.getBord();
+        return boardMaker.getSquaresBoard();
     }
 }
