@@ -11,7 +11,7 @@ public class Bomb extends Piece {
         super(r, player, x, y);
         this.isMovable = false;
         this.canAttack = false;
-        this.image = new Image("/Bomb.png");
+        this.image = new Image("/stratego-bomb.svg");
     }
 
 

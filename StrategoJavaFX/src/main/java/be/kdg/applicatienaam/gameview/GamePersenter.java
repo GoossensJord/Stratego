@@ -5,6 +5,7 @@ import be.kdg.applicatienaam.model.pieces.Bomb;
 import be.kdg.applicatienaam.model.pieces.Rank;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
 
 public class GamePersenter {
     private ApplicatieNaamModel model;
@@ -25,6 +26,11 @@ public class GamePersenter {
                 model.playStratego();
                 updateView();
             }
+        });
+        view.getBoard().addEventHandler(MouseEvent.MOUSE_CLICKED, e->{
+            System.out.println(e.getX()/78);
+            System.out.println(e.getY()/78);
+
         });
     }
 
