@@ -6,6 +6,8 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 
+import java.util.List;
+
 public class GamePresenter {
     private ApplicatieNaamModel model;
     private GameView view;
@@ -27,16 +29,17 @@ public class GamePresenter {
             }
         });
         view.getBoard().addEventHandler(MouseEvent.MOUSE_CLICKED, e->{
-            //System.out.println(e.getX()/78);
-            //System.out.println(e.getY()/78);
             //X val = 9-getX
             //y vval = X
             int y = (int)(e.getY()/78);
             int x = 9-(int)(e.getX()/78);
+
+            List<int[]> moveArr = model.getMoves(model.choosePiece(x,y));
+            moveArr = coordConverter(moveArr);
             System.out.println(x + " " + y);
+            System.out.println(e.getX()/78 + " " +e.getY()/78);
         });
     }
-
     private void updateView() {
         fillBoardWithImages();
     }
@@ -51,7 +54,11 @@ public class GamePresenter {
             }
         }
     }
-
+    private List<int[]> coordConverter(List<int[]> moveArr){
+        for (int i = 0; i < moveArr.size(); i++) {
+            moveArr.get(i)
+        }
+    }
     public void addWindowEventHandlers() {
 // Window event handlers (anon. inner klassen)
 // Koppeling via view.getScene().getWindow()

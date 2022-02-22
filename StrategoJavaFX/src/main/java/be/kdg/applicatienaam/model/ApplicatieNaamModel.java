@@ -2,7 +2,11 @@ package be.kdg.applicatienaam.model;
 import be.kdg.applicatienaam.model.board.Board;
 import be.kdg.applicatienaam.model.board.BoardMaker;
 import be.kdg.applicatienaam.model.board.Square;
+import be.kdg.applicatienaam.model.pieces.Piece;
+import be.kdg.applicatienaam.model.pieces.Scout;
 import be.kdg.applicatienaam.model.player.Player;
+
+import java.util.List;
 
 public class ApplicatieNaamModel {
     private final BoardMaker boardMaker;
@@ -26,7 +30,13 @@ public class ApplicatieNaamModel {
 // implementatie van de nodige Getters
 // implementatie van de nodige Setters
 
-
+    public List<int[]> getMoves(Piece p){
+        if (p instanceof Scout) return ((Scout) p).allMoves();
+        else return p.availableSquares(p.getX(),p.getY());
+    }
+    public Piece choosePiece(int x,int y){
+        return board.getBord()[x][y].getPiece();
+    }
     public Square[][] getBoard() {
         return board.getBord();
     }

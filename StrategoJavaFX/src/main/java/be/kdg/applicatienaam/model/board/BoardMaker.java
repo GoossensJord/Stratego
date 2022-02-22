@@ -48,6 +48,7 @@ public class BoardMaker {
         }
 
     }
+
     public void arrangePiecesTopPlayer(Piece piece) {
         for (int i = 0; i < SQUARE_ARRAY_HEIGHT; i++) {
             for (int j = 0; j < SQUARE_ARRAY_WIDTH; j++) {
@@ -69,11 +70,13 @@ public class BoardMaker {
             }
         }
     }
+
     public boolean spaceAvailableNoPrint(int heightindex, int widthindex) {
         if (!squaresBoard[heightindex][widthindex].getIsOccupied()) {
             return true;
         } else return false;
     }
+
     public Square[][] fillWithSquares(Board board) {
 
         for (int i = 0; i <= SQUARE_ARRAY_HEIGHT; i++) {
@@ -84,5 +87,13 @@ public class BoardMaker {
             }
         }
         return squaresBoard;
+    }
+
+    public int getSQUARE_ARRAY_WIDTH() {
+        return SQUARE_ARRAY_WIDTH;
+    }
+
+    public int getSQUARE_ARRAY_HEIGHT() {
+        return SQUARE_ARRAY_HEIGHT;
     }
 }

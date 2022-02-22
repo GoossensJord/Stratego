@@ -28,4 +28,12 @@ public class Board {
         return bord;
     }
 
+    public boolean notOutOfBounds(int x, int y) {
+
+        if (x >= 0 && y >= 0) {
+            return x < boardMaker.getSQUARE_ARRAY_WIDTH() && y < boardMaker.getSQUARE_ARRAY_HEIGHT();
+        } else {
+            return false;
+        }
+    }
 }

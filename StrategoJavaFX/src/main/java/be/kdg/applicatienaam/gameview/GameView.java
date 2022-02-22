@@ -2,12 +2,16 @@ package be.kdg.applicatienaam.gameview;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+
+import java.util.List;
 
 public class GameView extends GridPane {
     Button btnStartTurn;
@@ -81,6 +85,14 @@ public class GameView extends GridPane {
         board.add(imageview,x,y);
         GridPane.setHalignment(imageview,HPos.CENTER);
 
+    }
+    public void lightUp(List<int[]> moveArr){
+        for (int i = 0; i < moveArr.size(); i++) {
+            int[] pos = moveArr.get(i);
+            Rectangle rect = new Rectangle(78,78);
+            rect.setFill(Color.BLACK);
+            board.add(rect,pos[0],pos[1]);
+        }
     }
 
     public GridPane getBoard() {
