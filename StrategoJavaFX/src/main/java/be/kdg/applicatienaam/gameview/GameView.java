@@ -33,13 +33,13 @@ public class GameView extends GridPane {
         BackgroundSize backgroundSize = new BackgroundSize(100,100,true,true,true,false);
         BackgroundImage backgroundImageSetter = new BackgroundImage(backgroundImage,BackgroundRepeat.NO_REPEAT,BackgroundRepeat.NO_REPEAT,BackgroundPosition.DEFAULT,backgroundSize);
         background = new Background(backgroundImageSetter);
+
     }
 
     private void layoutNodes() {
 
         for (int i = 0; i < 40; i++) {
             this.getRowConstraints().add(new RowConstraints(20));
-
         }
         for (int i = 0; i < 71; i++) {
             this.getColumnConstraints().add(new ColumnConstraints(20));
@@ -60,6 +60,7 @@ public class GameView extends GridPane {
         GridPane.setConstraints(btnEndTurn, 50, 35,5,3);
         GridPane.setConstraints(tfNotifs, 55, 35,5,3);
         this.getChildren().addAll(board, btnStartTurn, btnEndTurn, tfNotifs, btnStartGame);
+        board.setRotate(-90);
     }
 // implementatie van de nodige
 // package-private Getters
@@ -79,6 +80,7 @@ public class GameView extends GridPane {
         ImageView imageview = new ImageView(image);
         board.add(imageview,x,y);
         GridPane.setHalignment(imageview,HPos.CENTER);
+
     }
 
     public GridPane getBoard() {

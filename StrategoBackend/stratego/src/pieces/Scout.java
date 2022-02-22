@@ -12,8 +12,8 @@ public class Scout extends Piece {
     public Scout(Rank scout, Player player, int x, int y) {
         super(Rank.SCOUT, player, x, y);
 
-        movableSquares = new ArrayList<List<int[]>>();
-        for (int i = 0; i < 4; i++) movableSquares.add(new ArrayList<int[]>());
+        //movableSquares = new ArrayList<List<int[]>>();
+        //for (int i = 0; i < 4; i++) movableSquares.add(new ArrayList<int[]>());
 
     }
 

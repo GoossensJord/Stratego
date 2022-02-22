@@ -1,7 +1,7 @@
 package be.kdg.applicatienaam;
 
 import be.kdg.applicatienaam.model.ApplicatieNaamModel;
-import be.kdg.applicatienaam.gameview.GamePersenter;
+import be.kdg.applicatienaam.gameview.GamePresenter;
 import be.kdg.applicatienaam.gameview.GameView;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -12,7 +12,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         ApplicatieNaamModel model = new ApplicatieNaamModel();
         GameView view = new GameView();
-        GamePersenter presenter = new GamePersenter(model, view);
+        GamePresenter presenter = new GamePresenter(model, view);
         primaryStage.setScene(new Scene(view));
         presenter.addWindowEventHandlers();
         primaryStage.setMaximized(true);
