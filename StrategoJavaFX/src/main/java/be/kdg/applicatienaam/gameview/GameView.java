@@ -1,22 +1,23 @@
-package be.kdg.applicatienaam.view;
+package be.kdg.applicatienaam.gameview;
 
 import javafx.geometry.HPos;
-import javafx.scene.Node;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.RowConstraints;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
 
-public class ApplicatieNaamView extends GridPane {
+public class GameView extends GridPane {
     Button btnStartTurn;
     Button btnEndTurn;
     Label tfNotifs;
     GridPane board;
     Button btnStartGame;
+    Background background;
 
-    public ApplicatieNaamView() {
+
+    public GameView() {
         this.initialiseNodes();
         this.layoutNodes();
     }
@@ -27,6 +28,10 @@ public class ApplicatieNaamView extends GridPane {
         tfNotifs = new Label();
         board = new GridPane();
         btnStartGame = new Button("Fill Board");
+        Image backgroundImage = new Image("file:src/main/resources/StrategoBoard.jpeg");
+        BackgroundSize backgroundSize = new BackgroundSize(100,100,true,true,true,false);
+        BackgroundImage backgroundImageSetter = new BackgroundImage(backgroundImage,BackgroundRepeat.NO_REPEAT,BackgroundRepeat.NO_REPEAT,BackgroundPosition.DEFAULT,backgroundSize);
+        background = new Background(backgroundImageSetter);
     }
 
     private void layoutNodes() {
@@ -40,12 +45,15 @@ public class ApplicatieNaamView extends GridPane {
         }
         this.setGridLinesVisible(false);
         board.setGridLinesVisible(true);
+        this.setBackground(background);
+
 
         for (int i = 0; i < 10; i++) {
-            board.getColumnConstraints().add(new ColumnConstraints(75));
-            board.getRowConstraints().add(new RowConstraints(75));
+            board.getColumnConstraints().add(new ColumnConstraints(78));
+            board.getRowConstraints().add(new RowConstraints(78));
         }
-        GridPane.setConstraints(board, 1, 17, 4, 4);
+        GridPane.setConstraints(board, 0, 18, 4, 4);
+        board.setPadding(new Insets(10,10,10,10));
         GridPane.setConstraints(btnStartGame, 40, 35,5,3);
         GridPane.setConstraints(btnStartTurn, 45, 35,5,3);
         GridPane.setConstraints(btnEndTurn, 50, 35,5,3);
