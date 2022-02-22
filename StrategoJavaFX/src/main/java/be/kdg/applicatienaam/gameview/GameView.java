@@ -80,4 +80,8 @@ public class GameView extends GridPane {
         board.add(imageview,x,y);
         GridPane.setHalignment(imageview,HPos.CENTER);
     }
+
+    public GridPane getBoard() {
+        return board;
+    }
 }
