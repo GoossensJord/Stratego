@@ -1,10 +1,13 @@
 package be.kdg.applicatienaam.model.pieces;
 import be.kdg.applicatienaam.model.player.*;
+import javafx.scene.image.Image;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Piece {
 
+    protected Image image;
     protected Rank rank;
     protected Player player;
     private boolean deadOrAlive;
@@ -24,6 +27,7 @@ public class Piece {
         this.movableSquares = new ArrayList<ArrayList<int[]>>();
         this.x = x;
         this.y = y;
+        this.image = image;
     }
 
 
@@ -100,5 +104,9 @@ public class Piece {
 
     public boolean isCanAttack() {
         return canAttack;
+    }
+
+    public Image getImage() {
+        return image;
     }
 }

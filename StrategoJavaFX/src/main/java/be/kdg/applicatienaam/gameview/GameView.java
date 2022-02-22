@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 
 public class GameView extends GridPane {
     Button btnStartTurn;
@@ -28,7 +29,7 @@ public class GameView extends GridPane {
         tfNotifs = new Label();
         board = new GridPane();
         btnStartGame = new Button("Fill Board");
-        Image backgroundImage = new Image("file:src/main/resources/StrategoBoard.jpeg");
+        Image backgroundImage = new Image("/StrategoBoard.jpeg");
         BackgroundSize backgroundSize = new BackgroundSize(100,100,true,true,true,false);
         BackgroundImage backgroundImageSetter = new BackgroundImage(backgroundImage,BackgroundRepeat.NO_REPEAT,BackgroundRepeat.NO_REPEAT,BackgroundPosition.DEFAULT,backgroundSize);
         background = new Background(backgroundImageSetter);
@@ -69,7 +70,14 @@ public class GameView extends GridPane {
 
     public void setPosition(String n, int x, int y) {
         Label z = new Label(n);
+        z.setTextFill(Color.color(1, 0, 0));
         board.add(z, x, y);
         GridPane.setHalignment(z, HPos.CENTER);
+    }
+
+    public void setPicture(Image image,int x, int y){
+        ImageView imageview = new ImageView(image);
+        board.add(imageview,x,y);
+        GridPane.setHalignment(imageview,HPos.CENTER);
     }
 }

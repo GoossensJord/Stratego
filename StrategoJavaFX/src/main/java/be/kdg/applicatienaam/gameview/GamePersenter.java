@@ -1,6 +1,8 @@
 package be.kdg.applicatienaam.gameview;
 
 import be.kdg.applicatienaam.model.ApplicatieNaamModel;
+import be.kdg.applicatienaam.model.pieces.Bomb;
+import be.kdg.applicatienaam.model.pieces.Rank;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
@@ -34,6 +36,10 @@ public class GamePersenter {
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
                 view.setPosition(model.getBoard()[i][j].toString(), i, j);
+                if(model.getBoard()[i][j].getPiece() instanceof Bomb) {
+                    view.setPicture(model.getBoard()[i][j].getPiece().getImage(), i, j);
+                }
+
 
             }
         }
