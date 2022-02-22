@@ -39,8 +39,6 @@ public class GamePersenter {
                 if(model.getBoard()[i][j].getPiece() instanceof Bomb) {
                     view.setPicture(model.getBoard()[i][j].getPiece().getImage(), i, j);
                 }
-
-
             }
         }
     }
