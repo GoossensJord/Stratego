@@ -32,10 +32,13 @@ public class GamePresenter {
             int y = (int) (e.getY() / 78);
             int x = 9 - (int) (e.getX() / 78);
 
-            List<int[]> moveArr = model.getMoves(model.choosePiece(x, y));
-            moveArr = coordConverter(moveArr);
-            System.out.println(x + " " + y);
-            System.out.println(e.getX() / 78 + " " + e.getY() / 78);
+            List<int[]> moveArr = model.getMoves(model.choosePiece((int)e.getX() / 78, (int) e.getY() / 78));
+            //view.lightUp(coordConverter(moveArr));
+            coordConverter(moveArr);
+            System.out.println("first convert \t"+x + " " + y);
+            System.out.println("chosen coords on gridpan\t"+ e.getX() / 78 + " " + e.getY() / 78);
+            System.out.println("chosen piece \t" + model.choosePiece((int)e.getX() / 78, (int) e.getY() / 78).toString());
+            //view.lightUp(moveArr);
         });
     }
 
@@ -44,10 +47,11 @@ public class GamePresenter {
     }
 
     private void fillBoardWithImages() {
-        for (int i = 0; i < 10; i++) {
+        for (int i = 10; i > 0; i--) {
             for (int j = 0; j < 10; j++) {
                 if (model.getBoard()[i][j].getPiece() == null ) view.setPosition("empty square", i, j);
-                else view.setPicture(model.getBoard()[i][j].getPiece().getImage(), i, j);
+                else view.setPosition(model.getBoard()[i][j].getPiece().toString(), i, j);
+                //else view.setPicture(model.getBoard()[i][j].getPiece().getImage(), i, j);
             }
         }
     }
@@ -55,6 +59,7 @@ public class GamePresenter {
     private List<int[]> coordConverter(List<int[]> moveArr) {
         for (int i = 0; i < moveArr.size(); i++) {
             moveArr.get(i)[0] = 9-moveArr.get(i)[0];
+            System.out.println("Movearr "+moveArr.get(i)[0] + " " + moveArr.get(i)[1]);
         }
         return moveArr;
     }

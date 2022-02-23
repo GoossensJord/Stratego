@@ -127,6 +127,7 @@ public class Piece {
             moveableSquares.add(new int[]{x - 1, y});
             System.out.println(++counter + " Square UP available");
         }
-        return moveableSquares;
+        if(this.isMovable) return moveableSquares;
+        else return null;
     }
 }
