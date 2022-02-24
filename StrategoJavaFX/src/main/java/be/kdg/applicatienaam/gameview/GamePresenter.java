@@ -1,7 +1,6 @@
 package be.kdg.applicatienaam.gameview;
 
 import be.kdg.applicatienaam.model.ApplicatieNaamModel;
-import be.kdg.applicatienaam.model.pieces.Bomb;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;

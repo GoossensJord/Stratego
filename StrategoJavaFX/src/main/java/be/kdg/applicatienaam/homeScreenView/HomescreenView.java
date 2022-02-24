@@ -6,7 +6,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 
 public class HomescreenView extends GridPane {
-    TextField strategoName;
     Button playClassic;
     Button playRandomFill;
     Button endGame;
@@ -18,7 +17,6 @@ public class HomescreenView extends GridPane {
     }
 
     private void initialiseNodes(){
-        strategoName = new TextField("Stratego");
         playClassic = new Button("Play Classic");
         playRandomFill = new Button("Play RandomFill");
         endGame = new Button("Quit");
@@ -34,18 +32,27 @@ public class HomescreenView extends GridPane {
         for (int i = 0; i < 19; i++) {
             this.getColumnConstraints().add(new ColumnConstraints(80));
         }
-        this.setGridLinesVisible(false);
+        this.setGridLinesVisible(true);
 
-        GridPane.setConstraints(strategoName,1,0,3,1);
-        GridPane.setConstraints(playClassic,9,1,2,1);
-        GridPane.setConstraints(playRandomFill,9,3,2,1);
-        GridPane.setConstraints(endGame,9,5,5,5);
+        GridPane.setConstraints(playClassic,1,9,1,1);
+        GridPane.setConstraints(playRandomFill,3,9,2,1);
+        GridPane.setConstraints(endGame,5,9,1,1);
 
         this.setBackground(background);
-        this.getChildren().addAll(strategoName, playClassic, playRandomFill, endGame);
+        this.getChildren().addAll(playClassic, playRandomFill, endGame);
 
 
     }
 
+    public Button getPlayClassic() {
+        return playClassic;
+    }
 
+    public Button getPlayRandomFill() {
+        return playRandomFill;
+    }
+
+    public Button getEndGame() {
+        return endGame;
+    }
 }

@@ -12,12 +12,13 @@ import javafx.stage.Stage;
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
+        HomescreenView view = new HomescreenView();
         ApplicatieNaamModel model = new ApplicatieNaamModel();
-        GameView view = new GameView();
-        GamePresenter presenter = new GamePresenter(model, view);
+        HomescreenPresenter presenter = new HomescreenPresenter(model,view);
         primaryStage.setScene(new Scene(view));
-        presenter.addWindowEventHandlers();
         primaryStage.setMaximized(true);
+        presenter.addWindowEventHandlers();
+
         primaryStage.show();
     }
 
