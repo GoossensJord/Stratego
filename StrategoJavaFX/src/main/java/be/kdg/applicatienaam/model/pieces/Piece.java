@@ -114,7 +114,7 @@ public class Piece {
         if (player.getBoard().notOutOfBounds(x + 1, y) && !player.getBoard().getBord()[x + 1][y].getIsOccupied()) {
             moveableSquares[0] = x + 1;
             moveableSquares[1] = y;
-            System.out.println(++counter + " Move UP available");
+            System.out.println(++counter + " Move DOWN available");
         }
         if (player.getBoard().notOutOfBounds(x, y + 1) && !player.getBoard().getBord()[x][y + 1].getIsOccupied()) {
             moveableSquares[0] = x;
@@ -129,7 +129,7 @@ public class Piece {
         if (player.getBoard().notOutOfBounds(x - 1, y) && !player.getBoard().getBord()[x - 1][y].getIsOccupied()) {
             moveableSquares[0] = x - 1;
             moveableSquares[1] = y;
-            System.out.println(++counter + " Square DOWN available");
+            System.out.println(++counter + " Square UP available");
         }
         if(this.isMovable) return moveableSquares;
         else return null;

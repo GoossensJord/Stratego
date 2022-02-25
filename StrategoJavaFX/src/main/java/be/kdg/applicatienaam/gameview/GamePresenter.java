@@ -1,18 +1,15 @@
 package be.kdg.applicatienaam.gameview;
 
-import be.kdg.applicatienaam.model.StrategoModel;
+import be.kdg.applicatienaam.model.GameModel;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class GamePresenter {
-    private StrategoModel model;
+    private GameModel model;
     private GameView view;
 
-    public GamePresenter(StrategoModel model, GameView view) {
+    public GamePresenter(GameModel model, GameView view) {
         this.model = model;
         this.view = view;
         this.addEventHandlers();
@@ -41,9 +38,9 @@ public class GamePresenter {
 
             int[] moveArr = model.getMoves(model.choosePiece(x, y));
             if (moveArr.length == 0) {
-                view.getNotifications().setText("No moves for piece " + x + " " + y + " available");
+                view.getNotifications().setText("No moves for piece " + (9-x) + " " + y + " available");
                 return;
-            } else view.getNotifications().setText("Moves for piece " + x + " " + y + " available!");
+            } else view.getNotifications().setText("Moves for piece " + (9-x) + " " + y + " available!");
             view.lightUp(coordConverter(moveArr));
             coordConverter(moveArr);
             //System.out.println("first convert \t" + x + " " + y);

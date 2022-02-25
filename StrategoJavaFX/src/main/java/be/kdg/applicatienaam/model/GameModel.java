@@ -11,7 +11,7 @@ import javafx.scene.input.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StrategoModel {
+public class GameModel {
     private final BoardMaker boardMaker;
     private final Board board;
     private final Player pl;
@@ -19,7 +19,7 @@ public class StrategoModel {
 
     // public static final constanten
 // private attributen
-    public StrategoModel() {
+    public GameModel() {
         boardMaker = new BoardMaker();
         board = new Board(boardMaker);
         pl = new Player(1, "Jord", board);

@@ -1,22 +1,25 @@
 package be.kdg.applicatienaam.homeScreenView;
 
+import be.kdg.applicatienaam.ArrangePiecesModel;
+import be.kdg.applicatienaam.arrangePiecesScreen.ArrangePiecesPresenter;
+import be.kdg.applicatienaam.arrangePiecesScreen.ArrangePiecesView;
 import be.kdg.applicatienaam.gameview.GamePresenter;
 import be.kdg.applicatienaam.gameview.GameView;
-import be.kdg.applicatienaam.model.StrategoModel;
+import be.kdg.applicatienaam.model.GameModel;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.WindowEvent;
 
 public class HomescreenPresenter {
 
-    private StrategoModel model;
+    private GameModel gameModel;
     private HomescreenView view;
+    private ArrangePiecesModel arrangePiecesModel;
 
-    public HomescreenPresenter(StrategoModel model, HomescreenView view) {
-        this.model = model;
+    public HomescreenPresenter(GameModel gameModel, HomescreenView view) {
+        this.gameModel = gameModel;
         this.view = view;
         this.addEventHandlers();
     }
@@ -26,9 +29,18 @@ public class HomescreenPresenter {
             @Override
             public void handle(ActionEvent event) {
                 GameView gameView = new GameView();
-                GamePresenter gamePresenter = new GamePresenter(model, gameView);
+                GamePresenter gamePresenter = new GamePresenter(gameModel, gameView);
                 view.getScene().setRoot(gameView);
                 gameView.getScene().getWindow();
+            }
+        });
+        view.getPlayClassic().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                ArrangePiecesView arrangePiecesView = new ArrangePiecesView();
+                ArrangePiecesPresenter arrangePiecesPresenter = new ArrangePiecesPresenter(arrangePiecesModel,arrangePiecesView);
+                view.getScene().setRoot(arrangePiecesView);
+                arrangePiecesView.getScene().getWindow();
             }
         });
         view.getEndGame().setOnAction(new EventHandler<ActionEvent>() {
@@ -57,8 +69,8 @@ public class HomescreenPresenter {
             }
         });
 
-    }
 
+    }
 
 
     private void updateView() {
