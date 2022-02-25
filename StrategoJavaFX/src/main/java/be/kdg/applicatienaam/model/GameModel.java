@@ -18,14 +18,13 @@ public class GameModel {
     private final Player pl;
     private final Player pl2;
 
-    // public static final constanten
-// private attributen
+
     public GameModel() {
         boardMaker = new BoardMaker();
         board = new Board(boardMaker);
         pl = new Player(1, "Jord", board);
         pl2 = new Player(2, "Michiel", board);
-// Constructor
+
     }
 
     public void playStratego() {
@@ -33,21 +32,12 @@ public class GameModel {
 
     }
 
-// implementatie logica van de
-// applicatie ahv methods
-// implementatie van de nodige Getters
-// implementatie van de nodige Setters
 
     public int[] getMoves(Piece p) {
 
         //   if (p instanceof Scout) return ((Scout) p).allMoves();
         if (!(p.availableSquares(p.getX(),  p.getY()) == null)) return p.availableSquares(p.getX(), p.getY());
-        else {
-            int[] test = new int[2];
-            test[0] = 10;
-            test[1] = 10;
-            return test;
-        }
+        else return null;
     }
 
     public Piece choosePiece(int x, int y) {

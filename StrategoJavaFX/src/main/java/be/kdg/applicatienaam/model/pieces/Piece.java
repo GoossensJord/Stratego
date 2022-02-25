@@ -24,7 +24,6 @@ public class Piece {
         this.deadOrAlive = true;
         this.isMovable = true;
         this.canAttack = true;
-        this.movableSquares = new ArrayList<ArrayList<int[]>>();
         this.x = x;
         this.y = y;
     }
@@ -54,6 +53,34 @@ public class Piece {
             System.out.println("\n"+piece.getPlayer().getName() + " won the fight!\n");
             return piece;
         }
+    }
+    public int[] availableSquares(int x, int y) {
+        int counter = 0;
+        int[] moveableSquares = new int[2];
+        moveableSquares[0] = 10;
+        moveableSquares[1] = 10;
+        if (player.getBoard().notOutOfBounds(x + 1, y) && !player.getBoard().getBord()[x + 1][y].getIsOccupied()) {
+            moveableSquares[0] = x + 1;
+            moveableSquares[1] = y;
+            System.out.println(++counter + " Move DOWN available");
+        }
+        if (player.getBoard().notOutOfBounds(x, y + 1) && !player.getBoard().getBord()[x][y + 1].getIsOccupied()) {
+            moveableSquares[0] = x;
+            moveableSquares[1] = y+1;
+            System.out.println(++counter + " Move RIGHT available");
+        }
+        if (player.getBoard().notOutOfBounds(x, y - 1) && !player.getBoard().getBord()[x][y - 1].getIsOccupied()) {
+            moveableSquares[0] = x;
+            moveableSquares[1] = y-1;
+            System.out.println(++counter + " Square LEFT available");
+        }
+        if (player.getBoard().notOutOfBounds(x - 1, y) && !player.getBoard().getBord()[x - 1][y].getIsOccupied()) {
+            moveableSquares[0] = x - 1;
+            moveableSquares[1] = y;
+            System.out.println(++counter + " Square UP available");
+        }
+        if(this.isMovable) return moveableSquares;
+        else return null;
     }
 
 
@@ -108,32 +135,5 @@ public class Piece {
     public Image getImage() {
         return this.getRank().getImage();
     }
-    public int[] availableSquares(int x, int y) {
-        int counter = 0;
-        int[] moveableSquares = new int[2];
-        moveableSquares[0] = 10;
-        moveableSquares[1] = 10;
-        if (player.getBoard().notOutOfBounds(x + 1, y) && !player.getBoard().getBord()[x + 1][y].getIsOccupied()) {
-            moveableSquares[0] = x + 1;
-            moveableSquares[1] = y;
-            System.out.println(++counter + " Move DOWN available");
-        }
-        if (player.getBoard().notOutOfBounds(x, y + 1) && !player.getBoard().getBord()[x][y + 1].getIsOccupied()) {
-            moveableSquares[0] = x;
-            moveableSquares[1] = y+1;
-            System.out.println(++counter + " Move RIGHT available");
-        }
-        if (player.getBoard().notOutOfBounds(x, y - 1) && !player.getBoard().getBord()[x][y - 1].getIsOccupied()) {
-            moveableSquares[0] = x;
-            moveableSquares[1] = y-1;
-            System.out.println(++counter + " Square LEFT available");
-        }
-        if (player.getBoard().notOutOfBounds(x - 1, y) && !player.getBoard().getBord()[x - 1][y].getIsOccupied()) {
-            moveableSquares[0] = x - 1;
-            moveableSquares[1] = y;
-            System.out.println(++counter + " Square UP available");
-        }
-        if(this.isMovable) return moveableSquares;
-        else return null;
-    }
+
 }
