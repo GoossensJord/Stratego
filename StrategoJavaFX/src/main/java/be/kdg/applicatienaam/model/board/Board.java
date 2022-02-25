@@ -1,8 +1,15 @@
 package be.kdg.applicatienaam.model.board;
 
 
+import be.kdg.applicatienaam.model.pieces.Piece;
+import be.kdg.applicatienaam.model.player.Player;
 import javafx.scene.Node;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Board {
     private BoardMaker boardMaker;
@@ -45,6 +52,10 @@ public class Board {
         }
 
     }
+
+
+
+
 
 
 }

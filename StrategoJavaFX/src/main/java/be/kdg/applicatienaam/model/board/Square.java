@@ -33,6 +33,10 @@ public class Square{
         isOccupied = occupied;
     }
 
+    public void removePiece() {
+        this.p = null;
+        isOccupied = false;
+    }
 
     @Override
     public String toString() {

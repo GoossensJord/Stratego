@@ -2,7 +2,7 @@ package be.kdg.applicatienaam.homeScreenView;
 
 import be.kdg.applicatienaam.gameview.GamePresenter;
 import be.kdg.applicatienaam.gameview.GameView;
-import be.kdg.applicatienaam.model.ApplicatieNaamModel;
+import be.kdg.applicatienaam.model.StrategoModel;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
@@ -11,10 +11,10 @@ import javafx.stage.WindowEvent;
 
 public class HomescreenPresenter {
 
-    private ApplicatieNaamModel model;
+    private StrategoModel model;
     private HomescreenView view;
 
-    public HomescreenPresenter(ApplicatieNaamModel model, HomescreenView view) {
+    public HomescreenPresenter(StrategoModel model, HomescreenView view) {
         this.model = model;
         this.view = view;
         this.addEventHandlers();

@@ -6,11 +6,12 @@ import be.kdg.applicatienaam.model.board.Square;
 import be.kdg.applicatienaam.model.pieces.Piece;
 import be.kdg.applicatienaam.model.pieces.Scout;
 import be.kdg.applicatienaam.model.player.Player;
+import javafx.scene.input.MouseEvent;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ApplicatieNaamModel {
+public class StrategoModel {
     private final BoardMaker boardMaker;
     private final Board board;
     private final Player pl;
@@ -18,7 +19,7 @@ public class ApplicatieNaamModel {
 
     // public static final constanten
 // private attributen
-    public ApplicatieNaamModel() {
+    public StrategoModel() {
         boardMaker = new BoardMaker();
         board = new Board(boardMaker);
         pl = new Player(1, "Jord", board);
@@ -28,7 +29,9 @@ public class ApplicatieNaamModel {
 
     public void playStratego() {
         boardMaker.randomlyPlacePieces(pl, pl2);
+
     }
+
 // implementatie logica van de
 // applicatie ahv methods
 // implementatie van de nodige Getters
@@ -44,6 +47,7 @@ public class ApplicatieNaamModel {
     public Piece choosePiece(int x, int y) {
         return board.getBord()[x][y].getPiece();
     }
+
 
     public Square[][] getBoard() {
         return boardMaker.getSquaresBoard();

@@ -4,6 +4,7 @@ import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -19,6 +20,8 @@ public class GameView extends GridPane {
     GridPane board;
     Button btnStartGame;
     Background background;
+    TextField playerName;
+    TextField notifications;
 
 
     public GameView() {
@@ -36,6 +39,8 @@ public class GameView extends GridPane {
         BackgroundSize backgroundSize = new BackgroundSize(100,100,true,true,true,false);
         BackgroundImage backgroundImageSetter = new BackgroundImage(backgroundImage,BackgroundRepeat.NO_REPEAT,BackgroundRepeat.NO_REPEAT,BackgroundPosition.DEFAULT,backgroundSize);
         background = new Background(backgroundImageSetter);
+        playerName = new TextField();
+        notifications = new TextField();
 
     }
 
@@ -62,8 +67,10 @@ public class GameView extends GridPane {
         GridPane.setConstraints(btnStartTurn, 45, 35,5,3);
         GridPane.setConstraints(btnEndTurn, 50, 35,5,3);
         GridPane.setConstraints(tfNotifs, 55, 35,5,3);
+        GridPane.setConstraints(playerName,40,30,5,3);
+        GridPane.setConstraints(notifications,45,30,10,3);
 
-        this.getChildren().addAll(board, btnStartTurn, btnEndTurn, tfNotifs, btnStartGame);
+        this.getChildren().addAll(board, btnStartTurn, btnEndTurn, tfNotifs, btnStartGame,playerName,notifications);
         board.setRotate(-90);
     }
 // implementatie van de nodige
@@ -89,7 +96,7 @@ public class GameView extends GridPane {
         board.setHalignment(imageview,HPos.CENTER);
         imageview.setFitWidth(78);
         imageview.setFitHeight(54);
-        imageview.setRotate(90);
+        imageview.setRotate(270);
         board.add(imageview,x,y);
     }
     public void lightUp(List<int[]> moveArr){
@@ -103,5 +110,13 @@ public class GameView extends GridPane {
 
     public GridPane getBoard() {
         return board;
+    }
+
+    public TextField getPlayerName() {
+        return playerName;
+    }
+
+    public TextField getNotifications() {
+        return notifications;
     }
 }
