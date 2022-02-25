@@ -37,11 +37,11 @@ public class StrategoModel {
 // implementatie van de nodige Getters
 // implementatie van de nodige Setters
 
-    public List<int[]> getMoves(Piece p) {
+    public int[] getMoves(Piece p) {
 
-        if (p instanceof Scout) return ((Scout) p).allMoves();
-        else if (!(p.availableSquares(p.getX(), p.getY()) == null)) return p.availableSquares(p.getX(), p.getY());
-        else return new ArrayList<>()   ;
+     //   if (p instanceof Scout) return ((Scout) p).allMoves();
+        if (!(p.availableSquares(p.getX(), p.getY()) == null)) return p.availableSquares(p.getX(), p.getY());
+        else return new int[0];
     }
 
     public Piece choosePiece(int x, int y) {

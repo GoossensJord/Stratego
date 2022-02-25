@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.WindowEvent;
 
 public class HomescreenPresenter {
@@ -37,6 +38,7 @@ public class HomescreenPresenter {
             }
         });
 
+
     }
 
     public void addWindowEventHandlers() {
@@ -47,13 +49,14 @@ public class HomescreenPresenter {
                 alert.setHeaderText("Are you sure you want to quit?");
                 alert.setTitle("Careful!");
                 alert.getButtonTypes().clear();
-                ButtonType no = new ButtonType("No");
                 ButtonType yes = new ButtonType("Yes");
+                ButtonType no = new ButtonType("No");
                 alert.getButtonTypes().addAll(no, yes);
                 alert.showAndWait();
                 if (alert.getResult() == null || alert.getResult().equals(no)) windowEvent.consume();
             }
         });
+
     }
 
 

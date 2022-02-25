@@ -108,23 +108,27 @@ public class Piece {
     public Image getImage() {
         return this.getRank().getImage();
     }
-    public List<int[]> availableSquares(int x, int y) {
+    public int[] availableSquares(int x, int y) {
         int counter = 0;
-        List<int[]> moveableSquares = new ArrayList<>();
+        int[] moveableSquares = new int[2];
         if (player.getBoard().notOutOfBounds(x + 1, y) && !player.getBoard().getBord()[x + 1][y].getIsOccupied()) {
-            moveableSquares.add(new int[]{x + 1, y});
+            moveableSquares[0] = x + 1;
+            moveableSquares[1] = y;
             System.out.println(++counter + " Move UP available");
         }
         if (player.getBoard().notOutOfBounds(x, y + 1) && !player.getBoard().getBord()[x][y + 1].getIsOccupied()) {
-            moveableSquares.add(new int[]{x, y + 1});
+            moveableSquares[0] = x;
+            moveableSquares[1] = y+1;
             System.out.println(++counter + " Move RIGHT available");
         }
         if (player.getBoard().notOutOfBounds(x, y - 1) && !player.getBoard().getBord()[x][y - 1].getIsOccupied()) {
-            moveableSquares.add(new int[]{x, y - 1});
+            moveableSquares[0] = x;
+            moveableSquares[1] = y-1;
             System.out.println(++counter + " Square LEFT available");
         }
         if (player.getBoard().notOutOfBounds(x - 1, y) && !player.getBoard().getBord()[x - 1][y].getIsOccupied()) {
-            moveableSquares.add(new int[]{x - 1, y});
+            moveableSquares[0] = x - 1;
+            moveableSquares[1] = y;
             System.out.println(++counter + " Square DOWN available");
         }
         if(this.isMovable) return moveableSquares;

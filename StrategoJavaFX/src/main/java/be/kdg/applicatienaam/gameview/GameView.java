@@ -96,16 +96,17 @@ public class GameView extends GridPane {
         board.setHalignment(imageview,HPos.CENTER);
         imageview.setFitWidth(78);
         imageview.setFitHeight(54);
-        imageview.setRotate(270);
+        imageview.setRotate(90);
         board.add(imageview,x,y);
     }
-    public void lightUp(List<int[]> moveArr){
-         for (int i = 0; i < moveArr.size(); i++) {
-            int[] pos = moveArr.get(i);
+    public void lightUp(int[] moveArr){
+            int[] pos = new int[2];
+            pos[0] = moveArr[0];
+            pos[1] = moveArr[1];
             Rectangle rect = new Rectangle(78,78);
             rect.setFill(Color.GREEN);
             board.add(rect,pos[0],pos[1]);
-        }
+
     }
 
     public GridPane getBoard() {
@@ -116,7 +117,12 @@ public class GameView extends GridPane {
         return playerName;
     }
 
+    public Button getBtnEndTurn() {
+        return btnEndTurn;
+    }
+
     public TextField getNotifications() {
         return notifications;
+
     }
 }

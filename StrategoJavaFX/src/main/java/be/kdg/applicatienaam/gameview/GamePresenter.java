@@ -27,21 +27,28 @@ public class GamePresenter {
 
             }
         });
+        view.getBtnEndTurn().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("lol");
+            }
+        });
         view.getBoard().addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
 
-            int y = (int) (e.getY() / 78);
-            int x = 9 - (int) (e.getX() / 78);
 
-            List<int[]> moveArr = model.getMoves(model.choosePiece(x, y));
+            int x = (int) (e.getX() / 78);
+            int y = (int) (e.getY() / 78);
+
+            int[] moveArr = model.getMoves(model.choosePiece(x, y));
+            if (moveArr.length == 0) {
+                view.getNotifications().setText("No moves for piece " + x + " " + y + " available");
+                return;
+            } else view.getNotifications().setText("Moves for piece " + x + " " + y + " available!");
             view.lightUp(coordConverter(moveArr));
             coordConverter(moveArr);
-            if (moveArr.size() == 0) {
-                view.getNotifications().setText("No moves for piece " + x + " " + y + " available");
-            } else view.getNotifications().setText("Moves for piece " + x + " " + y + " available!");
-
             //System.out.println("first convert \t" + x + " " + y);
             //System.out.println("chosen coords on gridpan\t" + e.getX() / 78 + " " + e.getY() / 78);
-            //System.out.println("chosen piece \t" + model.choosePiece((int) e.getX() / 78, (int) e.getY() / 78).toString());
+            System.out.println("chosen piece \t" + model.choosePiece((int) e.getX() / 78, (int) e.getY() / 78).toString());
 
             //view.lightUp(moveArr);
         });
@@ -62,14 +69,14 @@ public class GamePresenter {
         }
     }
 
-    private List<int[]> coordConverter(List<int[]> moveArr) {
-        List<int[]> temparr = new ArrayList<>();
-        for (int i = 0; i < moveArr.size(); i++) {
+    private int[] coordConverter(int[] moveArr) {
+        int[] temparr = new int[2];
+        int convertedX = 9 - moveArr[0];
+        int convertedY = 9 - moveArr[1];
+        temparr[0] = convertedX;
+        temparr[1] = convertedY;
+        System.out.println("Movearr " + temparr[0] + " " + temparr[1]);
 
-            int temp = 9 - moveArr.get(i)[0];
-            temparr.add(new int[]{temp, moveArr.get(i)[1]});
-            System.out.println("Movearr " + temparr.get(i)[0] + " " + temparr.get(i)[1]);
-        }
         return temparr;
     }
 

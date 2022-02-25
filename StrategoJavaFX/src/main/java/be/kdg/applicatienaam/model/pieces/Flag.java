@@ -9,7 +9,7 @@ public class Flag extends Piece {
         super(r, player, x, y);
         super.isMovable = false;
         super.canAttack = false;
-        this.image = new Image("Flag.png");
+
 
 
     }
