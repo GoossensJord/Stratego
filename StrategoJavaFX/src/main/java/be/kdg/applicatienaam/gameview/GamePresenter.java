@@ -37,15 +37,19 @@ public class GamePresenter {
             int y = (int) (e.getY() / 78);
 
             int[] moveArr = model.getMoves(model.choosePiece(x, y));
-            if (moveArr.length == 0) {
+            if (moveArr != null && (moveArr[0] != 0 || moveArr[1] !=0)) {
+                view.getNotifications().setText("Moves for piece " + (9-x) + " " + y + " available!");
+                view.lightUp(coordConverter(moveArr));
+                coordConverter(moveArr);
+                System.out.println("chosen piece \t" + model.choosePiece((int) e.getX() / 78, (int) e.getY() / 78).toString());
+
+            } else
                 view.getNotifications().setText("No moves for piece " + (9-x) + " " + y + " available");
-                return;
-            } else view.getNotifications().setText("Moves for piece " + (9-x) + " " + y + " available!");
-            view.lightUp(coordConverter(moveArr));
-            coordConverter(moveArr);
+
+
             //System.out.println("first convert \t" + x + " " + y);
             //System.out.println("chosen coords on gridpan\t" + e.getX() / 78 + " " + e.getY() / 78);
-            System.out.println("chosen piece \t" + model.choosePiece((int) e.getX() / 78, (int) e.getY() / 78).toString());
+
 
             //view.lightUp(moveArr);
         });

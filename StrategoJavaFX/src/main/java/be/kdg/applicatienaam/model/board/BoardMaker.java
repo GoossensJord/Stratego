@@ -35,6 +35,7 @@ public class BoardMaker {
                 arrangePiecesBottomPlayer(piecesPlayerOne.get(counter));
                 piecesPlayerOne.get(counter).setX(i);
                 piecesPlayerOne.get(counter++).setY(j);
+
             }
         }
         int counterTwo = 0;
@@ -52,6 +53,7 @@ public class BoardMaker {
             for (int j = 0; j < SQUARE_ARRAY_WIDTH; j++) {
                 if (spaceAvailableNoPrint(i, j)) {
                     squaresBoard[i][j].setPiece(piece);
+                    squaresBoard[i][j].setOccupied(true);
                     return;
                 }
             }
@@ -63,6 +65,7 @@ public class BoardMaker {
             for (int j = SQUARE_ARRAY_WIDTH - 1; j >= 0; j--) {
                 if (spaceAvailableNoPrint(i, j)) {
                     squaresBoard[i][j].setPiece(piece);
+                    squaresBoard[i][j].setOccupied(true);
                     return;
                 }
             }

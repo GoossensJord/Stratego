@@ -14,7 +14,8 @@ public enum Rank {
     MINER(3,"Miner",5, new Image("Miner.png")),
     SCOUT(2,"Scout",8, new Image("Scout.png")),
     SPY(1,"Spy",1, new Image("Spy.png")),
-    FLAG(0,"Flag",1, new Image("Flag.png"));
+    FLAG(0,"Flag",1, new Image("Flag.png")),
+    EMPTY(0,null,0,null);
 
     String name;
     int power;

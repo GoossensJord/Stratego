@@ -4,6 +4,7 @@ import be.kdg.applicatienaam.model.board.Board;
 import be.kdg.applicatienaam.model.board.BoardMaker;
 import be.kdg.applicatienaam.model.board.Square;
 import be.kdg.applicatienaam.model.pieces.Piece;
+import be.kdg.applicatienaam.model.pieces.Rank;
 import be.kdg.applicatienaam.model.pieces.Scout;
 import be.kdg.applicatienaam.model.player.Player;
 import javafx.scene.input.MouseEvent;
@@ -41,7 +42,7 @@ public class GameModel {
 
      //   if (p instanceof Scout) return ((Scout) p).allMoves();
         if (!(p.availableSquares(p.getX(), p.getY()) == null)) return p.availableSquares(p.getX(), p.getY());
-        else return new int[0];
+        else return null;
     }
 
     public Piece choosePiece(int x, int y) {
