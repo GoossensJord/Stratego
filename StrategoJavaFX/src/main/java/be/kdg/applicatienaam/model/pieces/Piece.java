@@ -111,6 +111,8 @@ public class Piece {
     public int[] availableSquares(int x, int y) {
         int counter = 0;
         int[] moveableSquares = new int[2];
+        moveableSquares[0] = 10;
+        moveableSquares[1] = 10;
         if (player.getBoard().notOutOfBounds(x + 1, y) && !player.getBoard().getBord()[x + 1][y].getIsOccupied()) {
             moveableSquares[0] = x + 1;
             moveableSquares[1] = y;

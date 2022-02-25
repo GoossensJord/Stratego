@@ -37,7 +37,7 @@ public class GamePresenter {
             int y = (int) (e.getY() / 78);
 
             int[] moveArr = model.getMoves(model.choosePiece(x, y));
-            if (moveArr != null && (moveArr[0] != 0 || moveArr[1] !=0)) {
+            if (moveArr != null && moveArr[0] <= 9) {
                 view.getNotifications().setText("Moves for piece " + (9-x) + " " + y + " available!");
                 view.lightUp(coordConverter(moveArr));
                 coordConverter(moveArr);
