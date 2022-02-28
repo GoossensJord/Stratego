@@ -3,15 +3,21 @@ package be.kdg.applicatienaam.gameview;
 import be.kdg.applicatienaam.model.GameModel;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.scene.input.MouseEvent;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GamePresenter {
     private GameModel model;
     private GameView view;
 
+
     public GamePresenter(GameModel model, GameView view) {
         this.model = model;
         this.view = view;
+
         this.addEventHandlers();
     }
 
@@ -19,42 +25,20 @@ public class GamePresenter {
         view.getBtnStartGame().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                model.playStratego();
-                updateView();
-
+                model.fillRandomly();
+                fillBoardWithImages();
+                view.getBtnStartGame().setDisable(true);
             }
         });
         view.getBtnEndTurn().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("lol");
+                updateView();
             }
         });
-        view.getBoard().addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+        view.getBoard().addEventHandler(MouseEvent.MOUSE_CLICKED, new boardEventHandler(model, view));
 
-
-            int x = (int) (e.getX() / 78);
-            int y = (int) (e.getY() / 78);
-
-            int[] moveArr = model.getMoves(model.choosePiece(x, y));
-            if (moveArr != null && moveArr[0] <= 9) {
-                view.getNotifications().setText("Moves for piece " + (9-x) + " " + y + " available!");
-                view.lightUp(coordConverter(moveArr));
-                coordConverter(moveArr);
-                System.out.println("chosen piece \t" + model.choosePiece((int) e.getX() / 78, (int) e.getY() / 78).toString());
-
-            } else
-                view.getNotifications().setText("No moves for piece " + (9-x) + " " + y + " available");
-
-
-            //System.out.println("first convert \t" + x + " " + y);
-            //System.out.println("chosen coords on gridpan\t" + e.getX() / 78 + " " + e.getY() / 78);
-
-
-            //view.lightUp(moveArr);
-        });
     }
-
 
     private void updateView() {
         fillBoardWithImages();
@@ -68,21 +52,6 @@ public class GamePresenter {
                 else view.setPicture(model.getBoard()[i][j].getPiece().getImage(), i, j);
             }
         }
-    }
-
-    private int[] coordConverter(int[] moveArr) {
-        int[] temparr = new int[2];
-        int convertedX = 9 - moveArr[0];
-        int convertedY = 9 - moveArr[1];
-        temparr[0] = convertedX;
-        temparr[1] = convertedY;
-        System.out.println("Movearr " + temparr[0] + " " + temparr[1]);
-
-        return temparr;
-    }
-
-    public void moveImage() {
-
     }
 
 }

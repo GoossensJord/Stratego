@@ -2,6 +2,7 @@ package be.kdg.applicatienaam.model.board;
 
 
 import be.kdg.applicatienaam.model.pieces.Piece;
+import be.kdg.applicatienaam.model.pieces.Scout;
 import be.kdg.applicatienaam.model.player.Player;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
@@ -10,6 +11,7 @@ import javafx.scene.text.Text;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 public class Board {
     private BoardMaker boardMaker;
@@ -43,19 +45,23 @@ public class Board {
 
     public void fillWithSquares() {
 
-        for (int i = 0; i <= boardMaker.getSQUARE_ARRAY_HEIGHT(); i++) {
-            for (int j = 0; j <= boardMaker.getSQUARE_ARRAY_WIDTH(); j++) {
+        for (int i = 0; i < boardMaker.getSQUARE_ARRAY_HEIGHT(); i++) {
+            for (int j = 0; j < boardMaker.getSQUARE_ARRAY_WIDTH(); j++) {
                 if (boardMaker.getSquaresBoard()[i][j] == null) {
                     boardMaker.getSquaresBoard()[i][j] = new Square(this);
                 }
             }
         }
-
     }
 
+    public void makeMove(int[] move, Piece p) {
+        int[] tempPos = new int[]{p.getX(), p.getY()};
 
-
-
-
-
+        if (notOutOfBounds(move[0], move[1])) {
+            p.setX(move[0]);
+            p.setY(move[1]);
+            boardMaker.getSquaresBoard()[p.getX()][p.getY()].setPiece(p);
+            boardMaker.getSquaresBoard()[tempPos[0]][tempPos[1]].removePiece();
+        }
+    }
 }

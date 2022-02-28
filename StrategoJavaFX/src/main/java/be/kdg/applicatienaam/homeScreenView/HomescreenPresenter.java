@@ -63,7 +63,7 @@ public class HomescreenPresenter {
                 alert.getButtonTypes().clear();
                 ButtonType yes = new ButtonType("Yes");
                 ButtonType no = new ButtonType("No");
-                alert.getButtonTypes().addAll(no, yes);
+                alert.getButtonTypes().addAll(yes, no);
                 alert.showAndWait();
                 if (alert.getResult() == null || alert.getResult().equals(no)) windowEvent.consume();
             }

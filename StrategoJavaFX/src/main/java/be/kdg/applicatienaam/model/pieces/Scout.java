@@ -9,6 +9,7 @@ import java.util.List;
 //moves any distance horizontal & vertical (no leaping over)
 public class Scout extends Piece {
     private boolean firstMove = true;
+    protected List<ArrayList<int[]>> movableSquares;
 
     public Scout(Rank scout, Player player, int x, int y) {
         super(Rank.SCOUT, player, x, y);

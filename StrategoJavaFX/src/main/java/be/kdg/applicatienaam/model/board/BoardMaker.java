@@ -30,9 +30,9 @@ public class BoardMaker {
         List<Piece> piecesPlayerTwo = playerData.createRandomPieceList(playerTwo);
 
         int counter = 0;
-        for (int i = 0; i < 4; i++) {
+        for (int i = 3; i >= 0; i--) {
             for (int j = 0; j < 10; j++) {
-                arrangePiecesBottomPlayer(piecesPlayerOne.get(counter));
+                arrangePiecesBottomPlayer(piecesPlayerOne.get(counter),i,j);
                 piecesPlayerOne.get(counter).setX(i);
                 piecesPlayerOne.get(counter++).setY(j);
 
@@ -40,15 +40,18 @@ public class BoardMaker {
         }
         int counterTwo = 0;
         for (int i = 9; i >= 6; i--) {
-            for (int j = 9; j >= 0; j--) {
-                arrangePiecesTopPlayer(piecesPlayerTwo.get(counterTwo));
+            for (int j = 0; j <= 9; j++) {
+                arrangePiecesTopPlayer(piecesPlayerTwo.get(counterTwo),i,j);
                 piecesPlayerTwo.get(counterTwo).setX(i);
                 piecesPlayerTwo.get(counterTwo++).setY(j);
             }
         }
     }
 
-    public void arrangePiecesTopPlayer(Piece piece) {
+    public void arrangePiecesTopPlayer(Piece piece, int x, int y) {
+        squaresBoard[x][y].setPiece(piece);
+        squaresBoard[x][y].setOccupied(true);
+        /*
         for (int i = 0; i < SQUARE_ARRAY_HEIGHT; i++) {
             for (int j = 0; j < SQUARE_ARRAY_WIDTH; j++) {
                 if (spaceAvailableNoPrint(i, j)) {
@@ -58,9 +61,14 @@ public class BoardMaker {
                 }
             }
         }
+        */
+
     }
 
-    public void arrangePiecesBottomPlayer(Piece piece) {
+    public void arrangePiecesBottomPlayer(Piece piece,int x, int y) {
+        squaresBoard[x][y].setPiece(piece);
+        squaresBoard[x][y].setOccupied(true);
+        /*
         for (int i = SQUARE_ARRAY_HEIGHT - 1; i >= 0; i--) {
             for (int j = SQUARE_ARRAY_WIDTH - 1; j >= 0; j--) {
                 if (spaceAvailableNoPrint(i, j)) {
@@ -70,6 +78,8 @@ public class BoardMaker {
                 }
             }
         }
+
+         */
     }
 
     public boolean spaceAvailableNoPrint(int heightindex, int widthindex) {

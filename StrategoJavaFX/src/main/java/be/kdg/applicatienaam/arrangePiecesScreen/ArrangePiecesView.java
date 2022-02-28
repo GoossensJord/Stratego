@@ -44,7 +44,7 @@ public class ArrangePiecesView extends GridPane {
         }
         this.setGridLinesVisible(false);
         board.setGridLinesVisible(true);
-        this.setBackground(background);
+        board.setBackground(background);
 
 
         for (int i = 0; i < 10; i++) {
