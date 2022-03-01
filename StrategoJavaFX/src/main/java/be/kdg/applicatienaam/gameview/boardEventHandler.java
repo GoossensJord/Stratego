@@ -42,6 +42,7 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
     private void selectPiece(int x ,int y){
 
         p = model.choosePiece(x, y);
+
         prevPosPiece = new int[]{x, y};
         //view.getNotifications().setText( "x = " + x + "y = " + y + "Piece that should be here = " + model.getPiece(x,y).toString());
         List<int[]> moveArr = model.getMoves(p);
@@ -81,6 +82,7 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
         view.setPicture(p.getImage(),x,y);
 
     }
+
 
 
 }

@@ -15,13 +15,14 @@ public class GameModel {
     private final Board board;
     private final Player pl;
     private final Player pl2;
-
+    private int playerTurn;
 
     public GameModel() {
         boardMaker = new BoardMaker();
         board = new Board(boardMaker);
         pl = new Player(1, "Jord", board);
         pl2 = new Player(2, "Michiel", board);
+        playerTurn = 1;
 
     }
 
@@ -30,17 +31,23 @@ public class GameModel {
     }
 
     public List<int[]> getMoves(Piece p) {
+/*        if(playerTurn == p.getPlayer().getId()){
+            //ugly, kan nog beter gedaan worden, werkt wel voorlopig.
+            if (playerTurn == 1) playerTurn++;
+            else  playerTurn--;
 
+
+        }*/
         if (p instanceof Scout) return ((Scout) p).allMoves();
         else if (!(p.availableSquares(p.getX(), p.getY()) == null)) {
             return p.availableSquares(p.getX(), p.getY());
-        } else return null;
+        }
+        return null;
     }
 
     public Piece choosePiece(int x, int y) {
         return board.getBord()[x][y].getPiece();
     }
-
 
     public Square[][] getBoard() {
         return boardMaker.getSquaresBoard();
@@ -48,9 +55,5 @@ public class GameModel {
 
     public void makeChosenMove(int[] move, Piece p) {
         board.makeMove(move, p);
-    }
-
-    public Piece getPiece(int x, int y) {
-        return boardMaker.getSquaresBoard()[x][y].getPiece();
     }
 }
