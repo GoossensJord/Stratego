@@ -1,8 +1,6 @@
 package be.kdg.applicatienaam.gameview;
 
-import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
-import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -26,6 +24,7 @@ public class GameView extends GridPane {
     TextField playerName;
     TextField notifications;
     List<ImageView> allPieces;
+    List<Rectangle> coloredRectangles;
 
     public GameView() {
         this.initialiseNodes();
@@ -45,6 +44,7 @@ public class GameView extends GridPane {
         playerName = new TextField();
         notifications = new TextField();
         allPieces = new ArrayList<>();
+        coloredRectangles = new ArrayList<>();
 
     }
 
@@ -101,20 +101,30 @@ public class GameView extends GridPane {
         imageview.setFitWidth(78);
         imageview.setFitHeight(54);
         imageview.setRotate(90);
+        imageview.setId(x + "" + y);
         board.add(imageview, x, y);
-        System.out.println(imageview.getImage());
-        imageview.setId(x+""+y);
-        System.out.println(imageview.getId());
+        allPieces.add(imageview);
     }
 
-    public void removeFromGridpane(Image i, int x , int y){
-        for (ImageView iw: allPieces) {
-            if (iw.getImage() == i) board.getChildren().remove(iw);
+    public void removeFromGridpane(int x, int y) {
+        for (Node image : allPieces) {
+            if (image instanceof ImageView) {
+                if (image.getId().equals(x + "" + y)){
+                    board.getChildren().remove(image);
+                }
+               /* System.out.println("image id"+ image.getId());
+                System.out.println("meegegeven id " + x+""+y);*/
+            }
         }
+        /*for (ImageView iw : allPieces) {
+            if (iw.getImage().getUrl().contains(i.getUrl())
+                    && board.getRowIndex(iw) == x
+                    && board.getColumnIndex(iw) == y)
+                board.getChildren().remove(i);
+        }*/
     }
 
-
-    public void lightUp(List<int[]> moveArr) {
+    public void lightUpRectangles(List<int[]> moveArr) {
         int[] pos = new int[2];
         for (int i = 0; i < moveArr.size(); i++) {
             pos[0] = moveArr.get(i)[0];
@@ -122,13 +132,15 @@ public class GameView extends GridPane {
             Rectangle rect = new Rectangle(78, 78);
             rect.setFill(Color.GREEN);
             board.add(rect, pos[0], pos[1]);
+            coloredRectangles.add(rect);
         }
     }
 
-    public void dimSquare(int x, int y) {
-
+    public void dimSquare() {
+        for (Rectangle r : coloredRectangles
+             ) { board.getChildren().remove(r);
+        }
     }
-
 
     public GridPane getBoard() {
         return board;
@@ -144,5 +156,5 @@ public class GameView extends GridPane {
 
     public TextField getNotifications() {
         return notifications;
- }
+    }
 }

@@ -33,7 +33,6 @@ public class Board {
     public Square[][] getBord() {
         return boardMaker.squaresBoard;
     }
-
     public boolean notOutOfBounds(int x, int y) {
 
         if (x >= 0 && y >= 0) {
@@ -56,12 +55,12 @@ public class Board {
 
     public void makeMove(int[] move, Piece p) {
         int[] tempPos = new int[]{p.getX(), p.getY()};
+        p.setX(move[0]);
+        p.setY(move[1]);
+        boardMaker.getSquaresBoard()[p.getX()][p.getY()].setPiece(p);
+        boardMaker.getSquaresBoard()[tempPos[0]][tempPos[1]].removePiece();
+        /*f (notOutOfBounds(move[0], move[1])) {
 
-        if (notOutOfBounds(move[0], move[1])) {
-            p.setX(move[0]);
-            p.setY(move[1]);
-            boardMaker.getSquaresBoard()[p.getX()][p.getY()].setPiece(p);
-            boardMaker.getSquaresBoard()[tempPos[0]][tempPos[1]].removePiece();
-        }
+        }*/
     }
 }

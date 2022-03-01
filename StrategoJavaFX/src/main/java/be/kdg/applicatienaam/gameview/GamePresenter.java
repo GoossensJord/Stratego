@@ -17,7 +17,6 @@ public class GamePresenter {
     public GamePresenter(GameModel model, GameView view) {
         this.model = model;
         this.view = view;
-
         this.addEventHandlers();
     }
 
@@ -33,11 +32,12 @@ public class GamePresenter {
         view.getBtnEndTurn().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                updateView();
+                /*updateView();*/
             }
         });
-        view.getBoard().addEventHandler(MouseEvent.MOUSE_CLICKED, new boardEventHandler(model, view));
-
+        view.getBoard().addEventHandler(MouseEvent.MOUSE_CLICKED, new boardEventHandler(model, view));{
+            updateView();
+        };
     }
 
     private void updateView() {
@@ -53,5 +53,9 @@ public class GamePresenter {
             }
         }
     }
+    private void test(){
+
+    }
+
 
 }

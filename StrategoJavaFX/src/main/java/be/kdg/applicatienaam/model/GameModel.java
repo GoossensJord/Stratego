@@ -41,6 +41,7 @@ public class GameModel {
         return board.getBord()[x][y].getPiece();
     }
 
+
     public Square[][] getBoard() {
         return boardMaker.getSquaresBoard();
     }

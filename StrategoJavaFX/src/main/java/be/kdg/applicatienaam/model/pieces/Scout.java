@@ -37,11 +37,15 @@ public class Scout extends Piece {
 
         List<int[]> startmoves = new ArrayList<>();
         if (this.getPlayer().getId() == 1) {
-            startmoves.add(new int[]{this.x + 1, this.y});
-            startmoves.add(new int[]{this.x + 2, this.y});
+            if (!super.player.getBoard().getBord()[x+1][y].getIsOccupied()) {
+                startmoves.add(new int[]{this.x + 1, this.y});
+                startmoves.add(new int[]{this.x + 2, this.y});
+            }
         } else {
-            startmoves.add(new int[]{this.x - 1, this.y});
-            startmoves.add(new int[]{this.x - 2, this.y});
+            if (!super.player.getBoard().getBord()[x-1][y].getIsOccupied()) {
+                startmoves.add(new int[]{this.x - 1, this.y});
+                startmoves.add(new int[]{this.x - 2, this.y});
+            }
         }
         return startmoves;
     }
