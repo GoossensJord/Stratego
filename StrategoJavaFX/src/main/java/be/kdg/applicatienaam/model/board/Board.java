@@ -2,16 +2,7 @@ package be.kdg.applicatienaam.model.board;
 
 
 import be.kdg.applicatienaam.model.pieces.Piece;
-import be.kdg.applicatienaam.model.pieces.Scout;
-import be.kdg.applicatienaam.model.player.Player;
-import javafx.scene.Node;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.text.Text;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import be.kdg.applicatienaam.model.pieces.Rank;
 
 public class Board {
     private BoardMaker boardMaker;
@@ -65,7 +56,11 @@ public class Board {
     }
     public void makeAttack(int[] attack, Piece p) {
         int[] tempPos = new int[]{p.getX(), p.getY()};
-        if (boardMaker.getSquaresBoard()[p.getX()][p.getY()].getPiece().getRankPower() >= boardMaker.getSquaresBoard()[attack[0]][attack[1]].getPiece().getRankPower()){
+
+        if (boardMaker.getSquaresBoard()[p.getX()][p.getY()].getPiece().getRankPower() >= boardMaker.getSquaresBoard()[attack[0]][attack[1]].getPiece().getRankPower() ||
+                (boardMaker.getSquaresBoard()[p.getX()][p.getY()].getPiece().getRank().equals(Rank.MINER) && boardMaker.getSquaresBoard()[attack[0]][attack[1]].getPiece().getRank().equals(Rank.BOMB))
+                || (boardMaker.getSquaresBoard()[p.getX()][p.getY()].getPiece().getRank().equals(Rank.SPY) && boardMaker.getSquaresBoard()[attack[0]][attack[1]].getPiece().getRank().equals(Rank.MARSHAL))){
+
             boardMaker.getSquaresBoard()[attack[0]][attack[1]].removePiece();
             p.setX(attack[0]);
             p.setY(attack[1]);

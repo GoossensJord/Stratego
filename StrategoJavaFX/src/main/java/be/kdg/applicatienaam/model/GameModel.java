@@ -7,7 +7,6 @@ import be.kdg.applicatienaam.model.pieces.Piece;
 import be.kdg.applicatienaam.model.pieces.Scout;
 import be.kdg.applicatienaam.model.player.Player;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class GameModel {

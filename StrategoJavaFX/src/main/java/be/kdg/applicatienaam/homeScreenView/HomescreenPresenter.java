@@ -14,7 +14,6 @@ public class HomescreenPresenter {
 
     private GameModel gameModel;
     private HomescreenView view;
-    //private ArrangePiecesModel arrangePiecesModel;
 
     public HomescreenPresenter(GameModel gameModel, HomescreenView view) {
         this.gameModel = gameModel;
@@ -32,15 +31,7 @@ public class HomescreenPresenter {
                 gameView.getScene().getWindow();
             }
         });
-   /*     view.getPlayClassic().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                ArrangePiecesView arrangePiecesView = new ArrangePiecesView();
-                ArrangePiecesPresenter arrangePiecesPresenter = new ArrangePiecesPresenter(arrangePiecesModel,arrangePiecesView);
-                view.getScene().setRoot(arrangePiecesView);
-                arrangePiecesView.getScene().getWindow();
-            }
-        });*/
+
         view.getEndGame().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {

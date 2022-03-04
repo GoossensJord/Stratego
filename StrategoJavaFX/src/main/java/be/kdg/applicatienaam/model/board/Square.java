@@ -7,7 +7,6 @@ public class Square{
 
     private boolean isOccupied;
     Board b;
-    //Image icon;
     String s;
     public Piece p;
 

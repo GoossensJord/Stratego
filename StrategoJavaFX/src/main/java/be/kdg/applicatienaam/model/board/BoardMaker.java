@@ -51,35 +51,12 @@ public class BoardMaker {
     public void arrangePiecesTopPlayer(Piece piece, int x, int y) {
         squaresBoard[x][y].setPiece(piece);
         squaresBoard[x][y].setOccupied(true);
-        /*
-        for (int i = 0; i < SQUARE_ARRAY_HEIGHT; i++) {
-            for (int j = 0; j < SQUARE_ARRAY_WIDTH; j++) {
-                if (spaceAvailableNoPrint(i, j)) {
-                    squaresBoard[i][j].setPiece(piece);
-                    squaresBoard[i][j].setOccupied(true);
-                    return;
-                }
-            }
-        }
-        */
-
     }
 
     public void arrangePiecesBottomPlayer(Piece piece,int x, int y) {
         squaresBoard[x][y].setPiece(piece);
         squaresBoard[x][y].setOccupied(true);
-        /*
-        for (int i = SQUARE_ARRAY_HEIGHT - 1; i >= 0; i--) {
-            for (int j = SQUARE_ARRAY_WIDTH - 1; j >= 0; j--) {
-                if (spaceAvailableNoPrint(i, j)) {
-                    squaresBoard[i][j].setPiece(piece);
-                    squaresBoard[i][j].setOccupied(true);
-                    return;
-                }
-            }
-        }
 
-         */
     }
 
     public boolean spaceAvailableNoPrint(int heightindex, int widthindex) {

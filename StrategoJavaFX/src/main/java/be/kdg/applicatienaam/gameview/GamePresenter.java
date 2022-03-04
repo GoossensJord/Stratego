@@ -3,11 +3,9 @@ package be.kdg.applicatienaam.gameview;
 import be.kdg.applicatienaam.model.GameModel;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.scene.input.MouseEvent;
 
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class GamePresenter {
     private GameModel model;
@@ -37,9 +35,11 @@ public class GamePresenter {
                 /*updateView();*/
             }
         });
-        view.getBoard().addEventHandler(MouseEvent.MOUSE_CLICKED, new boardEventHandler(model, view));{
+        view.getBoard().addEventHandler(MouseEvent.MOUSE_CLICKED, new boardEventHandler(model, view));
+        {
             updateView();
-        };
+        }
+        ;
     }
 
     private void updateView() {
@@ -55,7 +55,8 @@ public class GamePresenter {
             }
         }
     }
-    private void test(){
+
+    private void test() {
 
     }
 

@@ -1,7 +1,7 @@
 package be.kdg.applicatienaam.model.pieces;
 
 import be.kdg.applicatienaam.model.player.Player;
-import javafx.scene.image.Image;
+
 
 public class Bomb extends Piece {
 

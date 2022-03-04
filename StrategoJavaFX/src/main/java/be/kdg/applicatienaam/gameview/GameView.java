@@ -109,19 +109,12 @@ public class GameView extends GridPane {
     public void removeFromGridpane(int x, int y) {
         for (Node image : allPieces) {
             if (image instanceof ImageView) {
-                if (image.getId().equals(x + "" + y)){
+                if (image.getId().equals(x + "" + y)) {
                     board.getChildren().remove(image);
                 }
-               /* System.out.println("image id"+ image.getId());
-                System.out.println("meegegeven id " + x+""+y);*/
             }
         }
-        /*for (ImageView iw : allPieces) {
-            if (iw.getImage().getUrl().contains(i.getUrl())
-                    && board.getRowIndex(iw) == x
-                    && board.getColumnIndex(iw) == y)
-                board.getChildren().remove(i);
-        }*/
+
     }
 
     public void lightUpRectangles(List<int[]> moveArr) {
@@ -135,6 +128,7 @@ public class GameView extends GridPane {
             coloredRectangles.add(rect);
         }
     }
+
     public void lightUpRectanglesAttack(List<int[]> moveArr) {
         int[] pos = new int[2];
         for (int i = 0; i < moveArr.size(); i++) {
@@ -148,8 +142,8 @@ public class GameView extends GridPane {
     }
 
     public void dimSquare() {
-        for (Rectangle r : coloredRectangles
-             ) { board.getChildren().remove(r);
+        for (Rectangle r : coloredRectangles) {
+            board.getChildren().remove(r);
         }
     }
 
