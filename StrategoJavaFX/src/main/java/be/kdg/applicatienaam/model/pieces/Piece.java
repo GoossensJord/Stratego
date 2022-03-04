@@ -31,46 +31,54 @@ public class Piece {
     public Piece() {
     }
 
-    public Piece attack(Piece piece) {
-        if (piece.getRank().equals(Rank.FLAG)) {
-            System.out.println("\n\n\n\n");
-            System.out.println("---------------------------------------------------------");
-            System.out.println(this.getPlayer().getName().toUpperCase() + " CAPTURED THE FLAG AND WON THE GAME!");
-            System.out.println("---------------------------------------------------------");
-            System.exit(0);
-        }
-        if (piece.getRankPower() == this.getRankPower()) {
-            System.out.println("\n" + this.getPlayer().getName() + " won the fight!\n");
-            return this;
-        }
-        if (piece.getRankPower() < this.getRankPower()) {
-            piece.setDeadOrAlive(false);
-            System.out.println("\n" + this.getPlayer().getName() + " won the fight!\n");
-            return this;
-        } else {
-            this.setDeadOrAlive(false);
-            System.out.println("\n" + piece.getPlayer().getName() + " won the fight!\n");
-            return piece;
-        }
-    }
 
     public List<int[]> availableSquares(int x, int y) {
+
+
         List<int[]> moveList = new ArrayList<>();
         if (this.isMovable) {
             if (this.getPlayer().getBoard().notOutOfBounds(x + 1, y) && !player.getBoard().getBord()[x + 1][y].getIsOccupied()) {
                 moveList.add(new int[]{x + 1, y});
+
             }
             if (this.getPlayer().getBoard().notOutOfBounds(x, y + 1) && !player.getBoard().getBord()[x][y + 1].getIsOccupied()) {
                 moveList.add(new int[]{x, y + 1});
 
+
             }
             if (this.getPlayer().getBoard().notOutOfBounds(x - 1, y) && !player.getBoard().getBord()[x - 1][y].getIsOccupied()) {
-                moveList.add(new int[]{x, y - 1});
+                moveList.add(new int[]{x-1, y});
+
             }
             if (this.getPlayer().getBoard().notOutOfBounds(x, y - 1) && !player.getBoard().getBord()[x][y - 1].getIsOccupied()) {
-                moveList.add(new int[]{x - 1, y});
+                moveList.add(new int[]{x, y-1});
+
             }
             return moveList;
+        } else return null;
+    }
+    public List<int[]> getAttacks(int x, int y) {
+
+
+        List<int[]> attackList = new ArrayList<>();
+        if (this.isMovable) {
+            if (this.getPlayer().getBoard().notOutOfBounds(x + 1, y) && player.getBoard().getBord()[x + 1][y].getIsOccupied() && !player.getBoard().getBord()[x][y].getPiece().getPlayer().equals(player.getBoard().getBord()[x + 1][y].getPiece().getPlayer())) {
+                attackList.add(new int[]{x + 1, y});
+
+            }
+            if (this.getPlayer().getBoard().notOutOfBounds(x, y + 1) && player.getBoard().getBord()[x][y + 1].getIsOccupied() && !player.getBoard().getBord()[x][y].getPiece().getPlayer().equals(player.getBoard().getBord()[x][y +1].getPiece().getPlayer()))  {
+                attackList.add(new int[]{x, y+1});
+
+
+            }
+            if (this.getPlayer().getBoard().notOutOfBounds(x - 1, y) && player.getBoard().getBord()[x - 1][y].getIsOccupied() && !player.getBoard().getBord()[x][y].getPiece().getPlayer().equals(player.getBoard().getBord()[x -1][y].getPiece().getPlayer())) {
+                attackList.add(new int[]{x - 1, y});
+            }
+            if (this.getPlayer().getBoard().notOutOfBounds(x, y - 1) && player.getBoard().getBord()[x][y - 1].getIsOccupied() && !player.getBoard().getBord()[x][y].getPiece().getPlayer().equals(player.getBoard().getBord()[x][y-1].getPiece().getPlayer())) {
+                attackList.add(new int[]{x , y-1});
+
+            }
+            return attackList;
         } else return null;
     }
 
@@ -126,5 +134,6 @@ public class Piece {
     public Image getImage() {
         return this.getRank().getImage();
     }
+
 
 }

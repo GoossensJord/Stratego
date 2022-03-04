@@ -1,4 +1,4 @@
-package be.kdg.applicatienaam.arrangePiecesScreen;
+/*package be.kdg.applicatienaam.arrangePiecesScreen;
 
 import be.kdg.applicatienaam.ArrangePiecesModel;
 
@@ -23,5 +23,6 @@ public class ArrangePiecesPresenter {
     }
 
 }
+*/
 
 

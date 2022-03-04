@@ -12,7 +12,6 @@ public class Miner extends Piece {
         this.image = new Image("Miner.png");
     }
 
-    @Override
     public Piece attack(Piece piece) {
         if (piece instanceof Bomb) {
             piece.setDeadOrAlive(false);

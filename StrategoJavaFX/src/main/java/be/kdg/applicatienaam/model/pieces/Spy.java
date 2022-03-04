@@ -12,7 +12,7 @@ public class Spy extends Piece {
         this.image = new Image("Spy.png");
     }
 
-    @Override
+
     public Piece attack(Piece piece) {
         if (piece instanceof Marshal) {
             piece.setDeadOrAlive(false);

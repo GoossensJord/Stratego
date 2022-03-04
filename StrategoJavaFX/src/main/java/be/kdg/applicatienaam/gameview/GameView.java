@@ -135,6 +135,17 @@ public class GameView extends GridPane {
             coloredRectangles.add(rect);
         }
     }
+    public void lightUpRectanglesAttack(List<int[]> moveArr) {
+        int[] pos = new int[2];
+        for (int i = 0; i < moveArr.size(); i++) {
+            pos[0] = moveArr.get(i)[0];
+            pos[1] = moveArr.get(i)[1];
+            Rectangle rect = new Rectangle(78, 78);
+            rect.setFill(Color.RED);
+            board.add(rect, pos[0], pos[1]);
+            coloredRectangles.add(rect);
+        }
+    }
 
     public void dimSquare() {
         for (Rectangle r : coloredRectangles

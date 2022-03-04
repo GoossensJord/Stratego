@@ -1,4 +1,4 @@
-package be.kdg.applicatienaam.arrangePiecesScreen;
+/*package be.kdg.applicatienaam.arrangePiecesScreen;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -63,5 +63,5 @@ public class ArrangePiecesView extends GridPane {
     public GridPane getBoard() {
         return board;
     }}
-
+*/
 

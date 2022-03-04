@@ -1,4 +1,5 @@
-package be.kdg.applicatienaam;
+/*package be.kdg.applicatienaam;
 
 public class ArrangePiecesModel {
 }
+*/

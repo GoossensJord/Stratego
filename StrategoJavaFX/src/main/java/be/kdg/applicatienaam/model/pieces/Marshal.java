@@ -12,8 +12,5 @@ public class Marshal extends Piece {
         this.image = new Image("Marshal.png");
     }
 
-    @Override
-    public Piece attack(Piece piece) {
-        return super.attack(piece);
-    }
+
 }

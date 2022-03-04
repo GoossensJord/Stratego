@@ -15,8 +15,8 @@ public class Scout extends Piece {
         super(Rank.SCOUT, player, x, y);
         this.image = new Image("Scout.png");
 
-        movableSquares = new ArrayList<ArrayList<int[]>>();
-        for (int i = 0; i < 4; i++) movableSquares.add(new ArrayList<int[]>());
+        movableSquares = new ArrayList<>();
+        for (int i = 0; i < 4; i++) movableSquares.add(new ArrayList<>());
 
     }
 

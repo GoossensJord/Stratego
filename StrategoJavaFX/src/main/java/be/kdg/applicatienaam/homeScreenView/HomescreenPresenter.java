@@ -1,8 +1,6 @@
 package be.kdg.applicatienaam.homeScreenView;
 
-import be.kdg.applicatienaam.ArrangePiecesModel;
-import be.kdg.applicatienaam.arrangePiecesScreen.ArrangePiecesPresenter;
-import be.kdg.applicatienaam.arrangePiecesScreen.ArrangePiecesView;
+
 import be.kdg.applicatienaam.gameview.GamePresenter;
 import be.kdg.applicatienaam.gameview.GameView;
 import be.kdg.applicatienaam.model.GameModel;
@@ -16,7 +14,7 @@ public class HomescreenPresenter {
 
     private GameModel gameModel;
     private HomescreenView view;
-    private ArrangePiecesModel arrangePiecesModel;
+    //private ArrangePiecesModel arrangePiecesModel;
 
     public HomescreenPresenter(GameModel gameModel, HomescreenView view) {
         this.gameModel = gameModel;
@@ -34,7 +32,7 @@ public class HomescreenPresenter {
                 gameView.getScene().getWindow();
             }
         });
-        view.getPlayClassic().setOnAction(new EventHandler<ActionEvent>() {
+   /*     view.getPlayClassic().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 ArrangePiecesView arrangePiecesView = new ArrangePiecesView();
@@ -42,7 +40,7 @@ public class HomescreenPresenter {
                 view.getScene().setRoot(arrangePiecesView);
                 arrangePiecesView.getScene().getWindow();
             }
-        });
+        });*/
         view.getEndGame().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {

@@ -31,16 +31,28 @@ public class GameModel {
     }
 
     public List<int[]> getMoves(Piece p) {
-/*        if(playerTurn == p.getPlayer().getId()){
+      if(playerTurn == p.getPlayer().getId()){
             //ugly, kan nog beter gedaan worden, werkt wel voorlopig.
             if (playerTurn == 1) playerTurn++;
             else  playerTurn--;
 
 
-        }*/
+        }
         if (p instanceof Scout) return ((Scout) p).allMoves();
-        else if (!(p.availableSquares(p.getX(), p.getY()) == null)) {
+        else if (p.availableSquares(p.getX(), p.getY()) != null) {
             return p.availableSquares(p.getX(), p.getY());
+        }
+        return null;
+    }
+    public List<int[]> getAttacks(Piece p){
+        if(playerTurn == p.getPlayer().getId()){
+            //ugly, kan nog beter gedaan worden, werkt wel voorlopig.
+            if (playerTurn == 1) playerTurn++;
+            else  playerTurn--;
+
+        }
+        if(p.getAttacks(p.getX(),p.getY()) != null){
+            return p.getAttacks(p.getX(),p.getY());
         }
         return null;
     }
@@ -55,5 +67,8 @@ public class GameModel {
 
     public void makeChosenMove(int[] move, Piece p) {
         board.makeMove(move, p);
+    }
+    public void makeChosenAttack(int[] attack, Piece p){
+        board.makeAttack(attack,p);
     }
 }
