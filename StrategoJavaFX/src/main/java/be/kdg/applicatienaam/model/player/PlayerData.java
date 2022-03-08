@@ -3,15 +3,21 @@ package be.kdg.applicatienaam.model.player;
 import be.kdg.applicatienaam.model.pieces.*;
 
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class PlayerData {
+    List<Piece> piecesList;
 
-    public List<Piece> createRandomPieceList(Player player) {
+    public PlayerData() {
+        piecesList = new ArrayList<>();
+    }
 
-        List<Piece> piecesList = Arrays.asList(
+
+    public List<Piece> createPieceList(Player player) {
+
+        piecesList = Arrays.asList(
                 new Bomb(Rank.BOMB, player, 0, 0),
                 new Bomb(Rank.BOMB, player, 0, 0),
                 new Bomb(Rank.BOMB, player, 0, 0),
@@ -53,9 +59,22 @@ public class PlayerData {
                 new Spy(Rank.SPY, player, 0, 0),
                 new Flag(Rank.FLAG, player, 0, 0)
         );
+        return piecesList;
+    }
 
-        Collections.shuffle(piecesList);
+    public Piece addPieceToPieceList(Piece p) {
+        Rank instance = p.getRank();
 
+        int counter = instance.getCounter();
+        if (instance.getCounter() < p.getRank().getAmount()) {
+            piecesList.add(p);
+            counter++;
+        }
+        p.getRank().setCounter(counter);
+        return p;
+    }
+
+    public List<Piece> getPiecesList() {
         return piecesList;
     }
 }

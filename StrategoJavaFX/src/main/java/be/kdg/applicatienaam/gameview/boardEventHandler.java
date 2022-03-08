@@ -30,19 +30,23 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
         prevPosPiece = new int[2];
     }
 
-    @Override
     public void handle(MouseEvent mouseEvent) {
         boolean openSpace;
+
         int x = (int) (mouseEvent.getX() / 78);
         int y = (int) (mouseEvent.getY() / 78);
 
-        if (!midMove) {
+        model.makePieceByString(view.getNotifications().getText().substring(1,3),x,y);
+
+        /*if (!midMove) {
             selectPiece(x, y);
         } else {
             openSpace = makePlay(x, y);
             if (openSpace) view.removeFromGridpane(prevPosPiece[0], prevPosPiece[1]);
-        }
+        }*/
+
     }
+
 
     private void selectPiece(int x, int y) {
 
@@ -68,7 +72,8 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
             midMovearr = moveArr;
             this.midMove = true;
 
-        } else view.getNotifications().setText("No moves for " + model.getBoard()[x][y].getPiece().toString() + " " + x + " " + y + " available");
+        } else
+            view.getNotifications().setText("No moves for " + model.getBoard()[x][y].getPiece().toString() + " " + x + " " + y + " available");
     }
 
     private boolean makePlay(int x, int y) {
@@ -115,7 +120,7 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
                 view.getNotifications().setText(model.getBoard()[attack[0]][attack[1]].toString() + " won against " + p.toString());
 
 
-            view.removeFromGridpane(p.getX(),p.getY());
+            view.removeFromGridpane(p.getX(), p.getY());
             model.makeChosenAttack(attack, p);
             view.dimSquare();
             return true;

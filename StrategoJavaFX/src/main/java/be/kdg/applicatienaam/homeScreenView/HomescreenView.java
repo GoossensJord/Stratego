@@ -31,7 +31,7 @@ public class HomescreenView extends GridPane {
         for (int i = 0; i < 19; i++) {
             this.getColumnConstraints().add(new ColumnConstraints(80));
         }
-        this.setGridLinesVisible(true);
+        //this.setGridLinesVisible(true);
 
         GridPane.setConstraints(playClassic,1,9,1,1);
         GridPane.setConstraints(playRandomFill,3,9,2,1);
@@ -39,7 +39,6 @@ public class HomescreenView extends GridPane {
 
         this.setBackground(background);
         this.getChildren().addAll(playClassic, playRandomFill, endGame);
-
 
     }
 

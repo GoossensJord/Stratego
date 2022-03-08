@@ -1,10 +1,10 @@
 package be.kdg.applicatienaam.gameview;
 
 import be.kdg.applicatienaam.model.GameModel;
+import be.kdg.applicatienaam.model.pieces.Piece;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
-
 
 
 public class GamePresenter {
@@ -32,14 +32,27 @@ public class GamePresenter {
         view.getBtnEndTurn().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                /*updateView();*/
+                setItems();
             }
         });
-        view.getBoard().addEventHandler(MouseEvent.MOUSE_CLICKED, new boardEventHandler(model, view));
-        {
+        view.getBoard().addEventHandler(MouseEvent.MOUSE_CLICKED, new boardEventHandler(model, view));{
             updateView();
         }
-        ;
+
+        view.getListView().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                String pieceStr = mouseEvent.getPickResult().toString().split(",")[0];
+                pieceStr = pieceStr.substring(pieceStr.length() - 4);
+                view.getNotifications().setText(pieceStr + " selected");
+                //view.removeItemFromListView()
+            }
+        });
+    }
+
+
+    private void setItems() {
+        view.setListItems(model.getAllPiecesString());
     }
 
     private void updateView() {
@@ -54,10 +67,6 @@ public class GamePresenter {
                 else view.setPicture(model.getBoard()[i][j].getPiece().getImage(), i, j);
             }
         }
-    }
-
-    private void test() {
-
     }
 
 

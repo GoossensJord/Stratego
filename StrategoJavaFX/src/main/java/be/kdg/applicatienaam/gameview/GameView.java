@@ -1,16 +1,14 @@
 package be.kdg.applicatienaam.gameview;
 
+import javafx.collections.FXCollections;
 import javafx.geometry.HPos;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +23,7 @@ public class GameView extends GridPane {
     TextField notifications;
     List<ImageView> allPieces;
     List<Rectangle> coloredRectangles;
-
+    ListView pieceList;
     public GameView() {
         this.initialiseNodes();
         this.layoutNodes();
@@ -45,7 +43,7 @@ public class GameView extends GridPane {
         notifications = new TextField();
         allPieces = new ArrayList<>();
         coloredRectangles = new ArrayList<>();
-
+        pieceList = new ListView<String>();
     }
 
     private void layoutNodes() {
@@ -65,6 +63,7 @@ public class GameView extends GridPane {
             board.getColumnConstraints().add(new ColumnConstraints(78));
             board.getRowConstraints().add(new RowConstraints(78));
         }
+
         GridPane.setConstraints(board, 0, 18, 4, 4);
         //board.setPadding(new Insets(10,10,10,10));
         GridPane.setConstraints(btnStartGame, 40, 35, 5, 3);
@@ -73,8 +72,10 @@ public class GameView extends GridPane {
         GridPane.setConstraints(tfNotifs, 55, 35, 5, 3);
         GridPane.setConstraints(playerName, 40, 30, 5, 3);
         GridPane.setConstraints(notifications, 45, 30, 10, 3);
-
-        this.getChildren().addAll(board, btnStartTurn, btnEndTurn, tfNotifs, btnStartGame, playerName, notifications);
+        GridPane.setConstraints(pieceList , 60,10,100,15);
+        pieceList.setPrefHeight(200);
+        pieceList.setPrefHeight(2000);
+        this.getChildren().addAll(board, btnStartTurn, btnEndTurn, tfNotifs, btnStartGame, playerName, notifications,pieceList);
         board.setRotate(-90);
     }
 // implementatie van de nodige
@@ -98,9 +99,11 @@ public class GameView extends GridPane {
     public void setPicture(Image image, int x, int y) {
         ImageView imageview = new ImageView(image);
         board.setHalignment(imageview, HPos.CENTER);
+
         imageview.setFitWidth(78);
         imageview.setFitHeight(54);
         imageview.setRotate(90);
+
         imageview.setId(x + "" + y);
         board.add(imageview, x, y);
         allPieces.add(imageview);
@@ -151,15 +154,19 @@ public class GameView extends GridPane {
         return board;
     }
 
-    public TextField getPlayerName() {
-        return playerName;
-    }
-
     public Button getBtnEndTurn() {
         return btnEndTurn;
     }
 
     public TextField getNotifications() {
         return notifications;
+    }
+
+    public void setListItems(List<String> items){
+        pieceList.setItems(FXCollections.observableList(items));
+    }
+
+    public ListView<String> getListView(){
+        return  pieceList;
     }
 }

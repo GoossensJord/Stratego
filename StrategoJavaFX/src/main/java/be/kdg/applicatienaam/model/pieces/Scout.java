@@ -5,7 +5,7 @@ import javafx.scene.image.Image;
 
 import java.util.ArrayList;
 import java.util.List;
-
+//todo attack on first move
 //moves any distance horizontal & vertical (no leaping over)
 public class Scout extends Piece {
     private boolean firstMove = true;
@@ -34,7 +34,6 @@ public class Scout extends Piece {
     }
 
     private List<int[]> firstmove() {
-
         List<int[]> startmoves = new ArrayList<>();
         if (this.getPlayer().getId() == 1) {
             if (!super.player.getBoard().getBord()[x+1][y].getIsOccupied()) {
@@ -79,6 +78,5 @@ public class Scout extends Piece {
             else break;
         }
         return moves;
-
     }
 }

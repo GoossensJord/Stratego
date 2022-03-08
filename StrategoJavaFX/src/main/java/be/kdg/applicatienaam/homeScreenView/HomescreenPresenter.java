@@ -39,7 +39,6 @@ public class HomescreenPresenter {
             }
         });
 
-
     }
 
     public void addWindowEventHandlers() {

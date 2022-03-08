@@ -20,7 +20,6 @@ public class Board {
             return false;
         }
     }
-
     public Square[][] getBord() {
         return boardMaker.squaresBoard;
     }
@@ -32,27 +31,20 @@ public class Board {
             return false;
         }
     }
-
     public void fillWithSquares() {
 
         for (int i = 0; i < boardMaker.getSQUARE_ARRAY_HEIGHT(); i++) {
             for (int j = 0; j < boardMaker.getSQUARE_ARRAY_WIDTH(); j++) {
-
                     boardMaker.getSquaresBoard()[i][j] = new Square(this);
-
             }
         }
     }
-
     public void makeMove(int[] move, Piece p) {
         int[] tempPos = new int[]{p.getX(), p.getY()};
         p.setX(move[0]);
         p.setY(move[1]);
         boardMaker.getSquaresBoard()[p.getX()][p.getY()].setPiece(p);
         boardMaker.getSquaresBoard()[tempPos[0]][tempPos[1]].removePiece();
-        /*f (notOutOfBounds(move[0], move[1])) {
-
-        }*/
     }
     public void makeAttack(int[] attack, Piece p) {
         int[] tempPos = new int[]{p.getX(), p.getY()};
@@ -71,4 +63,7 @@ public class Board {
             boardMaker.getSquaresBoard()[tempPos[0]][tempPos[1]].removePiece();
         }
     }
+
+
+
 }
