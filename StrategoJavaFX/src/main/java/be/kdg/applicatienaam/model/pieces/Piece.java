@@ -18,6 +18,7 @@ public class Piece {
     protected int y;
 
 
+
     public Piece(Rank r, Player player, int x, int y) {
         this.rank = r;
         this.player = player;

@@ -88,6 +88,7 @@ public class GameModel {
                 Piece p = new Piece(r,pl,x,y);
                 boardMaker.manualListChecker(p);
                 System.out.println(boardMaker.manualPieceSelection(p));
+                break;
             }
         }
     }

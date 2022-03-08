@@ -30,7 +30,7 @@ public class GameView extends GridPane {
     }
 
     private void initialiseNodes() {
-        btnStartTurn = new Button("Start Turn");
+        btnStartTurn = new Button("update view");
         btnEndTurn = new Button("End Turn");
         tfNotifs = new Label();
         board = new GridPane();
@@ -156,6 +156,10 @@ public class GameView extends GridPane {
 
     public Button getBtnEndTurn() {
         return btnEndTurn;
+    }
+
+    public Button getBtnStartTurn() {
+        return btnStartTurn;
     }
 
     public TextField getNotifications() {

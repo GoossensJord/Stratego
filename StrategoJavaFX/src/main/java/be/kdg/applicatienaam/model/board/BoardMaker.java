@@ -32,7 +32,6 @@ public class BoardMaker {
     public void makePieces(Player playerOne, Player playerTwo) {
         piecesPlayerOne = playerData.createPieceList(playerOne);
         piecesPlayerTwo = playerData.createPieceList(playerTwo);
-
     }
 
     public List<String> getListView() {
@@ -52,7 +51,7 @@ public class BoardMaker {
     }
 
     public void manualListChecker(Piece p) {
-        while (playerData.getPiecesList().size() < 40) {
+        if(playerData.getPiecesList().size() < 40) {
             manualPieceSelection(p);
         }
     }
@@ -97,11 +96,11 @@ public class BoardMaker {
 
     }
 
-    public boolean spaceAvailableNoPrint(int heightindex, int widthindex) {
+   /*public boolean spaceAvailableNoPrint(int heightindex, int widthindex) {
         if (!squaresBoard[heightindex][widthindex].getIsOccupied()) {
             return true;
         } else return false;
-    }
+    }*/
 
     public int getSQUARE_ARRAY_WIDTH() {
         return SQUARE_ARRAY_WIDTH;
@@ -115,13 +114,4 @@ public class BoardMaker {
         return squaresBoard;
     }
 
-    public List<Piece> getPieceList() {
-        List<Piece> l1 = piecesPlayerOne;
-
-
-        List<Piece> out = new ArrayList<>();
-        out.addAll(piecesPlayerOne);
-        out.addAll(piecesPlayerTwo);
-        return out;
-    }
 }

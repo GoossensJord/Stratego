@@ -21,7 +21,7 @@ public enum Rank {
     int power;
     int amount;
     Image image;
-    int counter;
+    static int counter;
 
 
     Rank(int power, String name, int amnt, Image image) {
@@ -29,7 +29,6 @@ public enum Rank {
         this.name = name;
         this.amount = amnt;
         this.image = image;
-        int counter = 0;
     }
 
     public int getAmount() {
