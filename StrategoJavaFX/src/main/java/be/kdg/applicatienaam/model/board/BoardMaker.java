@@ -51,7 +51,7 @@ public class BoardMaker {
     }
 
     public void manualListChecker(Piece p) {
-        if(playerData.getPiecesList().size() < 40) {
+        if (playerData.getPiecesList().size() < 40) {
             manualPieceSelection(p);
         }
     }
@@ -96,11 +96,6 @@ public class BoardMaker {
 
     }
 
-   /*public boolean spaceAvailableNoPrint(int heightindex, int widthindex) {
-        if (!squaresBoard[heightindex][widthindex].getIsOccupied()) {
-            return true;
-        } else return false;
-    }*/
 
     public int getSQUARE_ARRAY_WIDTH() {
         return SQUARE_ARRAY_WIDTH;

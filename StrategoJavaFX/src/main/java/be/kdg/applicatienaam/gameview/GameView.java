@@ -13,11 +13,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameView extends GridPane {
-    Button btnStartTurn;
-    Button btnEndTurn;
+    Button btnUpdateView;
+    Button btnSetPieces;
     Label tfNotifs;
     GridPane board;
     Button btnStartGame;
+    Button endTurn;
+    Button startTurn;
     Background background;
     TextField playerName;
     TextField notifications;
@@ -30,8 +32,10 @@ public class GameView extends GridPane {
     }
 
     private void initialiseNodes() {
-        btnStartTurn = new Button("update view");
-        btnEndTurn = new Button("End Turn");
+        btnUpdateView = new Button("update view");
+        btnSetPieces = new Button("jord");
+        endTurn = new Button("End turn");
+        startTurn = new Button("Start turn");
         tfNotifs = new Label();
         board = new GridPane();
         btnStartGame = new Button("Fill Board");
@@ -67,15 +71,16 @@ public class GameView extends GridPane {
         GridPane.setConstraints(board, 0, 18, 4, 4);
         //board.setPadding(new Insets(10,10,10,10));
         GridPane.setConstraints(btnStartGame, 40, 35, 5, 3);
-        GridPane.setConstraints(btnStartTurn, 45, 35, 5, 3);
-        GridPane.setConstraints(btnEndTurn, 50, 35, 5, 3);
-        GridPane.setConstraints(tfNotifs, 55, 35, 5, 3);
-        GridPane.setConstraints(playerName, 40, 30, 5, 3);
+        GridPane.setConstraints(startTurn,45,35,5,3);
+        GridPane.setConstraints(endTurn,50,35,5,3);
+        GridPane.setConstraints(btnUpdateView, 55, 35, 5, 3);
+        GridPane.setConstraints(btnSetPieces, 60, 35, 5, 3);
+        GridPane.setConstraints(tfNotifs, 55, 30, 5, 3);
         GridPane.setConstraints(notifications, 45, 30, 10, 3);
         GridPane.setConstraints(pieceList , 60,10,100,15);
         pieceList.setPrefHeight(200);
         pieceList.setPrefHeight(2000);
-        this.getChildren().addAll(board, btnStartTurn, btnEndTurn, tfNotifs, btnStartGame, playerName, notifications,pieceList);
+        this.getChildren().addAll(board, btnUpdateView, btnSetPieces, tfNotifs, btnStartGame, playerName, notifications,pieceList, startTurn, endTurn);
         board.setRotate(-90);
     }
 // implementatie van de nodige
@@ -127,6 +132,7 @@ public class GameView extends GridPane {
             pos[1] = moveArr.get(i)[1];
             Rectangle rect = new Rectangle(78, 78);
             rect.setFill(Color.GREEN);
+            rect.setOpacity(0.3);
             board.add(rect, pos[0], pos[1]);
             coloredRectangles.add(rect);
         }
@@ -139,6 +145,7 @@ public class GameView extends GridPane {
             pos[1] = moveArr.get(i)[1];
             Rectangle rect = new Rectangle(78, 78);
             rect.setFill(Color.RED);
+            rect.setOpacity(0.4);
             board.add(rect, pos[0], pos[1]);
             coloredRectangles.add(rect);
         }
@@ -154,12 +161,12 @@ public class GameView extends GridPane {
         return board;
     }
 
-    public Button getBtnEndTurn() {
-        return btnEndTurn;
+    public Button getBtnSetPieces() {
+        return btnSetPieces;
     }
 
-    public Button getBtnStartTurn() {
-        return btnStartTurn;
+    public Button getBtnUpdateView() {
+        return btnUpdateView;
     }
 
     public TextField getNotifications() {
@@ -172,5 +179,13 @@ public class GameView extends GridPane {
 
     public ListView<String> getListView(){
         return  pieceList;
+    }
+
+    public Button getEndTurn() {
+        return endTurn;
+    }
+
+    public Button getStartTurn() {
+        return startTurn;
     }
 }
