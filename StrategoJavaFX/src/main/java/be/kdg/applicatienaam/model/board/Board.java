@@ -7,6 +7,7 @@ import be.kdg.applicatienaam.model.pieces.Rank;
 public class Board {
     private BoardMaker boardMaker;
 
+
     public Board(BoardMaker boardMaker) {
         this.boardMaker = boardMaker;
         fillWithSquares();

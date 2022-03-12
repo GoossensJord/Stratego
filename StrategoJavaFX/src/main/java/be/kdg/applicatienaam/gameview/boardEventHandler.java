@@ -4,8 +4,6 @@ import be.kdg.applicatienaam.model.GameModel;
 import be.kdg.applicatienaam.model.pieces.Piece;
 import be.kdg.applicatienaam.model.pieces.Rank;
 import javafx.event.EventHandler;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.input.MouseEvent;
 
 import java.util.ArrayList;
@@ -36,14 +34,14 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
         int x = (int) (mouseEvent.getX() / 78);
         int y = (int) (mouseEvent.getY() / 78);
 
-        model.makePieceByString(view.getNotifications().getText().substring(1,3),x,y);
+      //  model.makePieceByString(view.getNotifications().getText().substring(1,3),x,y);
 
-        /*if (!midMove) {
+        if (!midMove) {
             selectPiece(x, y);
         } else {
             openSpace = makePlay(x, y);
             if (openSpace) view.removeFromGridpane(prevPosPiece[0], prevPosPiece[1]);
-        }*/
+        }
 
     }
 

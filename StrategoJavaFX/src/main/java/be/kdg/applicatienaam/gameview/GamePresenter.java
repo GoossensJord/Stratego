@@ -23,17 +23,17 @@ public class GamePresenter {
             @Override
             public void handle(ActionEvent actionEvent) {
                 model.fillRandomly();
-                //fillBoardWithImages();
+                fillBoardWithImages();
                 view.getNotifications().setText("Player 1, you're up");
                 view.getBtnStartGame().setDisable(true);
             }
         });
-        view.getBtnEndTurn().setOnAction(new EventHandler<ActionEvent>() {
+       /* view.getBtnEndTurn().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 setItems();
             }
-        });
+        });*/
         view.getBoard().addEventHandler(MouseEvent.MOUSE_CLICKED, new boardEventHandler(model, view));
 
         view.getListView().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
@@ -45,12 +45,12 @@ public class GamePresenter {
                 //view.removeItemFromListView()
             }
         });
-        view.getBtnStartTurn().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+      /* view.getBtnStartTurn().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 updateView();
             }
-        });
+        });*/
     }
 
     private void setItems() {

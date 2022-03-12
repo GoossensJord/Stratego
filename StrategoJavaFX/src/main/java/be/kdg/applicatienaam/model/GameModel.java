@@ -50,12 +50,7 @@ public class GameModel {
     }
 
     public List<int[]> getAttacks(Piece p) {
-        if (playerTurn == p.getPlayer().getId()) {
-            //ugly, kan nog beter gedaan worden, werkt wel voorlopig.
-            if (playerTurn == 1) playerTurn++;
-            else playerTurn--;
 
-        }
         if (p.getAttacks(p.getX(), p.getY()) != null) {
             return p.getAttacks(p.getX(), p.getY());
         }
