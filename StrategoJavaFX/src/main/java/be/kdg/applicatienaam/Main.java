@@ -16,7 +16,7 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(view));
         primaryStage.setMaximized(true);
         presenter.addWindowEventHandlers();
-
+//xd
         primaryStage.show();
     }
 
