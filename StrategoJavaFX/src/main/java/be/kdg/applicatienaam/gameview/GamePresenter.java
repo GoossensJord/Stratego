@@ -32,6 +32,7 @@ public class GamePresenter {
 
                 view.getBtnStartGame().setDisable(true);
                 view.getBoard().setDisable(true);
+                view.getEndTurn().setDisable(true);
             }
         });
         view.getStartTurn().setOnAction(new EventHandler<ActionEvent>() {
@@ -42,7 +43,7 @@ public class GamePresenter {
                     imageChange--;
                 } else imageChange++;
                 view.getStartTurn().setDisable(true);
-                view.getEndTurn().setDisable(false);
+                view.getEndTurn().setDisable(true);
                 view.getBoard().setDisable(false);
 
 
@@ -89,7 +90,6 @@ public class GamePresenter {
         for (int i = 9; i >= 0; i--) {
             for (int j = 0; j < 10; j++) {
                 if (model.getBoard()[i][j].getPiece() == null) view.setPosition("", i, j);
-                    //   else view.setPosition(model.getBoard()[i][j].getPiece().toString(), i, j);
                 else view.setPicture(model.getBoard()[i][j].getPiece().getImage(), i, j);
             }
         }

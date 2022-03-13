@@ -139,7 +139,9 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
         if (currentPlayer == 1) {
             currentPlayer--;
         } else currentPlayer++;
+        view.getEndTurn().setDisable(false);
         return true;
+
     }
 
 
@@ -157,6 +159,7 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
         if (currentPlayer == 1) {
             currentPlayer--;
         } else currentPlayer++;
+        view.getEndTurn().setDisable(false);
         return true;
     }
 }
