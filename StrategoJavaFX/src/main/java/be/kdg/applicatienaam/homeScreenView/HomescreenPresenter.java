@@ -12,8 +12,8 @@ import javafx.stage.WindowEvent;
 
 public class HomescreenPresenter {
 
-    private GameModel gameModel;
-    private HomescreenView view;
+     GameModel gameModel;
+     HomescreenView view;
 
     public HomescreenPresenter(GameModel gameModel, HomescreenView view) {
         this.gameModel = gameModel;

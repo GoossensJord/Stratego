@@ -4,12 +4,17 @@ import be.kdg.applicatienaam.model.GameModel;
 import be.kdg.applicatienaam.model.pieces.Piece;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class GamePresenter {
-    private GameModel model;
-    private GameView view;
+     GameModel model;
+     GameView view;
+     int imageChange = 1;
 
 
     public GamePresenter(GameModel model, GameView view) {
@@ -29,12 +34,23 @@ public class GamePresenter {
                 view.getBtnStartGame().setDisable(true);
             }
         });
-       /* view.getBtnEndTurn().setOnAction(new EventHandler<ActionEvent>() {
+        view.getStartTurn().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                setItems();
+                fillOnePlayer(0);
+                view.getStartTurn().setDisable(true);
             }
-        });*/
+        });
+        view.getEndTurn().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                fillOnePlayer(imageChange);
+                if (imageChange == 1) {
+                    imageChange--;
+                } else imageChange++;
+
+            }
+        });
         view.getBoard().addEventHandler(MouseEvent.MOUSE_CLICKED, new boardEventHandler(model, view));
 
         view.getListView().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
@@ -70,6 +86,24 @@ public class GamePresenter {
                 else view.setPicture(model.getBoard()[i][j].getPiece().getImage(), i, j);
             }
         }
+    }
+    private void fillOnePlayer(int id){
+        Image enemyimage = new Image("enemy.png");
+        for (int i = 9; i >= 0; i--) {
+            for (int j = 0; j < 10; j++) {
+               view.removeFromGridpane(i,j);
+            }
+        }
+        List<int[]> pieces = model.piecesOnePlayer(id);
+        for (int[] piece: pieces) {
+            view.setPicture(model.getBoard()[piece[0]][piece[1]].p.getImage(), piece[0],piece[1]);
+        }
+        List<int[]> piecesOtherPlayer = model.piecesOnePlayer(1-id);
+        for (int[] otherPlayerPiece: piecesOtherPlayer) {
+            view.setPicture(enemyimage,otherPlayerPiece[0],otherPlayerPiece[1]);
+        }
+
+
     }
 
 

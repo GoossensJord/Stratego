@@ -21,8 +21,8 @@ public class GameModel {
     public GameModel() {
         boardMaker = new BoardMaker();
         board = new Board(boardMaker);
-        pl = new Player(1, "Jord", board);
-        pl2 = new Player(2, "Michiel", board);
+        pl = new Player(0, "Jord", board);
+        pl2 = new Player(1, "Michiel", board);
     }
 
     public void fillRandomly() {
@@ -88,5 +88,8 @@ public class GameModel {
                 break;
             }
         }
+    }
+    public List<int[]> piecesOnePlayer(int id){
+        return boardMaker.getPiecesOnePlayer(id);
     }
 }

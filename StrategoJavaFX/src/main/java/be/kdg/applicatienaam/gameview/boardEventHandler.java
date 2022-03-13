@@ -16,7 +16,7 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
     private GameModel model;
     private GameView view;
     private Piece p;
-    private int currentPlayer = 1;
+    private int currentPlayer = 0;
 
 
     public boardEventHandler(GameModel model, GameView view) {
@@ -56,31 +56,38 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
                 return;
             }
         }
-
         prevPosPiece = new int[]{x, y};
 
         List<int[]> moveArr = model.getMoves(p);
         List<int[]> attackArr = model.getAttacks(p);
 
-        if (attackArr != null) {
-            for (int i = 0; i < attackArr.size(); i++) {
-                view.lightUpRectanglesAttack(attackArr);
-            }
-            midAttackarr = attackArr;
-        }
+        midMove = lightUp(moveArr,attackArr);
+        if(midMove) view.getNotifications().setText(model.getBoard()[x][y].getPiece().toString() + " choose one of the lit up squares");
 
-        if (moveArr != null) {
-            for (int i = 0; i < moveArr.size(); i++) {
-                view.lightUpRectangles(moveArr);
-            }
-            view.getNotifications().setText(model.getBoard()[x][y].getPiece().toString() + " choose one of the lit up squares");
-            midMovearr = moveArr;
-            this.midMove = true;
-
-        }
         if (model.getBoard()[x][y].getPiece() == null) view.getNotifications().setText("No piece here");
         else view.getNotifications().setText("No moves for " + model.getBoard()[x][y].getPiece().toString() + " " + x + " " + y + " available");
     }
+
+
+    private boolean lightUp(List<int[]> moves, List<int[]> attacks){
+        if (attacks != null) {
+            for (int i = 0; i < attacks.size(); i++) {
+                view.lightUpRectanglesAttack(attacks);
+            }
+            midAttackarr = attacks;
+        }
+
+        if (moves != null) {
+            for (int i = 0; i < moves.size(); i++) {
+                view.lightUpRectangles(moves);
+            }
+            midMovearr = moves;
+            return true;
+
+        }
+        return false;
+    }
+
 
 
     private boolean choosePlay(int x, int y) {
@@ -125,9 +132,10 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
     private boolean makeMove(Piece p, int[] oldPosition, int[]move){
         view.getNotifications().setText(model.getBoard()[oldPosition[0]][oldPosition[1]].getPiece().toString() + " moved to square " + (9 - move[0]) + " " + move[1]);
         model.makeChosenMove(move, p);
+        model.piecesOnePlayer(1);
         view.dimSquare();
         view.setPicture(p.getImage(), move[0], move[1]);
-        if (currentPlayer == 2) {
+        if (currentPlayer == 1) {
             currentPlayer--;
         } else currentPlayer++;
         return true;
@@ -145,7 +153,7 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
         view.removeFromGridpane(p.getX(), p.getY());
         model.makeChosenAttack(attack, p);
         view.dimSquare();
-        if (currentPlayer == 2) {
+        if (currentPlayer == 1) {
             currentPlayer--;
         } else currentPlayer++;
         return true;

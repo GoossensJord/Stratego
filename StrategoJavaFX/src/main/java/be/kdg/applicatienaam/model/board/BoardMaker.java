@@ -107,6 +107,20 @@ public class BoardMaker {
 
     public Square[][] getSquaresBoard() {
         return squaresBoard;
+
     }
 
+    public List<int[]> getPiecesOnePlayer(int id){
+        List<int[]> pieces = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                if(squaresBoard[i][j].getIsOccupied()){
+                    if (squaresBoard[i][j].getPiece().getPlayer().getId() == id) pieces.add(new int[]{i,j});
+
+
+                }
+            }
+        }
+        return pieces;
+    }
 }
