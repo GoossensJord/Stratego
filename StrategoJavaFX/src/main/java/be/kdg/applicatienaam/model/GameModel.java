@@ -46,6 +46,7 @@ public class GameModel {
 
     public List<int[]> getAttacks(Piece p) {
         if(p == null) return null;
+        if(p instanceof Scout) return ((Scout) p).allAttacks();
         if (p.getAttacks(p.getX(), p.getY()) != null) {
             return p.getAttacks(p.getX(), p.getY());
         }

@@ -9,6 +9,7 @@ import java.util.List;
 //moves any distance horizontal & vertical (no leaping over)
 public class Scout extends Piece {
     private boolean firstMove = true;
+    private boolean firstAttack = true;
     protected List<ArrayList<int[]>> movableSquares;
 
     public Scout(Rank scout, Player player, int x, int y) {
@@ -18,6 +19,17 @@ public class Scout extends Piece {
         movableSquares = new ArrayList<>();
         for (int i = 0; i < 4; i++) movableSquares.add(new ArrayList<>());
 
+    }
+    public List<int[]> allAttacks(){
+        if(firstAttack){
+            this.firstAttack = false;
+            return firstAttack();
+        }
+        else{
+            List<int[]> allAttacks = new ArrayList<>(xAttackable());
+            allAttacks.addAll(yAttackable());
+            return allAttacks;
+        }
     }
 
     public List<int[]> allMoves() {
@@ -31,6 +43,46 @@ public class Scout extends Piece {
             return allmoves;
         }
 
+    }
+    public List<int[]> firstAttack(){
+        List <int[]> startAttacks = new ArrayList<>();
+       if(this.getPlayer().getId() == 1) startAttacks.add(new int[]{this.x + 3, this.y});
+       else startAttacks.add(new int[]{this.x - 3 , this.y});
+       return startAttacks;
+    }
+    public List<int[]> yAttackable(){
+        List<int[]> attacks = new ArrayList<>();
+        int yval = this.x;
+        for (int i = yval+1; i < 10 ; i++) {
+            if(!this.getPlayer().getBoard().spaceAvailable(i,this.y) && !this.getPlayer().equals(this.getPlayer().getBoard().getBord()[i][this.y].getPiece().getPlayer())){
+                attacks.add(new int[] {i,this.y});
+                break;
+            }
+        }
+        for (int i = yval-1; i >= 0 ; i--) {
+            if(!this.getPlayer().getBoard().spaceAvailable(i,this.y) && !this.getPlayer().equals(this.getPlayer().getBoard().getBord()[i][this.y].getPiece().getPlayer())){
+                attacks.add(new int[] {i,this.y});
+                break;
+            }
+        }
+        return attacks;
+    }
+    public List<int[]> xAttackable(){
+        List<int[]> attacks = new ArrayList<>();
+        int xval = this.x;
+        for (int i = xval+1; i < 10 ; i++) {
+            if(!this.getPlayer().getBoard().spaceAvailable(this.x,i) && !this.getPlayer().equals(this.getPlayer().getBoard().getBord()[this.x][i].getPiece().getPlayer())){
+                attacks.add(new int[] {this.x,i});
+                break;
+            }
+        }
+        for (int i = xval-1; i >= 0 ; i--) {
+            if(!this.getPlayer().getBoard().spaceAvailable(this.x,i) && !this.getPlayer().equals(this.getPlayer().getBoard().getBord()[this.x][i].getPiece().getPlayer())){
+                attacks.add(new int[] {this.x,i});
+                break;
+            }
+        }
+        return attacks;
     }
 
     private List<int[]> firstmove() {
@@ -64,6 +116,7 @@ public class Scout extends Piece {
         return moves;
 
     }
+
 
     public List<int[]> xMoveable() {
         List<int[]> moves = new ArrayList<>();
