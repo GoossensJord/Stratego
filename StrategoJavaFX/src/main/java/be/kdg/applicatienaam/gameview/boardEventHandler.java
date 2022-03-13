@@ -82,28 +82,14 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
         else view.getNotifications().setText("No moves for " + model.getBoard()[x][y].getPiece().toString() + " " + x + " " + y + " available");
     }
 
+
     private boolean choosePlay(int x, int y) {
-
-        boolean moveable = false;
-        boolean attackable = false;
+        boolean moveable = moveableOrAttackable(midMovearr, x , y);
+        boolean attackable = moveableOrAttackable(midAttackarr, x , y);
+        int[] move = getMovesOrAttacks(midMovearr, x , y);
+        int[] attack = getMovesOrAttacks(midAttackarr, x , y);
         this.midMove = false;
-        int[] move = new int[2];
-        int[] attack = new int[2];
 
-        for (int[] moves : midMovearr) {
-            if (moves[0] == x && moves[1] == y) {
-                move = new int[]{x, y};
-                moveable = true;
-                break;
-            }
-        }
-        for (int[] attacks : midAttackarr) {
-            if (attacks[0] == x && attacks[1] == y) {
-                attack = new int[]{x, y};
-                attackable = true;
-                break;
-            }
-        }
         if (moveable && !model.getBoard()[move[0]][move[1]].getIsOccupied()) return makeMove(p,prevPosPiece,move);
         else if (attackable) return makeAttack(p, model.getBoard()[attack[0]][attack[1]].getPiece(), attack);
         else {
@@ -112,6 +98,29 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
             return false;
         }
     }
+
+
+    private int[] getMovesOrAttacks(List<int[]> moveOrAttackOptions, int x, int y){
+        int [] play;
+        for(int[] plays : moveOrAttackOptions){
+            if(plays[0] == x && plays[1] == y){
+                 play = new int[]{x,y};
+                return play;
+            }
+        }
+        return null;
+    }
+
+
+    private boolean moveableOrAttackable(List<int[]> moveOrAttackOptions, int x, int y){
+        for(int[] plays : moveOrAttackOptions){
+            if(plays[0] == x && plays[1] == y){
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     private boolean makeMove(Piece p, int[] oldPosition, int[]move){
         view.getNotifications().setText(model.getBoard()[oldPosition[0]][oldPosition[1]].getPiece().toString() + " moved to square " + (9 - move[0]) + " " + move[1]);
@@ -126,14 +135,13 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
 
 
     private boolean makeAttack(Piece p, Piece p2, int [] attack){
-
         if (model.isMatchupWinner(p, p2)) {
             view.getNotifications().setText(p + " won against " + p2);
             view.removeFromGridpane(p2.getX(), p2.getY());
             view.setPicture(p.getImage(), attack[0], attack[1]);
+        }
 
-        } else view.getNotifications().setText(p2 + " won against " + p);
-
+        else view.getNotifications().setText(p2 + " won against " + p);
         view.removeFromGridpane(p.getX(), p.getY());
         model.makeChosenAttack(attack, p);
         view.dimSquare();
@@ -141,6 +149,5 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
             currentPlayer--;
         } else currentPlayer++;
         return true;
-
     }
 }
