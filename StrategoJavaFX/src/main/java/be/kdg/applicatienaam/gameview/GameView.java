@@ -25,6 +25,7 @@ public class GameView extends GridPane {
     TextField notifications;
     List<ImageView> allPieces;
     List<Rectangle> coloredRectangles;
+    Image enemyimage;
     ListView pieceList;
     public GameView() {
         this.initialiseNodes();
@@ -48,6 +49,8 @@ public class GameView extends GridPane {
         allPieces = new ArrayList<>();
         coloredRectangles = new ArrayList<>();
         pieceList = new ListView<String>();
+        enemyimage = new Image("enemy.png");
+
     }
 
     private void layoutNodes() {
@@ -187,5 +190,9 @@ public class GameView extends GridPane {
 
     public Button getStartTurn() {
         return startTurn;
+    }
+
+    public Image getEnemyimage() {
+        return enemyimage;
     }
 }

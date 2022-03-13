@@ -37,18 +37,17 @@ public class GamePresenter {
         view.getStartTurn().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                fillOnePlayer(0);
-                view.getStartTurn().setDisable(true);
-            }
-        });
-        view.getEndTurn().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
                 fillOnePlayer(imageChange);
                 if (imageChange == 1) {
                     imageChange--;
                 } else imageChange++;
 
+            }
+        });
+        view.getEndTurn().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                waitingTimeTurnChange();
             }
         });
         view.getBoard().addEventHandler(MouseEvent.MOUSE_CLICKED, new boardEventHandler(model, view));
@@ -88,7 +87,6 @@ public class GamePresenter {
         }
     }
     private void fillOnePlayer(int id){
-        Image enemyimage = new Image("enemy.png");
         for (int i = 9; i >= 0; i--) {
             for (int j = 0; j < 10; j++) {
                view.removeFromGridpane(i,j);
@@ -100,9 +98,19 @@ public class GamePresenter {
         }
         List<int[]> piecesOtherPlayer = model.piecesOnePlayer(1-id);
         for (int[] otherPlayerPiece: piecesOtherPlayer) {
-            view.setPicture(enemyimage,otherPlayerPiece[0],otherPlayerPiece[1]);
+            view.setPicture(view.getEnemyimage(),otherPlayerPiece[0],otherPlayerPiece[1]);
         }
 
+
+    }
+    private void waitingTimeTurnChange(){
+        List<int[]> allPieces = model.piecesOnePlayer(0);
+        allPieces.addAll(model.piecesOnePlayer(1));
+
+        for (int [] allPiece: allPieces) {
+            view.removeFromGridpane(allPiece[0],allPiece[1]);
+            view.setPicture(view.getEnemyimage(),allPiece[0],allPiece[1]);
+        }
 
     }
 
