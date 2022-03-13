@@ -24,6 +24,7 @@ public class GamePresenter {
             public void handle(ActionEvent actionEvent) {
                 model.fillRandomly();
                 fillBoardWithImages();
+
                 view.getNotifications().setText("Player 1, you're up");
                 view.getBtnStartGame().setDisable(true);
             }
@@ -56,6 +57,7 @@ public class GamePresenter {
     private void setItems() {
         view.setListItems(model.getAllPiecesString());
     }
+
     private void updateView() {
         fillBoardWithImages();
     }

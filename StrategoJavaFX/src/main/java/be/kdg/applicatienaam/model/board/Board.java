@@ -47,6 +47,7 @@ public class Board {
         boardMaker.getSquaresBoard()[p.getX()][p.getY()].setPiece(p);
         boardMaker.getSquaresBoard()[tempPos[0]][tempPos[1]].removePiece();
     }
+
     public void makeAttack(int[] attack, Piece p) {
         int[] tempPos = new int[]{p.getX(), p.getY()};
 
@@ -58,11 +59,8 @@ public class Board {
             p.setX(attack[0]);
             p.setY(attack[1]);
             boardMaker.getSquaresBoard()[p.getX()][p.getY()].setPiece(p);
-            boardMaker.getSquaresBoard()[tempPos[0]][tempPos[1]].removePiece();
         }
-        else {
-            boardMaker.getSquaresBoard()[tempPos[0]][tempPos[1]].removePiece();
-        }
+        boardMaker.getSquaresBoard()[tempPos[0]][tempPos[1]].removePiece();
     }
 
 

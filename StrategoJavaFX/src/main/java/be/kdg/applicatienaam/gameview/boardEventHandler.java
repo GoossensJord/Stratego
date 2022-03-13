@@ -2,7 +2,6 @@ package be.kdg.applicatienaam.gameview;
 
 import be.kdg.applicatienaam.model.GameModel;
 import be.kdg.applicatienaam.model.pieces.Piece;
-import be.kdg.applicatienaam.model.pieces.Rank;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 
@@ -17,6 +16,7 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
     private GameModel model;
     private GameView view;
     private Piece p;
+    private int currentPlayer = 1;
 
 
     public boardEventHandler(GameModel model, GameView view) {
@@ -34,12 +34,12 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
         int x = (int) (mouseEvent.getX() / 78);
         int y = (int) (mouseEvent.getY() / 78);
 
-      //  model.makePieceByString(view.getNotifications().getText().substring(1,3),x,y);
+        //  model.makePieceByString(view.getNotifications().getText().substring(1,3),x,y);
 
         if (!midMove) {
             selectPiece(x, y);
         } else {
-            openSpace = makePlay(x, y);
+            openSpace = choosePlay(x, y);
             if (openSpace) view.removeFromGridpane(prevPosPiece[0], prevPosPiece[1]);
         }
 
@@ -48,7 +48,14 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
 
     private void selectPiece(int x, int y) {
 
+
         p = model.choosePiece(x, y);
+        if (p != null) {
+            if (currentPlayer != p.getPlayer().getId()) {
+                view.getNotifications().setText("Not this piece's turn!");
+                return;
+            }
+        }
 
         prevPosPiece = new int[]{x, y};
 
@@ -70,11 +77,12 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
             midMovearr = moveArr;
             this.midMove = true;
 
-        } else
-            view.getNotifications().setText("No moves for " + model.getBoard()[x][y].getPiece().toString() + " " + x + " " + y + " available");
+        }
+        if (model.getBoard()[x][y].getPiece() == null) view.getNotifications().setText("No piece here");
+        else view.getNotifications().setText("No moves for " + model.getBoard()[x][y].getPiece().toString() + " " + x + " " + y + " available");
     }
 
-    private boolean makePlay(int x, int y) {
+    private boolean choosePlay(int x, int y) {
 
         boolean moveable = false;
         boolean attackable = false;
@@ -96,37 +104,43 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
                 break;
             }
         }
-
-        if (moveable && !model.getBoard()[move[0]][move[1]].getIsOccupied()) {
-            view.getNotifications().setText(model.getBoard()[prevPosPiece[0]][prevPosPiece[1]].getPiece().toString() + " moved to square " + (9 - move[0]) + " " + move[1]);
-
-            model.makeChosenMove(move, p);
-            view.dimSquare();
-            view.setPicture(p.getImage(), x, y);
-
-            return true;
-
-        } else if (attackable) {
-
-            if (model.getBoard()[attack[0]][attack[1]].getPiece().getRankPower() < p.getRankPower()
-                    || (p.getRank().equals(Rank.MINER) && model.getBoard()[attack[0]][attack[1]].getPiece().getRank().equals(Rank.BOMB))
-                    || (p.getRank().equals(Rank.SPY) && model.getBoard()[attack[0]][attack[1]].getPiece().getRank().equals(Rank.MARSHAL))) {
-                view.getNotifications().setText(p.toString() + " won against " + model.getBoard()[attack[0]][attack[1]].toString());
-                view.removeFromGridpane(attack[0], attack[1]);
-                view.setPicture(p.getImage(), x, y);
-            } else if (model.getBoard()[attack[0]][attack[1]].getPiece().getRankPower() > p.getRankPower())
-                view.getNotifications().setText(model.getBoard()[attack[0]][attack[1]].toString() + " won against " + p.toString());
-
-
-            view.removeFromGridpane(p.getX(), p.getY());
-            model.makeChosenAttack(attack, p);
-            view.dimSquare();
-            return true;
-        } else {
+        if (moveable && !model.getBoard()[move[0]][move[1]].getIsOccupied()) return makeMove(p,prevPosPiece,move);
+        else if (attackable) return makeAttack(p, model.getBoard()[attack[0]][attack[1]].getPiece(), attack);
+        else {
             view.getNotifications().setText("Can't move here");
             view.dimSquare();
             return false;
         }
+    }
+
+    private boolean makeMove(Piece p, int[] oldPosition, int[]move){
+        view.getNotifications().setText(model.getBoard()[oldPosition[0]][oldPosition[1]].getPiece().toString() + " moved to square " + (9 - move[0]) + " " + move[1]);
+        model.makeChosenMove(move, p);
+        view.dimSquare();
+        view.setPicture(p.getImage(), move[0], move[1]);
+        if (currentPlayer == 2) {
+            currentPlayer--;
+        } else currentPlayer++;
+        return true;
+    }
+
+
+    private boolean makeAttack(Piece p, Piece p2, int [] attack){
+
+        if (model.isMatchupWinner(p, p2)) {
+            view.getNotifications().setText(p + " won against " + p2);
+            view.removeFromGridpane(p2.getX(), p2.getY());
+            view.setPicture(p.getImage(), attack[0], attack[1]);
+
+        } else view.getNotifications().setText(p2 + " won against " + p);
+
+        view.removeFromGridpane(p.getX(), p.getY());
+        model.makeChosenAttack(attack, p);
+        view.dimSquare();
+        if (currentPlayer == 2) {
+            currentPlayer--;
+        } else currentPlayer++;
+        return true;
 
     }
 }

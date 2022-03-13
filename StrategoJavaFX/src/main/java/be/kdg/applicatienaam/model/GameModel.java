@@ -16,14 +16,13 @@ public class GameModel {
     private final Board board;
     private final Player pl;
     private final Player pl2;
-    private int playerTurn;
+
 
     public GameModel() {
         boardMaker = new BoardMaker();
         board = new Board(boardMaker);
         pl = new Player(1, "Jord", board);
         pl2 = new Player(2, "Michiel", board);
-        playerTurn = 1;
     }
 
     public void fillRandomly() {
@@ -37,11 +36,7 @@ public class GameModel {
     }
 
     public List<int[]> getMoves(Piece p) {
-        if (playerTurn == p.getPlayer().getId()) {
-            //ugly, kan nog beter gedaan worden, werkt wel voorlopig.
-            if (playerTurn == 1) playerTurn++;
-            else playerTurn--;
-        }
+        if(p == null) return null;
         if (p instanceof Scout) return ((Scout) p).allMoves();
         else if (p.availableSquares(p.getX(), p.getY()) != null) {
             return p.availableSquares(p.getX(), p.getY());
@@ -50,11 +45,18 @@ public class GameModel {
     }
 
     public List<int[]> getAttacks(Piece p) {
-
+        if(p == null) return null;
         if (p.getAttacks(p.getX(), p.getY()) != null) {
             return p.getAttacks(p.getX(), p.getY());
         }
         return null;
+    }
+
+    public boolean isMatchupWinner(Piece p, Piece p1){
+        if(p.getRank().equals(Rank.MINER) && p1.getRank().equals(Rank.BOMB)) return true;
+        if(p.getRank().equals(Rank.SPY) && p1.getRank().equals(Rank.MARSHAL)) return true;
+        return p.getRankPower() > p1.getRankPower();
+
     }
 
     public Piece choosePiece(int x, int y) {
