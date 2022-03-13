@@ -31,6 +31,7 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
     public void handle(MouseEvent mouseEvent) {
         boolean openSpace;
 
+
         int x = (int) (mouseEvent.getX() / 78);
         int y = (int) (mouseEvent.getY() / 78);
 

@@ -1,7 +1,6 @@
 package be.kdg.applicatienaam.gameview;
 
 import be.kdg.applicatienaam.model.GameModel;
-import be.kdg.applicatienaam.model.pieces.Piece;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
@@ -14,6 +13,7 @@ public class GamePresenter {
      GameModel model;
      GameView view;
      int imageChange = 0;
+
 
 
     public GamePresenter(GameModel model, GameView view) {
@@ -29,8 +29,9 @@ public class GamePresenter {
                 model.fillRandomly();
                 fillBoardWithImages();
 
-                view.getNotifications().setText("Player 1, you're up");
+
                 view.getBtnStartGame().setDisable(true);
+                view.getBoard().setDisable(true);
             }
         });
         view.getStartTurn().setOnAction(new EventHandler<ActionEvent>() {
@@ -42,6 +43,8 @@ public class GamePresenter {
                 } else imageChange++;
                 view.getStartTurn().setDisable(true);
                 view.getEndTurn().setDisable(false);
+                view.getBoard().setDisable(false);
+
 
             }
         });
@@ -51,6 +54,7 @@ public class GamePresenter {
                 waitingTimeTurnChange();
                 view.getStartTurn().setDisable(false);
                 view.getEndTurn().setDisable(true);
+                view.getBoard().setDisable(true);
 
             }
         });
