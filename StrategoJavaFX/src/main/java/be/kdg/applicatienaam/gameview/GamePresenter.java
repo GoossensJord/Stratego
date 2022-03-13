@@ -4,17 +4,16 @@ import be.kdg.applicatienaam.model.GameModel;
 import be.kdg.applicatienaam.model.pieces.Piece;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 
 public class GamePresenter {
      GameModel model;
      GameView view;
-     int imageChange = 1;
+     int imageChange = 0;
 
 
     public GamePresenter(GameModel model, GameView view) {
@@ -41,6 +40,8 @@ public class GamePresenter {
                 if (imageChange == 1) {
                     imageChange--;
                 } else imageChange++;
+                view.getStartTurn().setDisable(true);
+                view.getEndTurn().setDisable(false);
 
             }
         });
@@ -48,6 +49,9 @@ public class GamePresenter {
             @Override
             public void handle(ActionEvent event) {
                 waitingTimeTurnChange();
+                view.getStartTurn().setDisable(false);
+                view.getEndTurn().setDisable(true);
+
             }
         });
         view.getBoard().addEventHandler(MouseEvent.MOUSE_CLICKED, new boardEventHandler(model, view));
