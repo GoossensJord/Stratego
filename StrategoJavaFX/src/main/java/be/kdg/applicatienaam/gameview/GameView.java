@@ -14,7 +14,6 @@ import java.util.List;
 
 public class GameView extends GridPane {
     Button btnUpdateView;
-    Button btnSetPieces;
     Label tfNotifs;
     GridPane board;
     Button btnStartGame;
@@ -27,6 +26,7 @@ public class GameView extends GridPane {
     List<Rectangle> coloredRectangles;
     Image enemyimage;
     ListView pieceList;
+
     public GameView() {
         this.initialiseNodes();
         this.layoutNodes();
@@ -34,7 +34,6 @@ public class GameView extends GridPane {
 
     private void initialiseNodes() {
         btnUpdateView = new Button("update view");
-        btnSetPieces = new Button("jord");
         endTurn = new Button("End turn");
         startTurn = new Button("Start turn");
         tfNotifs = new Label();
@@ -77,15 +76,12 @@ public class GameView extends GridPane {
         GridPane.setConstraints(startTurn,45,35,5,3);
         GridPane.setConstraints(endTurn,50,35,5,3);
         GridPane.setConstraints(btnUpdateView, 55, 35, 5, 3);
-        GridPane.setConstraints(btnSetPieces, 60, 35, 5, 3);
         GridPane.setConstraints(tfNotifs, 55, 30, 5, 3);
         GridPane.setConstraints(notifications, 45, 10, 20, 3);
-        GridPane.setConstraints(pieceList , 60,10,100,15);
         notifications.setPrefHeight(200);
         notifications.setPrefHeight(2000);
-        pieceList.setPrefHeight(200);
-        pieceList.setPrefHeight(2000);
-        this.getChildren().addAll(board, btnUpdateView, btnSetPieces, tfNotifs, btnStartGame, playerName, notifications,pieceList, startTurn, endTurn);
+
+        this.getChildren().addAll(board, btnUpdateView, tfNotifs, btnStartGame, playerName, notifications,pieceList, startTurn, endTurn);
         board.setRotate(-90);
     }
 // implementatie van de nodige
@@ -166,9 +162,6 @@ public class GameView extends GridPane {
         return board;
     }
 
-    public Button getBtnSetPieces() {
-        return btnSetPieces;
-    }
 
     public Button getBtnUpdateView() {
         return btnUpdateView;
@@ -178,13 +171,7 @@ public class GameView extends GridPane {
         return notifications;
     }
 
-    public void setListItems(List<String> items){
-        pieceList.setItems(FXCollections.observableList(items));
-    }
 
-    public ListView<String> getListView(){
-        return  pieceList;
-    }
 
     public Button getEndTurn() {
         return endTurn;

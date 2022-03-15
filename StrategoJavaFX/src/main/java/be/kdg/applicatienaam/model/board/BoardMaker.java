@@ -58,11 +58,12 @@ public class BoardMaker {
 
 
     public String manualPieceSelection(Piece p) {
-        if (playerData.addPieceToPieceList(p) != null) {
+        if (playerData.addPieceToPieceList(p) != null  && !squaresBoard[p.getX()][p.getY()].getIsOccupied()) {
+            System.out.println(squaresBoard[p.getX()][p.getY()].getIsOccupied());
             piecesPlayerOne.add(playerData.addPieceToPieceList(p));
             squaresBoard[p.getX()][p.getY()].setPiece(p);
             return "Success";
-        } else return "Failed, pieces are full";
+        } else return "Failed, space occupied";
     }
 
     public void placePieces() {

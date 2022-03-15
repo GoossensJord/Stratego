@@ -1,6 +1,8 @@
 package be.kdg.applicatienaam.homeScreenView;
 
 
+import be.kdg.applicatienaam.arrangePiecesScreen.ArrangePiecesPresenter;
+import be.kdg.applicatienaam.arrangePiecesScreen.ArrangePiecesView;
 import be.kdg.applicatienaam.gameview.GamePresenter;
 import be.kdg.applicatienaam.gameview.GameView;
 import be.kdg.applicatienaam.model.GameModel;
@@ -31,7 +33,15 @@ public class HomescreenPresenter {
                 gameView.getScene().getWindow();
             }
         });
-
+        view.getPlayClassic().setOnAction(new EventHandler<ActionEvent>(){
+            @Override
+            public void handle(ActionEvent event){
+                ArrangePiecesView aView = new ArrangePiecesView();
+                ArrangePiecesPresenter aPresenter = new ArrangePiecesPresenter(gameModel,aView);
+                view.getScene().setRoot(aView);
+                aView.getScene().getWindow();
+            }
+        });
         view.getEndGame().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {

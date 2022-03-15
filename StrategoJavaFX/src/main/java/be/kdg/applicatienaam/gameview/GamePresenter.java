@@ -28,8 +28,6 @@ public class GamePresenter {
             public void handle(ActionEvent actionEvent) {
                 model.fillRandomly();
                 fillBoardWithImages();
-
-
                 view.getBtnStartGame().setDisable(true);
                 view.getBoard().setDisable(true);
                 view.getEndTurn().setDisable(true);
@@ -61,15 +59,7 @@ public class GamePresenter {
         });
         view.getBoard().addEventHandler(MouseEvent.MOUSE_CLICKED, new boardEventHandler(model, view));
 
-        view.getListView().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                String pieceStr = mouseEvent.getPickResult().toString().split(",")[0];
-                pieceStr = pieceStr.substring(pieceStr.length() - 4);
-                view.getNotifications().setText(pieceStr + " selected");
-                //view.removeItemFromListView()
-            }
-        });
+
       /* view.getBtnStartTurn().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -78,9 +68,6 @@ public class GamePresenter {
         });*/
     }
 
-    private void setItems() {
-        view.setListItems(model.getAllPiecesString());
-    }
 
     private void updateView() {
         fillBoardWithImages();

@@ -3,6 +3,7 @@ package be.kdg.applicatienaam;
 import be.kdg.applicatienaam.homeScreenView.HomescreenPresenter;
 import be.kdg.applicatienaam.homeScreenView.HomescreenView;
 import be.kdg.applicatienaam.model.GameModel;
+import be.kdg.applicatienaam.model.GameSaveState;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -16,7 +17,6 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(view));
         primaryStage.setMaximized(true);
         presenter.addWindowEventHandlers();
-//xd
         primaryStage.show();
     }
 

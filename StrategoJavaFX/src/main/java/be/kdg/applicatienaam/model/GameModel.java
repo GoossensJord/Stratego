@@ -13,23 +13,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameModel {
+    private GameSaveState GSS;
     private final BoardMaker boardMaker;
     private final Board board;
     private final Player pl;
     private final Player pl2;
-
 
     public GameModel() {
         boardMaker = new BoardMaker();
         board = new Board(boardMaker);
         pl = new Player(0, "Jord", board);
         pl2 = new Player(1, "Michiel", board);
+        GSS = new GameSaveState(pl,board.getBord());
     }
 
     public void fillRandomly() {
         boardMaker.makePieces(pl, pl2);
         boardMaker.shufflePieces();
         boardMaker.placePieces();
+        GSS.setBoardState(boardMaker.getSquaresBoard());
     }
 
     public void fillManually(){
@@ -91,7 +93,7 @@ public class GameModel {
             if(r.getName().substring(0,2).equals(pieceString)){
                 Piece p = new Piece(r,pl,x,y);
                 boardMaker.manualListChecker(p);
-                System.out.println(boardMaker.manualPieceSelection(p));
+                //System.out.println(boardMaker.manualPieceSelection(p));
                 break;
             }
         }
