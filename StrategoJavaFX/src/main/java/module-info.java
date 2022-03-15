@@ -1,4 +1,4 @@
 module applicatieNaam {
     requires javafx.controls;
-    exports be.kdg.applicatienaam;
+    exports be.kdg.stratego;
 }
