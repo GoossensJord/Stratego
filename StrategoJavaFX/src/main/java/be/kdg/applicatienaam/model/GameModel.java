@@ -3,6 +3,7 @@ package be.kdg.applicatienaam.model;
 import be.kdg.applicatienaam.model.board.Board;
 import be.kdg.applicatienaam.model.board.BoardMaker;
 import be.kdg.applicatienaam.model.board.Square;
+import be.kdg.applicatienaam.model.pieces.Flag;
 import be.kdg.applicatienaam.model.pieces.Piece;
 import be.kdg.applicatienaam.model.pieces.Rank;
 import be.kdg.applicatienaam.model.pieces.Scout;
@@ -59,6 +60,9 @@ public class GameModel {
         return p.getRankPower() > p1.getRankPower();
 
     }
+    public boolean gameWin(Piece p){
+        return p instanceof Flag;
+    }
 
     public Piece choosePiece(int x, int y) {
         return board.getBord()[x][y].getPiece();
@@ -72,8 +76,10 @@ public class GameModel {
         board.makeMove(move, p);
     }
 
-    public void makeChosenAttack(int[] attack, Piece p) {
+    public boolean makeChosenAttack(int[] attack, Piece p) {
+        boolean win = gameWin(boardMaker.getSquaresBoard()[attack[0]][attack[1]].getPiece());
         board.makeAttack(attack, p);
+        return win;
     }
 
     public List<String> getAllPiecesString() {

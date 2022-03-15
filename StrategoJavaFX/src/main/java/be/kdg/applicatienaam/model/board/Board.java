@@ -56,16 +56,19 @@ public class Board {
 
     public void makeAttack(int[] attack, Piece p) {
         int[] tempPos = new int[]{p.getX(), p.getY()};
-        if (boardMaker.getSquaresBoard()[p.getX()][p.getY()].getPiece().getRankPower() >= boardMaker.getSquaresBoard()[attack[0]][attack[1]].getPiece().getRankPower() ||
-                (boardMaker.getSquaresBoard()[p.getX()][p.getY()].getPiece().getRank().equals(Rank.MINER) && boardMaker.getSquaresBoard()[attack[0]][attack[1]].getPiece().getRank().equals(Rank.BOMB))
-                || (boardMaker.getSquaresBoard()[p.getX()][p.getY()].getPiece().getRank().equals(Rank.SPY) && boardMaker.getSquaresBoard()[attack[0]][attack[1]].getPiece().getRank().equals(Rank.MARSHAL))) {
-
+        if (matchupChecker(p,boardMaker.getSquaresBoard()[attack[0]][attack[1]].getPiece())){
             boardMaker.getSquaresBoard()[attack[0]][attack[1]].removePiece();
             p.setX(attack[0]);
             p.setY(attack[1]);
             boardMaker.getSquaresBoard()[p.getX()][p.getY()].setPiece(p);
         }
         boardMaker.getSquaresBoard()[tempPos[0]][tempPos[1]].removePiece();
+    }
+    public boolean matchupChecker(Piece p, Piece p1){
+        if(p.getRank().equals(Rank.MINER) && p1.getRank().equals(Rank.BOMB)) return true;
+        if(p.getRank().equals(Rank.SPY) && p1.getRank().equals(Rank.MARSHAL)) return true;
+        return p.getRankPower() > p1.getRankPower();
+
     }
 
 

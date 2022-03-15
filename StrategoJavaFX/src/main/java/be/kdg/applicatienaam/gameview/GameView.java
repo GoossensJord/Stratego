@@ -79,8 +79,10 @@ public class GameView extends GridPane {
         GridPane.setConstraints(btnUpdateView, 55, 35, 5, 3);
         GridPane.setConstraints(btnSetPieces, 60, 35, 5, 3);
         GridPane.setConstraints(tfNotifs, 55, 30, 5, 3);
-        GridPane.setConstraints(notifications, 45, 30, 10, 3);
+        GridPane.setConstraints(notifications, 45, 10, 20, 3);
         GridPane.setConstraints(pieceList , 60,10,100,15);
+        notifications.setPrefHeight(200);
+        notifications.setPrefHeight(2000);
         pieceList.setPrefHeight(200);
         pieceList.setPrefHeight(2000);
         this.getChildren().addAll(board, btnUpdateView, btnSetPieces, tfNotifs, btnStartGame, playerName, notifications,pieceList, startTurn, endTurn);

@@ -63,10 +63,10 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
         List<int[]> attackArr = model.getAttacks(p);
 
         midMove = lightUp(moveArr,attackArr);
-        if(midMove) view.getNotifications().setText(model.getBoard()[x][y].getPiece().toString() + " choose one of the lit up squares");
+        if(midMove) view.getNotifications().setText(model.getBoard()[x][y].getPiece().getRank().getName() + " choose one of the lit up squares");
 
         if (model.getBoard()[x][y].getPiece() == null) view.getNotifications().setText("No piece here");
-        else view.getNotifications().setText("No moves for " + model.getBoard()[x][y].getPiece().toString() + " " + x + " " + y + " available");
+        else if(!midMove) view.getNotifications().setText("No moves for " + model.getBoard()[x][y].getPiece().getRank().getName()+ " available");
     }
 
 
@@ -99,12 +99,14 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
         this.midMove = false;
 
         if (moveable && !model.getBoard()[move[0]][move[1]].getIsOccupied()) return makeMove(p,prevPosPiece,move);
-        else if (attackable) return makeAttack(p, model.getBoard()[attack[0]][attack[1]].getPiece(), attack);
+        else if (attackable) makeAttack(p, model.getBoard()[attack[0]][attack[1]].getPiece(), attack);
+
         else {
             view.getNotifications().setText("Can't move here");
             view.dimSquare();
             return false;
         }
+        return true;
     }
 
 
@@ -140,6 +142,7 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
             currentPlayer--;
         } else currentPlayer++;
         view.getEndTurn().setDisable(false);
+        view.getBoard().setDisable(true);
         return true;
 
     }
@@ -147,19 +150,22 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
 
     private boolean makeAttack(Piece p, Piece p2, int [] attack){
         if (model.isMatchupWinner(p, p2)) {
-            view.getNotifications().setText(p + " won against " + p2);
+            view.getNotifications().setText("You won! enemy lost " + p2.getRank().getName());
             view.removeFromGridpane(p2.getX(), p2.getY());
             view.setPicture(p.getImage(), attack[0], attack[1]);
         }
 
-        else view.getNotifications().setText(p2 + " won against " + p);
+        else view.getNotifications().setText("You lost against the enemy's " + p2.getRank().getName());
         view.removeFromGridpane(p.getX(), p.getY());
-        model.makeChosenAttack(attack, p);
+        if(model.makeChosenAttack(attack, p)){
+            view.getNotifications().setText("YOU WON THE GAME!!");
+        }
         view.dimSquare();
         if (currentPlayer == 1) {
             currentPlayer--;
         } else currentPlayer++;
         view.getEndTurn().setDisable(false);
+        view.getBoard().setDisable(true);
         return true;
     }
 }
