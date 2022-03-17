@@ -1,6 +1,6 @@
-package be.kdg.applicatienaam.arrangePiecesScreen;
+package be.kdg.stratego.arrangePiecesScreen;
 
-import be.kdg.applicatienaam.model.GameModel;
+import be.kdg.stratego.model.GameModel;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 

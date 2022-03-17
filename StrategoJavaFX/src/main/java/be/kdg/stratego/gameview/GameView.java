@@ -14,7 +14,6 @@ import java.util.List;
 
 public class GameView extends GridPane {
     Button btnUpdateView;
-    Label tfNotifs;
     GridPane board;
     Button btnStartGame;
     Button endTurn;
@@ -27,16 +26,21 @@ public class GameView extends GridPane {
     Image enemyimage;
     ListView pieceList;
 
+    /**
+     * Constructor which initialises and does the layout for the nodes
+     */
     public GameView() {
         this.initialiseNodes();
         this.layoutNodes();
     }
 
+    /**
+     * Method to initialise the nodes.
+     */
     private void initialiseNodes() {
         btnUpdateView = new Button("update view");
         endTurn = new Button("End turn");
         startTurn = new Button("Start turn");
-        tfNotifs = new Label();
         board = new GridPane();
         btnStartGame = new Button("Fill Board");
         Image backgroundImage = new Image("/StrategoBoard.jpeg");
@@ -52,6 +56,9 @@ public class GameView extends GridPane {
 
     }
 
+    /**
+     * Method for laying out the nodes
+     */
     private void layoutNodes() {
 
         for (int i = 0; i < 40; i++) {
@@ -76,25 +83,19 @@ public class GameView extends GridPane {
         GridPane.setConstraints(startTurn,45,35,5,3);
         GridPane.setConstraints(endTurn,50,35,5,3);
         GridPane.setConstraints(btnUpdateView, 55, 35, 5, 3);
-        GridPane.setConstraints(tfNotifs, 55, 30, 5, 3);
         GridPane.setConstraints(notifications, 45, 10, 20, 3);
         notifications.setPrefHeight(200);
         notifications.setPrefHeight(2000);
 
-        this.getChildren().addAll(board, btnUpdateView, tfNotifs, btnStartGame, playerName, notifications,pieceList, startTurn, endTurn);
+        this.getChildren().addAll(board, btnUpdateView,  btnStartGame, playerName, notifications,pieceList, startTurn, endTurn);
         board.setRotate(-90);
     }
-// implementatie van de nodige
 
-    public Label getTfNotifs() {
-        return tfNotifs;
-    }
-// package-private Getters
 
-    public Button getBtnStartGame() {
-        return btnStartGame;
-    }
 
+    /**
+     * fills the squares without a piece, thus without a picture with a string
+     */
     public void setPosition(String n, int x, int y) {
         Label z = new Label(n);
         z.setTextFill(Color.BLACK);
@@ -102,6 +103,9 @@ public class GameView extends GridPane {
         GridPane.setHalignment(z, HPos.CENTER);
     }
 
+    /**
+     * Fills the squares with the appropriate image and adds it to the gridpane.
+     */
     public void setPicture(Image image, int x, int y) {
         ImageView imageview = new ImageView(image);
         board.setHalignment(imageview, HPos.CENTER);
@@ -115,6 +119,9 @@ public class GameView extends GridPane {
         allPieces.add(imageview);
     }
 
+    /**
+     * Removes an image from the gridpane, this method is called upon when one loses a piece.
+     */
     public void removeFromGridpane(int x, int y) {
         for (Node image : allPieces) {
             if (image instanceof ImageView) {
@@ -126,8 +133,11 @@ public class GameView extends GridPane {
 
     }
 
-
-    public void lightUpRectangles(List<int[]> moveArr) {
+    /**
+     * Method to light up all moveable squares on the board
+     * @param moveArr Requires a list of moves to light them up on the board
+     */
+    public void lightUpRectanglesMoves(List<int[]> moveArr) {
         int[] pos = new int[2];
         for (int i = 0; i < moveArr.size(); i++) {
             pos[0] = moveArr.get(i)[0];
@@ -140,11 +150,15 @@ public class GameView extends GridPane {
         }
     }
 
-    public void lightUpRectanglesAttack(List<int[]> moveArr) {
+    /**
+     * Method to light up all attackable squares on the board
+     * @param attackArr Requires a list of attacks to light them up on the board
+     */
+    public void lightUpRectanglesAttack(List<int[]> attackArr) {
         int[] pos = new int[2];
-        for (int i = 0; i < moveArr.size(); i++) {
-            pos[0] = moveArr.get(i)[0];
-            pos[1] = moveArr.get(i)[1];
+        for (int i = 0; i < attackArr.size(); i++) {
+            pos[0] = attackArr.get(i)[0];
+            pos[1] = attackArr.get(i)[1];
             Rectangle rect = new Rectangle(78, 78);
             rect.setFill(Color.RED);
             rect.setOpacity(0.4);
@@ -153,10 +167,16 @@ public class GameView extends GridPane {
         }
     }
 
+    /**
+     * Method to dim all the lit up squares on the board
+     */
     public void dimSquare() {
         for (Rectangle r : coloredRectangles) {
             board.getChildren().remove(r);
         }
+    }
+    public Button getBtnStartGame() {
+        return btnStartGame;
     }
 
     public GridPane getBoard() {

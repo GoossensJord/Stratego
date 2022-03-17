@@ -23,16 +23,23 @@ public class BoardMaker {
     List<Piece> piecesPlayerOne;
     List<Piece> piecesPlayerTwo;
 
+    /**
+     * Constructor that initialises the square board and the lists of player pieces
+     */
     public BoardMaker() {
         squaresBoard = new Square[SQUARE_ARRAY_HEIGHT + 1][SQUARE_ARRAY_WIDTH + 1];
         piecesPlayerOne = new ArrayList<>();
         piecesPlayerTwo = new ArrayList<>();
     }
 
+    /**
+     * fills the lists of pieces per player
+     */
     public void makePieces(Player playerOne, Player playerTwo) {
         piecesPlayerOne = playerData.createPieceList(playerOne);
         piecesPlayerTwo = playerData.createPieceList(playerTwo);
     }
+
 
     public List<String> getListView() {
         List<String> out = new ArrayList<>();
@@ -44,6 +51,9 @@ public class BoardMaker {
         return out;
     }
 
+    /**
+     * Shuffles the
+     */
     public void shufflePieces() {
         Collections.shuffle(piecesPlayerOne);
         Collections.shuffle(piecesPlayerTwo);

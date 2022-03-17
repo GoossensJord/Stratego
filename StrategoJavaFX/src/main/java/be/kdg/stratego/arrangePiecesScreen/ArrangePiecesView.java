@@ -1,4 +1,4 @@
-package be.kdg.applicatienaam.arrangePiecesScreen;
+package be.kdg.stratego.arrangePiecesScreen;
 
 import javafx.collections.FXCollections;
 import javafx.geometry.HPos;

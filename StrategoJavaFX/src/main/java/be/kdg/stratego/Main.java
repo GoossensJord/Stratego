@@ -1,9 +1,9 @@
-package be.kdg.applicatienaam;
+package be.kdg.stratego;
 
-import be.kdg.applicatienaam.homeScreenView.HomescreenPresenter;
-import be.kdg.applicatienaam.homeScreenView.HomescreenView;
-import be.kdg.applicatienaam.model.GameModel;
-import be.kdg.applicatienaam.model.GameSaveState;
+import be.kdg.stratego.homeScreenView.HomescreenPresenter;
+import be.kdg.stratego.homeScreenView.HomescreenView;
+import be.kdg.stratego.model.GameModel;
+import be.kdg.stratego.model.GameSaveState;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;

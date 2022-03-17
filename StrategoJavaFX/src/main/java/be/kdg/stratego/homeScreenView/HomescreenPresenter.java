@@ -1,11 +1,11 @@
-package be.kdg.applicatienaam.homeScreenView;
+package be.kdg.stratego.homeScreenView;
 
 
-import be.kdg.applicatienaam.arrangePiecesScreen.ArrangePiecesPresenter;
-import be.kdg.applicatienaam.arrangePiecesScreen.ArrangePiecesView;
-import be.kdg.applicatienaam.gameview.GamePresenter;
-import be.kdg.applicatienaam.gameview.GameView;
-import be.kdg.applicatienaam.model.GameModel;
+import be.kdg.stratego.arrangePiecesScreen.ArrangePiecesPresenter;
+import be.kdg.stratego.arrangePiecesScreen.ArrangePiecesView;
+import be.kdg.stratego.gameview.GamePresenter;
+import be.kdg.stratego.gameview.GameView;
+import be.kdg.stratego.model.GameModel;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
@@ -23,6 +23,9 @@ public class HomescreenPresenter {
         this.addEventHandlers();
     }
 
+    /**
+     * Adds event handlers for the home screen, playClassic and randomFill buttons bring you to a different screen and end button closes the application.
+     */
     private void addEventHandlers() {
         view.getPlayRandomFill().setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -67,11 +70,6 @@ public class HomescreenPresenter {
             }
         });
 
-
-    }
-
-
-    private void updateView() {
 
     }
 

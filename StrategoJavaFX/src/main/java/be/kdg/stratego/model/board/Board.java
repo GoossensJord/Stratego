@@ -11,25 +11,25 @@ import be.kdg.stratego.model.pieces.Rank;
 public class Board {
     private BoardMaker boardMaker;
 
-
+    /**
+     * Creates a board, fills it with squares
+     * @param boardMaker class board utilises boardmaker to create the board itself.
+     */
     public Board(BoardMaker boardMaker) {
         this.boardMaker = boardMaker;
         fillWithSquares();
     }
 
+    /**
+     * Returns a boolean depending on if the square on x and y on the board is free
+     */
     public boolean spaceAvailable(int heightIndex, int widthIndex) {
-        if (!boardMaker.squaresBoard[heightIndex][widthIndex].getIsOccupied()) {
-            return true;
-        } else {
-            System.out.println("place taken");
-            return false;
-        }
+        return !boardMaker.squaresBoard[heightIndex][widthIndex].getIsOccupied();
     }
 
-    public Square[][] getBord() {
-        return boardMaker.squaresBoard;
-    }
-
+    /**
+     * Returns a boolean depending on if the x and y are out of bounds
+     */
     public boolean notOutOfBounds(int x, int y) {
 
         if (x >= 0 && y >= 0) {
@@ -39,6 +39,9 @@ public class Board {
         }
     }
 
+    /**
+     * Fills the board with squares, on which pieces can be placed later
+     */
     public void fillWithSquares() {
 
         for (int i = 0; i < boardMaker.getSQUARE_ARRAY_HEIGHT(); i++) {
@@ -48,6 +51,9 @@ public class Board {
         }
     }
 
+    /**
+     * Method to make a move, gives the piece a new place on the board and removes it from the old piece
+     */
     public void makeMove(int[] move, Piece p) {
         int[] tempPos = new int[]{p.getX(), p.getY()};
         p.setX(move[0]);
@@ -56,6 +62,9 @@ public class Board {
         boardMaker.getSquaresBoard()[tempPos[0]][tempPos[1]].removePiece();
     }
 
+    /**
+     * Method to make an attack, decides the winner and places the winner on the attacked piece's square.
+     */
     public void makeAttack(int[] attack, Piece p) {
         int[] tempPos = new int[]{p.getX(), p.getY()};
         if (matchupChecker(p,boardMaker.getSquaresBoard()[attack[0]][attack[1]].getPiece())){
@@ -66,11 +75,18 @@ public class Board {
         }
         boardMaker.getSquaresBoard()[tempPos[0]][tempPos[1]].removePiece();
     }
+
+    /**
+     * Checks the piece matchup, returns the winning piece
+     */
     public boolean matchupChecker(Piece p, Piece p1){
         if(p.getRank().equals(Rank.MINER) && p1.getRank().equals(Rank.BOMB)) return true;
         if(p.getRank().equals(Rank.SPY) && p1.getRank().equals(Rank.MARSHAL)) return true;
         return p.getRankPower() > p1.getRankPower();
 
+    }
+    public Square[][] getBord() {
+        return boardMaker.squaresBoard;
     }
 
 

@@ -8,6 +8,7 @@ import be.kdg.stratego.model.pieces.Piece;
 import be.kdg.stratego.model.pieces.Rank;
 import be.kdg.stratego.model.pieces.Scout;
 import be.kdg.stratego.model.player.Player;
+import be.kdg.stratego.model.GameSaveState;
 
 import java.util.List;
 

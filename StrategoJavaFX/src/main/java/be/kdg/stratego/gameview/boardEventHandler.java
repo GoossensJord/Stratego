@@ -8,6 +8,9 @@ import javafx.scene.input.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class boardEventHandler has as responsibility to process all mouse inputs on the board
+ */
 public class boardEventHandler implements EventHandler<MouseEvent> {
     private boolean midMove;
     private List<int[]> midMovearr;
@@ -18,7 +21,9 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
     private Piece p;
     private int currentPlayer = 0;
 
-
+    /**
+     * Constructor that initialises the view and model. Also sets midMove to false and initialises the lists / arrays.
+     */
     public boardEventHandler(GameModel model, GameView view) {
         this.model = model;
         this.view = view;
@@ -28,6 +33,9 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
         prevPosPiece = new int[2];
     }
 
+    /**
+     * Handles all mouse inputs, converts the x and y values to use in the model
+     */
     public void handle(MouseEvent mouseEvent) {
         boolean openSpace;
 
@@ -46,7 +54,9 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
 
     }
 
-
+    /**
+     * uses the x and y values from the handle method to select a piece, also checks if that piece is valid for use.
+     */
     private void selectPiece(int x, int y) {
 
 
@@ -69,7 +79,12 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
         else if(!midMove) view.getNotifications().setText("No moves for " + model.getBoard()[x][y].getPiece().getRank().getName()+ " available");
     }
 
-
+    /**
+     * Processes values gotten from the model for what squares can be lit up.
+     * @param moves List of possible moves to light up.
+     * @param attacks List of possible attacks to light up.
+     * @return The return value of this method is used to determine if you're in the middle of a move, because if both lists are empty you havent started a move.
+     */
     private boolean lightUp(List<int[]> moves, List<int[]> attacks){
         if (attacks != null) {
             for (int i = 0; i < attacks.size(); i++) {
@@ -80,7 +95,7 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
 
         if (moves != null) {
             for (int i = 0; i < moves.size(); i++) {
-                view.lightUpRectangles(moves);
+                view.lightUpRectanglesMoves(moves);
             }
             midMovearr = moves;
             return true;
@@ -90,7 +105,10 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
     }
 
 
-
+    /**
+     * if not in midmove, this method is called upon in the handle method. Allows the players input to be interpreted as a move or an attack.
+     * @return returns a boolean which determines if the space is open, if no moves or attacks can be made the space is not open thus returns false.
+     */
     private boolean choosePlay(int x, int y) {
         boolean moveable = moveableOrAttackable(midMovearr, x , y);
         boolean attackable = moveableOrAttackable(midAttackarr, x , y);
@@ -109,7 +127,10 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
         return true;
     }
 
-
+    /**
+     * A method that goes through the possible values until one is found that matches the x and y
+     * @return returns an int array of the x and y value that will be used.
+     */
     private int[] getMovesOrAttacks(List<int[]> moveOrAttackOptions, int x, int y){
         int [] play;
         for(int[] plays : moveOrAttackOptions){
@@ -121,7 +142,10 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
         return null;
     }
 
-
+    /**
+     *A method that goes through the possible values until one is found that matches the x and
+     * @return returns true if a combination is found that matches the x and y else returns false.
+     */
     private boolean moveableOrAttackable(List<int[]> moveOrAttackOptions, int x, int y){
         for(int[] plays : moveOrAttackOptions){
             if(plays[0] == x && plays[1] == y){
@@ -131,7 +155,10 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
         return false;
     }
 
-
+    /**
+     * A method to finalize the move, asks the model to make the chosen move and the view to change the board accordingly, is called upon in the chooseplay method.
+     * @return return value used in chooseplay to determine wether or not the space is open.
+     */
     private boolean makeMove(Piece p, int[] oldPosition, int[]move){
         view.getNotifications().setText(model.getBoard()[oldPosition[0]][oldPosition[1]].getPiece().toString() + " moved to square " + (9 - move[0]) + " " + move[1]);
         model.makeChosenMove(move, p);
@@ -147,8 +174,10 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
 
     }
 
-
-    private boolean makeAttack(Piece p, Piece p2, int [] attack){
+    /**
+     * A method to finalize the attack, asks the model to make the chosen attack and the view to change the board accordingly.
+     */
+    private void makeAttack(Piece p, Piece p2, int [] attack){
         if (model.isMatchupWinner(p, p2)) {
             view.getNotifications().setText("You won! enemy lost " + p2.getRank().getName());
             view.removeFromGridpane(p2.getX(), p2.getY());
@@ -166,6 +195,5 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
         } else currentPlayer++;
         view.getEndTurn().setDisable(false);
         view.getBoard().setDisable(true);
-        return true;
     }
 }

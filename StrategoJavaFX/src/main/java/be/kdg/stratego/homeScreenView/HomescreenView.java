@@ -10,11 +10,16 @@ public class HomescreenView extends GridPane {
     Button endGame;
     Background background;
 
+    /**
+     * Constructor which initialises and does the layout for the nodes
+     */
     public HomescreenView(){
         this.initialiseNodes();
         this.layoutNodes();
     }
-
+    /**
+     * Method to initialise the nodes.
+     */
     private void initialiseNodes(){
         playClassic = new Button("Play Classic");
         playRandomFill = new Button("Play RandomFill");
@@ -24,6 +29,11 @@ public class HomescreenView extends GridPane {
         BackgroundImage backgroundImage = new BackgroundImage(homeBackgroundImage,BackgroundRepeat.NO_REPEAT,BackgroundRepeat.NO_REPEAT,BackgroundPosition.DEFAULT,backgroundSize);
         background = new Background(backgroundImage);
     }
+
+    /**
+     * Method for laying out the nodes
+     */
+
     private void layoutNodes(){
         for (int i = 0; i < 10; i++) {
             this.getRowConstraints().add(new RowConstraints(80));

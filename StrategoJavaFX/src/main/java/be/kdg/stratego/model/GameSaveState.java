@@ -1,8 +1,8 @@
-package be.kdg.applicatienaam.model;
+package be.kdg.stratego.model;
 
-import be.kdg.applicatienaam.model.board.Board;
-import be.kdg.applicatienaam.model.board.Square;
-import be.kdg.applicatienaam.model.player.Player;
+
+import be.kdg.stratego.model.board.Square;
+import be.kdg.stratego.model.player.Player;
 
 public class GameSaveState {
     Square[][] boardState;

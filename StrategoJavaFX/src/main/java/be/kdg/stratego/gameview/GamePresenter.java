@@ -10,10 +10,9 @@ import java.util.List;
 
 
 public class GamePresenter {
-     GameModel model;
-     GameView view;
-     int imageChange = 0;
-
+    GameModel model;
+    GameView view;
+    int imageChange = 0;
 
 
     public GamePresenter(GameModel model, GameView view) {
@@ -22,6 +21,9 @@ public class GamePresenter {
         this.addEventHandlers();
     }
 
+    /**
+     * adds following event handlers: Start game, which fills the board. Start turn, which shows the current players pieces, end turn which hides all the pieces and links the board eventhandler
+     */
     private void addEventHandlers() {
         view.getBtnStartGame().setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -50,7 +52,7 @@ public class GamePresenter {
         view.getEndTurn().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                waitingTimeTurnChange();
+                turnChange();
                 view.getStartTurn().setDisable(false);
                 view.getEndTurn().setDisable(true);
                 view.getBoard().setDisable(true);
@@ -58,54 +60,53 @@ public class GamePresenter {
             }
         });
         view.getBoard().addEventHandler(MouseEvent.MOUSE_CLICKED, new boardEventHandler(model, view));
-
-
-      /* view.getBtnStartTurn().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                updateView();
-            }
-        });*/
     }
 
-
-    private void updateView() {
-        fillBoardWithImages();
-    }
-
+    /**
+     * Fills the board with the image linked to the piece
+     */
     private void fillBoardWithImages() {
         for (int i = 9; i >= 0; i--) {
             for (int j = 0; j < 10; j++) {
                 if (model.getBoard()[i][j].getPiece() == null) view.setPosition("", i, j);
-                //else view.setPicture(model.getBoard()[i][j].getPiece().getImage(), i, j);
+                    //else view.setPicture(model.getBoard()[i][j].getPiece().getImage(), i, j);
                 else view.setPicture(view.getEnemyimage(), i, j);
             }
         }
     }
-    private void fillOnePlayer(int id){
+
+    /**
+     * Fills the board with the image linked to the piece of one player
+     * @param id Determines the player.
+     */
+    private void fillOnePlayer(int id) {
         for (int i = 9; i >= 0; i--) {
             for (int j = 0; j < 10; j++) {
-               view.removeFromGridpane(i,j);
+                view.removeFromGridpane(i, j);
             }
         }
         List<int[]> pieces = model.piecesOnePlayer(id);
-        for (int[] piece: pieces) {
-            view.setPicture(model.getBoard()[piece[0]][piece[1]].p.getImage(), piece[0],piece[1]);
+        for (int[] piece : pieces) {
+            view.setPicture(model.getBoard()[piece[0]][piece[1]].p.getImage(), piece[0], piece[1]);
         }
-        List<int[]> piecesOtherPlayer = model.piecesOnePlayer(1-id);
-        for (int[] otherPlayerPiece: piecesOtherPlayer) {
-            view.setPicture(view.getEnemyimage(),otherPlayerPiece[0],otherPlayerPiece[1]);
+        List<int[]> piecesOtherPlayer = model.piecesOnePlayer(1 - id);
+        for (int[] otherPlayerPiece : piecesOtherPlayer) {
+            view.setPicture(view.getEnemyimage(), otherPlayerPiece[0], otherPlayerPiece[1]);
         }
 
 
     }
-    private void waitingTimeTurnChange(){
+
+    /**
+     * Hides all the pieces for turn change.
+     */
+    private void turnChange() {
         List<int[]> allPieces = model.piecesOnePlayer(0);
         allPieces.addAll(model.piecesOnePlayer(1));
 
-        for (int [] allPiece: allPieces) {
-            view.removeFromGridpane(allPiece[0],allPiece[1]);
-            view.setPicture(view.getEnemyimage(),allPiece[0],allPiece[1]);
+        for (int[] allPiece : allPieces) {
+            view.removeFromGridpane(allPiece[0], allPiece[1]);
+            view.setPicture(view.getEnemyimage(), allPiece[0], allPiece[1]);
         }
 
     }
