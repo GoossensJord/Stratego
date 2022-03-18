@@ -24,10 +24,12 @@ public class ArrangePiecesView extends GridPane {
     Button btnSetPieces;
     Button player1;
     Button player2;
+    Button saveSetup;
     ListView pieceList;
     List<ImageView> allPieces;
     List<Rectangle> coloredRectangles;
     List<String> itemList;
+
 
     public ArrangePiecesView() {
         this.initialiseNodes();
@@ -48,6 +50,7 @@ public class ArrangePiecesView extends GridPane {
         itemList = new ArrayList<>();
         player1 = new Button("Player 1");
         player2 = new Button("Player 2");
+        saveSetup = new Button("save this setup");
 
     }
 
@@ -74,59 +77,65 @@ public class ArrangePiecesView extends GridPane {
         GridPane.setConstraints(btnSetPieces,47,25,4,4);
         GridPane.setConstraints(notifications, 45, 30, 5, 5);
         GridPane.setConstraints(pieceList, 60, 10, 100, 15);
+        GridPane.setConstraints(saveSetup,45,15,4,4);
 
         pieceList.setPrefHeight(200);
         pieceList.setPrefHeight(2000);
-
-        this.getChildren().addAll(board,player1,player2, btnSetPieces, notifications, pieceList);
+        notifications.setMinWidth(2000);
+        this.getChildren().addAll(board,player1,player2, btnSetPieces, notifications, pieceList,saveSetup);
         board.setDisable(true);
         btnSetPieces.setDisable(true);
         board.setRotate(-90);
     }
 
-
-    public GridPane getBoard() {
+    GridPane getBoard() {
         return board;
     }
 
-    public Button getBtnSetPieces() {
+    Button getSaveSetup() {
+        return saveSetup;
+    }
+
+    Button getBtnSetPieces() {
         return btnSetPieces;
     }
 
-
-    public ListView<String> getListView() {
+    ListView<String> getListView() {
         return pieceList;
     }
 
-    public void setListItems(List<String> items) {
+    int getListViewLength(){
+        return itemList.size();
+    }
+
+    TextField getNotifications() {
+        return notifications;
+    }
+
+    Button getPlayer1() {
+        return player1;
+    }
+
+    Button getPlayer2() {
+        return player2;
+    }
+
+    void setListItems(List<String> items) {
         itemList = items;
         pieceList.setItems(FXCollections.observableList(items));
     }
 
-    public void removeListItem(String s){
+    void removeListItem(String s){
         for (int i = 0; i < itemList.size(); i++) {
             if(s.equals(itemList.get(i))) {
                 itemList.remove(i);
                 break;
             }
-
         }
         setListItems(itemList);
     }
 
-    public TextField getNotifications() {
-        return notifications;
-    }
-
-    public Button getPlayer1() {
-        return player1;
-    }
-
-    public Button getPlayer2() {
-        return player2;
-    }
-
-    public void setPicture(Image image, int x, int y) {
+    void setPicture(Image image, int x, int y) {
 
         ImageView imageview = new ImageView(image);
         board.setHalignment(imageview, HPos.CENTER);
@@ -140,18 +149,18 @@ public class ArrangePiecesView extends GridPane {
         allPieces.add(imageview);
     }
 
-    public void setPosition(String n, int x, int y) {
+    void setPosition(String n, int x, int y) {
         Label z = new Label(n);
         z.setTextFill(Color.BLACK);
         board.add(z, x, y);
         GridPane.setHalignment(z, HPos.CENTER);
     }
 
-    public void lightUpRectangles(int playerID) {
+    void lightUpRectangles(int playerID) {
         int x = 0;
         int y = 0;
         int start = 0;
-        if (playerID == 1) {
+        if (playerID == 0) {
             x = 3;
             y = 9;
         } else {
@@ -173,7 +182,7 @@ public class ArrangePiecesView extends GridPane {
         }
     }
 
-    public void dimSquare(int x, int y) {
+    void dimSquare(int x, int y) {
         for (Rectangle r : coloredRectangles) {
             if (r.getId().equals(x + "" + y)) {
                 board.getChildren().remove(r);

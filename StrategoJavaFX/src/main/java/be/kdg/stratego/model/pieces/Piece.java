@@ -96,10 +96,6 @@ public class Piece {
         this.deadOrAlive = deadOrAlive;
     }
 
-    public boolean getDeadOrAlive() {
-        return this.deadOrAlive;
-    }
-
     public String toString() {
         return this.rank.getName().substring(0, 2);
     }

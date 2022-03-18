@@ -37,7 +37,6 @@ public class GameModel {
         boardMaker.makePieces(pl, pl2);
         boardMaker.shufflePieces();
         boardMaker.placePieces();
-        GSS.setBoardState(boardMaker.getSquaresBoard());
     }
 
     public void fillManually(){
@@ -48,7 +47,7 @@ public class GameModel {
      * Returns a list of int arrays which include the possible moves for this piece, depending on wether or not the piece is a scout it will call a different method.
      */
     public List<int[]> getMoves(Piece p) {
-        if(p == null) return null;
+        if (p == null) return null;
         if (p instanceof Scout) return ((Scout) p).allMoves();
         else if (p.availableSquares(p.getX(), p.getY()) != null) {
             return p.availableSquares(p.getX(), p.getY());
@@ -58,9 +57,18 @@ public class GameModel {
     /**
      * Returns a list of int arrays which include the possible attacks for this piece, depending on wether or not the piece is a scout it will call a different method.
      */
+
+    public List<String> getAllPiecesString() {
+        return boardMaker.getListView();
+    }
+
+    public List<Piece> getPlayerPiecesById(int id) {
+        return getPlayerByID(id).getPiecesList();
+    }
+
     public List<int[]> getAttacks(Piece p) {
-        if(p == null) return null;
-        if(p instanceof Scout) return ((Scout) p).allAttacks();
+        if (p == null) return null;
+        if (p instanceof Scout) return ((Scout) p).allAttacks();
         if (p.getAttacks(p.getX(), p.getY()) != null) {
             return p.getAttacks(p.getX(), p.getY());
         }
@@ -116,17 +124,34 @@ public class GameModel {
         return boardMaker.getListView();
     }
 
-    public void makePieceByString(String pieceString,int x,int y){
+    public void makePieceByString(String pieceString, int x, int y) {
         for (Rank r : Rank.values()) {
-            if(r.getName().substring(0,2).equals(pieceString)){
-                Piece p = new Piece(r,pl,x,y);
+            if (r.getName().substring(0, 2).equals(pieceString)) {
+                Piece p = new Piece(r, pl, x, y);
                 boardMaker.manualListChecker(p);
                 //System.out.println(boardMaker.manualPieceSelection(p));
                 break;
             }
         }
     }
-    public List<int[]> piecesOnePlayer(int id){
+
+    public List<int[]> piecesOnePlayer(int id) {
         return boardMaker.getPiecesOnePlayer(id);
     }
+
+    public Player getPlayerByID(int id) {
+        if (pl.getId() == id) return pl;
+        else return pl2;
+    }
+
+    public boolean positionChecker(int x, int y) {
+        System.out.println(GameSaveState.getPlayerTurn().getId());
+        if (board.spaceAvailable(x, y)) {
+            if (GameSaveState.getPlayerTurn().getId() == 0 && x <= 3) return true;
+            else if (GameSaveState.getPlayerTurn().getId() == 1 && x >= 6) return true;
+        }
+        System.out.printf("magnie");
+        return false;
+    }
+
 }
