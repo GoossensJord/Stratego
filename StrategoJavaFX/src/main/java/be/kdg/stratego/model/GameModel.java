@@ -19,6 +19,9 @@ public class GameModel {
     private final Player pl;
     private final Player pl2;
 
+    /**
+     * Constructor for GameModel. Initialises a board and a boardmaker, two players and a GameSaveState.
+     */
     public GameModel() {
         boardMaker = new BoardMaker();
         board = new Board(boardMaker);
@@ -27,6 +30,9 @@ public class GameModel {
         GSS = new GameSaveState(pl,board.getBord());
     }
 
+    /**
+     * fills the board with a list of predetermined pieces that are shuffled for each player
+     */
     public void fillRandomly() {
         boardMaker.makePieces(pl, pl2);
         boardMaker.shufflePieces();
@@ -38,6 +44,9 @@ public class GameModel {
 
     }
 
+    /**
+     * Returns a list of int arrays which include the possible moves for this piece, depending on wether or not the piece is a scout it will call a different method.
+     */
     public List<int[]> getMoves(Piece p) {
         if(p == null) return null;
         if (p instanceof Scout) return ((Scout) p).allMoves();
@@ -46,7 +55,9 @@ public class GameModel {
         }
         return null;
     }
-
+    /**
+     * Returns a list of int arrays which include the possible attacks for this piece, depending on wether or not the piece is a scout it will call a different method.
+     */
     public List<int[]> getAttacks(Piece p) {
         if(p == null) return null;
         if(p instanceof Scout) return ((Scout) p).allAttacks();
@@ -56,16 +67,28 @@ public class GameModel {
         return null;
     }
 
+    /**
+     * Takes two pieces in it's parameter to decide the outcome of their battle.
+     * @return Returns the winning piece
+     */
     public boolean isMatchupWinner(Piece p, Piece p1){
         if(p.getRank().equals(Rank.MINER) && p1.getRank().equals(Rank.BOMB)) return true;
         if(p.getRank().equals(Rank.SPY) && p1.getRank().equals(Rank.MARSHAL)) return true;
+        if(p.getRankPower() == p1.getRankPower()) return true;
         return p.getRankPower() > p1.getRankPower();
 
     }
+
+    /**
+     * Boolean which returns true if piece given in parameter is Flag
+     */
     public boolean gameWin(Piece p){
         return p instanceof Flag;
     }
 
+    /**
+     * Method which uses the x and y from the parameters to get a piece from the backend board.
+     */
     public Piece choosePiece(int x, int y) {
         return board.getBord()[x][y].getPiece();
     }
@@ -74,10 +97,15 @@ public class GameModel {
         return boardMaker.getSquaresBoard();
     }
 
+    /**
+     * Method that calls the backend board method to make the move
+     */
     public void makeChosenMove(int[] move, Piece p) {
         board.makeMove(move, p);
     }
-
+    /**
+     * Method that calls the backend board method to make the attack. Uses the method gameWin to determine if the defeated piece was a flag.
+     */
     public boolean makeChosenAttack(int[] attack, Piece p) {
         boolean win = gameWin(boardMaker.getSquaresBoard()[attack[0]][attack[1]].getPiece());
         board.makeAttack(attack, p);

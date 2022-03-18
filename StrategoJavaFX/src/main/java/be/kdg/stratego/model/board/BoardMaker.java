@@ -52,7 +52,7 @@ public class BoardMaker {
     }
 
     /**
-     * Shuffles the
+     * Shuffles the list of pieces for each player
      */
     public void shufflePieces() {
         Collections.shuffle(piecesPlayerOne);
@@ -68,7 +68,7 @@ public class BoardMaker {
 
 
     public String manualPieceSelection(Piece p) {
-        if (playerData.addPieceToPieceList(p) != null  && !squaresBoard[p.getX()][p.getY()].getIsOccupied()) {
+        if (playerData.addPieceToPieceList(p) != null && !squaresBoard[p.getX()][p.getY()].getIsOccupied()) {
             System.out.println(squaresBoard[p.getX()][p.getY()].getIsOccupied());
             piecesPlayerOne.add(playerData.addPieceToPieceList(p));
             squaresBoard[p.getX()][p.getY()].setPiece(p);
@@ -96,15 +96,36 @@ public class BoardMaker {
         }
     }
 
+    /**
+     * places a piece for starting top player
+     */
     public void arrangePiecesTopPlayer(Piece piece, int x, int y) {
         squaresBoard[x][y].setPiece(piece);
         squaresBoard[x][y].setOccupied(true);
     }
 
+    /**
+     * places a piece for starting bottom player
+     */
     public void arrangePiecesBottomPlayer(Piece piece, int x, int y) {
         squaresBoard[x][y].setPiece(piece);
         squaresBoard[x][y].setOccupied(true);
 
+    }
+
+ //may not be needed xd
+    public List<int[]> getPiecesOnePlayer(int id) {
+        List<int[]> pieces = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                if (squaresBoard[i][j].getIsOccupied()) {
+                    if (squaresBoard[i][j].getPiece().getPlayer().getId() == id) pieces.add(new int[]{i, j});
+
+
+                }
+            }
+        }
+        return pieces;
     }
 
 
@@ -118,20 +139,5 @@ public class BoardMaker {
 
     public Square[][] getSquaresBoard() {
         return squaresBoard;
-
-    }
-
-    public List<int[]> getPiecesOnePlayer(int id){
-        List<int[]> pieces = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
-                if(squaresBoard[i][j].getIsOccupied()){
-                    if (squaresBoard[i][j].getPiece().getPlayer().getId() == id) pieces.add(new int[]{i,j});
-
-
-                }
-            }
-        }
-        return pieces;
     }
 }

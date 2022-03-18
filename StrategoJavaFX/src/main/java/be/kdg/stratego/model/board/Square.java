@@ -2,20 +2,20 @@ package be.kdg.stratego.model.board;
 
 import be.kdg.stratego.model.pieces.Piece;
 
-public class Square{
+public class Square {
 
 
     private boolean isOccupied;
     Board b;
-    String s;
     public Piece p;
 
     public Square(Board b) {
         this.isOccupied = false;
         this.b = b;
-        s = "x";
+
 
     }
+
     public Piece getPiece() {
         return this.p;
     }
@@ -24,6 +24,7 @@ public class Square{
         this.p = p;
         this.isOccupied = true;
     }
+
     public boolean getIsOccupied() {
         return this.isOccupied;
     }
@@ -36,9 +37,6 @@ public class Square{
         this.p = null;
         isOccupied = false;
     }
+}
 
-    @Override
-    public String toString() {
-        if (p != null) return this.p.toString();
-        else return "  ";
-    }}
+

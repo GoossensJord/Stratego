@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Class responsible for creating a list of pieces
+ */
 public class PlayerData {
     List<Piece> piecesList;
 
@@ -14,7 +17,10 @@ public class PlayerData {
         piecesList = new ArrayList<>();
     }
 
-
+    /**
+     * Creates the list of pieces
+     * @param player When pieces are initialised they require a player.
+     */
     public List<Piece> createPieceList(Player player) {
 
         piecesList = Arrays.asList(
