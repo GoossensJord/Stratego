@@ -28,9 +28,14 @@ public class Player {
         return this.name;
     }
 
+    public List<Piece> getPiecesList(){
+        piecesList = board.getPieceListByID(this.id);
+        return this.piecesList;
+    }
     public int getId() {
         return this.id;
     }
+
 
 
 }

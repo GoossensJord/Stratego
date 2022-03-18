@@ -1,9 +1,13 @@
 package be.kdg.stratego.arrangePiecesScreen;
 
 import be.kdg.stratego.model.GameModel;
+import be.kdg.stratego.model.GameSaveState;
 import javafx.event.EventHandler;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class ArrangePiecesPresenter {
     private GameModel model;
@@ -30,6 +34,8 @@ public class ArrangePiecesPresenter {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 setItems();
+                view.getBtnSetPieces().setDisable(true);
+
             }
         });
         view.getBoard().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
@@ -39,29 +45,65 @@ public class ArrangePiecesPresenter {
                 int y = (int) (mouseEvent.getY() / 78);
                 String pieceStr = view.getNotifications().getText().substring(1, 3);
 
-                model.makePieceByString(pieceStr, x, y);
-                fillBoardWithImages();
-                view.dimSquare(x, y);
-                view.removeListItem(pieceStr);
-                view.getBoard().setDisable(true);
+                if (model.positionChecker(x, y)) {
+                    model.makePieceByString(pieceStr, x, y);
+                    fillBoardWithImages();
+                    view.dimSquare(x, y);
+                    view.removeListItem(pieceStr);
+                    view.getBoard().setDisable(true);
+                } else view.getNotifications().setText("Invalid placing!");
+
+                if (view.getListViewLength() == 35){
+                    view.setListItems(new ArrayList<>());
+                    view.getNotifications().setText("Save your setup");
+                    view.getPlayer1().setDisable(true);
+                    view.getPlayer2().setDisable(true);
+                    view.getListView().setDisable(true);
+                }
+
             }
         });
         view.getPlayer1().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 view.getPlayer2().setDisable(true);
+                view.getPlayer1().setDisable(true);
                 view.getBtnSetPieces().setDisable(false);
-                view.lightUpRectangles(1);
+                GameSaveState.setPlayerTurn(model.getPlayerByID(0));
+                view.lightUpRectangles(0);
+
             }
         });
         view.getPlayer2().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 view.getPlayer1().setDisable(true);
+                view.getPlayer2().setDisable(true);
                 view.getBtnSetPieces().setDisable(false);
-                view.lightUpRectangles(2);
+                GameSaveState.setPlayerTurn(model.getPlayerByID(1));
+                view.getNotifications().setText(GameSaveState.getPlayerTurn().toString());
+                view.lightUpRectangles(1);
             }
         });
+        view.getSaveSetup().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+
+                TextInputDialog temp = new TextInputDialog("test");
+                temp.showAndWait();
+                String setupName = temp.getContentText();
+                view.getBtnSetPieces().setDisable(false);
+                try {
+                    GameSaveState.saveSetup(model.getPlayerPiecesById(GameSaveState.getPlayerTurn().getId()),setupName);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                view.getListView().setDisable(false);
+                GameSaveState.setPlayerTurn(model.getPlayerByID(GameSaveState.switchTurnByid()));
+                view.lightUpRectangles(GameSaveState.getPlayerTurn().getId());
+            }
+        });
+
     }
 
     private void fillBoardWithImages() {
@@ -72,6 +114,7 @@ public class ArrangePiecesPresenter {
             }
         }
     }
+
 
     private void setItems() {
         view.setListItems(model.getAllPiecesString());
