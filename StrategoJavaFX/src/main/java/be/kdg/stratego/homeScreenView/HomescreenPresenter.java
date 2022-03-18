@@ -1,8 +1,10 @@
+
 package be.kdg.stratego.homeScreenView;
 
 
-import be.kdg.stratego.arrangePiecesScreen.ArrangePiecesPresenter;
-import be.kdg.stratego.arrangePiecesScreen.ArrangePiecesView;
+
+//import be.kdg.stratego.arrangePiecesScreen.ArrangePiecesPresenter;
+//import be.kdg.stratego.arrangePiecesScreen.ArrangePiecesView;
 import be.kdg.stratego.gameview.GamePresenter;
 import be.kdg.stratego.gameview.GameView;
 import be.kdg.stratego.model.GameModel;
@@ -36,7 +38,7 @@ public class HomescreenPresenter {
                 gameView.getScene().getWindow();
             }
         });
-        view.getPlayClassic().setOnAction(new EventHandler<ActionEvent>(){
+     /*   view.getPlayClassic().setOnAction(new EventHandler<ActionEvent>(){
             @Override
             public void handle(ActionEvent event){
                 ArrangePiecesView aView = new ArrangePiecesView();
@@ -44,7 +46,7 @@ public class HomescreenPresenter {
                 view.getScene().setRoot(aView);
                 aView.getScene().getWindow();
             }
-        });
+        });*/
         view.getEndGame().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -75,3 +77,4 @@ public class HomescreenPresenter {
 
 
 }
+

@@ -1,5 +1,7 @@
 package be.kdg.stratego.gameview;
 
+import be.kdg.stratego.homeScreenView.HomescreenPresenter;
+import be.kdg.stratego.homeScreenView.HomescreenView;
 import be.kdg.stratego.model.GameModel;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -12,6 +14,7 @@ import java.util.List;
 public class GamePresenter {
     GameModel model;
     GameView view;
+
     int imageChange = 0;
 
 
@@ -56,6 +59,16 @@ public class GamePresenter {
                 view.getStartTurn().setDisable(false);
                 view.getEndTurn().setDisable(true);
                 view.getBoard().setDisable(true);
+
+            }
+        });
+        view.getBackToMainMenuButton().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                HomescreenView homeView = new HomescreenView();
+                HomescreenPresenter homePresenter = new HomescreenPresenter(model,homeView);
+                view.getScene().setRoot(homeView);
+                homeView.getScene().getWindow();
 
             }
         });

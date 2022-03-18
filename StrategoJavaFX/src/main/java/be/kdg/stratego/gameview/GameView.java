@@ -18,6 +18,7 @@ public class GameView extends GridPane {
     Button btnStartGame;
     Button endTurn;
     Button startTurn;
+    Button backToMainMenuButton;
     Background background;
     TextArea notifications;
     List<ImageView> allPieces;
@@ -39,10 +40,11 @@ public class GameView extends GridPane {
      */
     private void initialiseNodes() {
 
-        endTurn = new Button("End turn");
-        startTurn = new Button("Start turn");
+        endTurn = new Button("End Turn");
+        startTurn = new Button("Start Turn");
         board = new GridPane();
         btnStartGame = new Button("Fill Board");
+        backToMainMenuButton = new Button("Exit Game");
 
 
         Image backgroundImage = new Image("/StrategoBoard.jpeg");
@@ -82,20 +84,22 @@ public class GameView extends GridPane {
         GridPane.setConstraints(board, 0, 18, 4, 4);
         //board.setPadding(new Insets(10,10,10,10));
         GridPane.setConstraints(btnStartGame, 40, 35, 10, 3);
-        GridPane.setConstraints(startTurn, 50, 35, 10, 3);
-        GridPane.setConstraints(endTurn, 60, 35, 10, 3);
+        GridPane.setConstraints(startTurn, 48, 35, 10, 3);
+        GridPane.setConstraints(endTurn, 56, 35, 10, 3);
+        GridPane.setConstraints(backToMainMenuButton,64,35,10,3);
 
         GridPane.setConstraints(notifications, 45, 7, 12, 13);
 
         notifications.setPrefHeight(200);
         notifications.setPrefHeight(2000);
 
-        this.getChildren().addAll(board, btnStartGame, notifications , startTurn, endTurn, textFieldImage);
+        this.getChildren().addAll(board, btnStartGame, notifications , startTurn, endTurn,backToMainMenuButton, textFieldImage);
         board.setRotate(-90);
         this.getStylesheets().add("style.css");
         btnStartGame.setId("gameButton");
         startTurn.setId("gameButton");
         endTurn.setId("gameButton");
+        backToMainMenuButton.setId("gameButton");
         notifications.setId("gameNotification");
         notifications.setEditable(false);
         notifications.setWrapText(true);
@@ -213,5 +217,9 @@ public class GameView extends GridPane {
 
     public Image getEnemyimage() {
         return enemyimage;
+    }
+
+    public Button getBackToMainMenuButton() {
+        return backToMainMenuButton;
     }
 }
