@@ -27,7 +27,7 @@ public class GameModel {
         board = new Board(boardMaker);
         pl = new Player(0, "Jord", board);
         pl2 = new Player(1, "Michiel", board);
-        GSS = new GameSaveState(pl,board.getBord());
+      //  GSS = new GameSaveState(pl,board.getBord());
     }
 
     /**
@@ -58,13 +58,13 @@ public class GameModel {
      * Returns a list of int arrays which include the possible attacks for this piece, depending on wether or not the piece is a scout it will call a different method.
      */
 
-    public List<String> getAllPiecesString() {
+ /*   public List<String> getAllPiecesString() {
         return boardMaker.getListView();
-    }
-
+    }*/
+/*
     public List<Piece> getPlayerPiecesById(int id) {
         return getPlayerByID(id).getPiecesList();
-    }
+    }*/
 
     public List<int[]> getAttacks(Piece p) {
         if (p == null) return null;
