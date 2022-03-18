@@ -10,6 +10,7 @@ public class HomescreenView extends GridPane {
     Button endGame;
     Background background;
 
+
     /**
      * Constructor which initialises and does the layout for the nodes
      */
@@ -34,7 +35,7 @@ public class HomescreenView extends GridPane {
      * Method for laying out the nodes
      */
 
-    private void layoutNodes(){
+    private void layoutNodes() {
         for (int i = 0; i < 10; i++) {
             this.getRowConstraints().add(new RowConstraints(80));
         }
@@ -43,13 +44,17 @@ public class HomescreenView extends GridPane {
         }
         //this.setGridLinesVisible(true);
 
-        GridPane.setConstraints(playClassic,1,9,1,1);
-        GridPane.setConstraints(playRandomFill,3,9,2,1);
-        GridPane.setConstraints(endGame,5,9,1,1);
+        GridPane.setConstraints(playClassic, 1, 9, 5, 1);
+        GridPane.setConstraints(playRandomFill, 5, 9, 5, 1);
+        GridPane.setConstraints(endGame, 9, 9, 5, 1);
+
 
         this.setBackground(background);
         this.getChildren().addAll(playClassic, playRandomFill, endGame);
-
+        this.getStylesheets().add("style.css");
+        playClassic.setId("homeScreenButton");
+        playRandomFill.setId("homeScreenButton");
+        endGame.setId("homeScreenButton");
     }
 
     public Button getPlayClassic() {
@@ -63,4 +68,6 @@ public class HomescreenView extends GridPane {
     public Button getEndGame() {
         return endGame;
     }
+
+
 }

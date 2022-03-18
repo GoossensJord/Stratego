@@ -160,7 +160,7 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
      * @return return value used in chooseplay to determine wether or not the space is open.
      */
     private boolean makeMove(Piece p, int[] oldPosition, int[]move){
-        view.getNotifications().setText(model.getBoard()[oldPosition[0]][oldPosition[1]].getPiece().toString() + " moved to square " + (9 - move[0]) + " " + move[1]);
+        view.getNotifications().setText(model.getBoard()[oldPosition[0]][oldPosition[1]].getPiece().getRank().getName() + " moved to square " + (9 - move[0]) + ":" + move[1]);
         model.makeChosenMove(move, p);
         model.piecesOnePlayer(1);
         view.dimSquare();
@@ -179,7 +179,7 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
      */
     private void makeAttack(Piece p, Piece p2, int [] attack){
         if (model.isMatchupWinner(p, p2)) {
-            view.getNotifications().setText("You won! enemy lost " + p2.getRank().getName());
+            view.getNotifications().setText("You won! enemy lost a " + p2.getRank().getName());
             view.removeFromGridpane(p2.getX(), p2.getY());
             view.setPicture(p.getImage(), attack[0], attack[1]);
         }

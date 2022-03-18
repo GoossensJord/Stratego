@@ -1,6 +1,5 @@
 package be.kdg.stratego.gameview;
 
-import javafx.collections.FXCollections;
 import javafx.geometry.HPos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -9,21 +8,22 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class GameView extends GridPane {
-    Button btnUpdateView;
+
     GridPane board;
     Button btnStartGame;
     Button endTurn;
     Button startTurn;
     Background background;
-    TextField playerName;
-    TextField notifications;
+    TextArea notifications;
     List<ImageView> allPieces;
     List<Rectangle> coloredRectangles;
     Image enemyimage;
+    ImageView textFieldImage;
     ListView pieceList;
 
     /**
@@ -38,22 +38,23 @@ public class GameView extends GridPane {
      * Method to initialise the nodes.
      */
     private void initialiseNodes() {
-        btnUpdateView = new Button("update view");
+
         endTurn = new Button("End turn");
         startTurn = new Button("Start turn");
         board = new GridPane();
         btnStartGame = new Button("Fill Board");
+
+
         Image backgroundImage = new Image("/StrategoBoard.jpeg");
         BackgroundSize backgroundSize = new BackgroundSize(100, 100, true, true, true, false);
         BackgroundImage backgroundImageSetter = new BackgroundImage(backgroundImage, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, backgroundSize);
         background = new Background(backgroundImageSetter);
-        playerName = new TextField();
-        notifications = new TextField();
+        notifications = new TextArea();
         allPieces = new ArrayList<>();
         coloredRectangles = new ArrayList<>();
         pieceList = new ListView<String>();
         enemyimage = new Image("enemy.png");
-
+        textFieldImage = new ImageView(new Image("textfieldImage.png"));
     }
 
     /**
@@ -77,20 +78,30 @@ public class GameView extends GridPane {
             board.getRowConstraints().add(new RowConstraints(78));
         }
 
+        GridPane.setConstraints(textFieldImage,43,4,17,23);
         GridPane.setConstraints(board, 0, 18, 4, 4);
         //board.setPadding(new Insets(10,10,10,10));
-        GridPane.setConstraints(btnStartGame, 40, 35, 5, 3);
-        GridPane.setConstraints(startTurn,45,35,5,3);
-        GridPane.setConstraints(endTurn,50,35,5,3);
-        GridPane.setConstraints(btnUpdateView, 55, 35, 5, 3);
-        GridPane.setConstraints(notifications, 45, 10, 20, 3);
+        GridPane.setConstraints(btnStartGame, 40, 35, 10, 3);
+        GridPane.setConstraints(startTurn, 50, 35, 10, 3);
+        GridPane.setConstraints(endTurn, 60, 35, 10, 3);
+
+        GridPane.setConstraints(notifications, 45, 7, 12, 13);
+
         notifications.setPrefHeight(200);
         notifications.setPrefHeight(2000);
 
-        this.getChildren().addAll(board, btnUpdateView,  btnStartGame, playerName, notifications,pieceList, startTurn, endTurn);
+        this.getChildren().addAll(board, btnStartGame, notifications , startTurn, endTurn, textFieldImage);
         board.setRotate(-90);
-    }
+        this.getStylesheets().add("style.css");
+        btnStartGame.setId("gameButton");
+        startTurn.setId("gameButton");
+        endTurn.setId("gameButton");
+        notifications.setId("gameNotification");
+        notifications.setEditable(false);
+        notifications.setWrapText(true);
 
+        this.setId("gameBackground");
+    }
 
 
     /**
@@ -135,6 +146,7 @@ public class GameView extends GridPane {
 
     /**
      * Method to light up all moveable squares on the board
+     *
      * @param moveArr Requires a list of moves to light them up on the board
      */
     public void lightUpRectanglesMoves(List<int[]> moveArr) {
@@ -152,6 +164,7 @@ public class GameView extends GridPane {
 
     /**
      * Method to light up all attackable squares on the board
+     *
      * @param attackArr Requires a list of attacks to light them up on the board
      */
     public void lightUpRectanglesAttack(List<int[]> attackArr) {
@@ -175,6 +188,7 @@ public class GameView extends GridPane {
             board.getChildren().remove(r);
         }
     }
+
     public Button getBtnStartGame() {
         return btnStartGame;
     }
@@ -184,14 +198,9 @@ public class GameView extends GridPane {
     }
 
 
-    public Button getBtnUpdateView() {
-        return btnUpdateView;
-    }
-
-    public TextField getNotifications() {
+    public TextArea getNotifications() {
         return notifications;
     }
-
 
 
     public Button getEndTurn() {

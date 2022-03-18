@@ -4,10 +4,10 @@ import javafx.scene.image.Image;
 
 public enum Rank {
     BOMB(11, "Bomb", 6, new Image("bomb.png")),
-    MARSHAL(10, "mArshal", 1, new Image("Marshal.png")),
+    MARSHAL(10, "Marshal", 1, new Image("Marshal.png")),
     GENERAL(9, "General", 1, new Image("General.png")),
     COLONEL(8, "Colonel", 2, new Image("Colonel.png")),
-    MAJOR(7, "MAjor", 3, new Image("Major.png")),
+    MAJOR(7, "Major", 3, new Image("Major.png")),
     CAPTAIN(6, "Captain", 4, new Image("Captain.png")),
     LUITENANT(5, "Luitenant", 4, new Image("Luitenant.png")),
     SERGEANT(4, "Sergeant", 4, new Image("Sergeant.png")),
