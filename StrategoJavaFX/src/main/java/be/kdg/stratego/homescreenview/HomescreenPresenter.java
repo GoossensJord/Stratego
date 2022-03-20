@@ -1,13 +1,17 @@
 
-package be.kdg.stratego.homeScreenView;
+package be.kdg.stratego.homescreenview;
 
 
 
 //import be.kdg.stratego.arrangePiecesScreen.ArrangePiecesPresenter;
 //import be.kdg.stratego.arrangePiecesScreen.ArrangePiecesView;
+import be.kdg.stratego.arrangepiecesscreen.ArrangePiecesPresenter;
+import be.kdg.stratego.arrangepiecesscreen.ArrangePiecesView;
 import be.kdg.stratego.gameview.GamePresenter;
 import be.kdg.stratego.gameview.GameView;
 import be.kdg.stratego.model.GameModel;
+import be.kdg.stratego.selectgamemode.SelectGameModePresenter;
+import be.kdg.stratego.selectgamemode.SelectGameModeView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
@@ -26,19 +30,19 @@ public class HomescreenPresenter {
     }
 
     /**
-     * Adds event handlers for the home screen, playClassic and randomFill buttons bring you to a different screen and end button closes the application.
+     * Adds event handlers for the different buttons on the homescreen.
      */
     private void addEventHandlers() {
-        view.getPlayRandomFill().setOnAction(new EventHandler<ActionEvent>() {
+        view.getPlayButton().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                GameView gameView = new GameView();
-                GamePresenter gamePresenter = new GamePresenter(gameModel, gameView);
-                view.getScene().setRoot(gameView);
-                gameView.getScene().getWindow();
+                SelectGameModeView gameModeView = new SelectGameModeView();
+                SelectGameModePresenter gamePresenter = new SelectGameModePresenter(gameModel, gameModeView);
+                view.getScene().setRoot(gameModeView);
+                gameModeView.getScene().getWindow();
             }
         });
-     /*   view.getPlayClassic().setOnAction(new EventHandler<ActionEvent>(){
+        view.getLayoutPiecesButton().setOnAction(new EventHandler<ActionEvent>(){
             @Override
             public void handle(ActionEvent event){
                 ArrangePiecesView aView = new ArrangePiecesView();
@@ -46,8 +50,8 @@ public class HomescreenPresenter {
                 view.getScene().setRoot(aView);
                 aView.getScene().getWindow();
             }
-        });*/
-        view.getEndGame().setOnAction(new EventHandler<ActionEvent>() {
+        });
+        view.getEndGameButton().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 System.exit(1);
