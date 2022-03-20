@@ -40,8 +40,8 @@ public class SelectGameModeView extends GridPane {
         loadSaveGameFrame = new ImageView(new Image("nodeFrame.png"));
         askPlayerNameTextField = new TextField("Enter your names");
         askPlayerNameTextField.setEditable(false);
-        playerNameOne = new TextField("Enter name player one");
-        playerNameTwo = new TextField("Enter name player two");
+        playerNameOne = new TextField("");
+        playerNameTwo = new TextField("");
         setNamesButton = new Button("Confirm names");
     }
 
@@ -52,10 +52,11 @@ public class SelectGameModeView extends GridPane {
         for (int i = 0; i < 76; i++) {
             this.getColumnConstraints().add(new ColumnConstraints(20));
         }
+
         GridPane.setConstraints(setNamesButton,2,8,10,2);
-        GridPane.setConstraints(playerNameTwo,2,6,10,2);
-        GridPane.setConstraints(playerNameOne, 2, 4, 10, 2);
-        GridPane.setConstraints(askPlayerNameTextField, 2, 2, 10, 2);
+        GridPane.setConstraints(playerNameTwo,2,5,10,2);
+        GridPane.setConstraints(playerNameOne, 2, 3, 10, 2);
+        GridPane.setConstraints(askPlayerNameTextField, 2, 1, 10, 3);
         GridPane.setConstraints(randomFillButtonFrame, 2, 20, 20, 4);
         GridPane.setConstraints(loadPiecesFrame, 26, 20, 20, 4);
         GridPane.setConstraints(loadSaveGameFrame, 52, 20, 20, 4);
@@ -72,6 +73,9 @@ public class SelectGameModeView extends GridPane {
         loadSavedGameButton.setId("selectGameModeButton");
         loadSavedGameButton.setDisable(true);
         returnToMenuButton.setId("selectGameModeButton");
+        setNamesButton.setId("selectGameModeButtonSmall");
+        askPlayerNameTextField.setId("playerNameField");
+
 
         this.setBackground(background);
         this.getStylesheets().add("style.css");
@@ -95,5 +99,13 @@ public class SelectGameModeView extends GridPane {
 
     public Button getSetNamesButton() {
         return setNamesButton;
+    }
+
+    public TextField getPlayerNameOne() {
+        return playerNameOne;
+    }
+
+    public TextField getPlayerNameTwo() {
+        return playerNameTwo;
     }
 }

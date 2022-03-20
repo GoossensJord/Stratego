@@ -1,6 +1,5 @@
 package be.kdg.stratego.selectgamemode;
 
-import be.kdg.stratego.SelectGameModeModel;
 import be.kdg.stratego.gameview.GamePresenter;
 import be.kdg.stratego.gameview.GameView;
 import be.kdg.stratego.homescreenview.HomescreenPresenter;
@@ -12,11 +11,10 @@ import javafx.event.EventHandler;
 public class SelectGameModePresenter {
 
     GameModel gameModel;
-    SelectGameModeModel selectGameModeModel;
     SelectGameModeView gameModeView;
 
-    public SelectGameModePresenter(SelectGameModeModel selectGameModel, SelectGameModeView gameModeView){
-        this.selectGameModeModel = selectGameModel;
+    public SelectGameModePresenter(GameModel gameModel, SelectGameModeView gameModeView){
+        this.gameModel = gameModel;
         this.gameModeView = gameModeView;
         addEventHandlers();
     }
@@ -50,6 +48,9 @@ public class SelectGameModePresenter {
                 gameModeView.getFillBoardRandomlyButton().setDisable(false);
                 gameModeView.getLoadInPieceLayoutButton().setDisable(false);
                 gameModeView.getLoadSavedGameButton().setDisable(false);
+                gameModeView.getSetNamesButton().setDisable(true);
+                gameModel.setPlayerName(gameModeView.getPlayerNameOne().getText(),gameModeView.getPlayerNameTwo().getText());
+
             }
         });
     }

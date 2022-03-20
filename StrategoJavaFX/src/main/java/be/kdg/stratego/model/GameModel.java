@@ -153,5 +153,9 @@ public class GameModel {
         System.out.printf("magnie");
         return false;
     }
+    public void setPlayerName(String name, String nameTwo){
+        pl.setName(name);
+        pl2.setName(nameTwo);
+    }
 
 }

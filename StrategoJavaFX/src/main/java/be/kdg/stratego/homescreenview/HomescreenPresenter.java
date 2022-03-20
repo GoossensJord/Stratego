@@ -5,11 +5,8 @@ package be.kdg.stratego.homescreenview;
 
 //import be.kdg.stratego.arrangePiecesScreen.ArrangePiecesPresenter;
 //import be.kdg.stratego.arrangePiecesScreen.ArrangePiecesView;
-import be.kdg.stratego.SelectGameModeModel;
 import be.kdg.stratego.arrangepiecesscreen.ArrangePiecesPresenter;
 import be.kdg.stratego.arrangepiecesscreen.ArrangePiecesView;
-import be.kdg.stratego.gameview.GamePresenter;
-import be.kdg.stratego.gameview.GameView;
 import be.kdg.stratego.model.GameModel;
 import be.kdg.stratego.selectgamemode.SelectGameModePresenter;
 import be.kdg.stratego.selectgamemode.SelectGameModeView;
@@ -37,9 +34,8 @@ public class HomescreenPresenter {
         view.getPlayButton().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                SelectGameModeModel gameModeModel = new SelectGameModeModel();
                 SelectGameModeView gameModeView = new SelectGameModeView();
-                SelectGameModePresenter gamePresenter = new SelectGameModePresenter(gameModeModel, gameModeView);
+                SelectGameModePresenter gamePresenter = new SelectGameModePresenter(gameModel, gameModeView);
                 view.getScene().setRoot(gameModeView);
                 gameModeView.getScene().getWindow();
             }
