@@ -44,7 +44,7 @@
 
 #gameNotification {
     -fx-background-color: transparent;
-    -fx-font-size:  25px;
+    -fx-font-size: 25px;
     -fx-font-weight: bold;
     -fx-text-fill: white;
     -fx-text-alignment: center;
