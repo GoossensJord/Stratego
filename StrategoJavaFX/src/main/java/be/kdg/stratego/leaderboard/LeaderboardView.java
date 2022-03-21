@@ -15,6 +15,7 @@ public class LeaderboardView extends GridPane {
     Button resetHighScoresButton;
     Background background;
     TextArea highScores;
+    TextArea leaderBoardTitle;
     ImageView highScoreImage;
 
     public LeaderboardView() {
@@ -27,6 +28,7 @@ public class LeaderboardView extends GridPane {
         resetHighScoresButton = new Button("Reset");
         highScores = new TextArea(getHighScoreString() + "\n");
         highScoreImage = new ImageView(new Image("nodeFrame.png"));
+        leaderBoardTitle = new TextArea("Leaderboard");
         Image homeBackgroundImage = new Image("/homeScreenTwo.png");
         BackgroundSize backgroundSize = new BackgroundSize(100, 100, true, true, true, true);
         BackgroundImage backgroundImage = new BackgroundImage(homeBackgroundImage, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, backgroundSize);
@@ -42,13 +44,17 @@ public class LeaderboardView extends GridPane {
         }
         this.getStylesheets().add("style.css");
         this.setBackground(background);
-        GridPane.setConstraints(highScores,15,5,10,10);
+        GridPane.setConstraints(leaderBoardTitle,15,1,10,2);
+        GridPane.setConstraints(highScores,15,2,25,25);
         GridPane.setConstraints(backToMainMenuButton, 24, 18, 10, 2);
         GridPane.setConstraints(resetHighScoresButton, 2, 18, 10, 2);
-        this.getChildren().addAll(highScores,backToMainMenuButton,resetHighScoresButton);
+        this.getChildren().addAll(highScores,backToMainMenuButton,resetHighScoresButton,leaderBoardTitle);
         backToMainMenuButton.setId("homeScreenButton");
         resetHighScoresButton.setId("homeScreenButton");
-        highScores.setId("textArea");
+        highScores.setId("leaderboardTextArea");
+        highScores.setEditable(false);
+        leaderBoardTitle.setId("leaderboardTextArea");
+        leaderBoardTitle.setEditable(false);
     }
 
     private String getHighScoreString() {
