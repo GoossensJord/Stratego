@@ -6,6 +6,9 @@ import be.kdg.stratego.model.GameModel;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+
 public class LeaderboardPresenter {
 
     GameModel gameModel;
@@ -25,6 +28,19 @@ public class LeaderboardPresenter {
                 HomescreenPresenter homePresenter = new HomescreenPresenter(gameModel,homeView);
                 view.getScene().setRoot(homeView);
                 homeView.getScene().getWindow();
+
+            }
+        });
+        view.getResetHighScoresButton().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+
+                try {
+                    PrintWriter pw = new PrintWriter("highScores.txt");
+                    pw.close();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
 
             }
         });
