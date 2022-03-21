@@ -14,6 +14,7 @@ import java.util.Scanner;
 /**
  * Class boardEventHandler has as responsibility to process all mouse inputs on the board
  */
+@SuppressWarnings("ConstantConditions")
 public class boardEventHandler implements EventHandler<MouseEvent> {
     private boolean midMove;
     private List<int[]> midMovearr;
@@ -198,9 +199,11 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
 
             model.setScore(p.getPlayer());
             view.getNotifications().setText(p.getPlayer().getName() + " WINS");
+            view.dimSquare();
             view.getBoard().setDisable(true);
             view.getStartTurn().setDisable(true);
-            view.getEndTurn().setDisable(false);
+            view.getEndTurn().setDisable(true);
+            return;
 
         }
         view.dimSquare();

@@ -20,13 +20,14 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.List;
 
+@SuppressWarnings("SuspiciousNameCombination")
 public class GameModel {
     private GameSaveState GSS;
     private final BoardMaker boardMaker;
     private final Board board;
     private final Player pl;
     private final Player pl2;
-    private boolean win = false;
+
     /**
      * Constructor for GameModel. Initialises a board and a boardmaker, two players and a GameSaveState.
      */
@@ -125,7 +126,7 @@ public class GameModel {
      * Method that calls the backend board method to make the attack. Uses the method gameWin to determine if the defeated piece was a flag.
      */
     public boolean makeChosenAttack(int[] attack, Piece p) {
-        win = gameWin(boardMaker.getSquaresBoard()[attack[0]][attack[1]].getPiece());
+        boolean win = gameWin(boardMaker.getSquaresBoard()[attack[0]][attack[1]].getPiece());
         board.makeAttack(attack, p);
         return win;
     }

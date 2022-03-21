@@ -42,12 +42,14 @@ public class Scout extends Piece {
         List<int[]> attacks = new ArrayList<>();
         int yval = this.x;
         for (int i = yval+1; i < 10 ; i++) {
+            //noinspection SuspiciousNameCombination
             if(!this.getPlayer().getBoard().spaceAvailable(i,this.y) && !this.getPlayer().equals(this.getPlayer().getBoard().getBord()[i][this.y].getPiece().getPlayer())){
                 attacks.add(new int[] {i,this.y});
                 break;
             }
         }
         for (int i = yval-1; i >= 0 ; i--) {
+            //noinspection SuspiciousNameCombination
             if(!this.getPlayer().getBoard().spaceAvailable(i,this.y) && !this.getPlayer().equals(this.getPlayer().getBoard().getBord()[i][this.y].getPiece().getPlayer())){
                 attacks.add(new int[] {i,this.y});
                 break;
@@ -59,12 +61,14 @@ public class Scout extends Piece {
         List<int[]> attacks = new ArrayList<>();
         int xval = this.x;
         for (int i = xval+1; i < 10 ; i++) {
+            //noinspection SuspiciousNameCombination
             if(!this.getPlayer().getBoard().spaceAvailable(this.x,i) && !this.getPlayer().equals(this.getPlayer().getBoard().getBord()[this.x][i].getPiece().getPlayer())){
                 attacks.add(new int[] {this.x,i});
                 break;
             }
         }
         for (int i = xval-1; i >= 0 ; i--) {
+            //noinspection SuspiciousNameCombination
             if(!this.getPlayer().getBoard().spaceAvailable(this.x,i) && !this.getPlayer().equals(this.getPlayer().getBoard().getBord()[this.x][i].getPiece().getPlayer())){
                 attacks.add(new int[] {this.x,i});
                 break;
@@ -79,10 +83,12 @@ public class Scout extends Piece {
         int xval = this.x;
 
         for (int i = xval+1; i < 10; i++) {
+            //noinspection SuspiciousNameCombination
             if (this.getPlayer().getBoard().spaceAvailable(i, this.y)) moves.add(new int[]{i, this.y});
             else break;
         }
         for (int i = xval - 1; i >= 0; i--) {
+            //noinspection SuspiciousNameCombination
             if (this.getPlayer().getBoard().spaceAvailable(i, this.y)) moves.add(new int[]{i, this.y});
             else break;
         }
@@ -96,10 +102,12 @@ public class Scout extends Piece {
         int yval = this.y;
 
         for (int i = yval+1; i < 10; i++) {
+            //noinspection SuspiciousNameCombination
             if (this.getPlayer().getBoard().spaceAvailable(this.x, i)) moves.add(new int[]{this.x, i});
             else break;
         }
         for (int i = yval - 1; i >= 0; i--) {
+            //noinspection SuspiciousNameCombination
             if (this.getPlayer().getBoard().spaceAvailable(this.x, i)) moves.add(new int[]{this.x, i});
             else break;
         }
