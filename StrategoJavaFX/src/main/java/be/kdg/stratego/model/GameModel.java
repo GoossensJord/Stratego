@@ -150,8 +150,12 @@ public class GameModel {
             if (GameSaveState.getPlayerTurn().getId() == 0 && x <= 3) return true;
             else if (GameSaveState.getPlayerTurn().getId() == 1 && x >= 6) return true;
         }
-        System.out.printf("magnie");
+        System.out.print("magnie");
         return false;
+    }
+    public void setPlayerName(String name, String nameTwo){
+        pl.setName(name);
+        pl2.setName(nameTwo);
     }
 
 }

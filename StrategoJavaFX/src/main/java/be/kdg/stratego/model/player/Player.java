@@ -36,6 +36,7 @@ public class Player {
         return this.id;
     }
 
-
-
+    public void setName(String name) {
+        this.name = name;
+    }
 }

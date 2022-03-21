@@ -1,8 +1,7 @@
-package be.kdg.stratego.arrangePiecesScreen;
+package be.kdg.stratego.arrangepiecesscreen;
 
 import javafx.collections.FXCollections;
 import javafx.geometry.HPos;
-import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -25,6 +24,7 @@ public class ArrangePiecesView extends GridPane {
     Button player1;
     Button player2;
     Button saveSetup;
+    Button returnToMenuButton;
     ListView pieceList;
     List<ImageView> allPieces;
     List<Rectangle> coloredRectangles;
@@ -51,6 +51,7 @@ public class ArrangePiecesView extends GridPane {
         player1 = new Button("Player 1");
         player2 = new Button("Player 2");
         saveSetup = new Button("save this setup");
+        returnToMenuButton = new Button("Quit");
 
     }
 
@@ -78,11 +79,12 @@ public class ArrangePiecesView extends GridPane {
         GridPane.setConstraints(notifications, 45, 30, 5, 5);
         GridPane.setConstraints(pieceList, 60, 10, 100, 15);
         GridPane.setConstraints(saveSetup,45,15,4,4);
+        GridPane.setConstraints(returnToMenuButton, 60, 35, 10, 2);
 
         pieceList.setPrefHeight(200);
         pieceList.setPrefHeight(2000);
         notifications.setMinWidth(2000);
-        this.getChildren().addAll(board,player1,player2, btnSetPieces, notifications, pieceList,saveSetup);
+        this.getChildren().addAll(board,player1,player2, btnSetPieces, notifications, pieceList,saveSetup, returnToMenuButton);
         board.setDisable(true);
         btnSetPieces.setDisable(true);
         board.setRotate(-90);
@@ -190,6 +192,9 @@ public class ArrangePiecesView extends GridPane {
         }
     }
 
+    public Button getReturnToMenuButton() {
+        return returnToMenuButton;
+    }
 }
 
 

@@ -56,7 +56,7 @@ public class GameView extends GridPane {
         coloredRectangles = new ArrayList<>();
         pieceList = new ListView<String>();
         enemyimage = new Image("enemy.png");
-        textFieldImage = new ImageView(new Image("textfieldImage.png"));
+        textFieldImage = new ImageView(new Image("nodeFrame.png"));
     }
 
     /**

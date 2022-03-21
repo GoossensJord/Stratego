@@ -1,7 +1,10 @@
-package be.kdg.stratego.arrangePiecesScreen;
+package be.kdg.stratego.arrangepiecesscreen;
 
+import be.kdg.stratego.homescreenview.HomescreenPresenter;
+import be.kdg.stratego.homescreenview.HomescreenView;
 import be.kdg.stratego.model.GameModel;
 import be.kdg.stratego.model.GameSaveState;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
@@ -85,7 +88,7 @@ public class ArrangePiecesPresenter {
                 view.lightUpRectangles(1);
             }
         });
-        view.getSaveSetup().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+      /*  view.getSaveSetup().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
 
@@ -101,6 +104,15 @@ public class ArrangePiecesPresenter {
                 view.getListView().setDisable(false);
                 GameSaveState.setPlayerTurn(model.getPlayerByID(GameSaveState.switchTurnByid()));
                 view.lightUpRectangles(GameSaveState.getPlayerTurn().getId());
+            }
+        });*/
+        view.getReturnToMenuButton().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                HomescreenView homeView = new HomescreenView();
+                HomescreenPresenter homePresenter = new HomescreenPresenter(model,homeView);
+                view.getScene().setRoot(homeView);
+                homeView.getScene().getWindow();
             }
         });
 

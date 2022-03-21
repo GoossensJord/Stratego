@@ -1,13 +1,10 @@
 package be.kdg.stratego;
 
-import be.kdg.stratego.homeScreenView.HomescreenPresenter;
-import be.kdg.stratego.homeScreenView.HomescreenView;
+import be.kdg.stratego.homescreenview.HomescreenPresenter;
+import be.kdg.stratego.homescreenview.HomescreenView;
 import be.kdg.stratego.model.GameModel;
-import be.kdg.stratego.model.GameSaveState;
 import javafx.application.Application;
-import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class Main extends Application {
