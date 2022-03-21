@@ -25,7 +25,7 @@ public class LeaderboardView extends GridPane {
     private void initialiseNodes(){
         backToMainMenuButton = new Button("Exit");
         resetHighScoresButton = new Button("Reset");
-        highScores = new TextArea(getHighScoreString());
+        highScores = new TextArea(getHighScoreString() + "\n");
         highScoreImage = new ImageView(new Image("nodeFrame.png"));
         Image homeBackgroundImage = new Image("/homeScreenTwo.png");
         BackgroundSize backgroundSize = new BackgroundSize(100, 100, true, true, true, true);
