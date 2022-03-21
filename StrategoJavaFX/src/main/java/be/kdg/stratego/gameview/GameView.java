@@ -109,6 +109,8 @@ public class GameView extends GridPane {
         notifications.setId("gameNotification");
         notifications.setEditable(false);
         notifications.setWrapText(true);
+        startTurn.setDisable(true);
+        endTurn.setDisable(true);
         this.setId("gameBackground");
     }
 

@@ -125,9 +125,8 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
 
         if (moveable && !model.getBoard()[move[0]][move[1]].getIsOccupied()) return makeMove(p, prevPosPiece, move);
         else if (attackable) makeAttack(p, model.getBoard()[attack[0]][attack[1]].getPiece(), attack);
-
-        else {
-            view.getNotifications().setText("Can't move here");
+        else{
+            view.getNotifications().setText("");
             view.dimSquare();
             return false;
         }
@@ -198,7 +197,11 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
         if (model.makeChosenAttack(attack, p)) {
 
             model.setScore(p.getPlayer());
-            view.getNotifications().setText("YOU WON THE GAME!!");
+            view.getNotifications().setText(p.getPlayer().getName() + " WINS");
+            view.getBoard().setDisable(true);
+            view.getStartTurn().setDisable(true);
+            view.getEndTurn().setDisable(false);
+
         }
         view.dimSquare();
         if (currentPlayer == 1) {

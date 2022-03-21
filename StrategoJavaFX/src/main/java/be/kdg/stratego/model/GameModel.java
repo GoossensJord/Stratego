@@ -180,5 +180,8 @@ public class GameModel {
         pl.setName(name);
         pl2.setName(nameTwo);
     }
+    public void clearBoardOfPieces(){
+        boardMaker.clearBoard();
+    }
 
 }

@@ -140,6 +140,13 @@ public class BoardMaker {
         }
         return score;
     }
+    public void clearBoard(){
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                squaresBoard[i][j].removePiece();
+            }
+        }
+    }
 
     public int getSQUARE_ARRAY_WIDTH() {
         return SQUARE_ARRAY_WIDTH;
