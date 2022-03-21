@@ -127,7 +127,19 @@ public class BoardMaker {
         }
         return pieces;
     }
+    public int getScore(int id) {
+        int score = 0;
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                if (squaresBoard[i][j].getIsOccupied()) {
+                    if (squaresBoard[i][j].getPiece().getPlayer().getId() == id) score +=squaresBoard[i][j].getPiece().getRankPower();
 
+
+                }
+            }
+        }
+        return score;
+    }
 
     public int getSQUARE_ARRAY_WIDTH() {
         return SQUARE_ARRAY_WIDTH;

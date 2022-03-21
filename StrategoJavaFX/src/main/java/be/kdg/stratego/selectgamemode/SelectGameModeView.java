@@ -83,7 +83,7 @@ public class SelectGameModeView extends GridPane {
 
         setNamesButton.setId("selectGameModeButtonSmall");
 
-        askPlayerNameTextField.setId("playerNameField");
+        askPlayerNameTextField.setId("textArea");
 
 
         this.setBackground(background);

@@ -5,8 +5,11 @@ import be.kdg.stratego.model.pieces.Piece;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * Class boardEventHandler has as responsibility to process all mouse inputs on the board
@@ -72,20 +75,23 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
         List<int[]> moveArr = model.getMoves(p);
         List<int[]> attackArr = model.getAttacks(p);
 
-        midMove = lightUp(moveArr,attackArr);
-        if(midMove) view.getNotifications().setText(model.getBoard()[x][y].getPiece().getPlayer().getName() + "'s " +model.getBoard()[x][y].getPiece().getRank().getName() + " choose one of the lit up squares");
+        midMove = lightUp(moveArr, attackArr);
+        if (midMove)
+            view.getNotifications().setText(model.getBoard()[x][y].getPiece().getPlayer().getName() + "'s " + model.getBoard()[x][y].getPiece().getRank().getName() + " choose one of the lit up squares");
 
         if (model.getBoard()[x][y].getPiece() == null) view.getNotifications().setText("No piece here");
-        else if(!midMove) view.getNotifications().setText("No moves for " + model.getBoard()[x][y].getPiece().getPlayer().getName() + "'s " + model.getBoard()[x][y].getPiece().getRank().getName()+ " available");
+        else if (!midMove)
+            view.getNotifications().setText("No moves for " + model.getBoard()[x][y].getPiece().getPlayer().getName() + "'s " + model.getBoard()[x][y].getPiece().getRank().getName() + " available");
     }
 
     /**
      * Processes values gotten from the model for what squares can be lit up.
-     * @param moves List of possible moves to light up.
+     *
+     * @param moves   List of possible moves to light up.
      * @param attacks List of possible attacks to light up.
      * @return The return value of this method is used to determine if you're in the middle of a move, because if both lists are empty you havent started a move.
      */
-    private boolean lightUp(List<int[]> moves, List<int[]> attacks){
+    private boolean lightUp(List<int[]> moves, List<int[]> attacks) {
         if (attacks != null) {
             for (int i = 0; i < attacks.size(); i++) {
                 view.lightUpRectanglesAttack(attacks);
@@ -107,16 +113,17 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
 
     /**
      * if not in midmove, this method is called upon in the handle method. Allows the players input to be interpreted as a move or an attack.
+     *
      * @return returns a boolean which determines if the space is open, if no moves or attacks can be made the space is not open thus returns false.
      */
     private boolean choosePlay(int x, int y) {
-        boolean moveable = moveableOrAttackable(midMovearr, x , y);
-        boolean attackable = moveableOrAttackable(midAttackarr, x , y);
-        int[] move = getMovesOrAttacks(midMovearr, x , y);
-        int[] attack = getMovesOrAttacks(midAttackarr, x , y);
+        boolean moveable = moveableOrAttackable(midMovearr, x, y);
+        boolean attackable = moveableOrAttackable(midAttackarr, x, y);
+        int[] move = getMovesOrAttacks(midMovearr, x, y);
+        int[] attack = getMovesOrAttacks(midAttackarr, x, y);
         this.midMove = false;
 
-        if (moveable && !model.getBoard()[move[0]][move[1]].getIsOccupied()) return makeMove(p,prevPosPiece,move);
+        if (moveable && !model.getBoard()[move[0]][move[1]].getIsOccupied()) return makeMove(p, prevPosPiece, move);
         else if (attackable) makeAttack(p, model.getBoard()[attack[0]][attack[1]].getPiece(), attack);
 
         else {
@@ -129,13 +136,14 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
 
     /**
      * A method that goes through the possible values until one is found that matches the x and y
+     *
      * @return returns an int array of the x and y value that will be used.
      */
-    private int[] getMovesOrAttacks(List<int[]> moveOrAttackOptions, int x, int y){
-        int [] play;
-        for(int[] plays : moveOrAttackOptions){
-            if(plays[0] == x && plays[1] == y){
-                 play = new int[]{x,y};
+    private int[] getMovesOrAttacks(List<int[]> moveOrAttackOptions, int x, int y) {
+        int[] play;
+        for (int[] plays : moveOrAttackOptions) {
+            if (plays[0] == x && plays[1] == y) {
+                play = new int[]{x, y};
                 return play;
             }
         }
@@ -143,12 +151,13 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
     }
 
     /**
-     *A method that goes through the possible values until one is found that matches the x and
+     * A method that goes through the possible values until one is found that matches the x and
+     *
      * @return returns true if a combination is found that matches the x and y else returns false.
      */
-    private boolean moveableOrAttackable(List<int[]> moveOrAttackOptions, int x, int y){
-        for(int[] plays : moveOrAttackOptions){
-            if(plays[0] == x && plays[1] == y){
+    private boolean moveableOrAttackable(List<int[]> moveOrAttackOptions, int x, int y) {
+        for (int[] plays : moveOrAttackOptions) {
+            if (plays[0] == x && plays[1] == y) {
                 return true;
             }
         }
@@ -157,10 +166,11 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
 
     /**
      * A method to finalize the move, asks the model to make the chosen move and the view to change the board accordingly, is called upon in the chooseplay method.
+     *
      * @return return value used in chooseplay to determine wether or not the space is open.
      */
-    private boolean makeMove(Piece p, int[] oldPosition, int[]move){
-        view.getNotifications().setText( model.getBoard()[oldPosition[0]][oldPosition[1]].getPiece().getPlayer().getName() + "'s "+ model.getBoard()[oldPosition[0]][oldPosition[1]].getPiece().getRank().getName() + " moved to square " + (9 - move[0]) + ":" + move[1]);
+    private boolean makeMove(Piece p, int[] oldPosition, int[] move) {
+        view.getNotifications().setText(model.getBoard()[oldPosition[0]][oldPosition[1]].getPiece().getPlayer().getName() + "'s " + model.getBoard()[oldPosition[0]][oldPosition[1]].getPiece().getRank().getName() + " moved to square " + (9 - move[0]) + ":" + move[1]);
         model.makeChosenMove(move, p);
         model.piecesOnePlayer(1);
         view.dimSquare();
@@ -177,16 +187,17 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
     /**
      * A method to finalize the attack, asks the model to make the chosen attack and the view to change the board accordingly.
      */
-    private void makeAttack(Piece p, Piece p2, int [] attack){
+    private void makeAttack(Piece p, Piece p2, int[] attack) {
         if (model.isMatchupWinner(p, p2)) {
-            view.getNotifications().setText(p.getPlayer().getName() +"'s " + p.getRank().getName() + " won against " + p2.getRank().getName());
+            view.getNotifications().setText(p.getPlayer().getName() + "'s " + p.getRank().getName() + " won against " + p2.getRank().getName());
             view.removeFromGridpane(p2.getX(), p2.getY());
             view.setPicture(p.getImage(), attack[0], attack[1]);
-        }
-
-        else view.getNotifications().setText(p.getPlayer().getName() +"'s " + p.getRank().getName() + " lost against " + p2.getRank().getName());
+        } else
+            view.getNotifications().setText(p.getPlayer().getName() + "'s " + p.getRank().getName() + " lost against " + p2.getRank().getName());
         view.removeFromGridpane(p.getX(), p.getY());
-        if(model.makeChosenAttack(attack, p)){
+        if (model.makeChosenAttack(attack, p)) {
+
+            model.setScore(p.getPlayer());
             view.getNotifications().setText("YOU WON THE GAME!!");
         }
         view.dimSquare();
@@ -196,4 +207,6 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
         view.getEndTurn().setDisable(false);
         view.getBoard().setDisable(true);
     }
+
+
 }

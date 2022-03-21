@@ -10,6 +10,14 @@ import be.kdg.stratego.model.pieces.Scout;
 import be.kdg.stratego.model.player.Player;
 import be.kdg.stratego.model.GameSaveState;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.List;
 
 public class GameModel {
@@ -18,7 +26,7 @@ public class GameModel {
     private final Board board;
     private final Player pl;
     private final Player pl2;
-
+    private boolean win = false;
     /**
      * Constructor for GameModel. Initialises a board and a boardmaker, two players and a GameSaveState.
      */
@@ -27,7 +35,7 @@ public class GameModel {
         board = new Board(boardMaker);
         pl = new Player(0, "Jord", board);
         pl2 = new Player(1, "Michiel", board);
-      //  GSS = new GameSaveState(pl,board.getBord());
+        //  GSS = new GameSaveState(pl,board.getBord());
     }
 
     /**
@@ -39,7 +47,7 @@ public class GameModel {
         boardMaker.placePieces();
     }
 
-    public void fillManually(){
+    public void fillManually() {
 
     }
 
@@ -54,6 +62,7 @@ public class GameModel {
         }
         return null;
     }
+
     /**
      * Returns a list of int arrays which include the possible attacks for this piece, depending on wether or not the piece is a scout it will call a different method.
      */
@@ -65,7 +74,6 @@ public class GameModel {
     public List<Piece> getPlayerPiecesById(int id) {
         return getPlayerByID(id).getPiecesList();
     }*/
-
     public List<int[]> getAttacks(Piece p) {
         if (p == null) return null;
         if (p instanceof Scout) return ((Scout) p).allAttacks();
@@ -77,12 +85,13 @@ public class GameModel {
 
     /**
      * Takes two pieces in it's parameter to decide the outcome of their battle.
+     *
      * @return Returns the winning piece
      */
-    public boolean isMatchupWinner(Piece p, Piece p1){
-        if(p.getRank().equals(Rank.MINER) && p1.getRank().equals(Rank.BOMB)) return true;
-        if(p.getRank().equals(Rank.SPY) && p1.getRank().equals(Rank.MARSHAL)) return true;
-        if(p.getRankPower() == p1.getRankPower()) return true;
+    public boolean isMatchupWinner(Piece p, Piece p1) {
+        if (p.getRank().equals(Rank.MINER) && p1.getRank().equals(Rank.BOMB)) return true;
+        if (p.getRank().equals(Rank.SPY) && p1.getRank().equals(Rank.MARSHAL)) return true;
+        if (p.getRankPower() == p1.getRankPower()) return true;
         return p.getRankPower() > p1.getRankPower();
 
     }
@@ -90,7 +99,7 @@ public class GameModel {
     /**
      * Boolean which returns true if piece given in parameter is Flag
      */
-    public boolean gameWin(Piece p){
+    public boolean gameWin(Piece p) {
         return p instanceof Flag;
     }
 
@@ -111,13 +120,26 @@ public class GameModel {
     public void makeChosenMove(int[] move, Piece p) {
         board.makeMove(move, p);
     }
+
     /**
      * Method that calls the backend board method to make the attack. Uses the method gameWin to determine if the defeated piece was a flag.
      */
     public boolean makeChosenAttack(int[] attack, Piece p) {
-        boolean win = gameWin(boardMaker.getSquaresBoard()[attack[0]][attack[1]].getPiece());
+        win = gameWin(boardMaker.getSquaresBoard()[attack[0]][attack[1]].getPiece());
         board.makeAttack(attack, p);
         return win;
+    }
+
+    public void setScore(Player player){
+        try{
+
+      FileWriter fw = new FileWriter("highScores.txt", true);
+            fw.write(player.getName() + " - "+ boardMaker.getScore(player.getId())+"\n");
+            fw.close();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public List<String> getAllPiecesString() {
@@ -153,7 +175,8 @@ public class GameModel {
         System.out.print("magnie");
         return false;
     }
-    public void setPlayerName(String name, String nameTwo){
+
+    public void setPlayerName(String name, String nameTwo) {
         pl.setName(name);
         pl2.setName(nameTwo);
     }
