@@ -65,15 +65,24 @@ public class SelectGameModeView extends GridPane {
         GridPane.setConstraints(loadSavedGameButton, 56, 18, 20, 4);
         GridPane.setConstraints(returnToMenuButton, 60, 36, 20, 4);
 
-        this.getChildren().addAll(fillBoardRandomlyButton, loadInPieceLayoutButton, loadSavedGameButton, returnToMenuButton, randomFillButtonFrame, loadPiecesFrame, loadSaveGameFrame, askPlayerNameTextField,playerNameOne,playerNameTwo,setNamesButton);
+        this.getChildren().addAll(fillBoardRandomlyButton, loadInPieceLayoutButton,
+                loadSavedGameButton, returnToMenuButton, randomFillButtonFrame,
+                loadPiecesFrame, loadSaveGameFrame, askPlayerNameTextField,playerNameOne,
+                playerNameTwo,setNamesButton);
+
         fillBoardRandomlyButton.setId("selectGameModeButton");
         fillBoardRandomlyButton.setDisable(true);
+
         loadInPieceLayoutButton.setId("selectGameModeButton");
         loadInPieceLayoutButton.setDisable(true);
+
         loadSavedGameButton.setId("selectGameModeButton");
         loadSavedGameButton.setDisable(true);
+
         returnToMenuButton.setId("selectGameModeButton");
+
         setNamesButton.setId("selectGameModeButtonSmall");
+
         askPlayerNameTextField.setId("playerNameField");
 
 
