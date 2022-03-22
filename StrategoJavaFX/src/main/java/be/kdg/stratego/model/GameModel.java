@@ -10,11 +10,14 @@ import be.kdg.stratego.model.pieces.Scout;
 import be.kdg.stratego.model.player.Player;
 import be.kdg.stratego.model.GameSaveState;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
 public class GameModel {
+    private GameSaveState GSS;
     private final BoardMaker boardMaker;
     private final Board board;
     private final Player pl;
@@ -168,5 +171,4 @@ public class GameModel {
         pl.setName(name);
         pl2.setName(nameTwo);
     }
-
 }
