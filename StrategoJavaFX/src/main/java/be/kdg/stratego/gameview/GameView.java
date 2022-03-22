@@ -9,8 +9,11 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class GameView extends GridPane {
 
@@ -26,6 +29,7 @@ public class GameView extends GridPane {
     Image enemyimage;
     ImageView textFieldImage;
     ListView pieceList;
+
 
     /**
      * Constructor which initialises and does the layout for the nodes
@@ -57,6 +61,7 @@ public class GameView extends GridPane {
         pieceList = new ListView<String>();
         enemyimage = new Image("enemy.png");
         textFieldImage = new ImageView(new Image("nodeFrame.png"));
+
     }
 
     /**
@@ -80,20 +85,21 @@ public class GameView extends GridPane {
             board.getRowConstraints().add(new RowConstraints(78));
         }
 
-        GridPane.setConstraints(textFieldImage,43,4,17,23);
+
+        GridPane.setConstraints(textFieldImage, 43, 4, 17, 23);
+        GridPane.setConstraints(notifications, 45, 7, 12, 13);
         GridPane.setConstraints(board, 0, 18, 4, 4);
-        //board.setPadding(new Insets(10,10,10,10));
         GridPane.setConstraints(btnStartGame, 40, 35, 10, 3);
         GridPane.setConstraints(startTurn, 48, 35, 10, 3);
         GridPane.setConstraints(endTurn, 56, 35, 10, 3);
-        GridPane.setConstraints(backToMainMenuButton,64,35,10,3);
+        GridPane.setConstraints(backToMainMenuButton, 64, 35, 10, 3);
 
-        GridPane.setConstraints(notifications, 45, 7, 12, 13);
+
 
         notifications.setPrefHeight(200);
         notifications.setPrefHeight(2000);
 
-        this.getChildren().addAll(board, btnStartGame, notifications , startTurn, endTurn,backToMainMenuButton, textFieldImage);
+        this.getChildren().addAll(board, btnStartGame, notifications, startTurn, endTurn, backToMainMenuButton, textFieldImage);
         board.setRotate(-90);
         this.getStylesheets().add("style.css");
         btnStartGame.setId("gameButton");
@@ -103,7 +109,8 @@ public class GameView extends GridPane {
         notifications.setId("gameNotification");
         notifications.setEditable(false);
         notifications.setWrapText(true);
-
+        startTurn.setDisable(true);
+        endTurn.setDisable(true);
         this.setId("gameBackground");
     }
 
@@ -193,6 +200,7 @@ public class GameView extends GridPane {
         }
     }
 
+
     public Button getBtnStartGame() {
         return btnStartGame;
     }
@@ -222,4 +230,6 @@ public class GameView extends GridPane {
     public Button getBackToMainMenuButton() {
         return backToMainMenuButton;
     }
+
+
 }

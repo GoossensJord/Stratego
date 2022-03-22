@@ -185,7 +185,7 @@ public class ArrangePiecesView extends GridPane {
     }
 
     void lightUpRectangles(int playerID) {
-        int x = 0;
+        int x;
         int y = 0;
         int start = 0;
         if (playerID == 0) {

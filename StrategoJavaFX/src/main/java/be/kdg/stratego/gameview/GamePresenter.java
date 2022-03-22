@@ -28,49 +28,38 @@ public class GamePresenter {
      * adds following event handlers: Start game, which fills the board. Start turn, which shows the current players pieces, end turn which hides all the pieces and links the board eventhandler
      */
     private void addEventHandlers() {
-        view.getBtnStartGame().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                model.fillRandomly();
-                fillBoardWithImages();
-                view.getBtnStartGame().setDisable(true);
-                view.getBoard().setDisable(true);
-                view.getEndTurn().setDisable(true);
-            }
+        view.getBtnStartGame().setOnAction(actionEvent -> {
+            model.fillRandomly();
+            fillBoardWithImages();
+            view.getBtnStartGame().setDisable(true);
+            view.getBoard().setDisable(true);
+            view.getStartTurn().setDisable(false);
         });
-        view.getStartTurn().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                fillOnePlayer(imageChange);
-                if (imageChange == 1) {
-                    imageChange--;
-                } else imageChange++;
-                view.getStartTurn().setDisable(true);
-                view.getEndTurn().setDisable(true);
-                view.getBoard().setDisable(false);
+        view.getStartTurn().setOnAction(event -> {
+            fillOnePlayer(imageChange);
+            if (imageChange == 1) {
+                imageChange--;
+            } else imageChange++;
+            view.getStartTurn().setDisable(true);
+            view.getEndTurn().setDisable(true);
+            view.getBoard().setDisable(false);
 
 
-            }
         });
-        view.getEndTurn().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                turnChange();
-                view.getStartTurn().setDisable(false);
-                view.getEndTurn().setDisable(true);
-                view.getBoard().setDisable(true);
+        view.getEndTurn().setOnAction(event -> {
+            turnChange();
+            view.getStartTurn().setDisable(false);
+            view.getEndTurn().setDisable(true);
+            view.getBoard().setDisable(true);
 
-            }
         });
-        view.getBackToMainMenuButton().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                HomescreenView homeView = new HomescreenView();
-                HomescreenPresenter homePresenter = new HomescreenPresenter(model,homeView);
-                view.getScene().setRoot(homeView);
-                homeView.getScene().getWindow();
+        view.getBackToMainMenuButton().setOnAction(event -> {
+            model.clearBoardOfPieces();
+            HomescreenView homeView = new HomescreenView();
+            HomescreenPresenter homePresenter = new HomescreenPresenter(model,homeView);
+            view.getScene().setRoot(homeView);
+            homeView.getScene().getWindow();
 
-            }
         });
         view.getBoard().addEventHandler(MouseEvent.MOUSE_CLICKED, new boardEventHandler(model, view));
     }

@@ -65,7 +65,7 @@
     -fx-text-alignment: center;
 
 }
-#playerNameField{
+#textArea{
     -fx-background-color: transparent;
     -fx-font-size: 20px;
     -fx-font-weight: bold;
@@ -76,6 +76,12 @@
     -fx-background-image: url("gameBackground.jpg");
     -fx-background-repeat: no-repeat;
     -fx-background-size: stretch;
+}
+#leaderboardTextArea{
+    -fx-background-color: transparent;
+    -fx-font-size: 40px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
 }
 .text-area {
     -fx-background-color: rgba(53,89,119,0.4);

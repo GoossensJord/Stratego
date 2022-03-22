@@ -2,11 +2,10 @@
 package be.kdg.stratego.homescreenview;
 
 
-
-//import be.kdg.stratego.arrangePiecesScreen.ArrangePiecesPresenter;
-//import be.kdg.stratego.arrangePiecesScreen.ArrangePiecesView;
 import be.kdg.stratego.arrangepiecesscreen.ArrangePiecesPresenter;
 import be.kdg.stratego.arrangepiecesscreen.ArrangePiecesView;
+import be.kdg.stratego.leaderboard.LeaderboardPresenter;
+import be.kdg.stratego.leaderboard.LeaderboardView;
 import be.kdg.stratego.model.GameModel;
 import be.kdg.stratego.selectgamemode.SelectGameModePresenter;
 import be.kdg.stratego.selectgamemode.SelectGameModeView;
@@ -47,6 +46,15 @@ public class HomescreenPresenter {
                 ArrangePiecesPresenter aPresenter = new ArrangePiecesPresenter(gameModel,aView);
                 view.getScene().setRoot(aView);
                 aView.getScene().getWindow();
+            }
+        });
+        view.getLeaderBoardButton().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                LeaderboardView lView = new LeaderboardView();
+                LeaderboardPresenter lPresenter = new LeaderboardPresenter(gameModel,lView);
+                view.getScene().setRoot(lView);
+                lView.getScene().getWindow();
             }
         });
         view.getEndGameButton().setOnAction(new EventHandler<ActionEvent>() {
