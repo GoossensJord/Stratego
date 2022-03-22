@@ -1,5 +1,7 @@
 package be.kdg.stratego.loadSetup;
 
+import be.kdg.stratego.gameview.GamePresenter;
+import be.kdg.stratego.gameview.GameView;
 import be.kdg.stratego.model.GameModel;
 import be.kdg.stratego.model.GameSaveState;
 import javafx.event.EventHandler;
@@ -80,6 +82,15 @@ public class LoadSetupPresenter {
 
                 GameSaveState.switchTurn();
                 view.setListItems(new ArrayList<>());
+            }
+        });
+        view.getStartGame().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                GameView gameView = new GameView();
+                GamePresenter gamePresenter = new GamePresenter(model,gameView);
+                view.getScene().setRoot(gameView);
+                gameView.getScene().getWindow();
             }
         });
     }

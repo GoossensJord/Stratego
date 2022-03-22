@@ -34,6 +34,7 @@ public class LoadSetupView extends GridPane {
     Button resetBtn;
     List<ImageView> allPieces;
     Button confirmSetup;
+    Button startGame;
 
     public LoadSetupView() {
         this.initialiseNodes();
@@ -61,6 +62,7 @@ public class LoadSetupView extends GridPane {
         player1 = new Button("Player 1");
         player2 = new Button("Player 2");
         confirmSetup = new Button("Confirm this setup");
+        startGame = new Button("Start game with setup");
     }
 
 
@@ -93,11 +95,13 @@ public class LoadSetupView extends GridPane {
         GridPane.setConstraints(player2, 50, 20, 4, 4);
         GridPane.setConstraints(player1, 45, 20, 4, 4);
         GridPane.setConstraints(confirmSetup, 40, 20, 4, 4);
+        GridPane.setConstraints(startGame, 70, 35, 4, 4);
+
 
         commonListView.setPrefHeight(200);
         commonListView.setPrefHeight(2000);
         notifications.setMinWidth(2000);
-        this.getChildren().addAll(board, resetBtn, notifications, commonListView, loadSetupsBtn, returnToMenuButton, player1, player2, confirmSetup);
+        this.getChildren().addAll(board, resetBtn, notifications, commonListView, loadSetupsBtn, returnToMenuButton, player1, player2, confirmSetup, startGame);
 
         board.setDisable(true);
         btnSetPieces.setDisable(true);
@@ -126,6 +130,10 @@ public class LoadSetupView extends GridPane {
 
     public ListView getListView() {
         return commonListView;
+    }
+
+    public Button getStartGame() {
+        return startGame;
     }
 
     public TextField getNotifications() {
@@ -174,7 +182,6 @@ public class LoadSetupView extends GridPane {
     Button getPlayer2() {
         return player2;
     }
-
 
 
 }

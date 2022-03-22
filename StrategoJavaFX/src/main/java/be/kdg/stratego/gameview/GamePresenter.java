@@ -29,7 +29,7 @@ public class GamePresenter {
      */
     private void addEventHandlers() {
         view.getBtnStartGame().setOnAction(actionEvent -> {
-            model.fillRandomly();
+            //model.fillRandomly();
             fillBoardWithImages();
             view.getBtnStartGame().setDisable(true);
             view.getBoard().setDisable(true);
