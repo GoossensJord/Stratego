@@ -54,7 +54,7 @@ public class GamePresenter {
 
         });
         view.getBackToMainMenuButton().setOnAction(event -> {
-            model.clearBoardOfPieces();
+            //model.clearBoardOfPieces();
             HomescreenView homeView = new HomescreenView();
             HomescreenPresenter homePresenter = new HomescreenPresenter(model,homeView);
             view.getScene().setRoot(homeView);
@@ -110,8 +110,5 @@ public class GamePresenter {
             view.removeFromGridpane(allPiece[0], allPiece[1]);
             view.setPicture(view.getEnemyimage(), allPiece[0], allPiece[1]);
         }
-
     }
-
-
 }

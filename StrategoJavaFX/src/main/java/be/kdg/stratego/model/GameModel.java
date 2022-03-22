@@ -10,10 +10,11 @@ import be.kdg.stratego.model.pieces.Scout;
 import be.kdg.stratego.model.player.Player;
 import be.kdg.stratego.model.GameSaveState;
 
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 public class GameModel {
-    private GameSaveState GSS;
     private final BoardMaker boardMaker;
     private final Board board;
     private final Player pl;
@@ -74,7 +75,7 @@ public class GameModel {
     }
 
     /**
-     * Takes two pieces in it's parameter to decide the outcome of their battle.
+     * Takes two pieces in its parameter to decide the outcome of their battle.
      *
      * @return Returns the winning piece
      */
@@ -123,12 +124,16 @@ public class GameModel {
     public void makePieceByString(String pieceString, int x, int y) {
         for (Rank r : Rank.values()) {
             if (r.getName().equals(pieceString)) {
-                Piece p = new Piece(r, pl, x, y);
+                Piece p = new Piece(r, GameSaveState.getPlayerTurn(), x, y);
                 boardMaker.manualListChecker(p);
                 //System.out.println(boardMaker.manualPieceSelection(p));
                 break;
             }
         }
+    }
+
+    public void clearBoard(){
+        board.clearBoard();
     }
 
     public List<int[]> piecesOnePlayer(int id) {
@@ -150,8 +155,18 @@ public class GameModel {
         return false;
     }
 
+    public void loadSave(){
+        HashMap<String,List<int[]>> setupHashMap  = GameSaveState.getSetupHashMap();
+        for (String s: setupHashMap.keySet()) {
+            for (int i = 0; i < setupHashMap.get(s).size(); i++) {
+                makePieceByString(s,setupHashMap.get(s).get(i)[0],setupHashMap.get(s).get(i)[1]);
+            }
+        }
+    }
+
     public void setPlayerName(String name, String nameTwo) {
         pl.setName(name);
         pl2.setName(nameTwo);
     }
+
 }

@@ -41,12 +41,6 @@ public class ArrangePiecesPresenter {
                 view.getBtnSetPieces().setDisable(true);
             }
         });
-        view.getBtnUseSetup().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-
-            }
-        });
         view.getLoadSetupBtn().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -78,7 +72,6 @@ public class ArrangePiecesPresenter {
                     view.getPlayer2().setDisable(true);
                     view.getListView().setDisable(true);
                 }
-
             }
         });
         view.getPlayer1().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
@@ -99,7 +92,7 @@ public class ArrangePiecesPresenter {
                 view.getPlayer2().setDisable(true);
                 view.getBtnSetPieces().setDisable(false);
                 GameSaveState.setPlayerTurn(model.getPlayerByID(1));
-                view.getNotifications().setText(GameSaveState.getPlayerTurn().toString());
+                view.getNotifications().setText(GameSaveState.getPlayerTurn().getName());
                 view.lightUpRectangles(1);
             }
         });
@@ -117,7 +110,7 @@ public class ArrangePiecesPresenter {
                     e.printStackTrace();
                 }
                 view.getListView().setDisable(false);
-                GameSaveState.setPlayerTurn(model.getPlayerByID(GameSaveState.switchTurnByid()));
+                GameSaveState.switchTurn();
                 view.lightUpRectangles(GameSaveState.getPlayerTurn().getId());
             }
         });

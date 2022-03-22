@@ -152,7 +152,6 @@ public class GameView extends GridPane {
                 }
             }
         }
-
     }
 
     /**

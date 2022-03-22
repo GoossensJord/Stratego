@@ -137,13 +137,6 @@ public class ArrangePiecesView extends GridPane {
         return player2;
     }
 
-    Button getSetupBtn() {
-        return loadSetupsBtn;
-    }
-    public Button getBtnUseSetup() {
-        return btnUseSetup;
-    }
-
     void setListItems(List<String> items) {
         if(setupList) setupListString = items;
         else pieceListString = items;

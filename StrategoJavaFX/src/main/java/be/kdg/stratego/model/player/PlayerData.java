@@ -70,12 +70,9 @@ public class PlayerData {
     public Piece addPieceToPieceList(Piece p) {
         Rank instance = p.getRank();
 
-        int counter = instance.getCounter();
         if (instance.getCounter() < p.getRank().getAmount()) {
             piecesList.add(p);
-            counter++;
         }
-        p.getRank().setCounter(counter);
         return p;
     }
 

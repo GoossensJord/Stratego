@@ -26,10 +26,14 @@ public class LoadSetupView extends GridPane {
     Button loadSetupsBtn;
     Button returnToMenuButton;
     Button btnUseSetup;
+    Button player1;
+    Button player2;
     ListView commonListView;
     List<String> setupListString;
     boolean setupList;
-
+    Button resetBtn;
+    List<ImageView> allPieces;
+    Button confirmSetup;
 
     public LoadSetupView() {
         this.initialiseNodes();
@@ -52,7 +56,11 @@ public class LoadSetupView extends GridPane {
         loadSetupsBtn = new Button("Get all saved setups");
         setupListString = new ArrayList<>();
         setupList = false;
-
+        resetBtn = new Button("reset setup");
+        allPieces = new ArrayList<>();
+        player1 = new Button("Player 1");
+        player2 = new Button("Player 2");
+        confirmSetup = new Button("Confirm this setup");
     }
 
 
@@ -80,14 +88,21 @@ public class LoadSetupView extends GridPane {
         GridPane.setConstraints(commonListView, 60, 10, 100, 15);
 
         GridPane.setConstraints(loadSetupsBtn, 50, 15, 4, 4);
+        GridPane.setConstraints(resetBtn, 40, 15, 4, 4);
         GridPane.setConstraints(returnToMenuButton, 60, 35, 10, 2);
+        GridPane.setConstraints(player2, 50, 20, 4, 4);
+        GridPane.setConstraints(player1, 45, 20, 4, 4);
+        GridPane.setConstraints(confirmSetup, 40, 20, 4, 4);
 
         commonListView.setPrefHeight(200);
         commonListView.setPrefHeight(2000);
         notifications.setMinWidth(2000);
-        this.getChildren().addAll(board, notifications, commonListView, loadSetupsBtn, returnToMenuButton);
+        this.getChildren().addAll(board, resetBtn, notifications, commonListView, loadSetupsBtn, returnToMenuButton, player1, player2, confirmSetup);
+
         board.setDisable(true);
         btnSetPieces.setDisable(true);
+        commonListView.setDisable(true);
+        loadSetupsBtn.setDisable(true);
         board.setRotate(-90);
     }
 
@@ -105,6 +120,10 @@ public class LoadSetupView extends GridPane {
         return loadSetupsBtn;
     }
 
+    public Button getConfirmSetup() {
+        return confirmSetup;
+    }
+
     public ListView getListView() {
         return commonListView;
     }
@@ -112,6 +131,7 @@ public class LoadSetupView extends GridPane {
     public TextField getNotifications() {
         return notifications;
     }
+
     void setPicture(Image image, int x, int y) {
 
         ImageView imageview = new ImageView(image);
@@ -123,13 +143,39 @@ public class LoadSetupView extends GridPane {
 
         imageview.setId(x + "" + y);
         board.add(imageview, x, y);
+        allPieces.add(imageview);
     }
+
     void setPosition(String n, int x, int y) {
         Label z = new Label(n);
         z.setTextFill(Color.BLACK);
         board.add(z, x, y);
         GridPane.setHalignment(z, HPos.CENTER);
     }
+
+    public Button getResetBtn() {
+        return resetBtn;
+    }
+
+    public void removeFromGridpane(int x, int y) {
+        for (Node image : allPieces) {
+            if (image instanceof ImageView) {
+                if (image.getId().equals(x + "" + y)) {
+                    board.getChildren().remove(image);
+                }
+            }
+        }
+    }
+
+    Button getPlayer1() {
+        return player1;
+    }
+
+    Button getPlayer2() {
+        return player2;
+    }
+
+
 
 }
 

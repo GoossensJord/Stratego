@@ -1,5 +1,6 @@
 package be.kdg.stratego.model.board;
 
+import be.kdg.stratego.model.GameSaveState;
 import be.kdg.stratego.model.pieces.Piece;
 import be.kdg.stratego.model.pieces.Rank;
 import be.kdg.stratego.model.player.Player;
@@ -73,7 +74,7 @@ public class BoardMaker {
     public String manualPieceSelection(Piece p) {
         if (playerData.addPieceToPieceList(p) != null && !squaresBoard[p.getX()][p.getY()].getIsOccupied()) {
             System.out.println(squaresBoard[p.getX()][p.getY()].getIsOccupied());
-            piecesPlayerOne.add(playerData.addPieceToPieceList(p));
+            GameSaveState.getPlayerTurn().getPiecesList().add(playerData.addPieceToPieceList(p));
             squaresBoard[p.getX()][p.getY()].setPiece(p);
             return "Success";
         } else return "Failed, space occupied";
@@ -145,11 +146,9 @@ public class BoardMaker {
         return score;
     }
     public void clearBoard(){
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
-                squaresBoard[i][j].removePiece();
-            }
-        }
+        squaresBoard = new Square[SQUARE_ARRAY_HEIGHT + 1][SQUARE_ARRAY_WIDTH + 1];
+        piecesPlayerTwo = new ArrayList<>();
+        piecesPlayerOne = new ArrayList<>();
     }
 
     public int getSQUARE_ARRAY_WIDTH() {

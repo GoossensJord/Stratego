@@ -6,12 +6,10 @@ public class Square {
 
 
     private boolean isOccupied;
-    Board b;
     public Piece p;
 
-    public Square(Board b) {
+    public Square() {
         this.isOccupied = false;
-        this.b = b;
 
 
     }

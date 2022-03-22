@@ -48,7 +48,7 @@ public class Board {
 
         for (int i = 0; i < boardMaker.getSQUARE_ARRAY_HEIGHT(); i++) {
             for (int j = 0; j < boardMaker.getSQUARE_ARRAY_WIDTH(); j++) {
-                boardMaker.getSquaresBoard()[i][j] = new Square(this);
+                boardMaker.getSquaresBoard()[i][j] = new Square();
             }
         }
     }
@@ -94,5 +94,10 @@ public class Board {
 
     public List<Piece> getPieceListByID(int id) {
         return boardMaker.getPieceListByID(id);
+    }
+
+    public void clearBoard(){
+        boardMaker.clearBoard();
+        fillWithSquares();
     }
 }
