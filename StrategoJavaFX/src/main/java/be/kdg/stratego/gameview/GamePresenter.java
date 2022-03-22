@@ -3,8 +3,7 @@ package be.kdg.stratego.gameview;
 import be.kdg.stratego.homescreenview.HomescreenPresenter;
 import be.kdg.stratego.homescreenview.HomescreenView;
 import be.kdg.stratego.model.GameModel;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import be.kdg.stratego.model.GameSaveState;
 import javafx.scene.input.MouseEvent;
 
 
@@ -14,9 +13,6 @@ import java.util.List;
 public class GamePresenter {
     GameModel model;
     GameView view;
-
-    int imageChange = 0;
-
 
     public GamePresenter(GameModel model, GameView view) {
         this.model = model;
@@ -29,6 +25,8 @@ public class GamePresenter {
      */
     private void addEventHandlers() {
         view.getBtnStartGame().setOnAction(actionEvent -> {
+            GameSaveState.setPlayerTurn(model.getPlayerByID(0));
+            GameSaveState.setIdlePlayer(model.getPlayerByID(1));
             //model.fillRandomly();
             fillBoardWithImages();
             view.getBtnStartGame().setDisable(true);
@@ -36,10 +34,7 @@ public class GamePresenter {
             view.getStartTurn().setDisable(false);
         });
         view.getStartTurn().setOnAction(event -> {
-            fillOnePlayer(imageChange);
-            if (imageChange == 1) {
-                imageChange--;
-            } else imageChange++;
+            fillOnePlayer(GameSaveState.getPlayerTurn().getId());
             view.getStartTurn().setDisable(true);
             view.getEndTurn().setDisable(true);
             view.getBoard().setDisable(false);
@@ -47,7 +42,8 @@ public class GamePresenter {
 
         });
         view.getEndTurn().setOnAction(event -> {
-            turnChange();
+            GameSaveState.switchTurn();
+            hidePieces();
             view.getStartTurn().setDisable(false);
             view.getEndTurn().setDisable(true);
             view.getBoard().setDisable(true);
@@ -102,7 +98,7 @@ public class GamePresenter {
     /**
      * Hides all the pieces for turn change.
      */
-    private void turnChange() {
+    private void hidePieces() {
         List<int[]> allPieces = model.piecesOnePlayer(0);
         allPieces.addAll(model.piecesOnePlayer(1));
 

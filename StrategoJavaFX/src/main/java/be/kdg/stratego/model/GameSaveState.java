@@ -138,19 +138,8 @@ public class GameSaveState {
     /**
      * Order of save = setup name , repeat(Piece name (rank), piece X position, piece Y position)
      */
-        /*
 
-    private static String pieceSetupStringMaker(List<Piece> pieceList, String nameSetup) {
-        StringBuilder sb = new StringBuilder("{ setupName:"+ nameSetup + ",");
-        for (int i = 0; i < pieceList.size(); i++) {
-            Piece pToSave = pieceList.get(i);
-            sb.append(pToSave.getRank() + "," );
-            sb.append(pToSave.getX() + ",");
-            sb.append(pToSave.getY() + ",\n");
-        }
-        sb.append("}");
-        return sb.toString();
-    }*/
+
     public static void setBoardState(Square[][] bState) {
         boardState = bState;
     }
@@ -175,10 +164,12 @@ public class GameSaveState {
     }
 
     public static void switchTurn() {
+        Player temp = playerTurn;
         playerTurn = idlePlayer;
-        idlePlayer = playerTurn;
+        idlePlayer = temp;
 
     }
+
 
 
     public static void saveGame() {

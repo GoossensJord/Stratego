@@ -32,6 +32,7 @@ public class SelectGameModePresenter {
                 GamePresenter gamePresenter = new GamePresenter(gameModel,gameView);
                 gameModeView.getScene().setRoot(gameView);
                 gameView.getScene().getWindow();
+                gameModel.fillRandomly();
 
             }
         });

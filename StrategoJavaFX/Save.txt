@@ -17,3 +17,7 @@ Marshal:-2.6,
 Bomb:-3.1,
 }; 
 
+testingsave:{
+Miner:-3.9-3.8,
+Scout:-3.5-3.7-3.6,
+}; 
