@@ -59,7 +59,7 @@ public class Scout extends Piece {
     }
     public List<int[]> xAttackable(){
         List<int[]> attacks = new ArrayList<>();
-        int xval = this.x;
+        int xval = this.y;
         for (int i = xval+1; i < 10 ; i++) {
             //noinspection SuspiciousNameCombination
             if(!this.getPlayer().getBoard().spaceAvailable(this.x,i) && !this.getPlayer().equals(this.getPlayer().getBoard().getBord()[this.x][i].getPiece().getPlayer())){

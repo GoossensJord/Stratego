@@ -49,9 +49,8 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
 
         //  model.makePieceByString(view.getNotifications().getText().substring(1,3),x,y);
 
-        if (!midMove) {
-            selectPiece(x, y);
-        } else {
+        if (!midMove) selectPiece(x, y);
+        else {
             openSpace = choosePlay(x, y);
             if (openSpace) view.removeFromGridpane(prevPosPiece[0], prevPosPiece[1]);
         }
@@ -77,7 +76,7 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
         List<int[]> attackArr = model.getAttacks(p);
 
         midMove = lightUp(moveArr, attackArr);
-        if (midMove)
+        if (midMove && moveArr.size() != 0)
             view.getNotifications().setText(model.getBoard()[x][y].getPiece().getPlayer().getName() + "'s " + model.getBoard()[x][y].getPiece().getRank().getName() + " choose one of the lit up squares");
 
         if (model.getBoard()[x][y].getPiece() == null) view.getNotifications().setText("No piece here");

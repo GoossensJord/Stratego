@@ -10,6 +10,8 @@ import be.kdg.stratego.model.pieces.Scout;
 import be.kdg.stratego.model.player.Player;
 import be.kdg.stratego.model.GameSaveState;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 
 public class GameModel {
@@ -153,5 +155,20 @@ public class GameModel {
     public void setPlayerName(String name, String nameTwo) {
         pl.setName(name);
         pl2.setName(nameTwo);
+    }
+    public void clearBoardOfPieces(){
+        boardMaker.clearBoard();
+    }
+
+    public void setScore(Player player){
+        try{
+
+            FileWriter fw = new FileWriter("highScores.txt", true);
+            fw.write(player.getName() + " - "+ boardMaker.getScore(player.getId())+"\n");
+            fw.close();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
