@@ -45,7 +45,7 @@ public class BoardMaker {
         List<String> out = new ArrayList<>();
         for (Rank r : Rank.values()) {
             for (int i = 0; i < r.getAmount(); i++) {
-                out.add(r.getName().substring(0, 2));
+                out.add(r.getName());
             }
         }
         return out;
@@ -66,7 +66,10 @@ public class BoardMaker {
         }
     }
 
-
+    public List<Piece> getPieceListByID(int id){
+        if(id == 0) return piecesPlayerOne;
+        else return piecesPlayerTwo;
+    }
     public String manualPieceSelection(Piece p) {
         if (playerData.addPieceToPieceList(p) != null && !squaresBoard[p.getX()][p.getY()].getIsOccupied()) {
             System.out.println(squaresBoard[p.getX()][p.getY()].getIsOccupied());
@@ -125,6 +128,7 @@ public class BoardMaker {
                 }
             }
         }
+
         return pieces;
     }
 

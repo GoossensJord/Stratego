@@ -67,9 +67,6 @@ public class PlayerData {
         );
         return piecesList;
     }
-
-    //todo amnt check
-    //todo positioncheck
     public Piece addPieceToPieceList(Piece p) {
         Rank instance = p.getRank();
 

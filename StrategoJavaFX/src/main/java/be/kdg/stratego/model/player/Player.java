@@ -28,10 +28,13 @@ public class Player {
         return this.name;
     }
 
-   /* public List<Piece> getPiecesList(){
+    public List<Piece> getPiecesList(){
         piecesList = board.getPieceListByID(this.id);
         return this.piecesList;
-    }*/
+    }
+    public void setPiecesList(List<Piece> pieceList){
+        this.piecesList = pieceList;
+    }
     public int getId() {
         return this.id;
     }

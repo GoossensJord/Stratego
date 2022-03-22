@@ -4,6 +4,8 @@ import be.kdg.stratego.gameview.GamePresenter;
 import be.kdg.stratego.gameview.GameView;
 import be.kdg.stratego.homescreenview.HomescreenPresenter;
 import be.kdg.stratego.homescreenview.HomescreenView;
+import be.kdg.stratego.loadSetup.LoadSetupPresenter;
+import be.kdg.stratego.loadSetup.LoadSetupView;
 import be.kdg.stratego.model.GameModel;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -51,6 +53,15 @@ public class SelectGameModePresenter {
                 gameModeView.getSetNamesButton().setDisable(true);
                 gameModel.setPlayerName(gameModeView.getPlayerNameOne().getText(),gameModeView.getPlayerNameTwo().getText());
 
+            }
+        });
+        gameModeView.getLoadInPieceLayoutButton().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                LoadSetupView lsView = new LoadSetupView();
+                LoadSetupPresenter lsPresenter = new LoadSetupPresenter(gameModel,lsView);
+                gameModeView.getScene().setRoot(lsView);
+                lsView.getScene().getWindow();
             }
         });
     }

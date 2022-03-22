@@ -4,6 +4,8 @@ package be.kdg.stratego.model.board;
 import be.kdg.stratego.model.pieces.Piece;
 import be.kdg.stratego.model.pieces.Rank;
 
+import java.util.List;
+
 /**
  * Contains the backend board
  */
@@ -90,5 +92,7 @@ public class Board {
     }
 
 
-
+    public List<Piece> getPieceListByID(int id) {
+        return boardMaker.getPieceListByID(id);
+    }
 }

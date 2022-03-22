@@ -1,4 +1,4 @@
-package be.kdg.stratego.arrangepiecesscreen;
+package be.kdg.stratego.loadSetup;
 
 import javafx.collections.FXCollections;
 import javafx.geometry.HPos;
@@ -13,31 +13,25 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class ArrangePiecesView extends GridPane {
+public class LoadSetupView extends GridPane {
 
     GridPane board;
     Background background;
     TextField notifications;
     Button btnSetPieces;
-    Button player1;
-    Button player2;
-    Button saveSetup;
     Button loadSetupsBtn;
     Button returnToMenuButton;
     Button btnUseSetup;
     ListView commonListView;
-    List<ImageView> allPieces;
-    List<Rectangle> coloredRectangles;
-    List<String> pieceListString;
     List<String> setupListString;
     boolean setupList;
 
 
-
-    public ArrangePiecesView() {
+    public LoadSetupView() {
         this.initialiseNodes();
         this.layoutNodes();
     }
@@ -52,12 +46,6 @@ public class ArrangePiecesView extends GridPane {
 
         notifications = new TextField();
         commonListView = new ListView<String>();
-        allPieces = new ArrayList<>();
-        coloredRectangles = new ArrayList<>();
-        pieceListString = new ArrayList<>();
-        player1 = new Button("Player 1");
-        player2 = new Button("Player 2");
-        saveSetup = new Button("save this setup");
         btnSetPieces = new Button("setPieces");
         btnUseSetup = new Button("Use this setup");
         returnToMenuButton = new Button("Quit");
@@ -86,83 +74,44 @@ public class ArrangePiecesView extends GridPane {
             board.getRowConstraints().add(new RowConstraints(78));
         }
         GridPane.setConstraints(board, 0, 18, 4, 4);
-        GridPane.setConstraints(player2, 50, 20, 4, 4);
-        GridPane.setConstraints(player1,45,20,4 ,4);
-        GridPane.setConstraints(btnSetPieces,47,25,4,4);
-        GridPane.setConstraints(btnUseSetup, 40,15 , 4,4);
+
+
         GridPane.setConstraints(notifications, 45, 30, 5, 5);
         GridPane.setConstraints(commonListView, 60, 10, 100, 15);
-        GridPane.setConstraints(saveSetup,45 ,15,4,4);
-        GridPane.setConstraints(loadSetupsBtn,50,15,4,4);
+
+        GridPane.setConstraints(loadSetupsBtn, 50, 15, 4, 4);
         GridPane.setConstraints(returnToMenuButton, 60, 35, 10, 2);
 
         commonListView.setPrefHeight(200);
         commonListView.setPrefHeight(2000);
         notifications.setMinWidth(2000);
-        this.getChildren().addAll(board,player1,player2, btnSetPieces, notifications, commonListView,saveSetup, returnToMenuButton, loadSetupsBtn,btnUseSetup);
+        this.getChildren().addAll(board, notifications, commonListView, loadSetupsBtn, returnToMenuButton);
         board.setDisable(true);
         btnSetPieces.setDisable(true);
         board.setRotate(-90);
     }
 
-    GridPane getBoard() {
-        return board;
+
+    void setListItems(List<String> items) {
+        setupListString = items;
+        commonListView.setItems(FXCollections.observableList(items));
     }
 
-    Button getSaveSetup() {
-        return saveSetup;
-    }
-
-    Button getBtnSetPieces() {
-        return btnSetPieces;
-    }
-
-    ListView<String> getListView() {
+    public ListView getCommonListView() {
         return commonListView;
     }
 
-    int getListViewLength(){
-        return pieceListString.size();
-    }
-
-    TextField getNotifications() {
-        return notifications;
-    }
-
-    Button getPlayer1() {
-        return player1;
-    }
-
-    Button getPlayer2() {
-        return player2;
-    }
-
-    Button getSetupBtn() {
+    public Button getLoadSetupsBtn() {
         return loadSetupsBtn;
     }
-    public Button getBtnUseSetup() {
-        return btnUseSetup;
+
+    public ListView getListView() {
+        return commonListView;
     }
 
-    void setListItems(List<String> items) {
-        if(setupList) setupListString = items;
-        else pieceListString = items;
-        commonListView.setItems(FXCollections.observableList(items));
+    public TextField getNotifications() {
+        return notifications;
     }
-    public void setSetupList(boolean setupList) {
-        this.setupList = setupList;
-    }
-
-    void removeListItem(String s){
-        for (int i = 0; i < commonListView.getItems().size(); i++) {
-            if(s.equals(commonListView.getItems().get(i))) {
-                commonListView.getItems().remove(i);
-                break;
-            }
-        }
-        setListItems(pieceListString);
-    }
-
     void setPicture(Image image, int x, int y) {
 
         ImageView imageview = new ImageView(image);
@@ -174,9 +123,7 @@ public class ArrangePiecesView extends GridPane {
 
         imageview.setId(x + "" + y);
         board.add(imageview, x, y);
-        allPieces.add(imageview);
     }
-
     void setPosition(String n, int x, int y) {
         Label z = new Label(n);
         z.setTextFill(Color.BLACK);
@@ -184,47 +131,6 @@ public class ArrangePiecesView extends GridPane {
         GridPane.setHalignment(z, HPos.CENTER);
     }
 
-    void lightUpRectangles(int playerID) {
-        int x = 0;
-        int y = 0;
-        int start = 0;
-        if (playerID == 0) {
-            x = 3;
-            y = 9;
-        } else {
-            start = 6;
-            x = 9;
-            y = 9;
-        }
-
-        for (int i = start; i <= x; i++) {
-            for (int j = 0; j <= y; j++) {
-
-                Rectangle rect = new Rectangle(78, 78);
-                rect.setFill(Color.GREEN);
-                rect.setOpacity(0.7);
-                rect.setId(i + "" + j);
-                coloredRectangles.add(rect);
-                board.add(rect, i, j);
-            }
-        }
-    }
-
-    void dimSquare(int x, int y) {
-        for (Rectangle r : coloredRectangles) {
-            if (r.getId().equals(x + "" + y)) {
-                board.getChildren().remove(r);
-            }
-        }
-    }
-
-    public Button getReturnToMenuButton() {
-        return returnToMenuButton;
-    }
-
-    public Button getLoadSetupBtn() {
-        return loadSetupsBtn;
-    }
 }
 
 

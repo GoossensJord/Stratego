@@ -6,11 +6,13 @@ import be.kdg.stratego.model.GameModel;
 import be.kdg.stratego.model.GameSaveState;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.control.*;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ArrangePiecesPresenter {
     private GameModel model;
@@ -27,18 +29,31 @@ public class ArrangePiecesPresenter {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 view.getBoard().setDisable(false);
-                String pieceStr = mouseEvent.getPickResult().toString().split(",")[0];
-                pieceStr = pieceStr.substring(pieceStr.length() - 4);
+                String pieceStr = mouseEvent.getPickResult().toString().split("'")[1];
                 view.getNotifications().setText(pieceStr + " selected");
-                //view.removeItemFromListView()
             }
         });
         view.getBtnSetPieces().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                setItems();
+                setPieceItems();
+                view.setSetupList(false);
                 view.getBtnSetPieces().setDisable(true);
+            }
+        });
+        view.getBtnUseSetup().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
 
+            }
+        });
+        view.getLoadSetupBtn().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                //view.setListItems(GameSaveState.getSetupList()
+                view.setSetupList(true);
+                view.setListItems(new ArrayList<>());
+                view.setListItems(GameSaveState.getSetupStringList());
             }
         });
         view.getBoard().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
@@ -46,7 +61,7 @@ public class ArrangePiecesPresenter {
             public void handle(MouseEvent mouseEvent) {
                 int x = (int) (mouseEvent.getX() / 78);
                 int y = (int) (mouseEvent.getY() / 78);
-                String pieceStr = view.getNotifications().getText().substring(1, 3);
+                String pieceStr = view.getNotifications().getText().split(" ")[0];
 
                 if (model.positionChecker(x, y)) {
                     model.makePieceByString(pieceStr, x, y);
@@ -56,9 +71,9 @@ public class ArrangePiecesPresenter {
                     view.getBoard().setDisable(true);
                 } else view.getNotifications().setText("Invalid placing!");
 
-                if (view.getListViewLength() == 35){
+                if (view.getListViewLength() == 35) {
                     view.setListItems(new ArrayList<>());
-                    view.getNotifications().setText("Save your setup");
+                    view.getNotifications().setText("Save your setup or just use this setup without saving");
                     view.getPlayer1().setDisable(true);
                     view.getPlayer2().setDisable(true);
                     view.getListView().setDisable(true);
@@ -88,16 +103,16 @@ public class ArrangePiecesPresenter {
                 view.lightUpRectangles(1);
             }
         });
-      /*  view.getSaveSetup().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+        view.getSaveSetup().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
 
-                TextInputDialog temp = new TextInputDialog("test");
+                TextInputDialog temp = new TextInputDialog();
                 temp.showAndWait();
-                String setupName = temp.getContentText();
+                String setupName = temp.getEditor().getText();
                 view.getBtnSetPieces().setDisable(false);
                 try {
-                    GameSaveState.saveSetup(model.getPlayerPiecesById(GameSaveState.getPlayerTurn().getId()),setupName);
+                    GameSaveState.saveSetup(model.getPlayerPiecesById(GameSaveState.getPlayerTurn().getId()), setupName);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -105,12 +120,12 @@ public class ArrangePiecesPresenter {
                 GameSaveState.setPlayerTurn(model.getPlayerByID(GameSaveState.switchTurnByid()));
                 view.lightUpRectangles(GameSaveState.getPlayerTurn().getId());
             }
-        });*/
+        });
         view.getReturnToMenuButton().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 HomescreenView homeView = new HomescreenView();
-                HomescreenPresenter homePresenter = new HomescreenPresenter(model,homeView);
+                HomescreenPresenter homePresenter = new HomescreenPresenter(model, homeView);
                 view.getScene().setRoot(homeView);
                 homeView.getScene().getWindow();
             }
@@ -128,7 +143,7 @@ public class ArrangePiecesPresenter {
     }
 
 
-    private void setItems() {
+    private void setPieceItems() {
         view.setListItems(model.getAllPiecesString());
     }
 }
