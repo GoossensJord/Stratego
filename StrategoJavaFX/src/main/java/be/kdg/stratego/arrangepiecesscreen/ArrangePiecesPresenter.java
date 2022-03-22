@@ -29,8 +29,17 @@ public class ArrangePiecesPresenter {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 view.getBoard().setDisable(false);
-                String pieceStr = mouseEvent.getPickResult().toString().split("'")[1];
-                view.getNotifications().setText(pieceStr + " selected");
+                try {
+                    String pieceStr = mouseEvent.getPickResult().toString().split("'")[1];
+                    view.getNotifications().setText(pieceStr + " selected");
+
+                }
+                catch (ArrayIndexOutOfBoundsException aiob){
+                    String pieceStr = mouseEvent.getPickResult().toString().split("\"")[1];
+                    view.getNotifications().setText(pieceStr + " selected");
+
+                }
+
             }
         });
         view.getBtnSetPieces().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
