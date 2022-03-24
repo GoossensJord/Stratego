@@ -2,6 +2,7 @@
 package be.kdg.stratego.homescreenview;
 
 
+import be.kdg.stratego.LeaderBoardModel;
 import be.kdg.stratego.arrangepiecesscreen.ArrangePiecesPresenter;
 import be.kdg.stratego.arrangepiecesscreen.ArrangePiecesView;
 import be.kdg.stratego.leaderboard.LeaderboardPresenter;

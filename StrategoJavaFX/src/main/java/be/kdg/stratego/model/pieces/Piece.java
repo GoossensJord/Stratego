@@ -5,6 +5,7 @@ import javafx.scene.image.Image;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Superclass Piece, responsible for holding all the information and methods related to a piece.
@@ -61,6 +62,7 @@ public class Piece {
         } else return null;
     }
 
+
     /**
      * A method that returns a List of Intiger arrays by checking one square in each direction to see if it is available to attack, if so it adds it to the list.
      */
@@ -87,8 +89,35 @@ public class Piece {
             }
             return attackList;
         } else return null;
+
+
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Piece piece = (Piece) o;
+
+        if (isMovable != piece.isMovable) return false;
+        if (canAttack != piece.canAttack) return false;
+        if (x != piece.x) return false;
+        if (y != piece.y) return false;
+        if (rank != piece.rank) return false;
+        return Objects.equals(player, piece.player);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = rank != null ? rank.hashCode() : 0;
+        result = 31 * result + (player != null ? player.hashCode() : 0);
+        result = 31 * result + (isMovable ? 1 : 0);
+        result = 31 * result + (canAttack ? 1 : 0);
+        result = 31 * result + x;
+        result = 31 * result + y;
+        return result;
+    }
 
     public int getRankPower() {
         return this.rank.power;

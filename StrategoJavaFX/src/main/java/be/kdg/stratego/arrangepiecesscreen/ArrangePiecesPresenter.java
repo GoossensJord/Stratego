@@ -58,15 +58,6 @@ public class ArrangePiecesPresenter {
                 view.getBtnSetPieces().setDisable(true);
             }
         });
-        view.getLoadSetupBtn().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                //view.setListItems(GameSaveState.getSetupList()
-                view.setSetupList(true);
-                view.setListItems(new ArrayList<>());
-                view.setListItems(GameSaveState.getSetupStringList());
-            }
-        });
         view.getBoard().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {

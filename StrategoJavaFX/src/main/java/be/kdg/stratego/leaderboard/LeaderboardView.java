@@ -8,6 +8,9 @@ import javafx.scene.layout.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -20,6 +23,7 @@ public class LeaderboardView extends GridPane {
     TextArea highScores;
     TextArea leaderBoardTitle;
     ImageView highScoreImage;
+    Button updateLeaderboard;
 
     /**
      * Constructor which calls the initialise nodes and layout nodes method as those are needed immediately.
@@ -28,22 +32,24 @@ public class LeaderboardView extends GridPane {
         this.initialiseNodes();
         this.layoutNodes();
     }
+
     /**
      * Initialises the nodes on this view
      */
-    private void initialiseNodes(){
+    private void initialiseNodes() {
         backToMainMenuButton = new Button("Exit");
         resetHighScoresButton = new Button("Reset");
-        highScores = new TextArea(getHighScoreString() + "\n");
+        highScores = new TextArea("Points");
         highScoreImage = new ImageView(new Image("nodeFrame.png"));
         leaderBoardTitle = new TextArea("Leaderboard");
         Image homeBackgroundImage = new Image("/homeScreenTwo.png");
         BackgroundSize backgroundSize = new BackgroundSize(100, 100, true, true, true, true);
         BackgroundImage backgroundImage = new BackgroundImage(homeBackgroundImage, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, backgroundSize);
         background = new Background(backgroundImage);
-
+        updateLeaderboard = new Button("Update Leaderboard");
     }
-    private void layoutNodes(){
+
+    private void layoutNodes() {
         for (int i = 0; i < 20; i++) {
             this.getRowConstraints().add(new RowConstraints(40));
         }
@@ -52,14 +58,16 @@ public class LeaderboardView extends GridPane {
         }
         this.getStylesheets().add("style.css");
         this.setBackground(background);
-        GridPane.setConstraints(leaderBoardTitle,15,1,10,2);
-        GridPane.setConstraints(highScores,15,2,25,25);
-        GridPane.setConstraints(backToMainMenuButton, 24, 18, 10, 2);
-        GridPane.setConstraints(resetHighScoresButton, 2, 18, 10, 2);
-        this.getChildren().addAll(highScores,backToMainMenuButton,resetHighScoresButton,leaderBoardTitle);
+        GridPane.setConstraints(leaderBoardTitle, 15, 1, 10, 2);
+        GridPane.setConstraints(highScores, 15, 2, 25, 25);
+        GridPane.setConstraints(backToMainMenuButton, 24, 18, 10, 3);
+        GridPane.setConstraints(resetHighScoresButton, 4, 18, 10, 3);
+        GridPane.setConstraints(updateLeaderboard,14,18,10,3);
+        this.getChildren().addAll(highScores, backToMainMenuButton, resetHighScoresButton, leaderBoardTitle,updateLeaderboard);
         backToMainMenuButton.setId("homeScreenButton");
         resetHighScoresButton.setId("homeScreenButton");
         highScores.setId("leaderboardTextArea");
+        updateLeaderboard.setId("homeScreenButton");
         highScores.setEditable(false);
         leaderBoardTitle.setId("leaderboardTextArea");
         leaderBoardTitle.setEditable(false);
@@ -67,24 +75,11 @@ public class LeaderboardView extends GridPane {
 
     /**
      * Method that gives back a String to put in the highscore text area
+     *
      * @return
      */
-    private String getHighScoreString() {
-        StringBuilder highScoreString = new StringBuilder();
-        try {
-            File highScores = new File("highScores.txt");
-            Scanner sc = new Scanner(highScores);
 
-            while (sc.hasNextLine()) {
-                highScoreString.append(sc.nextLine());
-                highScoreString.append("\n");
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found error");
-            e.printStackTrace();
-        }
-        return highScoreString.toString();
-    }
+
     public TextArea getHighScores() {
         return highScores;
     }
@@ -96,4 +91,9 @@ public class LeaderboardView extends GridPane {
     public Button getResetHighScoresButton() {
         return resetHighScoresButton;
     }
+
+    public Button getUpdateLeaderboard() {
+        return updateLeaderboard;
+    }
+
 }

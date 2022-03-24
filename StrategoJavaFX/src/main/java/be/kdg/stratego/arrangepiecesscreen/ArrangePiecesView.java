@@ -24,7 +24,6 @@ public class ArrangePiecesView extends GridPane {
     Button player1;
     Button player2;
     Button saveSetup;
-    Button loadSetupsBtn;
     Button returnToMenuButton;
     Button btnUseSetup;
     ListView commonListView;
@@ -64,7 +63,6 @@ public class ArrangePiecesView extends GridPane {
         btnSetPieces = new Button("Set Pieces");
         btnUseSetup = new Button("Use setup");
         returnToMenuButton = new Button("Quit");
-        loadSetupsBtn = new Button("Saved Setups");
         setupListString = new ArrayList<>();
         setupList = false;
 
@@ -96,7 +94,6 @@ public class ArrangePiecesView extends GridPane {
         GridPane.setConstraints(btnSetPieces,47,10,10,3);
         GridPane.setConstraints(btnUseSetup, 40,35 , 10,3);
         GridPane.setConstraints(saveSetup,48 ,35,10,3);
-        GridPane.setConstraints(loadSetupsBtn,56,35,10,3);
         GridPane.setConstraints(returnToMenuButton, 64, 35, 10, 3);
         GridPane.setConstraints(notifications, 45, 30, 5, 5);
         GridPane.setConstraints(commonListView, 60, 10, 100, 15);
@@ -111,12 +108,12 @@ public class ArrangePiecesView extends GridPane {
         btnSetPieces.setId("selectGameModeButtonSmall");
         btnUseSetup.setId("selectGameModeButtonSmall");
         returnToMenuButton.setId("selectGameModeButtonSmall");
-        loadSetupsBtn.setId("selectGameModeButtonSmall");
         notifications.setId("textArea");
+        notifications.setEditable(false);
         commonListView.setPrefHeight(200);
         commonListView.setPrefHeight(2000);
         notifications.setMinWidth(2000);
-        this.getChildren().addAll(board,player1,player2, btnSetPieces, notifications, commonListView,saveSetup, returnToMenuButton, loadSetupsBtn,btnUseSetup);
+        this.getChildren().addAll(board,player1,player2, btnSetPieces, notifications, commonListView,saveSetup, returnToMenuButton,btnUseSetup);
         board.setDisable(true);
         btnSetPieces.setDisable(true);
         board.setRotate(-90);
@@ -215,10 +212,6 @@ public class ArrangePiecesView extends GridPane {
 
     public Button getReturnToMenuButton() {
         return returnToMenuButton;
-    }
-
-    public Button getLoadSetupBtn() {
-        return loadSetupsBtn;
     }
 
     GridPane getBoard() {
