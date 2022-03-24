@@ -26,3 +26,10 @@ Major:-1.5,
 Colonel:-3.8,
 Bomb:-2.8,
 }; 
+tdfdgtrh:{
+Major:-2.7,
+Colonel:-1.8,
+General:-2.8,
+Marshal:-1.6,
+Captain:-2.6,
+}; 
