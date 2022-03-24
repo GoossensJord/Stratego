@@ -196,7 +196,7 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
         view.removeFromGridpane(p.getX(), p.getY());
         if (model.makeChosenAttack(attack, p)) {
 
-            //model.setScore(p.getPlayer());
+            model.setScore(p.getPlayer());
             view.getNotifications().setText(p.getPlayer().getName() + " WINS");
             view.dimSquare();
             view.getBoard().setDisable(true);

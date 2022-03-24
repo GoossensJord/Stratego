@@ -160,6 +160,18 @@ public class GameModel {
         System.out.print("magnie");
         return false;
     }
+    public void setScore(Player player){
+        try{
+
+            FileWriter fw = new FileWriter("highScores.txt", true);
+            fw.write(player.getName() + " - "+ boardMaker.getScore(player.getId())+"\n");
+            fw.close();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public void loadSave() {
         HashMap<String, List<int[]>> setupHashMap = GameSaveState.getSetupHashMap();
