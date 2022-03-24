@@ -8,13 +8,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
+
+/**
+ * Class responsible for the laout of the game itself.
+ */
 public class GameView extends GridPane {
 
     GridPane board;

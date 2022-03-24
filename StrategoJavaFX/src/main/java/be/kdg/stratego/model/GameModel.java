@@ -131,6 +131,9 @@ public class GameModel {
         return win;
     }
 
+    /**
+     * Creates a piece by using a String name
+     */
     public void makePieceByString(String pieceString, int x, int y) {
         for (Rank r : Rank.values()) {
             if (r.getName().equals(pieceString)) {
@@ -191,7 +194,9 @@ public class GameModel {
         }
     }
 
-
+    /**
+     * A method for loading in a save
+     */
     public void loadSave() {
         HashMap<String, List<int[]>> setupHashMap = GameSaveState.getSetupHashMap();
         for (String s : setupHashMap.keySet()) {

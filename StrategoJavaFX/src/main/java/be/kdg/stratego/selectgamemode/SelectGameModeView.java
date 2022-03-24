@@ -6,6 +6,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
+/**
+ * View responsible for selecting a game mode
+ */
 public class SelectGameModeView extends GridPane {
     Button fillBoardRandomlyButton;
     Button loadInPieceLayoutButton;
@@ -20,12 +23,17 @@ public class SelectGameModeView extends GridPane {
     TextField playerNameTwo;
     Button setNamesButton;
 
-
+    /**
+     * Constructor which calls the initialise nodes and layout nodes method as those are needed immediately.
+     */
     public SelectGameModeView() {
         this.initialiseNodes();
         this.layoutNodes();
     }
 
+    /**
+     * Initialises the nodes on this view
+     */
     private void initialiseNodes() {
         fillBoardRandomlyButton = new Button("  Random  ");
         loadInPieceLayoutButton = new Button("Load Setup");
@@ -45,6 +53,9 @@ public class SelectGameModeView extends GridPane {
         setNamesButton = new Button("Confirm names");
     }
 
+    /**
+     * Lays out all the nodes on the gridpane, also uses ID to communicate with the CSS file
+     */
     private void layoutNodes() {
         for (int i = 0; i < 48; i++) {
             this.getRowConstraints().add(new RowConstraints(20));

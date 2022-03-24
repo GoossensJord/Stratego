@@ -1,11 +1,13 @@
 package be.kdg.stratego.homescreenview;
 
 import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
+/**
+ * Class responsible for layout of homescreen
+ */
 public class HomescreenView extends GridPane {
     Button layoutPiecesButton;
     Button playButton;
@@ -54,7 +56,6 @@ public class HomescreenView extends GridPane {
         for (int i = 0; i < 38; i++) {
             this.getColumnConstraints().add(new ColumnConstraints(40));
         }
-        //this.setGridLinesVisible(true);
         GridPane.setConstraints(leaderBoardButton, 16, 18, 10, 2);
         GridPane.setConstraints(playButton, 2, 18, 10, 2);
         GridPane.setConstraints(layoutPiecesButton, 8, 18, 10, 2);

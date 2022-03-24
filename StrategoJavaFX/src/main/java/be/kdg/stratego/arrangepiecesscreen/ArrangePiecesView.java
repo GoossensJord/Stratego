@@ -2,7 +2,6 @@ package be.kdg.stratego.arrangepiecesscreen;
 
 import javafx.collections.FXCollections;
 import javafx.geometry.HPos;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -13,6 +12,9 @@ import javafx.scene.shape.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class responsible for the layout of the arrange pieces screen
+ */
 public class ArrangePiecesView extends GridPane {
 
     GridPane board;
@@ -33,14 +35,17 @@ public class ArrangePiecesView extends GridPane {
     boolean setupList;
 
 
-
-
+    /**
+     * Constructor which initialises and lays out the nodes
+     */
     public ArrangePiecesView() {
         this.initialiseNodes();
         this.layoutNodes();
     }
 
-
+    /**
+     * Method that initialises the nodes.
+     */
     private void initialiseNodes() {
         board = new GridPane();
         Image backgroundImage = new Image("/StrategoBoard.jpeg");
@@ -65,7 +70,9 @@ public class ArrangePiecesView extends GridPane {
 
     }
 
-
+    /**
+     * Method that lays out the nodes on the gridpane.
+     */
     private void layoutNodes() {
 
         for (int i = 0; i < 40; i++) {
@@ -115,6 +122,105 @@ public class ArrangePiecesView extends GridPane {
         board.setRotate(-90);
     }
 
+    /**
+     * Makes a list of all the pieces by name, adds it to a listview for manual assignment
+     * */
+    void setListItems(List<String> items) {
+        if(setupList) setupListString = items;
+        else pieceListString = items;
+        commonListView.setItems(FXCollections.observableList(items));
+    }
+
+
+
+    /**
+     * Method that removes a piece from the list after it has been given a place
+     * */
+    void removeListItem(String s){
+        for (int i = 0; i < commonListView.getItems().size(); i++) {
+            if(s.equals(commonListView.getItems().get(i))) {
+                commonListView.getItems().remove(i);
+                break;
+            }
+        }
+        setListItems(pieceListString);
+    }
+
+    /**
+     * Method that puts an image on the square and adds the related piece to the backend board
+     */
+    void setPicture(Image image, int x, int y) {
+
+        ImageView imageview = new ImageView(image);
+        board.setHalignment(imageview, HPos.CENTER);
+
+        imageview.setFitWidth(78);
+        imageview.setFitHeight(54);
+        imageview.setRotate(90);
+
+        imageview.setId(x + "" + y);
+        board.add(imageview, x, y);
+        allPieces.add(imageview);
+    }
+
+    /**
+     * Method that puts a String label on a square that does not have a piece
+     */
+    void setPosition(String n, int x, int y) {
+        Label z = new Label(n);
+        z.setTextFill(Color.BLACK);
+        board.add(z, x, y);
+        GridPane.setHalignment(z, HPos.CENTER);
+    }
+
+    /**
+     * Lights up the rectangles on the gridpane depending on the player ID given
+     */
+    void lightUpRectangles(int playerID) {
+        int x;
+        int y = 0;
+        int start = 0;
+        if (playerID == 0) {
+            x = 3;
+            y = 9;
+        } else {
+            start = 6;
+            x = 9;
+            y = 9;
+        }
+
+        for (int i = start; i <= x; i++) {
+            for (int j = 0; j <= y; j++) {
+
+                Rectangle rect = new Rectangle(78, 78);
+                rect.setFill(Color.GREEN);
+                rect.setOpacity(0.7);
+                rect.setId(i + "" + j);
+                coloredRectangles.add(rect);
+                board.add(rect, i, j);
+            }
+        }
+    }
+
+    /**
+     * Method that dims the square on the gridpane
+     */
+    void dimSquare(int x, int y) {
+        for (Rectangle r : coloredRectangles) {
+            if (r.getId().equals(x + "" + y)) {
+                board.getChildren().remove(r);
+            }
+        }
+    }
+
+    public Button getReturnToMenuButton() {
+        return returnToMenuButton;
+    }
+
+    public Button getLoadSetupBtn() {
+        return loadSetupsBtn;
+    }
+
     GridPane getBoard() {
         return board;
     }
@@ -146,88 +252,11 @@ public class ArrangePiecesView extends GridPane {
     Button getPlayer2() {
         return player2;
     }
-
-    void setListItems(List<String> items) {
-        if(setupList) setupListString = items;
-        else pieceListString = items;
-        commonListView.setItems(FXCollections.observableList(items));
-    }
     public void setSetupList(boolean setupList) {
         this.setupList = setupList;
     }
 
-    void removeListItem(String s){
-        for (int i = 0; i < commonListView.getItems().size(); i++) {
-            if(s.equals(commonListView.getItems().get(i))) {
-                commonListView.getItems().remove(i);
-                break;
-            }
-        }
-        setListItems(pieceListString);
-    }
 
-    void setPicture(Image image, int x, int y) {
-
-        ImageView imageview = new ImageView(image);
-        board.setHalignment(imageview, HPos.CENTER);
-
-        imageview.setFitWidth(78);
-        imageview.setFitHeight(54);
-        imageview.setRotate(90);
-
-        imageview.setId(x + "" + y);
-        board.add(imageview, x, y);
-        allPieces.add(imageview);
-    }
-
-    void setPosition(String n, int x, int y) {
-        Label z = new Label(n);
-        z.setTextFill(Color.BLACK);
-        board.add(z, x, y);
-        GridPane.setHalignment(z, HPos.CENTER);
-    }
-
-    void lightUpRectangles(int playerID) {
-        int x;
-        int y = 0;
-        int start = 0;
-        if (playerID == 0) {
-            x = 3;
-            y = 9;
-        } else {
-            start = 6;
-            x = 9;
-            y = 9;
-        }
-
-        for (int i = start; i <= x; i++) {
-            for (int j = 0; j <= y; j++) {
-
-                Rectangle rect = new Rectangle(78, 78);
-                rect.setFill(Color.GREEN);
-                rect.setOpacity(0.7);
-                rect.setId(i + "" + j);
-                coloredRectangles.add(rect);
-                board.add(rect, i, j);
-            }
-        }
-    }
-
-    void dimSquare(int x, int y) {
-        for (Rectangle r : coloredRectangles) {
-            if (r.getId().equals(x + "" + y)) {
-                board.getChildren().remove(r);
-            }
-        }
-    }
-
-    public Button getReturnToMenuButton() {
-        return returnToMenuButton;
-    }
-
-    public Button getLoadSetupBtn() {
-        return loadSetupsBtn;
-    }
 }
 
 

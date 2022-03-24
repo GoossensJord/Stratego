@@ -10,11 +10,17 @@ import be.kdg.stratego.model.GameModel;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
+/**
+ * Class responsible for selecting a game mode
+ */
 public class SelectGameModePresenter {
 
     GameModel gameModel;
     SelectGameModeView gameModeView;
 
+    /**
+     * Constructor which takes a model and a view to present the game mode select screen
+     */
     public SelectGameModePresenter(GameModel gameModel, SelectGameModeView gameModeView){
         this.gameModel = gameModel;
         this.gameModeView = gameModeView;

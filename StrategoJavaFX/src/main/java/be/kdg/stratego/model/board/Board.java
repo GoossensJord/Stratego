@@ -7,7 +7,7 @@ import be.kdg.stratego.model.pieces.Rank;
 import java.util.List;
 
 /**
- * Contains the backend board
+ * Contains the backend board and its related methods
  */
 
 public class Board {
@@ -88,6 +88,14 @@ public class Board {
         return p.getRankPower() > p1.getRankPower();
 
     }
+    /**
+     * Method that clears the board and fills it with empty squares
+     */
+    public void clearBoard(){
+        boardMaker.clearBoard();
+        fillWithSquares();
+    }
+
     public Square[][] getBord() {
         return boardMaker.squaresBoard;
     }
@@ -97,8 +105,5 @@ public class Board {
         return boardMaker.getPieceListByID(id);
     }
 
-    public void clearBoard(){
-        boardMaker.clearBoard();
-        fillWithSquares();
-    }
+
 }

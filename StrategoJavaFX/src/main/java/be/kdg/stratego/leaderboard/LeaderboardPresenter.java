@@ -8,18 +8,25 @@ import javafx.event.EventHandler;
 
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-
+/**
+ * Class responsible for presenting the leaderboard
+ */
 public class LeaderboardPresenter {
 
     GameModel gameModel;
     LeaderboardView view;
-
+    /**
+     * Constructor which takes a model and a view to present the leaderboard screen
+     */
     public LeaderboardPresenter(GameModel gameModel, LeaderboardView view) {
         this.gameModel = gameModel;
         this.view = view;
         this.addEventHandlers();
     }
 
+    /**
+     * Adds event handlers for the different buttons.
+     */
     private void addEventHandlers(){
         view.getBackToMainMenuButton().setOnAction(new EventHandler<ActionEvent>() {
             @Override

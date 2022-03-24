@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Class responsible for making the board
+ */
 public class BoardMaker {
     private int boardHeight = 60;
     private int boardWidth = 20;
@@ -67,10 +70,14 @@ public class BoardMaker {
         }
     }
 
+    /**
+     * Returns the piece list depending on the player ID given
+     */
     public List<Piece> getPieceListByID(int id){
         if(id == 0) return piecesPlayerOne;
         else return piecesPlayerTwo;
     }
+
     public String manualPieceSelection(Piece p) {
         if (playerData.addPieceToPieceList(p) != null && !squaresBoard[p.getX()][p.getY()].getIsOccupied()) {
             System.out.println(squaresBoard[p.getX()][p.getY()].getIsOccupied());
@@ -80,6 +87,9 @@ public class BoardMaker {
         } else return "Failed, space occupied";
     }
 
+    /**
+     * Method for manually assigning pieces.
+     */
     public void placePieces() {
         int counter = 0;
         for (int i = 3; i >= 0; i--) {
@@ -117,7 +127,9 @@ public class BoardMaker {
 
     }
 
- //may not be needed xd
+    /**
+     * Gets pieces one player to display on the view during turn change
+     */
     public List<int[]> getPiecesOnePlayer(int id) {
         List<int[]> pieces = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
@@ -132,6 +144,11 @@ public class BoardMaker {
 
         return pieces;
     }
+
+    /**
+     * Calculates the score of the winning player for the leaderboard, it adds up all the power levels of the players remaining pieces.
+     * @return Returns an Intiger that holds the sum of all remaining pieces power levels.
+     */
     public int getScore(int id) {
         int score = 0;
         for (int i = 0; i < 10; i++) {
@@ -145,9 +162,12 @@ public class BoardMaker {
         }
         return score;
     }
+
+    /**
+     * Clears the board of pieces and empties the piece lists of each player
+     */
     public void clearBoard(){
         squaresBoard = new Square[SQUARE_ARRAY_HEIGHT + 1][SQUARE_ARRAY_WIDTH + 1];
-
         piecesPlayerTwo = new ArrayList<>();
         piecesPlayerOne = new ArrayList<>();
     }

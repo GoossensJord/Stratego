@@ -10,6 +10,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+/**
+ * View responsible for leaderboard
+ */
 public class LeaderboardView extends GridPane {
     Button backToMainMenuButton;
     Button resetHighScoresButton;
@@ -18,11 +21,16 @@ public class LeaderboardView extends GridPane {
     TextArea leaderBoardTitle;
     ImageView highScoreImage;
 
+    /**
+     * Constructor which calls the initialise nodes and layout nodes method as those are needed immediately.
+     */
     public LeaderboardView() {
         this.initialiseNodes();
         this.layoutNodes();
     }
-
+    /**
+     * Initialises the nodes on this view
+     */
     private void initialiseNodes(){
         backToMainMenuButton = new Button("Exit");
         resetHighScoresButton = new Button("Reset");
@@ -57,6 +65,10 @@ public class LeaderboardView extends GridPane {
         leaderBoardTitle.setEditable(false);
     }
 
+    /**
+     * Method that gives back a String to put in the highscore text area
+     * @return
+     */
     private String getHighScoreString() {
         StringBuilder highScoreString = new StringBuilder();
         try {

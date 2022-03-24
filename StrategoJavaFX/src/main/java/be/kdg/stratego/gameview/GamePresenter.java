@@ -9,11 +9,16 @@ import javafx.scene.input.MouseEvent;
 
 import java.util.List;
 
-
+/**
+ * Class responsible for presenting the game itself.
+ */
 public class GamePresenter {
     GameModel model;
     GameView view;
 
+    /**
+     * Constructor that takes a model and a view to present the game.
+     */
     public GamePresenter(GameModel model, GameView view) {
         this.model = model;
         this.view = view;

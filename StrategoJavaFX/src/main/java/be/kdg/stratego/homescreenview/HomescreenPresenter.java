@@ -15,11 +15,17 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.WindowEvent;
 
+/**
+ * Class responsible for presenting the home screen.
+ */
 public class HomescreenPresenter {
 
      GameModel gameModel;
      HomescreenView view;
 
+    /**
+     * Constructor which takes a model and a view to present the home screen
+     */
     public HomescreenPresenter(GameModel gameModel, HomescreenView view) {
         this.gameModel = gameModel;
         this.view = view;

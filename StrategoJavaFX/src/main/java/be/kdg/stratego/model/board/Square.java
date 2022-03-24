@@ -11,21 +11,36 @@ public class Square {
     private boolean isOccupied;
     public Piece p;
 
-
+    /**
+     * Constructor for square, as a square is initialised the boolean isOccupied is set to false, because no piece has been put on the square yet.
+     */
     public Square() {
         this.isOccupied = false;
 
 
     }
 
-    public Piece getPiece() {
-        return this.p;
+    /**
+     * Removes piece from a square
+     */
+    public void removePiece() {
+        this.p = null;
+        isOccupied = false;
     }
 
+    /**
+     *Sets a piece on the square, also sets the boolean isOccupied to true
+     * */
     public void setPiece(Piece p) {
         this.p = p;
         this.isOccupied = true;
     }
+
+    public Piece getPiece() {
+        return this.p;
+    }
+
+
 
     public boolean getIsOccupied() {
         return this.isOccupied;
@@ -35,10 +50,7 @@ public class Square {
         isOccupied = occupied;
     }
 
-    public void removePiece() {
-        this.p = null;
-        isOccupied = false;
-    }
+
 }
 
 

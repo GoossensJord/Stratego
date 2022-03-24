@@ -45,8 +45,6 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
         int x = (int) (mouseEvent.getX() / 78);
         int y = (int) (mouseEvent.getY() / 78);
 
-        //  model.makePieceByString(view.getNotifications().getText().substring(1,3),x,y);
-
         if (!midMove) selectPiece(x, y);
         else {
             openSpace = choosePlay(x, y);

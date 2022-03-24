@@ -11,19 +11,27 @@ import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
+
+/**
+ * Class responsible for presenting the arrange piece screen
+ */
 public class ArrangePiecesPresenter {
     private GameModel model;
     private ArrangePiecesView view;
 
+    /**
+     * Constructor that takes a model and a view to present the arrange pieces screen.
+     */
     public ArrangePiecesPresenter(GameModel model, ArrangePiecesView view) {
         this.model = model;
         this.view = view;
         this.addEventHandlers();
     }
 
+    /**
+     * Method that adds event handlers to the Nodes
+     */
     private void addEventHandlers() {
         view.getListView().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
@@ -136,6 +144,9 @@ public class ArrangePiecesPresenter {
 
     }
 
+    /**
+     * Method that fills the board with images where a piece is present and else it fills it with an empty string
+     */
     private void fillBoardWithImages() {
         for (int i = 9; i >= 0; i--) {
             for (int j = 0; j < 10; j++) {
