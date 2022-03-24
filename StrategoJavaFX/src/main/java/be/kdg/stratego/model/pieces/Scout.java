@@ -7,12 +7,9 @@ import javafx.scene.image.Image;
 import java.util.ArrayList;
 import java.util.List;
 
-//todo attack on first move
-//moves any distance horizontal & vertical (no leaping over)
+
 public class Scout extends Piece {
-    private boolean firstMove = true;
-    private boolean firstAttack = true;
-    private int jumpCounter = 0;
+
     protected List<ArrayList<int[]>> movableSquares;
 
     public Scout(Rank scout, Player player, int x, int y) {
@@ -42,91 +39,77 @@ public class Scout extends Piece {
 
     }
 
-
-    private boolean xJumpChecker(int xPosAttacking, int xPosGettingAttacked) {
-        int xstart = xPosAttacking;
-        int xend = xPosGettingAttacked;
-        if (xPosGettingAttacked < xPosAttacking) {
-            xstart = xPosGettingAttacked;
-            xend = xPosAttacking;
-        }
-
-        for (int i = xstart; i <= xend; i++) {
-            if (this.getPlayer().getBoard().getBord()[this.x][i].getPiece().getPlayer().getId() == GameSaveState.getPlayerTurn().getId())
-                return true;
-        }
-        return false;
-    }
-
-    private boolean yJumpChecker(int yPosAttacking, int yPosGettingAttacked) {
-        int ystart = yPosAttacking;
-        int yend = yPosGettingAttacked;
-        if (yPosGettingAttacked < yPosAttacking) {
-            ystart = yPosGettingAttacked;
-            yend = yPosAttacking;
-        }
-
-        for (int i = ystart; i <= yend; i++) {
-            if (this.getPlayer().getBoard().getBord()[i][this.y].getPiece().getPlayer().getId() == GameSaveState.getPlayerTurn().getId())
-                return true;
-        }
-        return false;
-    }
-
     public List<int[]> yAttackable() {
-        List<int[]> attacks = new ArrayList<>();
+        List<int[]> attacksLeft = new ArrayList<>();
+        List<int[]> attacksRight = new ArrayList<>();
+        int rightJumpCounter = 0;
+        int leftJumpCounter = 0;
         int yval = this.x;
         for (int i = yval + 1; i < 10; i++) {
             Piece p1 = this.getPlayer().getBoard().getBord()[i][this.y].getPiece();
             //noinspection SuspiciousNameCombination
             if (!this.getPlayer().getBoard().spaceAvailable(i, this.y) && !this.getPlayer().equals(p1.getPlayer())) {
-                if (yJumpChecker(this.x, i)) {
-                    attacks.add(new int[]{i, this.y});
+
+                    attacksRight.add(new int[]{i, this.y});
                     break;
-                }
+
             }
+            if(!this.getPlayer().getBoard().spaceAvailable(i, this.y) && this.getPlayer().getId() == p1.getPlayer().getId()) rightJumpCounter++;
+
         }
         for (int i = yval - 1; i >= 0; i--) {
             Piece p1 = this.getPlayer().getBoard().getBord()[i][this.y].getPiece();
             //noinspection SuspiciousNameCombination
             if (!this.getPlayer().getBoard().spaceAvailable(i, this.y) && !this.getPlayer().equals(p1.getPlayer())) {
-                if (yJumpChecker(this.x, i)) {
-                    attacks.add(new int[]{i, this.y});
+
+                    attacksLeft.add(new int[]{i, this.y});
                     break;
-                }
+
             }
+            if(!this.getPlayer().getBoard().spaceAvailable(i, this.y) && this.getPlayer().getId() == p1.getPlayer().getId()) leftJumpCounter++;
 
         }
-        return attacks;
+        if(rightJumpCounter > 0) attacksRight = new ArrayList<>();
+        if(leftJumpCounter > 0) attacksLeft = new ArrayList<>();
+        attacksRight.addAll(attacksLeft);
+        return attacksRight;
     }
 
 
     public List<int[]> xAttackable() {
-        List<int[]> attacks = new ArrayList<>();
+        List<int[]> attacksUp = new ArrayList<>();
+        List<int[]> attacksDown = new ArrayList<>();
+        int positiveJumpCounter = 0;
+        int negativeJumpCounter = 0;
         int xval = this.y;
         for (int i = xval + 1; i < 10; i++) {
             Piece p1 = this.getPlayer().getBoard().getBord()[this.x][i].getPiece();
 
             //noinspection SuspiciousNameCombination
             if (!this.getPlayer().getBoard().spaceAvailable(this.x, i) && !this.getPlayer().equals(p1.getPlayer())) {
-                if (xJumpChecker(i, this.y)) {
-                    attacks.add(new int[]{this.x, i});
+
+                    attacksUp.add(new int[]{this.x, i});
                     break;
                 }
-            }
+            if(!this.getPlayer().getBoard().spaceAvailable(this.x, i) && this.getPlayer().getId() == p1.getPlayer().getId()) positiveJumpCounter++;
         }
         for (int i = xval - 1; i >= 0; i--) {
             Piece p1 = this.getPlayer().getBoard().getBord()[this.x][i].getPiece();
 
             //noinspection SuspiciousNameCombination
             if (!this.getPlayer().getBoard().spaceAvailable(this.x, i) && !this.getPlayer().equals(p1.getPlayer())) {
-                if (xJumpChecker(i, this.y)) {
-                    attacks.add(new int[]{this.x, i});
+
+                    attacksDown.add(new int[]{this.x, i});
                     break;
-                }
+
             }
+            if(!this.getPlayer().getBoard().spaceAvailable(this.x, i) && this.getPlayer().getId() == p1.getPlayer().getId()) negativeJumpCounter++;
+
         }
-        return attacks;
+        if(negativeJumpCounter >0) attacksDown = new ArrayList<>();
+        if(positiveJumpCounter >0) attacksUp = new ArrayList<>();
+        attacksDown.addAll(attacksUp);
+        return attacksDown;
     }
 
 

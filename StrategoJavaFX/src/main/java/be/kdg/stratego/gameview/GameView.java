@@ -184,7 +184,7 @@ public class GameView extends GridPane {
             pos[1] = attackArr.get(i)[1];
             Rectangle rect = new Rectangle(78, 78);
             rect.setFill(Color.RED);
-            rect.setOpacity(0.4);
+            rect.setOpacity(0.3);
             board.add(rect, pos[0], pos[1]);
             coloredRectangles.add(rect);
         }

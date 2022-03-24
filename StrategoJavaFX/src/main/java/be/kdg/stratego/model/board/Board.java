@@ -84,6 +84,7 @@ public class Board {
     public boolean matchupChecker(Piece p, Piece p1){
         if(p.getRank().equals(Rank.MINER) && p1.getRank().equals(Rank.BOMB)) return true;
         if(p.getRank().equals(Rank.SPY) && p1.getRank().equals(Rank.MARSHAL)) return true;
+        if(p.getRank().equals(p1.getRank())) return true;
         return p.getRankPower() > p1.getRankPower();
 
     }
