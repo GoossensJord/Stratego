@@ -50,7 +50,7 @@ public class GamePresenter {
 
         });
         view.getBackToMainMenuButton().setOnAction(event -> {
-            model.clearBoardOfPieces();
+            model.clearBoard();
             HomescreenView homeView = new HomescreenView();
             HomescreenPresenter homePresenter = new HomescreenPresenter(model,homeView);
             view.getScene().setRoot(homeView);

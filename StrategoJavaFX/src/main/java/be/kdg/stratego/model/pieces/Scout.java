@@ -1,26 +1,28 @@
 package be.kdg.stratego.model.pieces;
 
-import be.kdg.stratego.model.GameSaveState;
+
 import be.kdg.stratego.model.player.Player;
-import javafx.scene.image.Image;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Class responsible for Scout, extends Piece
+ */
 public class Scout extends Piece {
 
-    protected List<ArrayList<int[]>> movableSquares;
-
+    /**
+     * Constructor for Scout, initialises its rank, its player and the x y value on the board.
+     */
     public Scout(Rank scout, Player player, int x, int y) {
         super(Rank.SCOUT, player, x, y);
-        this.image = new Image("Scout.png");
-
-        movableSquares = new ArrayList<>();
-        for (int i = 0; i < 4; i++) movableSquares.add(new ArrayList<>());
 
     }
 
+    /**
+     * A method that combines all the attack lists and returns it as one list.
+     */
     public List<int[]> allAttacks() {
 
         List<int[]> allAttacks = new ArrayList<>(xAttackable());
@@ -28,7 +30,9 @@ public class Scout extends Piece {
         return allAttacks;
 
     }
-
+    /**
+     * A method that combines all the move lists and returns it as one list.
+     */
     public List<int[]> allMoves() {
 
         List<int[]> allmoves = new ArrayList<>(xMoveable());
@@ -39,6 +43,10 @@ public class Scout extends Piece {
 
     }
 
+    /**
+     * A method that checks both left and right of the Scout, it goes through the squares one by one, once it finds a square that is occupied by an enemy it will add it to the arraylist, only doing this once per direction. It also has to break if it encounters an ally piece without adding it to the attack list
+     * @return Returns a list of all attack possibilities left and right
+     */
     public List<int[]> yAttackable() {
         List<int[]> attacksLeft = new ArrayList<>();
         List<int[]> attacksRight = new ArrayList<>();
@@ -75,7 +83,10 @@ public class Scout extends Piece {
         return attacksRight;
     }
 
-
+    /**
+     * A method that checks both up and down of the Scout, it goes through the squares one by one, once it finds a square that is occupied by an enemy it will add it to the arraylist, only doing this once per direction. It also has to break if it encounters an ally piece without adding it to the attack list
+     * @return Returns a list of all attack possibilities up and down.
+     */
     public List<int[]> xAttackable() {
         List<int[]> attacksUp = new ArrayList<>();
         List<int[]> attacksDown = new ArrayList<>();
@@ -112,7 +123,10 @@ public class Scout extends Piece {
         return attacksDown;
     }
 
-
+    /**
+     * A method that checks both left and right of the Scout, it goes through the squares one by one, adding each available square until it finds an occupied one.
+     * @return Returns a list of all move possibilities left and right
+     */
     public List<int[]> yMoveable() {
         List<int[]> moves = new ArrayList<>();
         int xval = this.x;
@@ -131,18 +145,19 @@ public class Scout extends Piece {
 
     }
 
-
+    /**
+     * A method that checks both up and down of the Scout, it goes through the squares one by one, adding each available square until it finds an occupied one.
+     * @return Returns a list of all move possibilities up and down
+     */
     public List<int[]> xMoveable() {
         List<int[]> moves = new ArrayList<>();
         int yval = this.y;
 
         for (int i = yval + 1; i < 10; i++) {
-            //noinspection SuspiciousNameCombination
             if (this.getPlayer().getBoard().spaceAvailable(this.x, i)) moves.add(new int[]{this.x, i});
             else break;
         }
         for (int i = yval - 1; i >= 0; i--) {
-            //noinspection SuspiciousNameCombination
             if (this.getPlayer().getBoard().spaceAvailable(this.x, i)) moves.add(new int[]{this.x, i});
             else break;
         }

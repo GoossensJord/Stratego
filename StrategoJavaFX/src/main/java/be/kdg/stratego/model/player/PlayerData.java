@@ -13,6 +13,9 @@ import java.util.List;
 public class PlayerData {
     List<Piece> piecesList;
 
+    /**
+     * Constructor which initialises the List.
+     */
     public PlayerData() {
         piecesList = new ArrayList<>();
     }
@@ -67,6 +70,12 @@ public class PlayerData {
         );
         return piecesList;
     }
+
+    /**
+     * Manually adds piece to piece list
+     * @param p Piece that you wish to add
+     * @return Returns piece for use in manual placement
+     */
     public Piece addPieceToPieceList(Piece p) {
         Rank instance = p.getRank();
 

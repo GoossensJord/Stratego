@@ -13,9 +13,11 @@ import be.kdg.stratego.model.GameSaveState;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 
+/**
+ * Class responsible for holding all model method, does a lot of back-end calls, used by presenters.
+ */
 public class GameModel {
     private GameSaveState GSS;
     private final BoardMaker boardMaker;
@@ -43,10 +45,6 @@ public class GameModel {
         boardMaker.placePieces();
     }
 
-    public void clearBoardOfPieces() {
-        boardMaker.clearBoard();
-    }
-
     /**
      * Returns a list of int arrays which include the possible moves for this piece, depending on wether or not the piece is a scout it will call a different method.
      */
@@ -67,10 +65,16 @@ public class GameModel {
         return boardMaker.getListView();
     }
 
+    /**
+     * Returns the piece list of one player depending on the ID given
+     */
     public List<Piece> getPlayerPiecesById(int id) {
         return getPlayerByID(id).getPiecesList();
     }
 
+    /**
+     * A method for determining the attack, depending on wether the piece is a scout or not.
+     */
     public List<int[]> getAttacks(Piece p) {
         if (p == null) return null;
         if (p instanceof Scout) return ((Scout) p).allAttacks();
@@ -138,14 +142,25 @@ public class GameModel {
         }
     }
 
+    /**
+     * calls the board method to clear the board.
+     */
     public void clearBoard() {
         board.clearBoard();
     }
 
+    /**
+     * Returns the coordinates piece list of one player depending on the ID given
+     */
     public List<int[]> piecesOnePlayer(int id) {
         return boardMaker.getPiecesOnePlayer(id);
     }
 
+    /**
+     * Returns the player by ID.
+     * @param id Each player has an ID, by asking for it in the parameter we can get the player itself.
+     * @return returns the appropriate player.
+     */
     public Player getPlayerByID(int id) {
         if (pl.getId() == id) return pl;
         else return pl2;
@@ -160,6 +175,10 @@ public class GameModel {
         System.out.print("magnie");
         return false;
     }
+
+    /**
+     * A method that gets the current score by adding up all the remaining pieces power of that player and writes it to a file.
+     */
     public void setScore(Player player){
         try{
 
@@ -182,6 +201,9 @@ public class GameModel {
         }
     }
 
+    /**
+     * A method to set the player names in the gamemode select screen
+     */
     public void setPlayerName(String name, String nameTwo) {
         pl.setName(name);
         pl2.setName(nameTwo);

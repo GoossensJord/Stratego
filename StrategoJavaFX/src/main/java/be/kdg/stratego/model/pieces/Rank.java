@@ -2,6 +2,9 @@ package be.kdg.stratego.model.pieces;
 
 import javafx.scene.image.Image;
 
+/**
+ * Enum class that holds all the differnt kinds of pieces, their power level, name, amount per player and their respective image.
+ */
 public enum Rank {
     BOMB(11, "Bomb", 6, new Image("bomb.png")),
     MARSHAL(10, "Marshal", 1, new Image("Marshal.png")),
@@ -23,7 +26,9 @@ public enum Rank {
     Image image;
     static int counter;
 
-
+    /**
+     * Constructor for Rank, initialises the power level, name of the rank, the amount you have and the image
+     */
     Rank(int power, String name, int amnt, Image image) {
         this.power = power;
         this.name = name;

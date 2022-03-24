@@ -6,11 +6,9 @@ import be.kdg.stratego.model.pieces.Piece;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 /**
  * Class boardEventHandler has as responsibility to process all mouse inputs on the board

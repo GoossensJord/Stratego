@@ -6,33 +6,35 @@ import javafx.scene.image.Image;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Superclass Piece, responsible for holding all the information and methods related to a piece.
+ */
 public class Piece {
 
-    protected Image image;
     protected Rank rank;
     protected Player player;
-    private boolean deadOrAlive;
     protected boolean isMovable;
     protected boolean canAttack;
     protected int x;
     protected int y;
 
 
-
+    /**
+     * Constructor that initialises a rank, player and xy coordinates on the board
+     */
     public Piece(Rank r, Player player, int x, int y) {
         this.rank = r;
         this.player = player;
-        this.deadOrAlive = true;
         this.isMovable = true;
         this.canAttack = true;
         this.x = x;
         this.y = y;
     }
 
-    public Piece() {
-    }
 
-
+    /**
+     * A method that returns a List of Intiger arrays by checking one square in each direction to see if it is available, if so it adds it to the list.
+     */
     public List<int[]> availableSquares(int x, int y) {
 
 
@@ -58,6 +60,10 @@ public class Piece {
             return moveList;
         } else return null;
     }
+
+    /**
+     * A method that returns a List of Intiger arrays by checking one square in each direction to see if it is available to attack, if so it adds it to the list.
+     */
     public List<int[]> getAttacks(int x, int y) {
 
 
@@ -92,9 +98,6 @@ public class Piece {
         return rank;
     }
 
-    public void setDeadOrAlive(boolean deadOrAlive) {
-        this.deadOrAlive = deadOrAlive;
-    }
 
     public String toString() {
         return this.rank.getName().substring(0, 2);
