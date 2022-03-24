@@ -1,5 +1,6 @@
 package be.kdg.stratego.leaderboard;
 
+import be.kdg.stratego.LeaderBoardModel;
 import be.kdg.stratego.homescreenview.HomescreenPresenter;
 import be.kdg.stratego.homescreenview.HomescreenView;
 import be.kdg.stratego.model.GameModel;
@@ -15,6 +16,7 @@ public class LeaderboardPresenter {
 
     GameModel gameModel;
     LeaderboardView view;
+    LeaderBoardModel leaderBoardModel = new LeaderBoardModel();
     /**
      * Constructor which takes a model and a view to present the leaderboard screen
      */
@@ -22,7 +24,9 @@ public class LeaderboardPresenter {
         this.gameModel = gameModel;
         this.view = view;
         this.addEventHandlers();
+
     }
+
 
     /**
      * Adds event handlers for the different buttons.
@@ -49,6 +53,12 @@ public class LeaderboardPresenter {
                     e.printStackTrace();
                 }
 
+            }
+        });
+        view.getUpdateLeaderboard().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                view.getHighScores().setText(leaderBoardModel.getHighScoreString() + "\n");
             }
         });
     }
