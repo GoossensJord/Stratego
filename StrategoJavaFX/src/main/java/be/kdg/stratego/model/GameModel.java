@@ -43,6 +43,9 @@ public class GameModel {
         boardMaker.placePieces();
     }
 
+    public void clearBoardOfPieces() {
+        boardMaker.clearBoard();
+    }
 
     /**
      * Returns a list of int arrays which include the possible moves for this piece, depending on wether or not the piece is a scout it will call a different method.
@@ -135,7 +138,7 @@ public class GameModel {
         }
     }
 
-    public void clearBoard(){
+    public void clearBoard() {
         board.clearBoard();
     }
 
@@ -158,11 +161,11 @@ public class GameModel {
         return false;
     }
 
-    public void loadSave(){
-        HashMap<String,List<int[]>> setupHashMap  = GameSaveState.getSetupHashMap();
-        for (String s: setupHashMap.keySet()) {
+    public void loadSave() {
+        HashMap<String, List<int[]>> setupHashMap = GameSaveState.getSetupHashMap();
+        for (String s : setupHashMap.keySet()) {
             for (int i = 0; i < setupHashMap.get(s).size(); i++) {
-                makePieceByString(s,setupHashMap.get(s).get(i)[0],setupHashMap.get(s).get(i)[1]);
+                makePieceByString(s, setupHashMap.get(s).get(i)[0], setupHashMap.get(s).get(i)[1]);
             }
         }
     }

@@ -126,6 +126,7 @@ public class ArrangePiecesPresenter {
         view.getReturnToMenuButton().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                model.clearBoardOfPieces();
                 HomescreenView homeView = new HomescreenView();
                 HomescreenPresenter homePresenter = new HomescreenPresenter(model, homeView);
                 view.getScene().setRoot(homeView);

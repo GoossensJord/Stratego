@@ -33,3 +33,16 @@ General:-2.8,
 Marshal:-1.6,
 Captain:-2.6,
 }; 
+jef:{
+Major:-2.6,
+Colonel:-2.8,
+Marshal:-3.8,
+Captain:-1.8,
+Bomb:-1.7,
+}; 
+niggasinparis:{
+Major:-1.5,
+Colonel:-3.6-1.9,
+General:-3.8,
+Captain:-1.7,
+}; 

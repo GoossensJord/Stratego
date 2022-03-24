@@ -146,7 +146,11 @@ public class BoardMaker {
         return score;
     }
     public void clearBoard(){
-        squaresBoard = new Square[SQUARE_ARRAY_HEIGHT + 1][SQUARE_ARRAY_WIDTH + 1];
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                squaresBoard[i][j].removePiece();
+            }
+        }
         piecesPlayerTwo = new ArrayList<>();
         piecesPlayerOne = new ArrayList<>();
     }
