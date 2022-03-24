@@ -1,6 +1,7 @@
 package be.kdg.stratego.gameview;
 
 import be.kdg.stratego.model.GameModel;
+import be.kdg.stratego.model.GameSaveState;
 import be.kdg.stratego.model.pieces.Piece;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
@@ -23,7 +24,6 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
     private GameModel model;
     private GameView view;
     private Piece p;
-    private int currentPlayer = 0;
 
     /**
      * Constructor that initialises the view and model. Also sets midMove to false and initialises the lists / arrays.
@@ -65,7 +65,7 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
 
         p = model.choosePiece(x, y);
         if (p != null) {
-            if (currentPlayer != p.getPlayer().getId()) {
+            if (GameSaveState.getPlayerTurn().getId() != p.getPlayer().getId()) {
                 view.getNotifications().setText("Not this piece's turn!");
                 return;
             }
@@ -174,9 +174,7 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
         model.piecesOnePlayer(1);
         view.dimSquare();
         view.setPicture(p.getImage(), move[0], move[1]);
-        if (currentPlayer == 1) {
-            currentPlayer--;
-        } else currentPlayer++;
+
         view.getEndTurn().setDisable(false);
         view.getBoard().setDisable(true);
         return true;
@@ -206,9 +204,7 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
 
         }
         view.dimSquare();
-        if (currentPlayer == 1) {
-            currentPlayer--;
-        } else currentPlayer++;
+
         view.getEndTurn().setDisable(false);
         view.getBoard().setDisable(true);
     }
