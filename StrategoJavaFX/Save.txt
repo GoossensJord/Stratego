@@ -21,3 +21,8 @@ testingsave:{
 Miner:-3.9-3.8,
 Scout:-3.5-3.7-3.6,
 }; 
+testje:{
+Major:-1.5,
+Colonel:-3.8,
+Bomb:-2.8,
+}; 

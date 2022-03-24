@@ -2,8 +2,11 @@ package be.kdg.stratego.loadSetup;
 
 import be.kdg.stratego.gameview.GamePresenter;
 import be.kdg.stratego.gameview.GameView;
+import be.kdg.stratego.homescreenview.HomescreenPresenter;
+import be.kdg.stratego.homescreenview.HomescreenView;
 import be.kdg.stratego.model.GameModel;
 import be.kdg.stratego.model.GameSaveState;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 
@@ -91,6 +94,15 @@ public class LoadSetupPresenter {
                 GamePresenter gamePresenter = new GamePresenter(model,gameView);
                 view.getScene().setRoot(gameView);
                 gameView.getScene().getWindow();
+            }
+        });
+        view.getReturnToMenuButton().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                HomescreenView homeView = new HomescreenView();
+                HomescreenPresenter homePresenter = new HomescreenPresenter(model,homeView);
+                view.getScene().setRoot(homeView);
+                homeView.getScene().getWindow();
             }
         });
     }

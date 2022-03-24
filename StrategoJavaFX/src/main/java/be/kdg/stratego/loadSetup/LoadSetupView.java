@@ -3,10 +3,7 @@ package be.kdg.stratego.loadSetup;
 import javafx.collections.FXCollections;
 import javafx.geometry.HPos;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -21,20 +18,21 @@ public class LoadSetupView extends GridPane {
 
     GridPane board;
     Background background;
-    TextField notifications;
+    TextArea notifications;
     Button btnSetPieces;
     Button loadSetupsBtn;
     Button returnToMenuButton;
     Button btnUseSetup;
     Button player1;
     Button player2;
+    Button confirmSetup;
+    Button startGame;
+    Button resetBtn;
     ListView commonListView;
     List<String> setupListString;
     boolean setupList;
-    Button resetBtn;
     List<ImageView> allPieces;
-    Button confirmSetup;
-    Button startGame;
+
 
     public LoadSetupView() {
         this.initialiseNodes();
@@ -49,20 +47,21 @@ public class LoadSetupView extends GridPane {
         BackgroundImage backgroundImageSetter = new BackgroundImage(backgroundImage, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, backgroundSize);
         background = new Background(backgroundImageSetter);
 
-        notifications = new TextField();
+        notifications = new TextArea();
         commonListView = new ListView<String>();
-        btnSetPieces = new Button("setPieces");
-        btnUseSetup = new Button("Use this setup");
+        btnSetPieces = new Button("Set Pieces");
+        btnUseSetup = new Button("Use Setup");
         returnToMenuButton = new Button("Quit");
-        loadSetupsBtn = new Button("Get all saved setups");
+        loadSetupsBtn = new Button("Saved setups");
         setupListString = new ArrayList<>();
         setupList = false;
-        resetBtn = new Button("reset setup");
+        resetBtn = new Button("Reset Setup");
         allPieces = new ArrayList<>();
         player1 = new Button("Player 1");
         player2 = new Button("Player 2");
-        confirmSetup = new Button("Confirm this setup");
-        startGame = new Button("Start game with setup");
+        confirmSetup = new Button("Confirm Setup");
+        startGame = new Button("Start Game");
+
     }
 
 
@@ -88,14 +87,26 @@ public class LoadSetupView extends GridPane {
 
         GridPane.setConstraints(notifications, 45, 30, 5, 5);
         GridPane.setConstraints(commonListView, 60, 10, 100, 15);
+        GridPane.setConstraints(loadSetupsBtn,56,35,10,3);
+        GridPane.setConstraints(resetBtn, 42, 20, 10, 3);
+        GridPane.setConstraints(returnToMenuButton, 64, 35, 10, 3);
+        GridPane.setConstraints(player2, 50, 15, 10, 3);
+        GridPane.setConstraints(player1,42,15,10 ,3);
+        GridPane.setConstraints(confirmSetup, 50, 20, 10, 3);
+        GridPane.setConstraints(startGame, 48, 35, 10, 3);
 
-        GridPane.setConstraints(loadSetupsBtn, 50, 15, 4, 4);
-        GridPane.setConstraints(resetBtn, 40, 15, 4, 4);
-        GridPane.setConstraints(returnToMenuButton, 60, 35, 10, 2);
-        GridPane.setConstraints(player2, 50, 20, 4, 4);
-        GridPane.setConstraints(player1, 45, 20, 4, 4);
-        GridPane.setConstraints(confirmSetup, 40, 20, 4, 4);
-        GridPane.setConstraints(startGame, 70, 35, 4, 4);
+        this.getStylesheets().add("style.css");
+        this.setId("gameBackground");
+        player1.setId("selectGameModeButtonSmall");
+        player2.setId("selectGameModeButtonSmall");
+        btnSetPieces.setId("selectGameModeButtonSmall");
+        loadSetupsBtn.setId("selectGameModeButtonSmall");
+        returnToMenuButton.setId("selectGameModeButtonSmall");
+        btnUseSetup.setId("selectGameModeButtonSmall");
+        confirmSetup.setId("selectGameModeButtonSmall");
+        startGame.setId("selectGameModeButtonSmall");
+        resetBtn.setId("selectGameModeButtonSmall");
+
 
 
         commonListView.setPrefHeight(200);
@@ -136,7 +147,7 @@ public class LoadSetupView extends GridPane {
         return startGame;
     }
 
-    public TextField getNotifications() {
+    public TextArea getNotifications() {
         return notifications;
     }
 
@@ -183,7 +194,9 @@ public class LoadSetupView extends GridPane {
         return player2;
     }
 
-
+    public Button getReturnToMenuButton() {
+        return returnToMenuButton;
+    }
 }
 
 

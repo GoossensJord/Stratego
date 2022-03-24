@@ -3,10 +3,7 @@ package be.kdg.stratego.arrangepiecesscreen;
 import javafx.collections.FXCollections;
 import javafx.geometry.HPos;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -20,7 +17,7 @@ public class ArrangePiecesView extends GridPane {
 
     GridPane board;
     Background background;
-    TextField notifications;
+    TextArea notifications;
     Button btnSetPieces;
     Button player1;
     Button player2;
@@ -37,6 +34,7 @@ public class ArrangePiecesView extends GridPane {
 
 
 
+
     public ArrangePiecesView() {
         this.initialiseNodes();
         this.layoutNodes();
@@ -50,18 +48,18 @@ public class ArrangePiecesView extends GridPane {
         BackgroundImage backgroundImageSetter = new BackgroundImage(backgroundImage, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, backgroundSize);
         background = new Background(backgroundImageSetter);
 
-        notifications = new TextField();
+        notifications = new TextArea();
         commonListView = new ListView<String>();
         allPieces = new ArrayList<>();
         coloredRectangles = new ArrayList<>();
         pieceListString = new ArrayList<>();
         player1 = new Button("Player 1");
         player2 = new Button("Player 2");
-        saveSetup = new Button("save this setup");
-        btnSetPieces = new Button("setPieces");
-        btnUseSetup = new Button("Use this setup");
+        saveSetup = new Button("Save Setup");
+        btnSetPieces = new Button("Set Pieces");
+        btnUseSetup = new Button("Use setup");
         returnToMenuButton = new Button("Quit");
-        loadSetupsBtn = new Button("Get all saved setups");
+        loadSetupsBtn = new Button("Saved Setups");
         setupListString = new ArrayList<>();
         setupList = false;
 
@@ -86,16 +84,28 @@ public class ArrangePiecesView extends GridPane {
             board.getRowConstraints().add(new RowConstraints(78));
         }
         GridPane.setConstraints(board, 0, 18, 4, 4);
-        GridPane.setConstraints(player2, 50, 20, 4, 4);
-        GridPane.setConstraints(player1,45,20,4 ,4);
-        GridPane.setConstraints(btnSetPieces,47,25,4,4);
-        GridPane.setConstraints(btnUseSetup, 40,15 , 4,4);
+        GridPane.setConstraints(player2, 50, 20, 10, 4);
+        GridPane.setConstraints(player1,42,20,10 ,4);
+        GridPane.setConstraints(btnSetPieces,47,10,10,3);
+        GridPane.setConstraints(btnUseSetup, 40,35 , 10,3);
+        GridPane.setConstraints(saveSetup,48 ,35,10,3);
+        GridPane.setConstraints(loadSetupsBtn,56,35,10,3);
+        GridPane.setConstraints(returnToMenuButton, 64, 35, 10, 3);
         GridPane.setConstraints(notifications, 45, 30, 5, 5);
         GridPane.setConstraints(commonListView, 60, 10, 100, 15);
-        GridPane.setConstraints(saveSetup,45 ,15,4,4);
-        GridPane.setConstraints(loadSetupsBtn,50,15,4,4);
-        GridPane.setConstraints(returnToMenuButton, 60, 35, 10, 2);
 
+
+
+        this.getStylesheets().add("style.css");
+        this.setId("gameBackground");
+        player1.setId("selectGameModeButtonSmall");
+        player2.setId("selectGameModeButtonSmall");
+        saveSetup.setId("selectGameModeButtonSmall");
+        btnSetPieces.setId("selectGameModeButtonSmall");
+        btnUseSetup.setId("selectGameModeButtonSmall");
+        returnToMenuButton.setId("selectGameModeButtonSmall");
+        loadSetupsBtn.setId("selectGameModeButtonSmall");
+        notifications.setId("textArea");
         commonListView.setPrefHeight(200);
         commonListView.setPrefHeight(2000);
         notifications.setMinWidth(2000);
@@ -125,7 +135,7 @@ public class ArrangePiecesView extends GridPane {
         return pieceListString.size();
     }
 
-    TextField getNotifications() {
+    TextArea getNotifications() {
         return notifications;
     }
 
