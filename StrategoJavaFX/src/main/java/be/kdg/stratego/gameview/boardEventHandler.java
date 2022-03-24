@@ -19,8 +19,8 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
     private List<int[]> midMovearr;
     private List<int[]> midAttackarr;
     private int[] prevPosPiece;
-    private GameModel model;
-    private GameView view;
+    private final GameModel model;
+    private final GameView view;
     private Piece p;
 
     /**
@@ -119,7 +119,10 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
         int[] attack = getMovesOrAttacks(midAttackarr, x, y);
         this.midMove = false;
 
-        if (moveable && !model.getBoard()[move[0]][move[1]].getIsOccupied()) return makeMove(p, prevPosPiece, move);
+        if (moveable && !model.getBoard()[move[0]][move[1]].getIsOccupied()){
+             makeMove(p, prevPosPiece, move);
+            return true;
+        }
         else if (attackable) makeAttack(p, model.getBoard()[attack[0]][attack[1]].getPiece(), attack);
         else{
             view.getNotifications().setText("");
@@ -162,9 +165,8 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
     /**
      * A method to finalize the move, asks the model to make the chosen move and the view to change the board accordingly, is called upon in the chooseplay method.
      *
-     * @return return value used in chooseplay to determine wether or not the space is open.
      */
-    private boolean makeMove(Piece p, int[] oldPosition, int[] move) {
+    private void makeMove(Piece p, int[] oldPosition, int[] move) {
         view.getNotifications().setText(model.getBoard()[oldPosition[0]][oldPosition[1]].getPiece().getPlayer().getName() + "'s " + model.getBoard()[oldPosition[0]][oldPosition[1]].getPiece().getRank().getName() + " moved to square " + (9 - move[0]) + ":" + move[1]);
         model.makeChosenMove(move, p);
         model.piecesOnePlayer(1);
@@ -173,7 +175,6 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
 
         view.getEndTurn().setDisable(false);
         view.getBoard().setDisable(true);
-        return true;
 
     }
 

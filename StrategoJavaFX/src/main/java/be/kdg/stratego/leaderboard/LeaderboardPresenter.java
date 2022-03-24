@@ -32,34 +32,23 @@ public class LeaderboardPresenter {
      * Adds event handlers for the different buttons.
      */
     private void addEventHandlers(){
-        view.getBackToMainMenuButton().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                HomescreenView homeView = new HomescreenView();
-                HomescreenPresenter homePresenter = new HomescreenPresenter(gameModel,homeView);
-                view.getScene().setRoot(homeView);
-                homeView.getScene().getWindow();
+        view.getBackToMainMenuButton().setOnAction(event -> {
+            HomescreenView homeView = new HomescreenView();
+            HomescreenPresenter homePresenter = new HomescreenPresenter(gameModel,homeView);
+            view.getScene().setRoot(homeView);
+            homeView.getScene().getWindow();
 
-            }
         });
-        view.getResetHighScoresButton().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
+        view.getResetHighScoresButton().setOnAction(event -> {
 
-                try {
-                    PrintWriter pw = new PrintWriter("highScores.txt");
-                    pw.close();
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
+            try {
+                PrintWriter pw = new PrintWriter("highScores.txt");
+                pw.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
 
-            }
         });
-        view.getUpdateLeaderboard().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                view.getHighScores().setText(leaderBoardModel.getHighScoreString() + "\n");
-            }
-        });
+        view.getUpdateLeaderboard().setOnAction(event -> view.getHighScores().setText(leaderBoardModel.getHighScoreString() + "\n"));
     }
 }

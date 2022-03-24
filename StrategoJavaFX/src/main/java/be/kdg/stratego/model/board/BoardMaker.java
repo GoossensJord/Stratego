@@ -14,11 +14,9 @@ import java.util.List;
  * Class responsible for making the board
  */
 public class BoardMaker {
-    private int boardHeight = 60;
-    private int boardWidth = 20;
 
-    private final int SQUARE_ARRAY_WIDTH = Math.abs((boardWidth + 1) / 2);
-    private final int SQUARE_ARRAY_HEIGHT = Math.abs((boardHeight + 1) / 6);
+    private final int SQUARE_ARRAY_WIDTH = 10;
+    private final int SQUARE_ARRAY_HEIGHT = 10;
 
     protected Square[][] squaresBoard;
 

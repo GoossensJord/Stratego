@@ -68,7 +68,7 @@ public class GameSaveState {
         setupStringList.clear();
         filechecker();
         Pattern pat = Pattern.compile("[A-Za-z]:\\{", Pattern.CASE_INSENSITIVE);
-        boolean matchingregex = true;
+        boolean matchingregex;
         try {
             Scanner sc = new Scanner(new File(String.valueOf(savePath)));
             while (sc.hasNext()) {

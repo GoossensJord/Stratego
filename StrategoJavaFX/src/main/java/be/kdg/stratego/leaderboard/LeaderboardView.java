@@ -5,14 +5,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Scanner;
-
 /**
  * View responsible for leaderboard
  */
@@ -72,12 +64,6 @@ public class LeaderboardView extends GridPane {
         leaderBoardTitle.setId("leaderboardTextArea");
         leaderBoardTitle.setEditable(false);
     }
-
-    /**
-     * Method that gives back a String to put in the highscore text area
-     *
-     * @return
-     */
 
 
     public TextArea getHighScores() {

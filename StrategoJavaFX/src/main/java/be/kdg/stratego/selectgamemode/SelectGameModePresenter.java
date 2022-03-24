@@ -31,45 +31,33 @@ public class SelectGameModePresenter {
      * Adds event handlers for the different buttons on the homescreen.
      */
     private void addEventHandlers(){
-        gameModeView.getFillBoardRandomlyButton().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                GameView gameView = new GameView();
-                GamePresenter gamePresenter = new GamePresenter(gameModel,gameView);
-                gameModeView.getScene().setRoot(gameView);
-                gameView.getScene().getWindow();
-                gameModel.fillRandomly();
+        gameModeView.getFillBoardRandomlyButton().setOnAction(event -> {
+            GameView gameView = new GameView();
+            GamePresenter gamePresenter = new GamePresenter(gameModel,gameView);
+            gameModeView.getScene().setRoot(gameView);
+            gameView.getScene().getWindow();
+            gameModel.fillRandomly();
 
-            }
         });
-        gameModeView.getReturnToMenuButton().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                HomescreenView homeView = new HomescreenView();
-                HomescreenPresenter homePresenter = new HomescreenPresenter(gameModel,homeView);
-                gameModeView.getScene().setRoot(homeView);
-                homeView.getScene().getWindow();
-            }
+        gameModeView.getReturnToMenuButton().setOnAction(event -> {
+            HomescreenView homeView = new HomescreenView();
+            HomescreenPresenter homePresenter = new HomescreenPresenter(gameModel,homeView);
+            gameModeView.getScene().setRoot(homeView);
+            homeView.getScene().getWindow();
         });
-        gameModeView.getSetNamesButton().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                gameModeView.getFillBoardRandomlyButton().setDisable(false);
-                gameModeView.getLoadInPieceLayoutButton().setDisable(false);
-                gameModeView.getLoadSavedGameButton().setDisable(false);
-                gameModeView.getSetNamesButton().setDisable(true);
-                gameModel.setPlayerName(gameModeView.getPlayerNameOne().getText(),gameModeView.getPlayerNameTwo().getText());
+        gameModeView.getSetNamesButton().setOnAction(event -> {
+            gameModeView.getFillBoardRandomlyButton().setDisable(false);
+            gameModeView.getLoadInPieceLayoutButton().setDisable(false);
+            gameModeView.getLoadSavedGameButton().setDisable(false);
+            gameModeView.getSetNamesButton().setDisable(true);
+            gameModel.setPlayerName(gameModeView.getPlayerNameOne().getText(),gameModeView.getPlayerNameTwo().getText());
 
-            }
         });
-        gameModeView.getLoadInPieceLayoutButton().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                LoadSetupView lsView = new LoadSetupView();
-                LoadSetupPresenter lsPresenter = new LoadSetupPresenter(gameModel,lsView);
-                gameModeView.getScene().setRoot(lsView);
-                lsView.getScene().getWindow();
-            }
+        gameModeView.getLoadInPieceLayoutButton().setOnAction(actionEvent -> {
+            LoadSetupView lsView = new LoadSetupView();
+            LoadSetupPresenter lsPresenter = new LoadSetupPresenter(gameModel,lsView);
+            gameModeView.getScene().setRoot(lsView);
+            lsView.getScene().getWindow();
         });
     }
 }

@@ -10,6 +10,7 @@ import java.util.List;
 /**
  * Class responsible for Scout, extends Piece
  */
+@SuppressWarnings("SuspiciousNameCombination")
 public class Scout extends Piece {
 
     /**

@@ -11,7 +11,7 @@ import java.util.List;
  */
 
 public class Board {
-    private BoardMaker boardMaker;
+    private final BoardMaker boardMaker;
 
     /**
      * Creates a board, fills it with squares

@@ -23,88 +23,60 @@ public class LoadSetupPresenter {
     }
 
     private void addEventHandlers() {
-        view.getLoadSetupsBtn().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                view.setListItems(GameSaveState.getSetupStringList());
-            }
+        view.getLoadSetupsBtn().addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> view.setListItems(GameSaveState.getSetupStringList()));
+
+        view.getPlayer1().addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
+            view.getPlayer2().setDisable(true);
+            view.getPlayer1().setDisable(true);
+            GameSaveState.setPlayerTurn(model.getPlayerByID(0));
+            GameSaveState.setIdlePlayer(model.getPlayerByID(1));
+            view.getLoadSetupsBtn().setDisable(false);
+            view.getCommonListView().setDisable(false);
         });
-        view.getPlayer1().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                view.getPlayer2().setDisable(true);
-                view.getPlayer1().setDisable(true);
-                GameSaveState.setPlayerTurn(model.getPlayerByID(0));
-                GameSaveState.setIdlePlayer(model.getPlayerByID(1));
-                view.getLoadSetupsBtn().setDisable(false);
-                view.getCommonListView().setDisable(false);
-            }
-        });
-        view.getPlayer2().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                view.getPlayer1().setDisable(true);
-                view.getPlayer2().setDisable(true);
-                GameSaveState.setPlayerTurn(model.getPlayerByID(1));
-                view.getNotifications().setText(GameSaveState.getPlayerTurn().getName());
-                view.getLoadSetupsBtn().setDisable(false);
-                view.getCommonListView().setDisable(false);
-            }
+        view.getPlayer2().addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
+            view.getPlayer1().setDisable(true);
+            view.getPlayer2().setDisable(true);
+            GameSaveState.setPlayerTurn(model.getPlayerByID(1));
+            view.getNotifications().setText(GameSaveState.getPlayerTurn().getName());
+            view.getLoadSetupsBtn().setDisable(false);
+            view.getCommonListView().setDisable(false);
         });
 
-        view.getCommonListView().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
+        view.getCommonListView().addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
 
-            }
         });
-        view.getResetBtn().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                model.clearBoard();
-                clearGrid();
-            }
+        view.getResetBtn().addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
+            model.clearBoard();
+            clearGrid();
         });
-        view.getListView().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                try {
-                    String pieceStr = mouseEvent.getPickResult().toString().split("\"")[1];
-                    view.getNotifications().setText(pieceStr + " selected");
-                    GameSaveState.loadSave(pieceStr);
-                } catch (ArrayIndexOutOfBoundsException aiob) {
-                    System.out.println("smth foktop");
-                }
-                model.loadSave();
-                fillBoardWithImages();
+        view.getListView().addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
+            try {
+                String pieceStr = mouseEvent.getPickResult().toString().split("\"")[1];
+                view.getNotifications().setText(pieceStr + " selected");
+                GameSaveState.loadSave(pieceStr);
+            } catch (ArrayIndexOutOfBoundsException aiob) {
+                System.out.println("smth foktop");
             }
+            model.loadSave();
+            fillBoardWithImages();
         });
-        view.getConfirmSetup().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
+        view.getConfirmSetup().addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
 
-                GameSaveState.switchTurn();
-                view.setListItems(new ArrayList<>());
-            }
+            GameSaveState.switchTurn();
+            view.setListItems(new ArrayList<>());
         });
-        view.getStartGame().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                GameView gameView = new GameView();
-                GamePresenter gamePresenter = new GamePresenter(model,gameView);
-                view.getScene().setRoot(gameView);
-                gameView.getScene().getWindow();
-            }
+        view.getStartGame().addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
+            GameView gameView = new GameView();
+            GamePresenter gamePresenter = new GamePresenter(model,gameView);
+            view.getScene().setRoot(gameView);
+            gameView.getScene().getWindow();
         });
-        view.getReturnToMenuButton().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                model.clearBoard();
-                HomescreenView homeView = new HomescreenView();
-                HomescreenPresenter homePresenter = new HomescreenPresenter(model,homeView);
-                view.getScene().setRoot(homeView);
-                homeView.getScene().getWindow();
-            }
+        view.getReturnToMenuButton().setOnAction(event -> {
+            model.clearBoard();
+            HomescreenView homeView = new HomescreenView();
+            HomescreenPresenter homePresenter = new HomescreenPresenter(model,homeView);
+            view.getScene().setRoot(homeView);
+            homeView.getScene().getWindow();
         });
     }
 

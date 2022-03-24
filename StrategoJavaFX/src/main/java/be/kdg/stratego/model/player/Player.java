@@ -13,8 +13,8 @@ import java.util.Objects;
  */
 public class Player {
     private String name;
-    private Board board;
-    private int id;
+    private final Board board;
+    private final int id;
     List<Piece> piecesList;
 
     /**
@@ -58,9 +58,6 @@ public class Player {
         return result;
     }
 
-    /* public void setPiecesList(List<Piece> pieceList){
-            this.piecesList = pieceList;
-        }*/
     public int getId() {
         return this.id;
     }

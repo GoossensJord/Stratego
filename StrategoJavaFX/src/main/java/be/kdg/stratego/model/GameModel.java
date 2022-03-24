@@ -171,6 +171,7 @@ public class GameModel {
 
     public boolean positionChecker(int x, int y) {
         System.out.println(GameSaveState.getPlayerTurn().getId());
+        //noinspection SuspiciousNameCombination
         if (board.spaceAvailable(x, y)) {
             if (GameSaveState.getPlayerTurn().getId() == 0 && x <= 3) return true;
             else if (GameSaveState.getPlayerTurn().getId() == 1 && x >= 6) return true;
