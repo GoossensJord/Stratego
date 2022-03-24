@@ -4,6 +4,9 @@ import be.kdg.stratego.homescreenview.HomescreenPresenter;
 import be.kdg.stratego.homescreenview.HomescreenView;
 import be.kdg.stratego.model.GameModel;
 import be.kdg.stratego.model.GameSaveState;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.input.MouseEvent;
 
 
@@ -72,7 +75,6 @@ public class GamePresenter {
         for (int i = 9; i >= 0; i--) {
             for (int j = 0; j < 10; j++) {
                 if (model.getBoard()[i][j].getPiece() == null) view.setPosition("", i, j);
-                    //else view.setPicture(model.getBoard()[i][j].getPiece().getImage(), i, j);
                 else view.setPicture(view.getEnemyimage(), i, j);
             }
         }

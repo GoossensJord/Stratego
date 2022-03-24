@@ -1,4 +1,4 @@
 module applicatieNaam {
-    requires javafx.controls;
+ requires javafx.controls;
     exports be.kdg.stratego;
 }
