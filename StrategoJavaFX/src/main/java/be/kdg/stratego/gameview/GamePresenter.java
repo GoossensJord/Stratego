@@ -12,6 +12,7 @@ import javafx.scene.control.TextInputDialog;
 import javafx.scene.input.MouseEvent;
 
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -76,7 +77,6 @@ public class GamePresenter {
                 saveInput.setHeaderText("Enter save name");
                 saveInput.showAndWait();
                 String saveName = saveInput.getEditor().getText();
-
             }
         });
         view.getBoard().addEventHandler(MouseEvent.MOUSE_CLICKED, new boardEventHandler(model, view));
