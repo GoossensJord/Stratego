@@ -8,6 +8,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +30,7 @@ public class GameView extends GridPane {
     Image enemyimage;
     ImageView textFieldImage;
     ListView pieceList;
+    Button saveGameButton;
 
 
     /**
@@ -49,7 +51,7 @@ public class GameView extends GridPane {
         board = new GridPane();
         btnStartGame = new Button("Fill Board");
         backToMainMenuButton = new Button("Exit Game");
-
+        saveGameButton = new Button("Save Game");
 
         Image backgroundImage = new Image("/StrategoBoard.jpeg");
         BackgroundSize backgroundSize = new BackgroundSize(100, 100, true, true, true, false);
@@ -85,7 +87,7 @@ public class GameView extends GridPane {
             board.getRowConstraints().add(new RowConstraints(78));
         }
 
-
+        GridPane.setConstraints(saveGameButton, 64, 30, 10, 3);
         GridPane.setConstraints(textFieldImage, 43, 4, 17, 23);
         GridPane.setConstraints(notifications, 45, 7, 12, 13);
         GridPane.setConstraints(board, 0, 18, 4, 4);
@@ -95,22 +97,23 @@ public class GameView extends GridPane {
         GridPane.setConstraints(backToMainMenuButton, 64, 35, 10, 3);
 
 
-
         notifications.setPrefHeight(200);
         notifications.setPrefHeight(2000);
 
-        this.getChildren().addAll(board, btnStartGame, notifications, startTurn, endTurn, backToMainMenuButton, textFieldImage);
+        this.getChildren().addAll(board, btnStartGame, notifications, startTurn, endTurn, backToMainMenuButton, textFieldImage,saveGameButton);
         board.setRotate(-90);
         this.getStylesheets().add("style.css");
         btnStartGame.setId("gameButton");
         startTurn.setId("gameButton");
         endTurn.setId("gameButton");
+        saveGameButton.setId("gameButton");
         backToMainMenuButton.setId("gameButton");
         notifications.setId("gameNotification");
         notifications.setEditable(false);
         notifications.setWrapText(true);
         startTurn.setDisable(true);
         endTurn.setDisable(true);
+        saveGameButton.setDisable(true);
         this.setId("gameBackground");
     }
 
@@ -230,5 +233,7 @@ public class GameView extends GridPane {
         return backToMainMenuButton;
     }
 
-
+    public Button getSaveGameButton() {
+        return saveGameButton;
+    }
 }
