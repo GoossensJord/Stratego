@@ -34,6 +34,7 @@ public class HomescreenPresenter {
      * Adds event handlers for the different buttons on the homescreen.
      */
     private void addEventHandlers() {
+        view.getEndGameButton().setOnAction(event -> System.exit(1));
         view.getPlayButton().setOnAction(event -> {
             SelectGameModeView gameModeView = new SelectGameModeView();
             SelectGameModePresenter gamePresenter = new SelectGameModePresenter(gameModel, gameModeView);
@@ -52,7 +53,7 @@ public class HomescreenPresenter {
             view.getScene().setRoot(lView);
             lView.getScene().getWindow();
         });
-        view.getEndGameButton().setOnAction(event -> System.exit(1));
+
 
     }
 

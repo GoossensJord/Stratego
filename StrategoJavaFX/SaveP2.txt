@@ -1,4 +1,4 @@
-workingk:{
+working:{
 Major:-6.1,
 Colonel:-9.5,
 General:-8.7,

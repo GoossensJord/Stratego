@@ -4,9 +4,15 @@ import be.kdg.stratego.homescreenview.HomescreenPresenter;
 import be.kdg.stratego.homescreenview.HomescreenView;
 import be.kdg.stratego.model.GameModel;
 import be.kdg.stratego.model.GameSaveState;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.input.MouseEvent;
 
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -52,6 +58,7 @@ public class GamePresenter {
             view.getStartTurn().setDisable(false);
             view.getEndTurn().setDisable(true);
             view.getBoard().setDisable(true);
+            view.getSaveGameButton().setDisable(false);
 
         });
         view.getBackToMainMenuButton().setOnAction(event -> {
@@ -61,6 +68,16 @@ public class GamePresenter {
             view.getScene().setRoot(homeView);
             homeView.getScene().getWindow();
 
+        });
+        view.getSaveGameButton().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                TextInputDialog saveInput = new TextInputDialog();
+                saveInput.setTitle("Save Game");
+                saveInput.setHeaderText("Enter save name");
+                saveInput.showAndWait();
+                String saveName = saveInput.getEditor().getText();
+            }
         });
         view.getBoard().addEventHandler(MouseEvent.MOUSE_CLICKED, new boardEventHandler(model, view));
     }
@@ -72,7 +89,6 @@ public class GamePresenter {
         for (int i = 9; i >= 0; i--) {
             for (int j = 0; j < 10; j++) {
                 if (model.getBoard()[i][j].getPiece() == null) view.setPosition("", i, j);
-                    //else view.setPicture(model.getBoard()[i][j].getPiece().getImage(), i, j);
                 else view.setPicture(view.getEnemyimage(), i, j);
             }
         }

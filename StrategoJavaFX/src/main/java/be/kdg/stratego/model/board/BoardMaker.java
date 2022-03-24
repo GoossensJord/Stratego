@@ -153,8 +153,6 @@ public class BoardMaker {
             for (int j = 0; j < 10; j++) {
                 if (squaresBoard[i][j].getIsOccupied()) {
                     if (squaresBoard[i][j].getPiece().getPlayer().getId() == id) score +=squaresBoard[i][j].getPiece().getRankPower();
-
-
                 }
             }
         }

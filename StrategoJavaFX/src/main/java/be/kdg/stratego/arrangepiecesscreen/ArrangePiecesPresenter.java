@@ -4,8 +4,6 @@ import be.kdg.stratego.homescreenview.HomescreenPresenter;
 import be.kdg.stratego.homescreenview.HomescreenView;
 import be.kdg.stratego.model.GameModel;
 import be.kdg.stratego.model.GameSaveState;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.input.MouseEvent;
 
@@ -33,106 +31,85 @@ public class ArrangePiecesPresenter {
      * Method that adds event handlers to the Nodes
      */
     private void addEventHandlers() {
-        view.getListView().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                view.getBoard().setDisable(false);
-                try {
-                    String pieceStr = mouseEvent.getPickResult().toString().split("'")[1];
-                    view.getNotifications().setText(pieceStr + " selected");
-
-                }
-                catch (ArrayIndexOutOfBoundsException aiob){
-                    String pieceStr = mouseEvent.getPickResult().toString().split("\"")[1];
-                    view.getNotifications().setText(pieceStr + " selected");
-
-                }
+        view.getListView().addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
+            view.getBoard().setDisable(false);
+            try {
+                String pieceStr = mouseEvent.getPickResult().toString().split("'")[1];
+                view.getNotifications().setText(pieceStr + " selected");
 
             }
-        });
-        view.getBtnSetPieces().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                setPieceItems();
-                view.setSetupList(false);
-                view.getBtnSetPieces().setDisable(true);
-            }
-        });
-        view.getBoard().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                int x = (int) (mouseEvent.getX() / 78);
-                int y = (int) (mouseEvent.getY() / 78);
-                String pieceStr = view.getNotifications().getText().split(" ")[0];
-
-                if (model.positionChecker(x, y)) {
-                    model.makePieceByString(pieceStr, x, y);
-                    fillBoardWithImages();
-                    view.dimSquare(x, y);
-                    view.removeListItem(pieceStr);
-                    view.getBoard().setDisable(true);
-                } else view.getNotifications().setText("Invalid placing!");
-
-                if (view.getListViewLength() == 35) {
-                    view.setListItems(new ArrayList<>());
-                    view.getNotifications().setText("Save your setup or just use this setup without saving");
-                    view.getPlayer1().setDisable(true);
-                    view.getPlayer2().setDisable(true);
-                    view.getListView().setDisable(true);
-                }
-            }
-        });
-        view.getPlayer1().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                view.getPlayer2().setDisable(true);
-                view.getPlayer1().setDisable(true);
-                view.getBtnSetPieces().setDisable(false);
-                GameSaveState.setPlayerTurn(model.getPlayerByID(0));
-                GameSaveState.setIdlePlayer(model.getPlayerByID(1));
-                view.lightUpRectangles(0);
+            catch (ArrayIndexOutOfBoundsException aiob){
+                String pieceStr = mouseEvent.getPickResult().toString().split("\"")[1];
+                view.getNotifications().setText(pieceStr + " selected");
 
             }
+
         });
-        view.getPlayer2().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
+        view.getBtnSetPieces().addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
+            setPieceItems();
+            view.setSetupList(false);
+            view.getBtnSetPieces().setDisable(true);
+        });
+        view.getBoard().addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
+            int x = (int) (mouseEvent.getX() / 78);
+            int y = (int) (mouseEvent.getY() / 78);
+            String pieceStr = view.getNotifications().getText().split(" ")[0];
+
+            if (model.positionChecker(x, y)) {
+                model.makePieceByString(pieceStr, x, y);
+                fillBoardWithImages();
+                view.dimSquare(x, y);
+                view.removeListItem(pieceStr);
+                view.getBoard().setDisable(true);
+            } else view.getNotifications().setText("Invalid placing!");
+
+            if (view.getListViewLength() == 35) {
+                view.setListItems(new ArrayList<>());
+                view.getNotifications().setText("Save your setup or just use this setup without saving");
                 view.getPlayer1().setDisable(true);
                 view.getPlayer2().setDisable(true);
-                view.getBtnSetPieces().setDisable(false);
-                GameSaveState.setPlayerTurn(model.getPlayerByID(1));
-                GameSaveState.setIdlePlayer(model.getPlayerByID(0));
-                //view.getNotifications().setText(GameSaveState.getPlayerTurn().getName());
-                view.lightUpRectangles(1);
+                view.getListView().setDisable(true);
             }
         });
-        view.getSaveSetup().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
+        view.getPlayer1().addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
+            view.getPlayer2().setDisable(true);
+            view.getPlayer1().setDisable(true);
+            view.getBtnSetPieces().setDisable(false);
+            GameSaveState.setPlayerTurn(model.getPlayerByID(0));
+            GameSaveState.setIdlePlayer(model.getPlayerByID(1));
+            view.lightUpRectangles(0);
 
-                TextInputDialog temp = new TextInputDialog();
-                temp.showAndWait();
-                String setupName = temp.getEditor().getText();
-                view.getBtnSetPieces().setDisable(false);
-                try {
-                    GameSaveState.saveSetup(model.getPlayerPiecesById(GameSaveState.getPlayerTurn().getId()), setupName);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                view.getListView().setDisable(false);
-                GameSaveState.switchTurn();
-                view.lightUpRectangles(GameSaveState.getPlayerTurn().getId());
-            }
         });
-        view.getReturnToMenuButton().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                model.clearBoard();
-                HomescreenView homeView = new HomescreenView();
-                HomescreenPresenter homePresenter = new HomescreenPresenter(model, homeView);
-                view.getScene().setRoot(homeView);
-                homeView.getScene().getWindow();
+        view.getPlayer2().addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
+            view.getPlayer1().setDisable(true);
+            view.getPlayer2().setDisable(true);
+            view.getBtnSetPieces().setDisable(false);
+            GameSaveState.setPlayerTurn(model.getPlayerByID(1));
+            GameSaveState.setIdlePlayer(model.getPlayerByID(0));
+            //view.getNotifications().setText(GameSaveState.getPlayerTurn().getName());
+            view.lightUpRectangles(1);
+        });
+        view.getSaveSetup().addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
+
+            TextInputDialog temp = new TextInputDialog();
+            temp.showAndWait();
+            String setupName = temp.getEditor().getText();
+            view.getBtnSetPieces().setDisable(false);
+            try {
+                GameSaveState.saveSetup(model.getPlayerPiecesById(GameSaveState.getPlayerTurn().getId()), setupName);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
+            view.getListView().setDisable(false);
+            GameSaveState.switchTurn();
+            view.lightUpRectangles(GameSaveState.getPlayerTurn().getId());
+        });
+        view.getReturnToMenuButton().setOnAction(event -> {
+            model.clearBoard();
+            HomescreenView homeView = new HomescreenView();
+            HomescreenPresenter homePresenter = new HomescreenPresenter(model, homeView);
+            view.getScene().setRoot(homeView);
+            homeView.getScene().getWindow();
         });
 
     }
