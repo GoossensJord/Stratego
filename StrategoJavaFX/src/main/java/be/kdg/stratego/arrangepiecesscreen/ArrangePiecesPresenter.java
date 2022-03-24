@@ -98,6 +98,7 @@ public class ArrangePiecesPresenter {
                 view.getPlayer1().setDisable(true);
                 view.getBtnSetPieces().setDisable(false);
                 GameSaveState.setPlayerTurn(model.getPlayerByID(0));
+                GameSaveState.setIdlePlayer(model.getPlayerByID(1));
                 view.lightUpRectangles(0);
 
             }
@@ -109,7 +110,8 @@ public class ArrangePiecesPresenter {
                 view.getPlayer2().setDisable(true);
                 view.getBtnSetPieces().setDisable(false);
                 GameSaveState.setPlayerTurn(model.getPlayerByID(1));
-                view.getNotifications().setText(GameSaveState.getPlayerTurn().getName());
+                GameSaveState.setIdlePlayer(model.getPlayerByID(0));
+                //view.getNotifications().setText(GameSaveState.getPlayerTurn().getName());
                 view.lightUpRectangles(1);
             }
         });
