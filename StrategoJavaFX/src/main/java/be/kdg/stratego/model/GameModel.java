@@ -186,7 +186,7 @@ public class GameModel {
         try{
 
             FileWriter fw = new FileWriter("highScores.txt", true);
-            fw.write(player.getName() + " - "+ boardMaker.getScore(player.getId())+"\n");
+            fw.write(boardMaker.getScore(player.getId())+ " - "+player.getName()  +"\n");
             fw.close();
         }
         catch (IOException e) {
