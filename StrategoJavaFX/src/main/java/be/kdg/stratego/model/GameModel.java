@@ -144,6 +144,16 @@ public class GameModel {
             }
         }
     }
+    public void makePieceByStringCustomPlayer(String pieceString, int x, int y,Player pl) {
+        for (Rank r : Rank.values()) {
+            if (r.getName().equals(pieceString)) {
+                Piece p = new Piece(r, pl, x, y);
+                boardMaker.manualListChecker(p);
+                //System.out.println(boardMaker.manualPieceSelection(p));
+                break;
+            }
+        }
+    }
 
     /**
      * calls the board method to clear the board.
@@ -213,5 +223,21 @@ public class GameModel {
     public void setPlayerName(String name, String nameTwo) {
         pl.setName(name);
         pl2.setName(nameTwo);
+    }
+
+    public void loadSaveGame(){
+        List<String> strList = GameSaveState.loadSaveGame();
+        for (int i = 0; i < strList.size(); i++) {
+            String[] split = strList.get(i).split("-");
+            String name = split[0];
+            String pos = split[1];
+            int xval = Integer.valueOf(pos.substring(0,1));
+            int yval = Integer.valueOf(pos.substring(2,3));
+
+            Player p = getPlayerByID(Integer.valueOf(split[2].substring(0,split[2].length()-1)));
+
+            makePieceByStringCustomPlayer(name,xval,yval,p);
+
+        };
     }
 }

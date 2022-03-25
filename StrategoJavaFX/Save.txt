@@ -39,4 +39,14 @@ Colonel:-2.8,
 Marshal:-3.8,
 Captain:-1.8,
 Bomb:-1.7,
-};
+};toLoadp1:{
+Major:-1.5-1.5,
+Colonel:-3.8-5.8,
+Bomb:-2.8-2.8,
+}; 
+toLoadp2:{
+Major:-1.5-1.5-5.5,
+Colonel:-3.8-5.8,
+Marshal:-8.6,
+Bomb:-2.8-2.8-7.7-7.4-7.5,
+}; 

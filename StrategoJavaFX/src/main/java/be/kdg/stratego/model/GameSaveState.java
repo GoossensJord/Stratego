@@ -13,11 +13,14 @@ import java.util.regex.Pattern;
 
 public class GameSaveState {
     private static Square[][] boardState;
+
     private static Player playerTurn;
     private static Player idlePlayer;
     private static Path savePath;
     private static List<String> setupStringList = new ArrayList<>();
     private static HashMap<String, List<int[]>> setupHashMap = new HashMap<>();
+    private static boolean entireGame = false;
+    private static String saveGameString;
 
     public GameSaveState() {
 
@@ -27,6 +30,7 @@ public class GameSaveState {
     public static void saveSetup(List<Piece> pieceList, String name)
 
             throws IOException {
+
         filechecker();
         for (Piece p : pieceList) {
             if (setupHashMap.containsKey(p.getRank().getName()))
@@ -39,10 +43,16 @@ public class GameSaveState {
         writeToFile(name);
         //loadSetupStringList();
     }
-    private static void filechecker(){
-        if (playerTurn.getId()==0) savePath = Paths.get("Save.txt");
+
+    private static void filechecker() {
+
+
+        if (playerTurn.getId() == 0) savePath = Paths.get("Save.txt");
         else savePath = Paths.get("SaveP2.txt");
+
+
     }
+
     private static void writeToFile(String name) throws IOException {
         filechecker();
         PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(savePath.toFile(), true)));
@@ -61,6 +71,40 @@ public class GameSaveState {
 
     }
 
+    public static void saveGame(Square[][] board) throws IOException {
+        PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter("saveGame.txt")));
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
+                if (board[i][j] != null) {
+                    if (board[i][j].getIsOccupied()) {
+                        sb.append(board[i][j].getPiece().getRank().getName() + "-" + board[i][j].getPiece().getX() + '.' + board[i][j].getPiece().getY() + "-" + board[i][j].getPiece().getPlayer().getId());
+                        sb.append(":");
+                    }
+                }
+                else continue;
+            }
+        }
+        for (String s: sb.toString().split(":")) {
+            pw.format("%s %n",s);
+        }
+        pw.close();
+    }
+
+
+
+    public static List<String> loadSaveGame(){
+        List<String> out = new ArrayList<>();
+        try {
+            Scanner sc = new Scanner(new File("saveGame.txt"));
+            while(sc.hasNext()){
+                out.add(sc.nextLine());
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return out;
+    }
     /**
      * gets all the names from the save file
      */
@@ -84,7 +128,8 @@ public class GameSaveState {
 
     }
 
-    public static void loadSave(String save) {
+    public static void loadSave(String save, boolean game) {
+        entireGame = game;
         filechecker();
         StringBuilder sb = new StringBuilder();
         setupHashMap.clear();
@@ -131,7 +176,7 @@ public class GameSaveState {
     }
 
     public static HashMap<String, List<int[]>> getSetupHashMap() {
-
+        filechecker();
         return setupHashMap;
     }
 
@@ -169,16 +214,4 @@ public class GameSaveState {
         idlePlayer = temp;
 
     }
-
-
-
-    public static void saveGame() {
-
-    }
-
-    public static void loadGame() {
-    }
-    //todo saven
-    //todo laden
-
 }
