@@ -1,0 +1,131 @@
+package be.kdg.stratego.selectgamemode;
+
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
+
+/**
+ * View responsible for selecting a game mode
+ */
+public class SelectGameModeView extends GridPane {
+    Button fillBoardRandomlyButton;
+    Button loadInPieceLayoutButton;
+    Button loadSavedGameButton;
+    Button returnToMenuButton;
+    Background background;
+    ImageView randomFillButtonFrame;
+    ImageView loadPiecesFrame;
+    ImageView loadSaveGameFrame;
+    TextField askPlayerNameTextField;
+    TextField playerNameOne;
+    TextField playerNameTwo;
+    Button setNamesButton;
+
+    /**
+     * Constructor which calls the initialise nodes and layout nodes method as those are needed immediately.
+     */
+    public SelectGameModeView() {
+        this.initialiseNodes();
+        this.layoutNodes();
+    }
+
+    /**
+     * Initialises the nodes on this view
+     */
+    private void initialiseNodes() {
+        fillBoardRandomlyButton = new Button("  Random  ");
+        loadInPieceLayoutButton = new Button("Load Setup");
+        loadSavedGameButton = new Button(" Load Save ");
+        returnToMenuButton = new Button("Quit");
+        Image selechtGameModeBackgroundImage = new Image("/homeScreenTwo.png");
+        BackgroundSize backgroundSize = new BackgroundSize(100, 100, true, true, true, true);
+        BackgroundImage backgroundImage = new BackgroundImage(selechtGameModeBackgroundImage, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, backgroundSize);
+        background = new Background(backgroundImage);
+        randomFillButtonFrame = new ImageView(new Image("nodeFrame.png"));
+        loadPiecesFrame = new ImageView(new Image("nodeFrame.png"));
+        loadSaveGameFrame = new ImageView(new Image("nodeFrame.png"));
+        askPlayerNameTextField = new TextField("Enter your names");
+        askPlayerNameTextField.setEditable(false);
+        playerNameOne = new TextField("");
+        playerNameTwo = new TextField("");
+        setNamesButton = new Button("Confirm names");
+    }
+
+    /**
+     * Lays out all the nodes on the gridpane, also uses ID to communicate with the CSS file
+     */
+    private void layoutNodes() {
+        for (int i = 0; i < 48; i++) {
+            this.getRowConstraints().add(new RowConstraints(20));
+        }
+        for (int i = 0; i < 76; i++) {
+            this.getColumnConstraints().add(new ColumnConstraints(20));
+        }
+
+        GridPane.setConstraints(setNamesButton,2,8,10,2);
+        GridPane.setConstraints(playerNameTwo,2,5,10,2);
+        GridPane.setConstraints(playerNameOne, 2, 3, 10, 2);
+        GridPane.setConstraints(askPlayerNameTextField, 2, 1, 10, 3);
+        GridPane.setConstraints(randomFillButtonFrame, 2, 20, 20, 4);
+        GridPane.setConstraints(loadPiecesFrame, 26, 20, 20, 4);
+        GridPane.setConstraints(loadSaveGameFrame, 52, 20, 20, 4);
+        GridPane.setConstraints(fillBoardRandomlyButton, 6, 10, 20, 20);
+        GridPane.setConstraints(loadInPieceLayoutButton, 30, 18, 20, 4);
+        GridPane.setConstraints(loadSavedGameButton, 56, 18, 20, 4);
+        GridPane.setConstraints(returnToMenuButton, 60, 36, 20, 4);
+
+        this.getChildren().addAll(fillBoardRandomlyButton, loadInPieceLayoutButton,
+                loadSavedGameButton, returnToMenuButton, randomFillButtonFrame,
+                loadPiecesFrame, loadSaveGameFrame, askPlayerNameTextField,playerNameOne,
+                playerNameTwo,setNamesButton);
+
+        fillBoardRandomlyButton.setId("selectGameModeButton");
+        fillBoardRandomlyButton.setDisable(true);
+
+        loadInPieceLayoutButton.setId("selectGameModeButton");
+        loadInPieceLayoutButton.setDisable(true);
+
+        loadSavedGameButton.setId("selectGameModeButton");
+        loadSavedGameButton.setDisable(true);
+
+        returnToMenuButton.setId("selectGameModeButton");
+
+        setNamesButton.setId("selectGameModeButtonSmall");
+
+        askPlayerNameTextField.setId("textArea");
+
+
+        this.setBackground(background);
+        this.getStylesheets().add("style.css");
+    }
+
+    public Button getFillBoardRandomlyButton() {
+        return fillBoardRandomlyButton;
+    }
+
+    public Button getLoadInPieceLayoutButton() {
+        return loadInPieceLayoutButton;
+    }
+
+    public Button getLoadSavedGameButton() {
+        return loadSavedGameButton;
+    }
+
+    public Button getReturnToMenuButton() {
+        return returnToMenuButton;
+    }
+
+    public Button getSetNamesButton() {
+        return setNamesButton;
+    }
+
+    public TextField getPlayerNameOne() {
+        return playerNameOne;
+    }
+
+    public TextField getPlayerNameTwo() {
+        return playerNameTwo;
+    }
+}
