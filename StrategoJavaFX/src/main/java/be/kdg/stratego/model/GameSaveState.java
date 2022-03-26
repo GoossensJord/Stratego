@@ -30,7 +30,7 @@ public class GameSaveState {
     public static void saveSetup(List<Piece> pieceList, String name)
 
             throws IOException {
-
+        setupHashMap = new HashMap<>();
         filechecker();
         for (Piece p : pieceList) {
             if (setupHashMap.containsKey(p.getRank().getName()))
@@ -41,7 +41,7 @@ public class GameSaveState {
             }
         }
         writeToFile(name);
-        //loadSetupStringList();
+        //loadSetupStringList()
     }
 
     private static void filechecker() {
@@ -54,7 +54,7 @@ public class GameSaveState {
     }
 
     private static void writeToFile(String name) throws IOException {
-        filechecker();
+
         PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(savePath.toFile(), true)));
         pw.format("%s:{%n", name);
         for (String s : setupHashMap.keySet()
@@ -88,6 +88,7 @@ public class GameSaveState {
         for (String s: sb.toString().split(":")) {
             pw.format("%s %n",s);
         }
+        pw.format("|%s",getPlayerTurn().getId());
         pw.close();
     }
 
@@ -98,7 +99,9 @@ public class GameSaveState {
         try {
             Scanner sc = new Scanner(new File("saveGame.txt"));
             while(sc.hasNext()){
+
                 out.add(sc.nextLine());
+
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -109,7 +112,7 @@ public class GameSaveState {
      * gets all the names from the save file
      */
     public static void loadSetupStringList() {
-        setupStringList.clear();
+        setupStringList = new ArrayList<>();
         filechecker();
         Pattern pat = Pattern.compile("[A-Za-z]:\\{", Pattern.CASE_INSENSITIVE);
         boolean matchingregex;
@@ -177,6 +180,7 @@ public class GameSaveState {
 
     public static HashMap<String, List<int[]>> getSetupHashMap() {
         filechecker();
+
         return setupHashMap;
     }
 
@@ -213,5 +217,13 @@ public class GameSaveState {
         playerTurn = idlePlayer;
         idlePlayer = temp;
 
+    }
+
+    public static void clearHashMap() {
+        setupHashMap.clear();
+    }
+
+    public static Player getIdlePlayer() {
+        return idlePlayer;
     }
 }

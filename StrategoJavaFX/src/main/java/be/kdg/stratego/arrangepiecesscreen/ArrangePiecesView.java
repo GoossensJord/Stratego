@@ -26,6 +26,7 @@ public class ArrangePiecesView extends GridPane {
     Button saveSetup;
     Button returnToMenuButton;
     Button btnUseSetup;
+    Button startGame;
     ListView commonListView;
     List<ImageView> allPieces;
     List<Rectangle> coloredRectangles;
@@ -63,6 +64,7 @@ public class ArrangePiecesView extends GridPane {
         btnSetPieces = new Button("Set Pieces");
         btnUseSetup = new Button("Use setup");
         returnToMenuButton = new Button("Quit");
+        startGame = new Button("Start Game");
         setupListString = new ArrayList<>();
         setupList = false;
 
@@ -94,6 +96,7 @@ public class ArrangePiecesView extends GridPane {
         GridPane.setConstraints(btnSetPieces,47,10,10,3);
         GridPane.setConstraints(btnUseSetup, 40,35 , 10,3);
         GridPane.setConstraints(saveSetup,48 ,35,10,3);
+        GridPane.setConstraints(startGame,57,35,10,3);
         GridPane.setConstraints(returnToMenuButton, 64, 35, 10, 3);
         GridPane.setConstraints(notifications, 45, 30, 5, 5);
         GridPane.setConstraints(commonListView, 60, 10, 100, 15);
@@ -108,14 +111,17 @@ public class ArrangePiecesView extends GridPane {
         btnSetPieces.setId("selectGameModeButtonSmall");
         btnUseSetup.setId("selectGameModeButtonSmall");
         returnToMenuButton.setId("selectGameModeButtonSmall");
+        startGame.setId("selectGameModeButtonSmall");
         notifications.setId("textArea");
         notifications.setEditable(false);
         commonListView.setPrefHeight(200);
         commonListView.setPrefHeight(2000);
         notifications.setMinWidth(2000);
-        this.getChildren().addAll(board,player1,player2, btnSetPieces, notifications, commonListView,saveSetup, returnToMenuButton,btnUseSetup);
+        this.getChildren().addAll(board,player1,player2, btnSetPieces, notifications, commonListView,saveSetup, returnToMenuButton, startGame);
         board.setDisable(true);
         btnSetPieces.setDisable(true);
+        startGame.setDisable(true);
+        saveSetup.setDisable(true);
         board.setRotate(-90);
     }
 
@@ -128,7 +134,9 @@ public class ArrangePiecesView extends GridPane {
         commonListView.setItems(FXCollections.observableList(items));
     }
 
-
+    public Button getBtnUseSetup() {
+        return btnUseSetup;
+    }
 
     /**
      * Method that removes a piece from the list after it has been given a place
@@ -223,6 +231,10 @@ public class ArrangePiecesView extends GridPane {
 
     Button getBtnSetPieces() {
         return btnSetPieces;
+    }
+
+    public Button getStartGame() {
+        return startGame;
     }
 
     ListView<String> getListView() {

@@ -3,10 +3,7 @@ package be.kdg.stratego.model;
 import be.kdg.stratego.model.board.Board;
 import be.kdg.stratego.model.board.BoardMaker;
 import be.kdg.stratego.model.board.Square;
-import be.kdg.stratego.model.pieces.Flag;
-import be.kdg.stratego.model.pieces.Piece;
-import be.kdg.stratego.model.pieces.Rank;
-import be.kdg.stratego.model.pieces.Scout;
+import be.kdg.stratego.model.pieces.*;
 import be.kdg.stratego.model.player.Player;
 import be.kdg.stratego.model.GameSaveState;
 
@@ -134,31 +131,64 @@ public class GameModel {
     /**
      * Creates a piece by using a String name
      */
-    public void makePieceByString(String pieceString, int x, int y) {
-        for (Rank r : Rank.values()) {
-            if (r.getName().equals(pieceString)) {
-                Piece p = new Piece(r, GameSaveState.getPlayerTurn(), x, y);
-                boardMaker.manualListChecker(p);
-                //System.out.println(boardMaker.manualPieceSelection(p));
-                break;
-            }
-        }
+    public void makePieceByString(String pieceString, int x, int y, Player pl) {
+        Piece p = pieceMaker(pieceString, x, y, pl);
+        boardMaker.manualPieceSelection(p);
     }
-    public void makePieceByStringCustomPlayer(String pieceString, int x, int y,Player pl) {
-        for (Rank r : Rank.values()) {
-            if (r.getName().equals(pieceString)) {
-                Piece p = new Piece(r, pl, x, y);
-                boardMaker.manualListChecker(p);
-                //System.out.println(boardMaker.manualPieceSelection(p));
+
+    private Piece pieceMaker(String str, int x, int y, Player pl) {
+        Piece p = null;
+        switch (str) {
+            case "Bomb":
+                p = new Bomb(Rank.BOMB, pl, x, y);
                 break;
-            }
+            case "Flag":
+                p = new Flag(Rank.FLAG, pl, x, y);
+                break;
+            case "Marshal":
+                p = new Marshal(Rank.MARSHAL, pl, x, y);
+                break;
+            case "Miner":
+                p = new Miner(Rank.MINER, pl, x, y);
+                break;
+            case "Scout":
+                p = new Scout(Rank.SCOUT, pl, x, y);
+                break;
+            case "Spy":
+                p = new Scout(Rank.SPY, pl, x, y);
+                break;
+            case "General":
+                p = new Piece(Rank.GENERAL, pl, x, y);
+                break;
+            case "Colonel":
+                p = new Piece(Rank.COLONEL, pl, x, y);
+                break;
+            case "Major":
+                p = new Piece(Rank.MAJOR, pl, x, y);
+                break;
+            case "Luitenant":
+                p = new Piece(Rank.LUITENANT, pl, x, y);
+                break;
+            case "Captain":
+                p = new Piece(Rank.CAPTAIN, pl, x, y);
+                break;
+            case "Sergeant":
+                p = new Piece(Rank.SERGEANT, pl, x, y);
+                break;
         }
+        return p;
     }
+
+
+
 
     /**
      * calls the board method to clear the board.
      */
-    public void clearBoard() {
+    public void clearBoardById(int id) {
+        board.clearSetupSideById(id);
+    }
+    public void clearBoard(){
         board.clearBoard();
     }
 
@@ -171,6 +201,7 @@ public class GameModel {
 
     /**
      * Returns the player by ID.
+     *
      * @param id Each player has an ID, by asking for it in the parameter we can get the player itself.
      * @return returns the appropriate player.
      */
@@ -193,14 +224,13 @@ public class GameModel {
     /**
      * A method that gets the current score by adding up all the remaining pieces power of that player and writes it to a file.
      */
-    public void setScore(Player player){
-        try{
+    public void setScore(Player player) {
+        try {
 
             FileWriter fw = new FileWriter("highScores.txt", true);
-            fw.write(boardMaker.getScore(player.getId())+ " - "+player.getName()  +"\n");
+            fw.write(boardMaker.getScore(player.getId()) + " - " + player.getName() + "\n");
             fw.close();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -209,10 +239,11 @@ public class GameModel {
      * A method for loading in a save
      */
     public void loadSave() {
+
         HashMap<String, List<int[]>> setupHashMap = GameSaveState.getSetupHashMap();
         for (String s : setupHashMap.keySet()) {
             for (int i = 0; i < setupHashMap.get(s).size(); i++) {
-                makePieceByString(s, setupHashMap.get(s).get(i)[0], setupHashMap.get(s).get(i)[1]);
+                makePieceByString(s, setupHashMap.get(s).get(i)[0], setupHashMap.get(s).get(i)[1],GameSaveState.getPlayerTurn());
             }
         }
     }
@@ -225,19 +256,31 @@ public class GameModel {
         pl2.setName(nameTwo);
     }
 
-    public void loadSaveGame(){
+    public void loadSaveGame() {
         List<String> strList = GameSaveState.loadSaveGame();
+
         for (int i = 0; i < strList.size(); i++) {
+            if (strList.get(i).contains("|")){
+                int playerId = Integer.valueOf(strList.get(i).substring(0,1));
+                GameSaveState.setPlayerTurn(getPlayerByID(playerId));
+                GameSaveState.setIdlePlayer(getPlayerByID(Math.abs(playerId -1)));
+                break;
+            }
             String[] split = strList.get(i).split("-");
             String name = split[0];
             String pos = split[1];
-            int xval = Integer.valueOf(pos.substring(0,1));
-            int yval = Integer.valueOf(pos.substring(2,3));
+            int xval = Integer.valueOf(pos.substring(0, 1));
+            int yval = Integer.valueOf(pos.substring(2, 3));
 
-            Player p = getPlayerByID(Integer.valueOf(split[2].substring(0,split[2].length()-1)));
+            Player p = getPlayerByID(Integer.valueOf(split[2].substring(0, split[2].length() - 1)));
 
-            makePieceByStringCustomPlayer(name,xval,yval,p);
+            makePieceByString(name, xval, yval, p);
 
-        };
+        }
+    }
+
+    public boolean startGame() {
+        if (getPlayerPiecesById(1).size() >= 1 && getPlayerPiecesById(0).size() >= 1) return true;
+        else return false;
     }
 }

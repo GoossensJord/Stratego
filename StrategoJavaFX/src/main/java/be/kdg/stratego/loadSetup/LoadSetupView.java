@@ -54,12 +54,12 @@ public class LoadSetupView extends GridPane {
         loadSetupsBtn = new Button("Saved setups");
         setupListString = new ArrayList<>();
         setupList = false;
-        resetBtn = new Button("Reset Setup");
         allPieces = new ArrayList<>();
         player1 = new Button("Player 1");
         player2 = new Button("Player 2");
         confirmSetup = new Button("Confirm Setup");
         startGame = new Button("Start Game");
+        resetBtn = new Button("reset setup");
 
     }
 
@@ -87,11 +87,11 @@ public class LoadSetupView extends GridPane {
         GridPane.setConstraints(notifications, 45, 30, 5, 5);
         GridPane.setConstraints(commonListView, 60, 10, 100, 15);
         GridPane.setConstraints(loadSetupsBtn,56,35,10,3);
-        GridPane.setConstraints(resetBtn, 42, 20, 10, 3);
         GridPane.setConstraints(returnToMenuButton, 64, 35, 10, 3);
         GridPane.setConstraints(player2, 50, 15, 10, 3);
         GridPane.setConstraints(player1,42,15,10 ,3);
         GridPane.setConstraints(confirmSetup, 50, 20, 10, 3);
+        GridPane.setConstraints(resetBtn,42,20,10,3);
         GridPane.setConstraints(startGame, 48, 35, 10, 3);
 
         this.getStylesheets().add("style.css");
@@ -111,12 +111,15 @@ public class LoadSetupView extends GridPane {
         commonListView.setPrefHeight(200);
         commonListView.setPrefHeight(2000);
         notifications.setMinWidth(2000);
-        this.getChildren().addAll(board, resetBtn, notifications, commonListView, loadSetupsBtn, returnToMenuButton, player1, player2, confirmSetup, startGame);
+        this.getChildren().addAll(board,  notifications, resetBtn ,commonListView, loadSetupsBtn, returnToMenuButton, player1, player2, confirmSetup, startGame);
 
         board.setDisable(true);
         btnSetPieces.setDisable(true);
         commonListView.setDisable(true);
         loadSetupsBtn.setDisable(true);
+        startGame.setDisable(true);
+        confirmSetup.setDisable(true);
+        resetBtn.setDisable(true);
         board.setRotate(-90);
     }
 
@@ -171,10 +174,6 @@ public class LoadSetupView extends GridPane {
         GridPane.setHalignment(z, HPos.CENTER);
     }
 
-    public Button getResetBtn() {
-        return resetBtn;
-    }
-
     public void removeFromGridpane(int x, int y) {
         for (Node image : allPieces) {
             if (image instanceof ImageView) {
@@ -183,6 +182,10 @@ public class LoadSetupView extends GridPane {
                 }
             }
         }
+    }
+
+    public Button getResetBtn() {
+        return resetBtn;
     }
 
     Button getPlayer1() {

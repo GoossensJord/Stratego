@@ -63,14 +63,12 @@ public class SelectGameModePresenter {
         gameModeView.getLoadSavedGameButton().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
+                gameModel.clearBoard();
                 GameView gameView = new GameView();
                 GamePresenter gamePresenter = new GamePresenter(gameModel,gameView);
                 gameModeView.getScene().setRoot(gameView);
                 gameView.getScene().getWindow();
-                gameModel.clearBoard();
                 gameModel.loadSaveGame();
-
-
             }
         });
     }

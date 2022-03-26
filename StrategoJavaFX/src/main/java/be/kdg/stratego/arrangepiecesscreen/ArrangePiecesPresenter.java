@@ -1,9 +1,12 @@
 package be.kdg.stratego.arrangepiecesscreen;
 
+import be.kdg.stratego.gameview.GamePresenter;
+import be.kdg.stratego.gameview.GameView;
 import be.kdg.stratego.homescreenview.HomescreenPresenter;
 import be.kdg.stratego.homescreenview.HomescreenView;
 import be.kdg.stratego.model.GameModel;
 import be.kdg.stratego.model.GameSaveState;
+import javafx.event.EventHandler;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.input.MouseEvent;
 
@@ -37,8 +40,7 @@ public class ArrangePiecesPresenter {
                 String pieceStr = mouseEvent.getPickResult().toString().split("'")[1];
                 view.getNotifications().setText(pieceStr + " selected");
 
-            }
-            catch (ArrayIndexOutOfBoundsException aiob){
+            } catch (ArrayIndexOutOfBoundsException aiob) {
                 String pieceStr = mouseEvent.getPickResult().toString().split("\"")[1];
                 view.getNotifications().setText(pieceStr + " selected");
 
@@ -49,6 +51,8 @@ public class ArrangePiecesPresenter {
             setPieceItems();
             view.setSetupList(false);
             view.getBtnSetPieces().setDisable(true);
+            view.getBtnUseSetup().setDisable(true);
+            view.getSaveSetup().setDisable(true);
         });
         view.getBoard().addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
             int x = (int) (mouseEvent.getX() / 78);
@@ -56,7 +60,7 @@ public class ArrangePiecesPresenter {
             String pieceStr = view.getNotifications().getText().split(" ")[0];
 
             if (model.positionChecker(x, y)) {
-                model.makePieceByString(pieceStr, x, y);
+                model.makePieceByString(pieceStr, x, y,GameSaveState.getPlayerTurn());
                 fillBoardWithImages();
                 view.dimSquare(x, y);
                 view.removeListItem(pieceStr);
@@ -65,10 +69,13 @@ public class ArrangePiecesPresenter {
 
             if (view.getListViewLength() == 35) {
                 view.setListItems(new ArrayList<>());
-                view.getNotifications().setText("Save your setup or just use this setup without saving");
+                view.getNotifications().setText("Save your setup");
                 view.getPlayer1().setDisable(true);
                 view.getPlayer2().setDisable(true);
                 view.getListView().setDisable(true);
+                view.getSaveSetup().setDisable(false);
+                view.getBtnUseSetup().setDisable(false);
+                view.getSaveSetup().setDisable(false);
             }
         });
         view.getPlayer1().addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
@@ -100,9 +107,29 @@ public class ArrangePiecesPresenter {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            view.getListView().setDisable(false);
-            GameSaveState.switchTurn();
-            view.lightUpRectangles(GameSaveState.getPlayerTurn().getId());
+            if (!model.startGame()){
+                view.getListView().setDisable(false);
+                GameSaveState.switchTurn();
+                view.lightUpRectangles(GameSaveState.getPlayerTurn().getId());
+                GameSaveState.clearHashMap();
+            }
+            else {
+                view.getSaveSetup().setDisable(true);
+                view.getListView().setDisable(true);
+                view.getStartGame().setDisable(false);
+                view.getBtnSetPieces().setDisable(true);
+            }
+
+
+        });
+        view.getBtnUseSetup().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                GameSaveState.switchTurn();
+                view.lightUpRectangles(GameSaveState.getPlayerTurn().getId());
+                view.getBtnSetPieces().setDisable(false);
+                view.getListView().setDisable(false);
+            }
         });
         view.getReturnToMenuButton().setOnAction(event -> {
             model.clearBoard();
@@ -111,7 +138,15 @@ public class ArrangePiecesPresenter {
             view.getScene().setRoot(homeView);
             homeView.getScene().getWindow();
         });
-
+        view.getStartGame().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                GameView gameView = new GameView();
+                GamePresenter gamePresenter = new GamePresenter(model, gameView);
+                view.getScene().setRoot(gameView);
+                gameView.getScene().getWindow();
+            }
+        });
     }
 
     /**

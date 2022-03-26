@@ -9,6 +9,8 @@ import be.kdg.stratego.model.GameSaveState;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
 
@@ -38,6 +40,8 @@ public class LoadSetupPresenter {
             GameSaveState.setIdlePlayer(model.getPlayerByID(1));
             view.getLoadSetupsBtn().setDisable(false);
             view.getCommonListView().setDisable(false);
+
+            view.getNotifications().setText("Player one, choose your layout");
         });
         view.getPlayer2().addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
             view.getPlayer1().setDisable(true);
@@ -47,27 +51,41 @@ public class LoadSetupPresenter {
             view.getNotifications().setText(GameSaveState.getPlayerTurn().getName());
             view.getLoadSetupsBtn().setDisable(false);
             view.getCommonListView().setDisable(false);
-        });
 
 
-        view.getResetBtn().addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
-            model.clearBoard();
-            clearGrid();
         });
+
         view.getListView().addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
+            view.getConfirmSetup().setDisable(false);
+            view.getResetBtn().setDisable(false);
             try {
                 String pieceStr = mouseEvent.getPickResult().toString().split("\"")[1];
                 view.getNotifications().setText(pieceStr + " selected");
-                GameSaveState.loadSave(pieceStr,false);
+                GameSaveState.loadSave(pieceStr, false);
             } catch (ArrayIndexOutOfBoundsException aiob) {
                 System.out.println("smth foktop");
             }
             model.loadSave();
             fillBoardWithImages();
         });
+
         view.getConfirmSetup().addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
             GameSaveState.switchTurn();
             view.setListItems(new ArrayList<>());
+            view.getListView().setDisable(false);
+            view.getResetBtn().setDisable(true);
+            view.getConfirmSetup().setDisable(true);
+            if (model.startGame()) {
+                view.getStartGame().setDisable(false);
+                view.getLoadSetupsBtn().setDisable(true);
+            }
+        });
+        view.getResetBtn().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                model.clearBoardById(GameSaveState.getPlayerTurn().getId());
+                clearGridById(GameSaveState.getPlayerTurn().getId());
+            }
         });
         view.getStartGame().addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
             GameView gameView = new GameView();
@@ -84,9 +102,20 @@ public class LoadSetupPresenter {
         });
     }
 
-    private void clearGrid() {
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
+    private void clearGridById(int id) {
+        int x;
+        int y;
+        int start = 0;
+        if (id == 0) {
+            x = 3;
+        } else {
+            start = 6;
+            x = 9;
+        }
+        y = 9;
+
+        for (int i = start; i <= x; i++) {
+            for (int j = 0; j <= y; j++) {
                 view.removeFromGridpane(i, j);
             }
         }

@@ -62,12 +62,6 @@ public class BoardMaker {
 
     }
 
-    public void manualListChecker(Piece p) {
-
-            manualPieceSelection(p);
-
-    }
-
     /**
      * Returns the piece list depending on the player ID given
      */
@@ -163,12 +157,25 @@ public class BoardMaker {
     /**
      * Clears the board of pieces and empties the piece lists of each player
      */
+    public void clearBoardById(int id){
+        for (int i = 0; i <= 9; i++) {
+            for (int j = 0; j <= 9; j++) {
+                if (squaresBoard[i][j].getPiece() != null){
+                    if (squaresBoard[i][j].getPiece().getPlayer().getId() == id) squaresBoard[i][j] = new Square();
+                }
+            }
+        }
+        if (id == 1) piecesPlayerTwo = new ArrayList<>();
+        else piecesPlayerOne = new ArrayList<>();
+
+    }
+
     public void clearBoard(){
         squaresBoard = new Square[SQUARE_ARRAY_HEIGHT + 1][SQUARE_ARRAY_WIDTH + 1];
+
         piecesPlayerTwo = new ArrayList<>();
         piecesPlayerOne = new ArrayList<>();
     }
-
     public int getSQUARE_ARRAY_WIDTH() {
         return SQUARE_ARRAY_WIDTH;
     }

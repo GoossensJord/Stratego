@@ -37,9 +37,11 @@ public class GamePresenter {
      */
     private void addEventHandlers() {
         view.getBtnStartGame().setOnAction(actionEvent -> {
-            GameSaveState.setPlayerTurn(model.getPlayerByID(0));
-            GameSaveState.setIdlePlayer(model.getPlayerByID(1));
-            //model.fillRandomly();
+            if (GameSaveState.getPlayerTurn() == null) {
+                GameSaveState.setPlayerTurn(model.getPlayerByID(0));
+                GameSaveState.setIdlePlayer(model.getPlayerByID(1));
+            }
+
             fillBoardWithImages();
             view.getBtnStartGame().setDisable(true);
             view.getBoard().setDisable(true);
@@ -84,7 +86,6 @@ public class GamePresenter {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
             }
         });
         view.getBoard().addEventHandler(MouseEvent.MOUSE_CLICKED, new boardEventHandler(model, view));
