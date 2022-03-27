@@ -66,19 +66,19 @@ public class LeaderboardView extends GridPane {
     }
 
 
-    public TextArea getHighScores() {
+    TextArea getHighScores() {
         return highScores;
     }
 
-    public Button getBackToMainMenuButton() {
+    Button getBackToMainMenuButton() {
         return backToMainMenuButton;
     }
 
-    public Button getResetHighScoresButton() {
+    Button getResetHighScoresButton() {
         return resetHighScoresButton;
     }
 
-    public Button getUpdateLeaderboard() {
+    Button getUpdateLeaderboard() {
         return updateLeaderboard;
     }
 

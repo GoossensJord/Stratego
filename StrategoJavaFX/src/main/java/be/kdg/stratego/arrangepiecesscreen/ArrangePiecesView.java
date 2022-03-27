@@ -17,21 +17,21 @@ import java.util.List;
  */
 public class ArrangePiecesView extends GridPane {
 
-    GridPane board;
-    Background background;
-    TextArea notifications;
-    Button btnSetPieces;
-    Button player1;
-    Button player2;
-    Button saveSetup;
-    Button returnToMenuButton;
-    Button btnUseSetup;
-    Button startGame;
-    ListView<String> commonListView;
+    private GridPane board;
+    private Background background;
+    private TextArea notifications;
+    private Button btnSetPieces;
+    private Button player1;
+    private Button player2;
+    private Button saveSetup;
+    private Button returnToMenuButton;
+    private Button btnUseSetup;
+    private Button startGame;
+    private ListView<String> commonListView;
     List<ImageView> allPieces;
-    List<Rectangle> coloredRectangles;
-    List<String> pieceListString;
-    List<String> setupListString;
+    private List<Rectangle> coloredRectangles;
+    private List<String> pieceListString;
+    private List<String> setupListString;
     boolean setupList;
 
 
@@ -92,15 +92,14 @@ public class ArrangePiecesView extends GridPane {
         }
         GridPane.setConstraints(board, 0, 18, 4, 4);
         GridPane.setConstraints(player2, 50, 20, 10, 4);
-        GridPane.setConstraints(player1,42,20,10 ,4);
-        GridPane.setConstraints(btnSetPieces,47,10,10,3);
-        GridPane.setConstraints(btnUseSetup, 40,35 , 10,3);
-        GridPane.setConstraints(saveSetup,48 ,35,10,3);
-        GridPane.setConstraints(startGame,57,35,10,3);
+        GridPane.setConstraints(player1, 42, 20, 10, 4);
+        GridPane.setConstraints(btnSetPieces, 47, 10, 10, 3);
+        GridPane.setConstraints(btnUseSetup, 40, 35, 10, 3);
+        GridPane.setConstraints(saveSetup, 48, 35, 10, 3);
+        GridPane.setConstraints(startGame, 57, 35, 10, 3);
         GridPane.setConstraints(returnToMenuButton, 64, 35, 10, 3);
         GridPane.setConstraints(notifications, 45, 30, 5, 5);
         GridPane.setConstraints(commonListView, 60, 10, 100, 15);
-
 
 
         this.getStylesheets().add("style.css");
@@ -117,7 +116,7 @@ public class ArrangePiecesView extends GridPane {
         commonListView.setPrefHeight(200);
         commonListView.setPrefHeight(2000);
         notifications.setMinWidth(2000);
-        this.getChildren().addAll(board,player1,player2, btnSetPieces, notifications, commonListView,saveSetup, returnToMenuButton, startGame);
+        this.getChildren().addAll(board, player1, player2, btnSetPieces, notifications, commonListView, saveSetup, returnToMenuButton, startGame);
         board.setDisable(true);
         btnSetPieces.setDisable(true);
         startGame.setDisable(true);
@@ -127,23 +126,20 @@ public class ArrangePiecesView extends GridPane {
 
     /**
      * Makes a list of all the pieces by name, adds it to a listview for manual assignment
-     * */
+     */
     void setListItems(List<String> items) {
-        if(setupList) setupListString = items;
+        if (setupList) setupListString = items;
         else pieceListString = items;
         commonListView.setItems(FXCollections.observableList(items));
     }
 
-    public Button getBtnUseSetup() {
-        return btnUseSetup;
-    }
 
     /**
      * Method that removes a piece from the list after it has been given a place
-     * */
-    void removeListItem(String s){
+     */
+    void removeListItem(String s) {
         for (int i = 0; i < commonListView.getItems().size(); i++) {
-            if(s.equals(commonListView.getItems().get(i))) {
+            if (s.equals(commonListView.getItems().get(i))) {
                 commonListView.getItems().remove(i);
                 break;
             }
@@ -216,8 +212,11 @@ public class ArrangePiecesView extends GridPane {
             }
         }
     }
+    public void setSetupList(boolean setupList) {
+        this.setupList = setupList;
+    }
 
-    public Button getReturnToMenuButton() {
+    Button getReturnToMenuButton() {
         return returnToMenuButton;
     }
 
@@ -233,7 +232,7 @@ public class ArrangePiecesView extends GridPane {
         return btnSetPieces;
     }
 
-    public Button getStartGame() {
+    Button getStartGame() {
         return startGame;
     }
 
@@ -241,9 +240,7 @@ public class ArrangePiecesView extends GridPane {
         return commonListView;
     }
 
-    int getListViewLength(){
-        return pieceListString.size();
-    }
+    int getListViewLength() {return pieceListString.size();}
 
     TextArea getNotifications() {
         return notifications;
@@ -256,8 +253,9 @@ public class ArrangePiecesView extends GridPane {
     Button getPlayer2() {
         return player2;
     }
-    public void setSetupList(boolean setupList) {
-        this.setupList = setupList;
+
+    Button getBtnUseSetup() {
+        return btnUseSetup;
     }
 
 

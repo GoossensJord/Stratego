@@ -121,7 +121,7 @@ public class GameView extends GridPane {
     /**
      * fills the squares without a piece, thus without a picture with a string
      */
-    public void setPosition(String n, int x, int y) {
+    void setPosition(String n, int x, int y) {
         Label z = new Label(n);
         z.setTextFill(Color.BLACK);
         board.add(z, x, y);
@@ -131,7 +131,7 @@ public class GameView extends GridPane {
     /**
      * Fills the squares with the appropriate image and adds it to the gridpane.
      */
-    public void setPicture(Image image, int x, int y) {
+    void setPicture(Image image, int x, int y) {
         ImageView imageview = new ImageView(image);
         setHalignment(imageview, HPos.CENTER);
 
@@ -147,7 +147,7 @@ public class GameView extends GridPane {
     /**
      * Removes an image from the gridpane, this method is called upon when one loses a piece.
      */
-    public void removeFromGridpane(int x, int y) {
+    void removeFromGridpane(int x, int y) {
         for (Node image : allPieces) {
             if (image instanceof ImageView) {
                 if (image.getId().equals(x + "" + y)) {
@@ -162,7 +162,7 @@ public class GameView extends GridPane {
      *
      * @param moveArr Requires a list of moves to light them up on the board
      */
-    public void lightUpRectanglesMoves(List<int[]> moveArr) {
+    void lightUpRectanglesMoves(List<int[]> moveArr) {
         int[] pos = new int[2];
         for (int[] ints : moveArr) {
             pos[0] = ints[0];
@@ -180,7 +180,7 @@ public class GameView extends GridPane {
      *
      * @param attackArr Requires a list of attacks to light them up on the board
      */
-    public void lightUpRectanglesAttack(List<int[]> attackArr) {
+    void lightUpRectanglesAttack(List<int[]> attackArr) {
         int[] pos = new int[2];
         for (int[] ints : attackArr) {
             pos[0] = ints[0];
@@ -196,44 +196,35 @@ public class GameView extends GridPane {
     /**
      * Method to dim all the lit up squares on the board
      */
-    public void dimSquare() {
+    void dimSquare() {
         for (Rectangle r : coloredRectangles) {
             board.getChildren().remove(r);
         }
     }
 
 
-    public Button getBtnStartGame() {
+    Button getBtnStartGame() {
         return btnStartGame;
     }
-
-    public GridPane getBoard() {
+    GridPane getBoard() {
         return board;
     }
-
-
-    public TextArea getNotifications() {
+    TextArea getNotifications() {
         return notifications;
     }
-
-
-    public Button getEndTurn() {
+    Button getEndTurn() {
         return endTurn;
     }
-
-    public Button getStartTurn() {
+    Button getStartTurn() {
         return startTurn;
     }
-
-    public Image getEnemyimage() {
+    Image getEnemyimage() {
         return enemyimage;
     }
-
-    public Button getBackToMainMenuButton() {
+    Button getBackToMainMenuButton() {
         return backToMainMenuButton;
     }
-
-    public Button getSaveGameButton() {
+    Button getSaveGameButton() {
         return saveGameButton;
     }
 }

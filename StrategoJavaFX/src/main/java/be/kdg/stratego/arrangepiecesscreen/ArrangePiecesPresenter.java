@@ -154,7 +154,9 @@ public class ArrangePiecesPresenter {
         }
     }
 
-
+    /**
+     * A method that calls the backend model to give back a string list of all pieces to present in the view
+     */
     private void setPieceItems() {
         view.setListItems(model.getAllPiecesString());
     }

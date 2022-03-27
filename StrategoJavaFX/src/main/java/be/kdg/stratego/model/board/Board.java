@@ -91,6 +91,10 @@ public class Board {
     /**
      * Method that clears the board and fills it with empty squares
      */
+    public void clearBoard() {
+        boardMaker.clearBoard();
+        fillWithSquares();
+    }
     public void clearSetupSideById(int id){
         boardMaker.clearBoardById(id);
     }
@@ -105,8 +109,4 @@ public class Board {
     }
 
 
-    public void clearBoard() {
-        boardMaker.clearBoard();
-        fillWithSquares();
-    }
 }

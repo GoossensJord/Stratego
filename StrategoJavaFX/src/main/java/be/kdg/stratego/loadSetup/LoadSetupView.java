@@ -129,27 +129,27 @@ public class LoadSetupView extends GridPane {
         commonListView.setItems(FXCollections.observableList(items));
     }
 
-    public ListView<String> getCommonListView() {
+    ListView<String> getCommonListView() {
         return commonListView;
     }
 
-    public Button getLoadSetupsBtn() {
+    Button getLoadSetupsBtn() {
         return loadSetupsBtn;
     }
 
-    public Button getConfirmSetup() {
+    Button getConfirmSetup() {
         return confirmSetup;
     }
 
-    public ListView<String> getListView() {
+    ListView<String> getListView() {
         return commonListView;
     }
 
-    public Button getStartGame() {
+    Button getStartGame() {
         return startGame;
     }
 
-    public TextArea getNotifications() {
+    TextArea getNotifications() {
         return notifications;
     }
 
@@ -174,7 +174,7 @@ public class LoadSetupView extends GridPane {
         GridPane.setHalignment(z, HPos.CENTER);
     }
 
-    public void removeFromGridpane(int x, int y) {
+    void removeFromGridpane(int x, int y) {
         for (Node image : allPieces) {
             if (image instanceof ImageView) {
                 if (image.getId().equals(x + "" + y)) {
@@ -184,7 +184,7 @@ public class LoadSetupView extends GridPane {
         }
     }
 
-    public Button getResetBtn() {
+    Button getResetBtn() {
         return resetBtn;
     }
 
@@ -196,7 +196,7 @@ public class LoadSetupView extends GridPane {
         return player2;
     }
 
-    public Button getReturnToMenuButton() {
+    Button getReturnToMenuButton() {
         return returnToMenuButton;
     }
 }

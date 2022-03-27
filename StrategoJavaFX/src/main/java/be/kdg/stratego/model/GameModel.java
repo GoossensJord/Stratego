@@ -135,6 +135,14 @@ public class GameModel {
         boardMaker.manualPieceSelection(p);
     }
 
+    /**
+     * Creates a new piece when manually placing them on the board to create a layout.
+     * @param str The string name of the piece.
+     * @param x The X coordinate on the board.
+     * @param y The Y Coordinate on the board.
+     * @param pl The player that gets assigned to the piece.
+     * @return Returns the made piece.
+     */
     private Piece pieceMaker(String str, int x, int y, Player pl) {
         Piece p = null;
         switch (str) {
@@ -254,6 +262,9 @@ public class GameModel {
         pl2.setName(nameTwo);
     }
 
+    /**
+     * Method that loads in the save from a text file.
+     */
     public void loadSaveGame() {
         List<String> strList = GameSaveState.loadSaveGame();
 
@@ -285,6 +296,10 @@ public class GameModel {
         }
     }
 
+    /**
+     * Boolean to determine wether or not you can start the game with your created layout, it checks the remaining pieces to be placed by each player
+     * @return returns true if both are bigger or equal to one
+     */
     public boolean startGame() {
         return getPlayerPiecesById(1).size() >= 1 && getPlayerPiecesById(0).size() >= 1;
     }

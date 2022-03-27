@@ -75,19 +75,19 @@ public class HomescreenView extends GridPane {
 
     }
 
-    public Button getLayoutPiecesButton() {
+    Button getLayoutPiecesButton() {
         return layoutPiecesButton;
     }
 
-    public Button getPlayButton() {
+    Button getPlayButton() {
         return playButton;
     }
 
-    public Button getEndGameButton() {
+    Button getEndGameButton() {
         return endGameButton;
     }
 
-    public Button getLeaderBoardButton() {
+    Button getLeaderBoardButton() {
         return leaderBoardButton;
     }
 }
