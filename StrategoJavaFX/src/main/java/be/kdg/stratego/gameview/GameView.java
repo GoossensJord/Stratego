@@ -133,7 +133,7 @@ public class GameView extends GridPane {
      */
     public void setPicture(Image image, int x, int y) {
         ImageView imageview = new ImageView(image);
-        board.setHalignment(imageview, HPos.CENTER);
+        setHalignment(imageview, HPos.CENTER);
 
         imageview.setFitWidth(78);
         imageview.setFitHeight(54);
@@ -182,9 +182,9 @@ public class GameView extends GridPane {
      */
     public void lightUpRectanglesAttack(List<int[]> attackArr) {
         int[] pos = new int[2];
-        for (int i = 0; i < attackArr.size(); i++) {
-            pos[0] = attackArr.get(i)[0];
-            pos[1] = attackArr.get(i)[1];
+        for (int[] ints : attackArr) {
+            pos[0] = ints[0];
+            pos[1] = ints[1];
             Rectangle rect = new Rectangle(78, 78);
             rect.setFill(Color.RED);
             rect.setOpacity(0.3);

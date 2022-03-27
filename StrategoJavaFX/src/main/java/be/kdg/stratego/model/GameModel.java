@@ -5,7 +5,6 @@ import be.kdg.stratego.model.board.BoardMaker;
 import be.kdg.stratego.model.board.Square;
 import be.kdg.stratego.model.pieces.*;
 import be.kdg.stratego.model.player.Player;
-import be.kdg.stratego.model.GameSaveState;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -211,13 +210,12 @@ public class GameModel {
     }
 
     public boolean positionChecker(int x, int y) {
-        System.out.println(GameSaveState.getPlayerTurn().getId());
         //noinspection SuspiciousNameCombination
         if (board.spaceAvailable(x, y)) {
             if (GameSaveState.getPlayerTurn().getId() == 0 && x <= 3) return true;
-            else if (GameSaveState.getPlayerTurn().getId() == 1 && x >= 6) return true;
+            else return GameSaveState.getPlayerTurn().getId() == 1 && x >= 6;
         }
-        System.out.print("magnie");
+
         return false;
     }
 
@@ -259,20 +257,26 @@ public class GameModel {
     public void loadSaveGame() {
         List<String> strList = GameSaveState.loadSaveGame();
 
-        for (int i = 0; i < strList.size(); i++) {
-            if (strList.get(i).contains("|")){
-                int playerId = Integer.valueOf(strList.get(i).substring(0,1));
-                GameSaveState.setPlayerTurn(getPlayerByID(playerId));
-                GameSaveState.setIdlePlayer(getPlayerByID(Math.abs(playerId -1)));
-                break;
+        for (String s : strList) {
+            if (s.contains("|")) {
+                try {
+                    int playerId = Integer.parseInt(s.substring(0, 1));
+                    GameSaveState.setPlayerTurn(getPlayerByID(playerId));
+                    GameSaveState.setIdlePlayer(getPlayerByID(Math.abs(playerId - 1)));
+                    break;
+                } catch (NumberFormatException ex){
+                    System.out.println("Fout in loadsavegame string");
+                }
+
+
             }
-            String[] split = strList.get(i).split("-");
+            String[] split = s.split("-");
             String name = split[0];
             String pos = split[1];
-            int xval = Integer.valueOf(pos.substring(0, 1));
-            int yval = Integer.valueOf(pos.substring(2, 3));
+            int xval = Integer.parseInt(pos.substring(0, 1));
+            int yval = Integer.parseInt(pos.substring(2, 3));
 
-            Player p = getPlayerByID(Integer.valueOf(split[2].substring(0, split[2].length() - 1)));
+            Player p = getPlayerByID(Integer.parseInt(split[2].substring(0, split[2].length() - 1)));
 
             makePieceByString(name, xval, yval, p);
 
@@ -280,7 +284,6 @@ public class GameModel {
     }
 
     public boolean startGame() {
-        if (getPlayerPiecesById(1).size() >= 1 && getPlayerPiecesById(0).size() >= 1) return true;
-        else return false;
+        return getPlayerPiecesById(1).size() >= 1 && getPlayerPiecesById(0).size() >= 1;
     }
 }

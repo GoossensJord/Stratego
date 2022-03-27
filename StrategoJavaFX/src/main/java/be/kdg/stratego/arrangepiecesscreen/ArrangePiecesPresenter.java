@@ -6,7 +6,6 @@ import be.kdg.stratego.homescreenview.HomescreenPresenter;
 import be.kdg.stratego.homescreenview.HomescreenView;
 import be.kdg.stratego.model.GameModel;
 import be.kdg.stratego.model.GameSaveState;
-import javafx.event.EventHandler;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.input.MouseEvent;
 
@@ -67,7 +66,7 @@ public class ArrangePiecesPresenter {
                 view.getBoard().setDisable(true);
             } else view.getNotifications().setText("Invalid placing!");
 
-            if (view.getListViewLength() == 35) {
+            if (view.getListViewLength() == 0) {
                 view.setListItems(new ArrayList<>());
                 view.getNotifications().setText("Save your setup");
                 view.getPlayer1().setDisable(true);
@@ -122,14 +121,11 @@ public class ArrangePiecesPresenter {
 
 
         });
-        view.getBtnUseSetup().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                GameSaveState.switchTurn();
-                view.lightUpRectangles(GameSaveState.getPlayerTurn().getId());
-                view.getBtnSetPieces().setDisable(false);
-                view.getListView().setDisable(false);
-            }
+        view.getBtnUseSetup().addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
+            GameSaveState.switchTurn();
+            view.lightUpRectangles(GameSaveState.getPlayerTurn().getId());
+            view.getBtnSetPieces().setDisable(false);
+            view.getListView().setDisable(false);
         });
         view.getReturnToMenuButton().setOnAction(event -> {
             model.clearBoard();
@@ -138,14 +134,11 @@ public class ArrangePiecesPresenter {
             view.getScene().setRoot(homeView);
             homeView.getScene().getWindow();
         });
-        view.getStartGame().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                GameView gameView = new GameView();
-                GamePresenter gamePresenter = new GamePresenter(model, gameView);
-                view.getScene().setRoot(gameView);
-                gameView.getScene().getWindow();
-            }
+        view.getStartGame().addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
+            GameView gameView = new GameView();
+            GamePresenter gamePresenter = new GamePresenter(model, gameView);
+            view.getScene().setRoot(gameView);
+            gameView.getScene().getWindow();
         });
     }
 
@@ -155,7 +148,7 @@ public class ArrangePiecesPresenter {
     private void fillBoardWithImages() {
         for (int i = 9; i >= 0; i--) {
             for (int j = 0; j < 10; j++) {
-                if (model.getBoard()[i][j].getPiece() == null) view.setPosition("", i, j);
+                if (model.getBoard()[i][j].getPiece() == null) view.setPosition(i, j);
                 else view.setPicture(model.getBoard()[i][j].getPiece().getImage(), i, j);
             }
         }

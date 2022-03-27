@@ -7,8 +7,6 @@ import be.kdg.stratego.homescreenview.HomescreenView;
 import be.kdg.stratego.loadSetup.LoadSetupPresenter;
 import be.kdg.stratego.loadSetup.LoadSetupView;
 import be.kdg.stratego.model.GameModel;
-import be.kdg.stratego.model.GameSaveState;
-import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 
 /**
@@ -60,16 +58,13 @@ public class SelectGameModePresenter {
             gameModeView.getScene().setRoot(lsView);
             lsView.getScene().getWindow();
         });
-        gameModeView.getLoadSavedGameButton().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                gameModel.clearBoard();
-                GameView gameView = new GameView();
-                GamePresenter gamePresenter = new GamePresenter(gameModel,gameView);
-                gameModeView.getScene().setRoot(gameView);
-                gameView.getScene().getWindow();
-                gameModel.loadSaveGame();
-            }
+        gameModeView.getLoadSavedGameButton().addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
+            gameModel.clearBoard();
+            GameView gameView = new GameView();
+            GamePresenter gamePresenter = new GamePresenter(gameModel,gameView);
+            gameModeView.getScene().setRoot(gameView);
+            gameView.getScene().getWindow();
+            gameModel.loadSaveGame();
         });
     }
 }

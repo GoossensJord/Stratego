@@ -201,7 +201,6 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
 
         }
         view.dimSquare();
-
         view.getEndTurn().setDisable(false);
         view.getBoard().setDisable(true);
     }

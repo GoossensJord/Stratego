@@ -27,7 +27,7 @@ public class ArrangePiecesView extends GridPane {
     Button returnToMenuButton;
     Button btnUseSetup;
     Button startGame;
-    ListView commonListView;
+    ListView<String> commonListView;
     List<ImageView> allPieces;
     List<Rectangle> coloredRectangles;
     List<String> pieceListString;
@@ -54,7 +54,7 @@ public class ArrangePiecesView extends GridPane {
         background = new Background(backgroundImageSetter);
 
         notifications = new TextArea();
-        commonListView = new ListView<String>();
+        commonListView = new ListView<>();
         allPieces = new ArrayList<>();
         coloredRectangles = new ArrayList<>();
         pieceListString = new ArrayList<>();
@@ -157,7 +157,7 @@ public class ArrangePiecesView extends GridPane {
     void setPicture(Image image, int x, int y) {
 
         ImageView imageview = new ImageView(image);
-        board.setHalignment(imageview, HPos.CENTER);
+        setHalignment(imageview, HPos.CENTER);
 
         imageview.setFitWidth(78);
         imageview.setFitHeight(54);
@@ -171,8 +171,8 @@ public class ArrangePiecesView extends GridPane {
     /**
      * Method that puts a String label on a square that does not have a piece
      */
-    void setPosition(String n, int x, int y) {
-        Label z = new Label(n);
+    void setPosition(int x, int y) {
+        Label z = new Label("");
         z.setTextFill(Color.BLACK);
         board.add(z, x, y);
         GridPane.setHalignment(z, HPos.CENTER);

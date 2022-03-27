@@ -4,12 +4,8 @@ import be.kdg.stratego.homescreenview.HomescreenPresenter;
 import be.kdg.stratego.homescreenview.HomescreenView;
 import be.kdg.stratego.model.GameModel;
 import be.kdg.stratego.model.GameSaveState;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.TextInputDialog;
 import javafx.scene.input.MouseEvent;
 
 
@@ -72,20 +68,17 @@ public class GamePresenter {
             homeView.getScene().getWindow();
 
         });
-        view.getSaveGameButton().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setHeaderText("Your game has been saved, you can close the game");
-                alert.getButtonTypes().clear();
-                ButtonType ok = new ButtonType("OK");
-                alert.getButtonTypes().addAll(ok);
-                alert.showAndWait();
-                try {
-                    GameSaveState.saveGame(model.getBoard());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+        view.getSaveGameButton().setOnAction(event -> {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setHeaderText("Your game has been saved, you can close the game");
+            alert.getButtonTypes().clear();
+            ButtonType ok = new ButtonType("OK");
+            alert.getButtonTypes().addAll(ok);
+            alert.showAndWait();
+            try {
+                GameSaveState.saveGame(model.getBoard());
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         });
         view.getBoard().addEventHandler(MouseEvent.MOUSE_CLICKED, new boardEventHandler(model, view));

@@ -12,14 +12,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class GameSaveState {
-    private static Square[][] boardState;
 
     private static Player playerTurn;
     private static Player idlePlayer;
     private static Path savePath;
     private static List<String> setupStringList = new ArrayList<>();
     private static HashMap<String, List<int[]>> setupHashMap = new HashMap<>();
-    private static boolean entireGame = false;
     private static String saveGameString;
 
     public GameSaveState() {
@@ -74,15 +72,14 @@ public class GameSaveState {
     public static void saveGame(Square[][] board) throws IOException {
         PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter("saveGame.txt")));
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[i].length; j++) {
-                if (board[i][j] != null) {
-                    if (board[i][j].getIsOccupied()) {
-                        sb.append(board[i][j].getPiece().getRank().getName() + "-" + board[i][j].getPiece().getX() + '.' + board[i][j].getPiece().getY() + "-" + board[i][j].getPiece().getPlayer().getId());
+        for (Square[] squares : board) {
+            for (Square square : squares) {
+                if (square != null) {
+                    if (square.getIsOccupied()) {
+                        sb.append(square.getPiece().getRank().getName()).append("-").append(square.getPiece().getX()).append('.').append(square.getPiece().getY()).append("-").append(square.getPiece().getPlayer().getId());
                         sb.append(":");
                     }
-                }
-                else continue;
+                } else continue;
             }
         }
         for (String s: sb.toString().split(":")) {
@@ -132,7 +129,6 @@ public class GameSaveState {
     }
 
     public static void loadSave(String save, boolean game) {
-        entireGame = game;
         filechecker();
         StringBuilder sb = new StringBuilder();
         setupHashMap.clear();
@@ -149,22 +145,21 @@ public class GameSaveState {
         System.out.println(sb);
 
         String[] setupTitle = sb.toString().split("};");
-        for (int i = 0; i < setupTitle.length; i++) {
-            if (setupTitle[i].contains(save)) {
-                String toLoad = setupTitle[i];
-                String setupString = toLoad.split(":\\{")[1];
+        for (String s : setupTitle) {
+            if (s.contains(save)) {
+                String setupString = s.split(":\\{")[1];
                 String[] piecesStr = setupString.split(",");
                 System.out.println(setupString);
 
-                for (int j = 0; j < piecesStr.length; j++) {
-                    String pieceStr = piecesStr[j].split(":-")[0];
-                    String[] posarr = piecesStr[j].split(":")[1].split("-");
-                    for (int k = 0; k < posarr.length; k++) {
+                for (String value : piecesStr) {
+                    String pieceStr = value.split(":-")[0];
+                    String[] posarr = value.split(":")[1].split("-");
+                    for (String item : posarr) {
 
-                        String[] pos = posarr[k].split("\\.");
+                        String[] pos = item.split("\\.");
 
                         if (pos.length == 2) {
-                            int[] intarr = new int[]{Integer.valueOf(pos[0]), Integer.valueOf(pos[1])};
+                            int[] intarr = new int[]{Integer.parseInt(pos[0]), Integer.parseInt(pos[1])};
                             if (setupHashMap.containsKey(pieceStr))
                                 setupHashMap.get(pieceStr).add(intarr);
                             else {
@@ -190,7 +185,6 @@ public class GameSaveState {
 
 
     public static void setBoardState(Square[][] bState) {
-        boardState = bState;
     }
 
     public static void setPlayerTurn(Player p) {

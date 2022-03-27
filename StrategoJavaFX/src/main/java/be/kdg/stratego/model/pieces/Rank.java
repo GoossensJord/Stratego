@@ -53,6 +53,6 @@ public enum Rank {
     }
 
     public void setCounter(int counter) {
-        this.counter = counter;
+        Rank.counter = counter;
     }
 }

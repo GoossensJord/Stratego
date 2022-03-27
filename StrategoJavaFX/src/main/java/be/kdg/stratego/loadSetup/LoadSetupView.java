@@ -27,7 +27,7 @@ public class LoadSetupView extends GridPane {
     Button confirmSetup;
     Button startGame;
     Button resetBtn;
-    ListView commonListView;
+    ListView<String> commonListView;
     List<String> setupListString;
     boolean setupList;
     List<ImageView> allPieces;
@@ -47,7 +47,7 @@ public class LoadSetupView extends GridPane {
         background = new Background(backgroundImageSetter);
 
         notifications = new TextArea();
-        commonListView = new ListView<String>();
+        commonListView = new ListView<>();
         btnSetPieces = new Button("Set Pieces");
         btnUseSetup = new Button("Use Setup");
         returnToMenuButton = new Button("Quit");
@@ -129,7 +129,7 @@ public class LoadSetupView extends GridPane {
         commonListView.setItems(FXCollections.observableList(items));
     }
 
-    public ListView getCommonListView() {
+    public ListView<String> getCommonListView() {
         return commonListView;
     }
 
@@ -141,7 +141,7 @@ public class LoadSetupView extends GridPane {
         return confirmSetup;
     }
 
-    public ListView getListView() {
+    public ListView<String> getListView() {
         return commonListView;
     }
 
@@ -156,7 +156,7 @@ public class LoadSetupView extends GridPane {
     void setPicture(Image image, int x, int y) {
 
         ImageView imageview = new ImageView(image);
-        board.setHalignment(imageview, HPos.CENTER);
+        setHalignment(imageview, HPos.CENTER);
 
         imageview.setFitWidth(78);
         imageview.setFitHeight(54);
@@ -167,8 +167,8 @@ public class LoadSetupView extends GridPane {
         allPieces.add(imageview);
     }
 
-    void setPosition(String n, int x, int y) {
-        Label z = new Label(n);
+    void setPosition(int x, int y) {
+        Label z = new Label("");
         z.setTextFill(Color.BLACK);
         board.add(z, x, y);
         GridPane.setHalignment(z, HPos.CENTER);
