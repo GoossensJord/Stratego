@@ -70,15 +70,20 @@ public class GamePresenter {
         });
         view.getSaveGameButton().setOnAction(event -> {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setHeaderText("Your game has been saved, you can close the game");
+            alert.setHeaderText("Your game has been saved, the game will close after confirmation");
             alert.getButtonTypes().clear();
             ButtonType ok = new ButtonType("OK");
-            alert.getButtonTypes().addAll(ok);
+            ButtonType cancel = new ButtonType("Cancel");
+            alert.getButtonTypes().addAll(ok,cancel);
             alert.showAndWait();
-            try {
-                GameSaveState.saveGame(model.getBoard());
-            } catch (IOException e) {
-                e.printStackTrace();
+            if (alert.getResult() == null || alert.getResult().equals(cancel)) event.consume();
+            else {
+                try {
+                    GameSaveState.saveGame(model.getBoard());
+                    System.exit(2);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
         view.getBoard().addEventHandler(MouseEvent.MOUSE_CLICKED, new boardEventHandler(model, view));

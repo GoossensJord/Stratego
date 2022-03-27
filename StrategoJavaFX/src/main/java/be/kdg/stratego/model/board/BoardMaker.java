@@ -72,7 +72,6 @@ public class BoardMaker {
 
     public void manualPieceSelection(Piece p) {
         if (playerData.addPieceToPieceList(p) != null && !squaresBoard[p.getX()][p.getY()].getIsOccupied()) {
-            System.out.println(squaresBoard[p.getX()][p.getY()].getIsOccupied());
             if (p.getPlayer() == null) GameSaveState.getPlayerTurn().getPiecesList().add(playerData.addPieceToPieceList(p));
             else p.getPlayer().getPiecesList().add(playerData.addPieceToPieceList(p));
             squaresBoard[p.getX()][p.getY()].setPiece(p);

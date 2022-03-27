@@ -270,16 +270,18 @@ public class GameModel {
 
 
             }
-            String[] split = s.split("-");
-            String name = split[0];
-            String pos = split[1];
-            int xval = Integer.parseInt(pos.substring(0, 1));
-            int yval = Integer.parseInt(pos.substring(2, 3));
-
-            Player p = getPlayerByID(Integer.parseInt(split[2].substring(0, split[2].length() - 1)));
-
-            makePieceByString(name, xval, yval, p);
-
+            try {
+                String[] split = s.split("-");
+                String name = split[0];
+                String pos = split[1];
+                int xval = Integer.parseInt(pos.substring(0, 1));
+                int yval = Integer.parseInt(pos.substring(2, 3));
+                Player p = getPlayerByID(Integer.parseInt(split[2].substring(0, split[2].length() - 1)));
+                makePieceByString(name, xval, yval, p);
+            }
+            catch (ArrayIndexOutOfBoundsException ae){
+                System.out.println("Fout in loadsavegame array");
+            }
         }
     }
 
