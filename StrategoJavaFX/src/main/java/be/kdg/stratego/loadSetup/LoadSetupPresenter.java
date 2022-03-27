@@ -10,16 +10,27 @@ import javafx.scene.input.MouseEvent;
 
 import java.util.ArrayList;
 
+/**
+ * Class responsible for presenting the load setup screen
+ */
 public class LoadSetupPresenter {
     private GameModel model;
     private LoadSetupView view;
 
+    /**
+     * Constructor for the load setup presenter using a GameModel and a LoadSetupView
+     * @param model The game model
+     * @param view The load setup view
+     */
     public LoadSetupPresenter(GameModel model, LoadSetupView view) {
         this.model = model;
         this.view = view;
         addEventHandlers();
     }
 
+    /**
+     * Adds event handlers to the different input options
+     */
     private void addEventHandlers() {
         view.getLoadSetupsBtn().addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> view.setListItems(GameSaveState.getSetupStringList()));
 
@@ -89,6 +100,10 @@ public class LoadSetupPresenter {
         });
     }
 
+    /**
+     * Clears the grid of one player
+     * @param id Used to check the player ID, depending on the ID a different side of the board gets cleared.
+     */
     private void clearGridById(int id) {
         int x;
         int y;
@@ -109,11 +124,14 @@ public class LoadSetupPresenter {
 
     }
 
+    /**
+     * fills the board with images
+     */
     private void fillBoardWithImages() {
         for (int i = 9; i >= 0; i--) {
             for (int j = 0; j < 10; j++) {
-                if (model.getBoard()[i][j].getPiece() == null) view.setPosition(i, j);
-                else view.setPicture(model.getBoard()[i][j].getPiece().getImage(), i, j);
+                if (model.getBoard()[i][j].getPiece() == null) view.fillSquareWithEmptyString(i, j);
+                else view.fillSquareWithPicture(model.getBoard()[i][j].getPiece().getImage(), i, j);
             }
         }
     }

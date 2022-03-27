@@ -9,13 +9,12 @@ import javafx.scene.layout.*;
  * View responsible for leaderboard
  */
 public class LeaderboardView extends GridPane {
-    Button backToMainMenuButton;
-    Button resetHighScoresButton;
-    Background background;
-    TextArea highScores;
-    TextArea leaderBoardTitle;
-    ImageView highScoreImage;
-    Button updateLeaderboard;
+    private Button backToMainMenuButton;
+    private  Button resetHighScoresButton;
+    private Background background;
+    private TextArea highScores;
+    private TextArea leaderBoardTitle;
+    private  Button updateLeaderboard;
 
     /**
      * Constructor which calls the initialise nodes and layout nodes method as those are needed immediately.
@@ -32,7 +31,7 @@ public class LeaderboardView extends GridPane {
         backToMainMenuButton = new Button("Exit");
         resetHighScoresButton = new Button("Reset");
         highScores = new TextArea("Points");
-        highScoreImage = new ImageView(new Image("nodeFrame.png"));
+        ImageView highScoreImage = new ImageView(new Image("nodeFrame.png"));
         leaderBoardTitle = new TextArea("Leaderboard");
         Image homeBackgroundImage = new Image("/homeScreenTwo.png");
         BackgroundSize backgroundSize = new BackgroundSize(100, 100, true, true, true, true);

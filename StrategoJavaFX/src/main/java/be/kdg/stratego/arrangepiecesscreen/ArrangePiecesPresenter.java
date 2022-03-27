@@ -51,14 +51,14 @@ public class ArrangePiecesPresenter {
             view.setSetupList(false);
             view.getBtnSetPieces().setDisable(true);
             view.getBtnUseSetup().setDisable(true);
-            view.getSaveSetup().setDisable(true);
+            view.getBtnSaveSetup().setDisable(true);
         });
         view.getBoard().addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
             int x = (int) (mouseEvent.getX() / 78);
             int y = (int) (mouseEvent.getY() / 78);
             String pieceStr = view.getNotifications().getText().split(" ")[0];
 
-            if (model.positionChecker(x, y)) {
+            if (model.positionCheckerManualAssigningPiece(x, y)) {
                 model.makePieceByString(pieceStr, x, y,GameSaveState.getPlayerTurn());
                 fillBoardWithImages();
                 view.dimSquare(x, y);
@@ -69,33 +69,33 @@ public class ArrangePiecesPresenter {
             if (view.getListViewLength() == 0) {
                 view.setListItems(new ArrayList<>());
                 view.getNotifications().setText("Save your setup");
-                view.getPlayer1().setDisable(true);
-                view.getPlayer2().setDisable(true);
+                view.getBtnPlayer1().setDisable(true);
+                view.getBtnPlayer2().setDisable(true);
                 view.getListView().setDisable(true);
-                view.getSaveSetup().setDisable(false);
+                view.getBtnSaveSetup().setDisable(false);
                 view.getBtnUseSetup().setDisable(false);
-                view.getSaveSetup().setDisable(false);
+                view.getBtnSaveSetup().setDisable(false);
             }
         });
-        view.getPlayer1().addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
-            view.getPlayer2().setDisable(true);
-            view.getPlayer1().setDisable(true);
+        view.getBtnPlayer1().addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
+            view.getBtnPlayer2().setDisable(true);
+            view.getBtnPlayer1().setDisable(true);
             view.getBtnSetPieces().setDisable(false);
             GameSaveState.setPlayerTurn(model.getPlayerByID(0));
             GameSaveState.setIdlePlayer(model.getPlayerByID(1));
             view.lightUpRectangles(0);
 
         });
-        view.getPlayer2().addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
-            view.getPlayer1().setDisable(true);
-            view.getPlayer2().setDisable(true);
+        view.getBtnPlayer2().addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
+            view.getBtnPlayer1().setDisable(true);
+            view.getBtnPlayer2().setDisable(true);
             view.getBtnSetPieces().setDisable(false);
             GameSaveState.setPlayerTurn(model.getPlayerByID(1));
             GameSaveState.setIdlePlayer(model.getPlayerByID(0));
             //view.getNotifications().setText(GameSaveState.getPlayerTurn().getName());
             view.lightUpRectangles(1);
         });
-        view.getSaveSetup().addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
+        view.getBtnSaveSetup().addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
 
             TextInputDialog temp = new TextInputDialog();
             temp.showAndWait();
@@ -113,9 +113,9 @@ public class ArrangePiecesPresenter {
                 GameSaveState.clearHashMap();
             }
             else {
-                view.getSaveSetup().setDisable(true);
+                view.getBtnSaveSetup().setDisable(true);
                 view.getListView().setDisable(true);
-                view.getStartGame().setDisable(false);
+                view.getBtnStartGame().setDisable(false);
                 view.getBtnSetPieces().setDisable(true);
             }
 
@@ -134,7 +134,7 @@ public class ArrangePiecesPresenter {
             view.getScene().setRoot(homeView);
             homeView.getScene().getWindow();
         });
-        view.getStartGame().addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
+        view.getBtnStartGame().addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
             GameView gameView = new GameView();
             GamePresenter gamePresenter = new GamePresenter(model, gameView);
             view.getScene().setRoot(gameView);

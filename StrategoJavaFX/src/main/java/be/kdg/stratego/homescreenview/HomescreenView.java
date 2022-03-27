@@ -9,13 +9,13 @@ import javafx.scene.layout.*;
  * Class responsible for layout of homescreen
  */
 public class HomescreenView extends GridPane {
-    Button layoutPiecesButton;
-    Button playButton;
-    Button endGameButton;
-    Background background;
-    ImageView title;
-    ImageView titleCreators;
-    Button leaderBoardButton;
+    private Button layoutPiecesButton;
+    private  Button playButton;
+    private   Button endGameButton;
+    private  Background background;
+    private   ImageView title;
+    private  ImageView titleCreators;
+    private  Button leaderBoardButton;
 
 
     /**

@@ -92,14 +92,19 @@ public class Board {
      * Method that clears the board and fills it with empty squares
      */
     public void clearBoard() {
-        boardMaker.clearBoard();
+        boardMaker.clearFullBoardAndPlayerLists();
         fillWithSquares();
     }
+
+    /**
+     * Method that clears the back-end board depending on the ID
+     * @param id The ID determines who's pieces will be removed
+     */
     public void clearSetupSideById(int id){
         boardMaker.clearBoardById(id);
     }
 
-    public Square[][] getBord() {
+    public Square[][] getBoardMaker() {
         return boardMaker.squaresBoard;
     }
 

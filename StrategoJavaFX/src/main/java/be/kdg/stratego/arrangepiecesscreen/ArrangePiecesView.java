@@ -21,14 +21,14 @@ public class ArrangePiecesView extends GridPane {
     private Background background;
     private TextArea notifications;
     private Button btnSetPieces;
-    private Button player1;
-    private Button player2;
-    private Button saveSetup;
-    private Button returnToMenuButton;
+    private Button btnPlayer1;
+    private Button btnPlayer2;
+    private Button btnSaveSetup;
+    private Button btnReturnToMenu;
     private Button btnUseSetup;
-    private Button startGame;
+    private Button btnStartGame;
     private ListView<String> commonListView;
-    List<ImageView> allPieces;
+    List<ImageView> allPiecesImageViews;
     private List<Rectangle> coloredRectangles;
     private List<String> pieceListString;
     private List<String> setupListString;
@@ -55,16 +55,16 @@ public class ArrangePiecesView extends GridPane {
 
         notifications = new TextArea();
         commonListView = new ListView<>();
-        allPieces = new ArrayList<>();
+        allPiecesImageViews = new ArrayList<>();
         coloredRectangles = new ArrayList<>();
         pieceListString = new ArrayList<>();
-        player1 = new Button("Player 1");
-        player2 = new Button("Player 2");
-        saveSetup = new Button("Save Setup");
+        btnPlayer1 = new Button("Player 1");
+        btnPlayer2 = new Button("Player 2");
+        btnSaveSetup = new Button("Save Setup");
         btnSetPieces = new Button("Set Pieces");
         btnUseSetup = new Button("Use setup");
-        returnToMenuButton = new Button("Quit");
-        startGame = new Button("Start Game");
+        btnReturnToMenu = new Button("Quit");
+        btnStartGame = new Button("Start Game");
         setupListString = new ArrayList<>();
         setupList = false;
 
@@ -91,36 +91,36 @@ public class ArrangePiecesView extends GridPane {
             board.getRowConstraints().add(new RowConstraints(78));
         }
         GridPane.setConstraints(board, 0, 18, 4, 4);
-        GridPane.setConstraints(player2, 50, 20, 10, 4);
-        GridPane.setConstraints(player1, 42, 20, 10, 4);
+        GridPane.setConstraints(btnPlayer2, 50, 20, 10, 4);
+        GridPane.setConstraints(btnPlayer1, 42, 20, 10, 4);
         GridPane.setConstraints(btnSetPieces, 47, 10, 10, 3);
         GridPane.setConstraints(btnUseSetup, 40, 35, 10, 3);
-        GridPane.setConstraints(saveSetup, 48, 35, 10, 3);
-        GridPane.setConstraints(startGame, 57, 35, 10, 3);
-        GridPane.setConstraints(returnToMenuButton, 64, 35, 10, 3);
+        GridPane.setConstraints(btnSaveSetup, 48, 35, 10, 3);
+        GridPane.setConstraints(btnStartGame, 57, 35, 10, 3);
+        GridPane.setConstraints(btnReturnToMenu, 64, 35, 10, 3);
         GridPane.setConstraints(notifications, 45, 30, 5, 5);
         GridPane.setConstraints(commonListView, 60, 10, 100, 15);
 
 
         this.getStylesheets().add("style.css");
         this.setId("gameBackground");
-        player1.setId("selectGameModeButtonSmall");
-        player2.setId("selectGameModeButtonSmall");
-        saveSetup.setId("selectGameModeButtonSmall");
+        btnPlayer1.setId("selectGameModeButtonSmall");
+        btnPlayer2.setId("selectGameModeButtonSmall");
+        btnSaveSetup.setId("selectGameModeButtonSmall");
         btnSetPieces.setId("selectGameModeButtonSmall");
         btnUseSetup.setId("selectGameModeButtonSmall");
-        returnToMenuButton.setId("selectGameModeButtonSmall");
-        startGame.setId("selectGameModeButtonSmall");
+        btnReturnToMenu.setId("selectGameModeButtonSmall");
+        btnStartGame.setId("selectGameModeButtonSmall");
         notifications.setId("textArea");
         notifications.setEditable(false);
         commonListView.setPrefHeight(200);
         commonListView.setPrefHeight(2000);
         notifications.setMinWidth(2000);
-        this.getChildren().addAll(board, player1, player2, btnSetPieces, notifications, commonListView, saveSetup, returnToMenuButton, startGame);
+        this.getChildren().addAll(board, btnPlayer1, btnPlayer2, btnSetPieces, notifications, commonListView, btnSaveSetup, btnReturnToMenu, btnStartGame);
         board.setDisable(true);
         btnSetPieces.setDisable(true);
-        startGame.setDisable(true);
-        saveSetup.setDisable(true);
+        btnStartGame.setDisable(true);
+        btnSaveSetup.setDisable(true);
         board.setRotate(-90);
     }
 
@@ -161,7 +161,7 @@ public class ArrangePiecesView extends GridPane {
 
         imageview.setId(x + "" + y);
         board.add(imageview, x, y);
-        allPieces.add(imageview);
+        allPiecesImageViews.add(imageview);
     }
 
     /**
@@ -217,23 +217,23 @@ public class ArrangePiecesView extends GridPane {
     }
 
     Button getReturnToMenuButton() {
-        return returnToMenuButton;
+        return btnReturnToMenu;
     }
 
     GridPane getBoard() {
         return board;
     }
 
-    Button getSaveSetup() {
-        return saveSetup;
+    Button getBtnSaveSetup() {
+        return btnSaveSetup;
     }
 
     Button getBtnSetPieces() {
         return btnSetPieces;
     }
 
-    Button getStartGame() {
-        return startGame;
+    Button getBtnStartGame() {
+        return btnStartGame;
     }
 
     ListView<String> getListView() {
@@ -246,12 +246,12 @@ public class ArrangePiecesView extends GridPane {
         return notifications;
     }
 
-    Button getPlayer1() {
-        return player1;
+    Button getBtnPlayer1() {
+        return btnPlayer1;
     }
 
-    Button getPlayer2() {
-        return player2;
+    Button getBtnPlayer2() {
+        return btnPlayer2;
     }
 
     Button getBtnUseSetup() {

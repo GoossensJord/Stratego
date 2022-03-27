@@ -13,6 +13,9 @@ import javafx.scene.paint.Color;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class responsible for the LoadSetup view
+ */
 public class LoadSetupView extends GridPane {
 
     GridPane board;
@@ -32,13 +35,17 @@ public class LoadSetupView extends GridPane {
     boolean setupList;
     List<ImageView> allPieces;
 
-
+    /**
+     * Constructor that initialises and lays the nodes out on the gridpane.
+     */
     public LoadSetupView() {
         this.initialiseNodes();
         this.layoutNodes();
     }
 
-
+    /**
+     * Method that initialises all the nodes
+     */
     private void initialiseNodes() {
         board = new GridPane();
         Image backgroundImage = new Image("/StrategoBoard.jpeg");
@@ -63,7 +70,9 @@ public class LoadSetupView extends GridPane {
 
     }
 
-
+    /**
+     * Method that lays out all the nodes on the gridpane
+     */
     private void layoutNodes() {
 
         for (int i = 0; i < 40; i++) {
@@ -123,10 +132,53 @@ public class LoadSetupView extends GridPane {
         board.setRotate(-90);
     }
 
-
+    /**
+     * A method that fills the observable list with the possible pieces
+     * @param items A list of Strings that will be displayed in an observable list.
+     */
     void setListItems(List<String> items) {
         setupListString = items;
         commonListView.setItems(FXCollections.observableList(items));
+    }
+
+    /**
+     * Method to set a picture on a givex x and y coordinate.
+     */
+    void fillSquareWithPicture(Image image, int x, int y) {
+
+        ImageView imageview = new ImageView(image);
+        setHalignment(imageview, HPos.CENTER);
+
+        imageview.setFitWidth(78);
+        imageview.setFitHeight(54);
+        imageview.setRotate(90);
+
+        imageview.setId(x + "" + y);
+        board.add(imageview, x, y);
+        allPieces.add(imageview);
+    }
+
+    /**
+     * Fills the square on the board with an empty square, used for when there are no pieces on the square.
+     */
+    void fillSquareWithEmptyString(int x, int y) {
+        Label z = new Label("");
+        z.setTextFill(Color.BLACK);
+        board.add(z, x, y);
+        GridPane.setHalignment(z, HPos.CENTER);
+    }
+
+    /**
+     * Removes a node and it's respective imageview from the gridpane.
+     */
+    void removeFromGridpane(int x, int y) {
+        for (Node image : allPieces) {
+            if (image instanceof ImageView) {
+                if (image.getId().equals(x + "" + y)) {
+                    board.getChildren().remove(image);
+                }
+            }
+        }
     }
 
     ListView<String> getCommonListView() {
@@ -149,40 +201,7 @@ public class LoadSetupView extends GridPane {
         return startGame;
     }
 
-    TextArea getNotifications() {
-        return notifications;
-    }
-
-    void setPicture(Image image, int x, int y) {
-
-        ImageView imageview = new ImageView(image);
-        setHalignment(imageview, HPos.CENTER);
-
-        imageview.setFitWidth(78);
-        imageview.setFitHeight(54);
-        imageview.setRotate(90);
-
-        imageview.setId(x + "" + y);
-        board.add(imageview, x, y);
-        allPieces.add(imageview);
-    }
-
-    void setPosition(int x, int y) {
-        Label z = new Label("");
-        z.setTextFill(Color.BLACK);
-        board.add(z, x, y);
-        GridPane.setHalignment(z, HPos.CENTER);
-    }
-
-    void removeFromGridpane(int x, int y) {
-        for (Node image : allPieces) {
-            if (image instanceof ImageView) {
-                if (image.getId().equals(x + "" + y)) {
-                    board.getChildren().remove(image);
-                }
-            }
-        }
-    }
+    TextArea getNotifications() {return notifications;}
 
     Button getResetBtn() {
         return resetBtn;

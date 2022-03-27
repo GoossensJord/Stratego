@@ -96,7 +96,7 @@ public class GameModel {
     /**
      * Boolean which returns true if piece given in parameter is Flag
      */
-    public boolean gameWin(Piece p) {
+    public boolean isGameWin(Piece p) {
         return p instanceof Flag;
     }
 
@@ -104,7 +104,7 @@ public class GameModel {
      * Method which uses the x and y from the parameters to get a piece from the backend board.
      */
     public Piece choosePiece(int x, int y) {
-        return board.getBord()[x][y].getPiece();
+        return board.getBoardMaker()[x][y].getPiece();
     }
 
     public Square[][] getBoard() {
@@ -122,7 +122,7 @@ public class GameModel {
      * Method that calls the backend board method to make the attack. Uses the method gameWin to determine if the defeated piece was a flag.
      */
     public boolean makeChosenAttack(int[] attack, Piece p) {
-        boolean win = gameWin(boardMaker.getSquaresBoard()[attack[0]][attack[1]].getPiece());
+        boolean win = isGameWin(boardMaker.getSquaresBoard()[attack[0]][attack[1]].getPiece());
         board.makeAttack(attack, p);
         return win;
     }
@@ -131,7 +131,7 @@ public class GameModel {
      * Creates a piece by using a String name
      */
     public void makePieceByString(String pieceString, int x, int y, Player pl) {
-        Piece p = pieceMaker(pieceString, x, y, pl);
+        Piece p = pieceMakerManualAssigning(pieceString, x, y, pl);
         boardMaker.manualPieceSelection(p);
     }
 
@@ -143,7 +143,7 @@ public class GameModel {
      * @param pl The player that gets assigned to the piece.
      * @return Returns the made piece.
      */
-    private Piece pieceMaker(String str, int x, int y, Player pl) {
+    private Piece pieceMakerManualAssigning(String str, int x, int y, Player pl) {
         Piece p = null;
         switch (str) {
             case "Bomb":
@@ -217,7 +217,11 @@ public class GameModel {
         else return pl2;
     }
 
-    public boolean positionChecker(int x, int y) {
+    /**
+     * Checks if the position for manual placement of a piece in create layout is valid depending on the player ID
+     * @return Returns true if position is possible.
+     */
+    public boolean positionCheckerManualAssigningPiece(int x, int y) {
         //noinspection SuspiciousNameCombination
         if (board.spaceAvailable(x, y)) {
             if (GameSaveState.getPlayerTurn().getId() == 0 && x <= 3) return true;

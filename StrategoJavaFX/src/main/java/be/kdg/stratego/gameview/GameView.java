@@ -18,19 +18,19 @@ import java.util.List;
  */
 public class GameView extends GridPane {
 
-    GridPane board;
-    Button btnStartGame;
-    Button endTurn;
-    Button startTurn;
-    Button backToMainMenuButton;
-    Background background;
-    TextArea notifications;
-    List<ImageView> allPieces;
-    List<Rectangle> coloredRectangles;
-    Image enemyimage;
-    ImageView textFieldImage;
-    ListView pieceList;
-    Button saveGameButton;
+    private GridPane board;
+    private  Button btnStartGame;
+    private Button endTurn;
+    private Button startTurn;
+    private Button backToMainMenuButton;
+    private  Background background;
+    private  TextArea notifications;
+    private  List<ImageView> allPieces;
+    private  List<Rectangle> coloredRectangles;
+    private  Image enemyimage;
+    private  ImageView textFieldImage;
+    private  ListView pieceList;
+    private  Button saveGameButton;
 
 
     /**

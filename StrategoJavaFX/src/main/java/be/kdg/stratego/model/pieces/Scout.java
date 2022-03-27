@@ -55,7 +55,7 @@ public class Scout extends Piece {
         int leftJumpCounter = 0;
         int yval = this.x;
         for (int i = yval + 1; i < 10; i++) {
-            Piece p1 = this.getPlayer().getBoard().getBord()[i][this.y].getPiece();
+            Piece p1 = this.getPlayer().getBoard().getBoardMaker()[i][this.y].getPiece();
             //noinspection SuspiciousNameCombination
             if (!this.getPlayer().getBoard().spaceAvailable(i, this.y) && !this.getPlayer().equals(p1.getPlayer())) {
 
@@ -67,7 +67,7 @@ public class Scout extends Piece {
 
         }
         for (int i = yval - 1; i >= 0; i--) {
-            Piece p1 = this.getPlayer().getBoard().getBord()[i][this.y].getPiece();
+            Piece p1 = this.getPlayer().getBoard().getBoardMaker()[i][this.y].getPiece();
             //noinspection SuspiciousNameCombination
             if (!this.getPlayer().getBoard().spaceAvailable(i, this.y) && !this.getPlayer().equals(p1.getPlayer())) {
 
@@ -95,7 +95,7 @@ public class Scout extends Piece {
         int negativeJumpCounter = 0;
         int xval = this.y;
         for (int i = xval + 1; i < 10; i++) {
-            Piece p1 = this.getPlayer().getBoard().getBord()[this.x][i].getPiece();
+            Piece p1 = this.getPlayer().getBoard().getBoardMaker()[this.x][i].getPiece();
 
             //noinspection SuspiciousNameCombination
             if (!this.getPlayer().getBoard().spaceAvailable(this.x, i) && !this.getPlayer().equals(p1.getPlayer())) {
@@ -106,7 +106,7 @@ public class Scout extends Piece {
             if(!this.getPlayer().getBoard().spaceAvailable(this.x, i) && this.getPlayer().getId() == p1.getPlayer().getId()) positiveJumpCounter++;
         }
         for (int i = xval - 1; i >= 0; i--) {
-            Piece p1 = this.getPlayer().getBoard().getBord()[this.x][i].getPiece();
+            Piece p1 = this.getPlayer().getBoard().getBoardMaker()[this.x][i].getPiece();
 
             //noinspection SuspiciousNameCombination
             if (!this.getPlayer().getBoard().spaceAvailable(this.x, i) && !this.getPlayer().equals(p1.getPlayer())) {

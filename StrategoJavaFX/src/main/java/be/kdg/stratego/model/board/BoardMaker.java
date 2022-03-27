@@ -42,7 +42,10 @@ public class BoardMaker {
         piecesPlayerTwo = playerData.createPieceList(playerTwo);
     }
 
-
+    /**
+     * A method that makes a list of all the pieces one player needs to fill in their board, used later for manual placement
+     * @return A list of strings containing all necessary pieces to place on the board.
+     */
     public List<String> getListView() {
         List<String> out = new ArrayList<>();
         for (Rank r : Rank.values()) {
@@ -70,6 +73,10 @@ public class BoardMaker {
         else return piecesPlayerTwo;
     }
 
+    /**
+     * Manually select a piece from the listview adding it to the board.
+     * @param p the selected piece
+     */
     public void manualPieceSelection(Piece p) {
         if (playerData.addPieceToPieceList(p) != null && !squaresBoard[p.getX()][p.getY()].getIsOccupied()) {
             if (p.getPlayer() == null) GameSaveState.getPlayerTurn().getPiecesList().add(playerData.addPieceToPieceList(p));
@@ -168,7 +175,10 @@ public class BoardMaker {
 
     }
 
-    public void clearBoard(){
+    /**
+     * Method to clear the board and the player piece lists
+     */
+    public void clearFullBoardAndPlayerLists(){
         squaresBoard = new Square[SQUARE_ARRAY_HEIGHT + 1][SQUARE_ARRAY_WIDTH + 1];
 
         piecesPlayerTwo = new ArrayList<>();

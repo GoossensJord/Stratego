@@ -71,7 +71,7 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
         List<int[]> moveArr = model.getMoves(p);
         List<int[]> attackArr = model.getAttacks(p);
 
-        midMove = lightUp(moveArr, attackArr);
+        midMove = lightUpMoveableOrAttackableSquares(moveArr, attackArr);
         if (midMove && moveArr.size() != 0)
             view.getNotifications().setText(model.getBoard()[x][y].getPiece().getPlayer().getName() + "'s " + model.getBoard()[x][y].getPiece().getRank().getName() + " choose one of the lit up squares");
 
@@ -87,7 +87,7 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
      * @param attacks List of possible attacks to light up.
      * @return The return value of this method is used to determine if you're in the middle of a move, because if both lists are empty you havent started a move.
      */
-    private boolean lightUp(List<int[]> moves, List<int[]> attacks) {
+    private boolean lightUpMoveableOrAttackableSquares(List<int[]> moves, List<int[]> attacks) {
         if (attacks != null) {
             for (int i = 0; i < attacks.size(); i++) {
                 view.lightUpRectanglesAttack(attacks);
@@ -197,6 +197,7 @@ public class boardEventHandler implements EventHandler<MouseEvent> {
             view.getBoard().setDisable(true);
             view.getStartTurn().setDisable(true);
             view.getEndTurn().setDisable(true);
+            view.getSaveGameButton().setDisable(true);
             return;
 
         }

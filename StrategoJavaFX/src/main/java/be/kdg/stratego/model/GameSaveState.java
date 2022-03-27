@@ -11,6 +11,9 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Class responsible for the current state of the game and it's saves.
+ */
 public class GameSaveState {
 
     private static Player playerTurn;
@@ -24,7 +27,11 @@ public class GameSaveState {
 
     }
 
-
+    /**
+     * A method to save the setup you can create in arrange pieces
+     * @param pieceList Uses the List of pieces set by the user.
+     * @param name The name the player wishes to give to the save.
+     */
     public static void saveSetup(List<Piece> pieceList, String name)
 
             throws IOException {
@@ -38,10 +45,13 @@ public class GameSaveState {
                 setupHashMap.get(p.getRank().getName()).add(new int[]{p.getX(), p.getY()});
             }
         }
-        writeToFile(name);
+        writeSavedSetupsToFile(name);
         //loadSetupStringList()
     }
 
+    /**
+     * Checks the correct file path determining on which player's turn it is.
+     */
     private static void filechecker() {
 
 
@@ -51,7 +61,11 @@ public class GameSaveState {
 
     }
 
-    private static void writeToFile(String name) throws IOException {
+    /**
+     * Method to write away the saved setups to a file
+     * @param name Name of the file to write to.
+     */
+    private static void writeSavedSetupsToFile(String name) throws IOException {
 
         PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(savePath.toFile(), true)));
         pw.format("%s:{%n", name);
@@ -69,7 +83,11 @@ public class GameSaveState {
 
     }
 
-    public static void saveGame(Square[][] board) throws IOException {
+    /**
+     * A method that saves the game to a file.
+     * @param board The save needs the exact board layout to correctly save.
+     */
+    public static void writeSavedGameToFile(Square[][] board) throws IOException {
         PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter("saveGame.txt")));
         StringBuilder sb = new StringBuilder();
         for (Square[] squares : board) {
@@ -90,7 +108,10 @@ public class GameSaveState {
     }
 
 
-
+    /**
+     * Loads the saved game out of the file
+     * @return returns a list of strings containing all the save information.
+     */
     public static List<String> loadSaveGame(){
         List<String> out = new ArrayList<>();
         try {
@@ -106,7 +127,7 @@ public class GameSaveState {
         return out;
     }
     /**
-     * gets all the names from the save file
+     * Goes through the file with a regex adding appropriate parts of the text file to the setupstringlist.
      */
     public static void loadSetupStringList() {
         setupStringList = new ArrayList<>();
@@ -128,6 +149,9 @@ public class GameSaveState {
 
     }
 
+    /**
+     * Loads the saved game from the file
+     */
     public static void loadSave(String save, boolean game) {
         filechecker();
         StringBuilder sb = new StringBuilder();
@@ -173,16 +197,27 @@ public class GameSaveState {
         }
     }
 
-    public static HashMap<String, List<int[]>> getSetupHashMap() {
-        filechecker();
+    /**
+     * Method to change the player turn
+     */
+    public static void switchTurn() {
+        Player temp = playerTurn;
+        playerTurn = idlePlayer;
+        idlePlayer = temp;
 
-        return setupHashMap;
     }
 
     /**
-     * Order of save = setup name , repeat(Piece name (rank), piece X position, piece Y position)
+     * Method that clears the setup hashmap
      */
+    public static void clearHashMap() {
+        setupHashMap.clear();
+    }
 
+
+    public static HashMap<String, List<int[]>> getSetupHashMap() {
+        return setupHashMap;
+    }
 
     public static void setBoardState(Square[][] bState) {
     }
@@ -206,16 +241,6 @@ public class GameSaveState {
         return setupStringList;
     }
 
-    public static void switchTurn() {
-        Player temp = playerTurn;
-        playerTurn = idlePlayer;
-        idlePlayer = temp;
-
-    }
-
-    public static void clearHashMap() {
-        setupHashMap.clear();
-    }
 
     public static Player getIdlePlayer() {
         return idlePlayer;

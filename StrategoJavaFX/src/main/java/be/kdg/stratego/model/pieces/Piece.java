@@ -41,20 +41,20 @@ public class Piece {
 
         List<int[]> moveList = new ArrayList<>();
         if (this.isMovable) {
-            if (this.getPlayer().getBoard().notOutOfBounds(x + 1, y) && !player.getBoard().getBord()[x + 1][y].getIsOccupied()) {
+            if (this.getPlayer().getBoard().notOutOfBounds(x + 1, y) && !player.getBoard().getBoardMaker()[x + 1][y].getIsOccupied()) {
                 moveList.add(new int[]{x + 1, y});
 
             }
-            if (this.getPlayer().getBoard().notOutOfBounds(x, y + 1) && !player.getBoard().getBord()[x][y + 1].getIsOccupied()) {
+            if (this.getPlayer().getBoard().notOutOfBounds(x, y + 1) && !player.getBoard().getBoardMaker()[x][y + 1].getIsOccupied()) {
                 moveList.add(new int[]{x, y + 1});
 
 
             }
-            if (this.getPlayer().getBoard().notOutOfBounds(x - 1, y) && !player.getBoard().getBord()[x - 1][y].getIsOccupied()) {
+            if (this.getPlayer().getBoard().notOutOfBounds(x - 1, y) && !player.getBoard().getBoardMaker()[x - 1][y].getIsOccupied()) {
                 moveList.add(new int[]{x-1, y});
 
             }
-            if (this.getPlayer().getBoard().notOutOfBounds(x, y - 1) && !player.getBoard().getBord()[x][y - 1].getIsOccupied()) {
+            if (this.getPlayer().getBoard().notOutOfBounds(x, y - 1) && !player.getBoard().getBoardMaker()[x][y - 1].getIsOccupied()) {
                 moveList.add(new int[]{x, y-1});
 
             }
@@ -71,19 +71,19 @@ public class Piece {
 
         List<int[]> attackList = new ArrayList<>();
         if (this.isMovable) {
-            if (this.getPlayer().getBoard().notOutOfBounds(x + 1, y) && player.getBoard().getBord()[x + 1][y].getIsOccupied() && !player.getBoard().getBord()[x][y].getPiece().getPlayer().equals(player.getBoard().getBord()[x + 1][y].getPiece().getPlayer())) {
+            if (this.getPlayer().getBoard().notOutOfBounds(x + 1, y) && player.getBoard().getBoardMaker()[x + 1][y].getIsOccupied() && !player.getBoard().getBoardMaker()[x][y].getPiece().getPlayer().equals(player.getBoard().getBoardMaker()[x + 1][y].getPiece().getPlayer())) {
                 attackList.add(new int[]{x + 1, y});
 
             }
-            if (this.getPlayer().getBoard().notOutOfBounds(x, y + 1) && player.getBoard().getBord()[x][y + 1].getIsOccupied() && !player.getBoard().getBord()[x][y].getPiece().getPlayer().equals(player.getBoard().getBord()[x][y +1].getPiece().getPlayer()))  {
+            if (this.getPlayer().getBoard().notOutOfBounds(x, y + 1) && player.getBoard().getBoardMaker()[x][y + 1].getIsOccupied() && !player.getBoard().getBoardMaker()[x][y].getPiece().getPlayer().equals(player.getBoard().getBoardMaker()[x][y +1].getPiece().getPlayer()))  {
                 attackList.add(new int[]{x, y+1});
 
 
             }
-            if (this.getPlayer().getBoard().notOutOfBounds(x - 1, y) && player.getBoard().getBord()[x - 1][y].getIsOccupied() && !player.getBoard().getBord()[x][y].getPiece().getPlayer().equals(player.getBoard().getBord()[x -1][y].getPiece().getPlayer())) {
+            if (this.getPlayer().getBoard().notOutOfBounds(x - 1, y) && player.getBoard().getBoardMaker()[x - 1][y].getIsOccupied() && !player.getBoard().getBoardMaker()[x][y].getPiece().getPlayer().equals(player.getBoard().getBoardMaker()[x -1][y].getPiece().getPlayer())) {
                 attackList.add(new int[]{x - 1, y});
             }
-            if (this.getPlayer().getBoard().notOutOfBounds(x, y - 1) && player.getBoard().getBord()[x][y - 1].getIsOccupied() && !player.getBoard().getBord()[x][y].getPiece().getPlayer().equals(player.getBoard().getBord()[x][y-1].getPiece().getPlayer())) {
+            if (this.getPlayer().getBoard().notOutOfBounds(x, y - 1) && player.getBoard().getBoardMaker()[x][y - 1].getIsOccupied() && !player.getBoard().getBoardMaker()[x][y].getPiece().getPlayer().equals(player.getBoard().getBoardMaker()[x][y-1].getPiece().getPlayer())) {
                 attackList.add(new int[]{x , y-1});
 
             }

@@ -44,7 +44,7 @@ public class GamePresenter {
             view.getStartTurn().setDisable(false);
         });
         view.getStartTurn().setOnAction(event -> {
-            fillOnePlayer(GameSaveState.getPlayerTurn().getId());
+            fillBoardOnePlayer(GameSaveState.getPlayerTurn().getId());
             view.getStartTurn().setDisable(true);
             view.getEndTurn().setDisable(true);
             view.getBoard().setDisable(false);
@@ -79,7 +79,7 @@ public class GamePresenter {
             if (alert.getResult() == null || alert.getResult().equals(cancel)) event.consume();
             else {
                 try {
-                    GameSaveState.saveGame(model.getBoard());
+                    GameSaveState.writeSavedGameToFile(model.getBoard());
                     System.exit(2);
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -105,7 +105,7 @@ public class GamePresenter {
      * Fills the board with the image linked to the piece of one player
      * @param id Determines the player.
      */
-    private void fillOnePlayer(int id) {
+    private void fillBoardOnePlayer(int id) {
         for (int i = 9; i >= 0; i--) {
             for (int j = 0; j < 10; j++) {
                 view.removeFromGridpane(i, j);
