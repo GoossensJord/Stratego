@@ -95,7 +95,7 @@ public class GamePresenter {
     private void fillBoardWithImages() {
         for (int i = 9; i >= 0; i--) {
             for (int j = 0; j < 10; j++) {
-                if (model.getBoard()[i][j].getPiece() == null) view.setPosition("", i, j);
+                if (model.getBoard()[i][j].getPiece() == null) view.setPosition(i, j);
                 else view.setPicture(view.getEnemyimage(), i, j);
             }
         }

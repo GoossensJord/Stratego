@@ -29,7 +29,6 @@ public class GameView extends GridPane {
     private  List<Rectangle> coloredRectangles;
     private  Image enemyimage;
     private  ImageView textFieldImage;
-    private  ListView pieceList;
     private  Button saveGameButton;
 
 
@@ -60,7 +59,7 @@ public class GameView extends GridPane {
         notifications = new TextArea();
         allPieces = new ArrayList<>();
         coloredRectangles = new ArrayList<>();
-        pieceList = new ListView<String>();
+        ListView pieceList = new ListView<String>();
         enemyimage = new Image("enemy.png");
         textFieldImage = new ImageView(new Image("nodeFrame.png"));
 
@@ -121,8 +120,8 @@ public class GameView extends GridPane {
     /**
      * fills the squares without a piece, thus without a picture with a string
      */
-    void setPosition(String n, int x, int y) {
-        Label z = new Label(n);
+    void setPosition(int x, int y) {
+        Label z = new Label("");
         z.setTextFill(Color.BLACK);
         board.add(z, x, y);
         GridPane.setHalignment(z, HPos.CENTER);
